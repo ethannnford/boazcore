@@ -472,7 +472,7 @@
   function wzFound(){ var d=wz.data, rate=+d.rate||0, hw=+d.hours||40, oh=+d.oh||0, pr=(+d.profit||15)/100;
     var f=(oh*12)+(rate*hw*48*pr); if(f<0||isNaN(f)||!isFinite(f))f=0; return f; }
   function wzTier(){ var d=wz.data, jobs=+d.jobs||0, crew=+d.crew||1, rec=(d.recept==='yes'), tier='Basic';
-    if(jobs>15||crew>1) tier='Balanced'; if(rec||crew>=4||jobs>40) tier='Premium'; return tier; }
+    if(jobs>15||crew>1) tier='Balanced'; if(rec||crew>=3||jobs>30) tier='Premium'; return tier; }
   function wznav(label){ return '<div class="wznav">'+(wz.step>1?'<button type="button" class="btn btn-g" onclick="wzBack()">← Back</button>':'<span></span>')+
     '<button type="button" class="btn btn-p" onclick="wzNext()">'+(label||'Next →')+'</button></div>'; }
   function renderWz(){
@@ -505,7 +505,7 @@
     } else if(s===5){
       var found=wzFound(), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
       b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
-        (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div></div>':'')+
+        (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">$9.99 setup · 7-day free trial · cancel anytime</div></div>'+
         '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Claim my spot →</button>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
@@ -529,7 +529,9 @@
     wz.step++; renderWz(); document.querySelector('.modal.wz').scrollTop=0; }
   function wzBack(){ wzCapture(); if(wz.step>1){ wz.step--; renderWz(); } }
   function wzSubmit(){
-    var d=wz.data, btn=document.getElementById('w_submit'); if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
+    var d=wz.data, btn=document.getElementById('w_submit');
+    if(!/.+@.+\..+/.test(d.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; }
+    if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
     var payload={ access_key:WZ_KEY, subject:'New Cornerstone lead: '+(d.name||'')+' ('+wzTier()+')', from_name:'Cornerstone Website',
       Name:d.name||'', Email:d.email||'', Phone:d.phone||'', Business:d.biz||'', Trade:d.trade||'',
       Rate:d.rate||'', HoursPerWeek:d.hours||'', MonthlyOverhead:d.oh||'', ProfitPct:d.profit||'', TaxPct:d.tax||'',
@@ -537,8 +539,8 @@
       FoundMoneyPerYear:money(wzFound()), RecommendedPlan:wzTier() };
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json();}).then(function(){ wz.step=6; renderWz(); })
-      .catch(function(){ if(btn){btn.textContent='Claim my spot →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please email us instead — we’ll get you set up.'); });
+      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
+      .catch(function(){ if(btn){btn.textContent='Claim my spot →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
   }
 
   // close mobile menu on link tap
