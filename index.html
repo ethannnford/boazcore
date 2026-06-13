@@ -394,22 +394,39 @@
 
 <!-- GET STARTED MODAL -->
 <div class="modal-bg" id="getModal" onclick="if(event.target===this)closeGet()">
-  <div class="modal">
+  <div class="modal wz">
     <button class="x" onclick="closeGet()">×</button>
-    <h3>Let's build your app 🛠️</h3>
-    <p>Here's exactly how it works:</p>
-    <ul class="flow">
-      <li><span>1</span>Answer a quick Q&amp;A about your business</li>
-      <li><span>2</span>We build your app, set up to your numbers</li>
-      <li><span>3</span>Pay $9.99, then it's free for 7 days</li>
-      <li><span>4</span>Sign in on your phone &amp; run your business</li>
-    </ul>
-    <p style="font-size:14px">We're onboarding our first contractors personally right now. Drop your info and I'll get you set up myself.</p>
-    <a class="btn btn-p btn-lg" style="width:100%" href="mailto:hello@cornerstoneai.io?subject=I want to get started with Cornerstone AI&body=Hey! I'd like to get set up. My business: %0D%0AMy trade: %0D%0AMy phone: ">Email me to get started →</a>
-    <p style="font-size:12.5px;color:var(--muted);margin-top:14px;margin-bottom:0;text-align:center">Online signup &amp; instant checkout coming soon.</p>
+    <div class="wzbar"><div class="wzfill" id="wzFill"></div></div>
+    <div id="wzBody"></div>
   </div>
 </div>
 
+<style>
+  .modal.wz{max-width:480px;max-height:90vh;overflow:auto}
+  .wzbar{height:6px;background:var(--soft);border-radius:999px;overflow:hidden;margin:2px 0 18px}
+  .wzfill{height:100%;background:var(--grad);border-radius:999px;transition:width .35s ease;width:20%}
+  #wzBody h3{font-size:22px;margin-bottom:6px;color:var(--ink)}
+  #wzBody>p{color:var(--muted);font-size:14px;margin-bottom:4px}
+  .wzl{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:14px 0 6px}
+  .wzi{width:100%;padding:13px 14px;font-size:16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit;outline:none}
+  .wzi:focus{border-color:var(--indigo)}
+  .wzg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .wzig{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding-left:12px;background:#fff}
+  .wzig span{color:var(--muted);font-weight:700}
+  .wzig .wzi{border:0;padding-left:6px}
+  .opts{display:flex;gap:10px;margin-top:6px}
+  .opt{flex:1;padding:13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:700;color:var(--ink);cursor:pointer;font-size:15px}
+  .opt.on{border-color:var(--indigo);background:#eef1fe;color:var(--indigo-d)}
+  .wznav{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+  .wznav .btn{width:auto;padding:12px 20px}
+  .wzfound{text-align:center;background:var(--ink);color:#fff;border-radius:16px;padding:18px;margin:10px 0}
+  .wzfound .s{color:#aab1d6;font-size:14px}
+  .wzbig{font-size:40px;font-weight:800;background:linear-gradient(135deg,#7d94ff,#c9962f);-webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 0}
+  .wzrec{text-align:center;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+  .wzrec .s{color:var(--muted);font-size:13px}
+  .wzrec .rt{font-size:22px;font-weight:800;color:var(--indigo);margin:3px 0}
+  .wzfine{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+</style>
 <script>
   // Found-money calculator
   function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
@@ -439,10 +456,90 @@
   // FAQ accordion
   function tog(btn){ btn.parentElement.classList.toggle('open'); }
 
-  // Get Started modal
-  function openGet(){ document.getElementById('getModal').classList.add('show'); document.body.style.overflow='hidden'; }
+  // ===== Get Started — onboarding Q&A wizard =====
+  // TODO: paste your real Web3Forms access key (free at web3forms.com) so leads email you.
+  var WZ_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+  var wz = { step:1, data:{} };
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function tradeOpts(sel){
+    var arr=['General Contractor','Carpentry / Finish','Remodeling','Plumbing','Electrical','HVAC','Painting','Concrete / Masonry','Roofing','Landscaping','Flooring','Handyman','Other'];
+    return '<option value="">Choose your trade…</option>'+arr.map(function(x){return '<option'+(sel===x?' selected':'')+'>'+x+'</option>';}).join('');
+  }
+  function openGet(){ wz={step:1,data:{}}; document.getElementById('getModal').classList.add('show'); document.body.style.overflow='hidden'; renderWz(); }
   function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('getModal').classList.contains('show')) closeGet(); });
+
+  function wzFound(){ var d=wz.data, rate=+d.rate||0, hw=+d.hours||40, oh=+d.oh||0, pr=(+d.profit||15)/100;
+    var f=(oh*12)+(rate*hw*48*pr); if(f<0||isNaN(f)||!isFinite(f))f=0; return f; }
+  function wzTier(){ var d=wz.data, jobs=+d.jobs||0, crew=+d.crew||1, rec=(d.recept==='yes'), tier='Basic';
+    if(jobs>15||crew>1) tier='Balanced'; if(rec||crew>=4||jobs>40) tier='Premium'; return tier; }
+  function wznav(label){ return '<div class="wznav">'+(wz.step>1?'<button type="button" class="btn btn-g" onclick="wzBack()">← Back</button>':'<span></span>')+
+    '<button type="button" class="btn btn-p" onclick="wzNext()">'+(label||'Next →')+'</button></div>'; }
+  function renderWz(){
+    var s=wz.step, d=wz.data;
+    document.getElementById('wzFill').style.width=Math.round((Math.min(s,5)/5)*100)+'%';
+    var b='';
+    if(s===1){
+      b='<h3>Let’s get you set up 🛠️</h3><p>First — who are you? So we can build it for you and reach out.</p>'+
+        '<label class="wzl">Your name</label><input class="wzi" id="w_name" value="'+esc(d.name||'')+'" placeholder="Your name">'+
+        '<label class="wzl">Email</label><input class="wzi" id="w_email" type="email" value="'+esc(d.email||'')+'" placeholder="you@email.com">'+
+        '<label class="wzl">Phone</label><input class="wzi" id="w_phone" type="tel" value="'+esc(d.phone||'')+'" placeholder="(555) 123-4567">'+wznav();
+    } else if(s===2){
+      b='<h3>Your business</h3>'+
+        '<label class="wzl">Business name</label><input class="wzi" id="w_biz" value="'+esc(d.biz||'')+'" placeholder="e.g. Ford Carpentry">'+
+        '<label class="wzl">Your trade</label><select class="wzi" id="w_trade">'+tradeOpts(d.trade)+'</select>'+wznav();
+    } else if(s===3){
+      b='<h3>Your numbers</h3><p>So every bid is actually profitable.</p>'+
+        '<div class="wzg"><div><label class="wzl">Hourly rate</label><div class="wzig"><span>$</span><input class="wzi" id="w_rate" type="number" inputmode="decimal" value="'+esc(d.rate||'')+'" placeholder="125"></div></div>'+
+        '<div><label class="wzl">Billable hrs/week</label><input class="wzi" id="w_hours" type="number" inputmode="decimal" value="'+esc(d.hours||'')+'" placeholder="40"></div></div>'+
+        '<label class="wzl">Monthly overhead (costs, not your pay)</label><div class="wzig"><span>$</span><input class="wzi" id="w_oh" type="number" inputmode="decimal" value="'+esc(d.oh||'')+'" placeholder="3000"></div>'+
+        '<div class="wzg"><div><label class="wzl">Profit %</label><input class="wzi" id="w_profit" type="number" inputmode="decimal" value="'+esc(d.profit||'15')+'"></div>'+
+        '<div><label class="wzl">Tax %</label><input class="wzi" id="w_tax" type="number" inputmode="decimal" value="'+esc(d.tax||'')+'" placeholder="8"></div></div>'+wznav();
+    } else if(s===4){
+      b='<h3>Let’s pick your plan</h3>'+
+        '<div class="wzg"><div><label class="wzl">Jobs/bids per month</label><input class="wzi" id="w_jobs" type="number" inputmode="decimal" value="'+esc(d.jobs||'')+'" placeholder="10"></div>'+
+        '<div><label class="wzl">People who’ll use it</label><input class="wzi" id="w_crew" type="number" inputmode="decimal" value="'+esc(d.crew||'1')+'"></div></div>'+
+        '<label class="wzl">Want an AI receptionist to answer calls &amp; texts?</label>'+
+        '<div class="opts"><button type="button" class="opt'+(d.recept==='yes'?' on':'')+'" onclick="wzPick(\'recept\',\'yes\')">Yes</button>'+
+        '<button type="button" class="opt'+(d.recept==='no'?' on':'')+'" onclick="wzPick(\'recept\',\'no\')">Not now</button></div>'+wznav('See my plan →');
+    } else if(s===5){
+      var found=wzFound(), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
+      b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
+        (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div></div>':'')+
+        '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">$9.99 setup · 7-day free trial · cancel anytime</div></div>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Claim my spot →</button>'+
+        '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
+        '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
+    } else {
+      b='<div style="text-align:center"><div style="font-size:50px">🙏</div><h3>You’re in'+(d.name?', '+esc(d.name):'')+'!</h3>'+
+        '<p style="margin-bottom:18px">Thanks for trusting us. We’ll reach out at <b>'+esc(d.email||'')+'</b> to get your app set up. Talk soon.</p>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" onclick="closeGet()">Done</button></div>';
+    }
+    document.getElementById('wzBody').innerHTML=b;
+  }
+  function wzCapture(){ var s=wz.step, g=function(id){var e=document.getElementById(id);return e?e.value:undefined;};
+    if(s===1){ wz.data.name=g('w_name'); wz.data.email=g('w_email'); wz.data.phone=g('w_phone'); }
+    else if(s===2){ wz.data.biz=g('w_biz'); wz.data.trade=g('w_trade'); }
+    else if(s===3){ ['rate','hours','oh','profit','tax'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
+    else if(s===4){ wz.data.jobs=g('w_jobs'); wz.data.crew=g('w_crew'); } }
+  function wzPick(k,v){ wzCapture(); wz.data[k]=v; renderWz(); }
+  function wzNext(){ wzCapture();
+    if(wz.step===1 && !/.+@.+\..+/.test(wz.data.email||'')){ alert('Please enter a valid email so we can reach you.'); return; }
+    if(wz.step===3 && !(+wz.data.rate>0)){ alert('Enter your hourly rate so your bids are accurate.'); return; }
+    wz.step++; renderWz(); document.querySelector('.modal.wz').scrollTop=0; }
+  function wzBack(){ wzCapture(); if(wz.step>1){ wz.step--; renderWz(); } }
+  function wzSubmit(){
+    var d=wz.data, btn=document.getElementById('w_submit'); if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
+    var payload={ access_key:WZ_KEY, subject:'New Cornerstone lead: '+(d.name||'')+' ('+wzTier()+')', from_name:'Cornerstone Website',
+      Name:d.name||'', Email:d.email||'', Phone:d.phone||'', Business:d.biz||'', Trade:d.trade||'',
+      Rate:d.rate||'', HoursPerWeek:d.hours||'', MonthlyOverhead:d.oh||'', ProfitPct:d.profit||'', TaxPct:d.tax||'',
+      JobsPerMonth:d.jobs||'', CrewSize:d.crew||'', WantReceptionist:d.recept||'',
+      FoundMoneyPerYear:money(wzFound()), RecommendedPlan:wzTier() };
+    if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();}).then(function(){ wz.step=6; renderWz(); })
+      .catch(function(){ if(btn){btn.textContent='Claim my spot →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please email us instead — we’ll get you set up.'); });
+  }
 
   // close mobile menu on link tap
   document.querySelectorAll('#nav a').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('nav').classList.remove('open'); }); });
