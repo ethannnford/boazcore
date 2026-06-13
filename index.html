@@ -29,8 +29,8 @@
   /* nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);
     border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:18px;letter-spacing:-.02em}
+  .nav{display:flex;align-items:center;gap:14px;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:18px;letter-spacing:-.02em;margin-right:auto}
   .logo .mark{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;
     color:#fff;font-size:16px;box-shadow:var(--shadow-sm)}
   .navlinks{display:flex;align-items:center;gap:28px}
@@ -45,6 +45,9 @@
   .btn-g:hover{border-color:var(--indigo);color:var(--indigo)}
   .btn-lg{padding:15px 30px;font-size:16px}
   .menu-btn{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink)}
+  .langbtn{background:#fff;border:1.5px solid var(--line);color:var(--ink);font-weight:800;font-size:13px;
+    padding:7px 13px;border-radius:999px;cursor:pointer;letter-spacing:.04em;transition:border-color .12s,color .12s}
+  .langbtn:hover{border-color:var(--indigo);color:var(--indigo)}
 
   /* hero */
   .hero{padding:84px 0 70px;text-align:center;background:radial-gradient(1100px 480px at 50% -10%,#eef1fe 0%,#fff 60%)}
@@ -191,6 +194,7 @@
       <a href="#foundation">Our Foundation</a>
       <button class="btn btn-p" onclick="openGet()">Get Started</button>
     </div>
+    <button class="langbtn" id="langToggle" onclick="toggleLang()">ES</button>
     <button class="menu-btn" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
   </div>
 </nav>
@@ -205,7 +209,7 @@
       <button class="btn btn-p btn-lg" onclick="openGet()">Get Started — $9.99</button>
       <a class="btn btn-g btn-lg" href="#calc">See your found money →</a>
     </div>
-    <div class="trust">✓ 7-day free trial &nbsp;·&nbsp; ✓ Built &amp; set up for you &nbsp;·&nbsp; ✓ Cancel anytime</div>
+    <div class="trust">✓ 7-day free trial · ✓ Built &amp; set up for you · ✓ Cancel anytime</div>
   </div>
 </header>
 
@@ -428,6 +432,116 @@
   .wzfine{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
 </style>
 <script>
+  // ===== i18n (English / Español) =====
+  var SITE_ES = {
+    // nav
+    "Found Money":"Dinero Recuperado","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base",
+    "Get Started":"Empezar","Get Started — $9.99":"Empezar — $9.99",
+    // hero
+    "Custom software for the trades":"Software a la medida para los oficios",
+    "Stop the leaks. Keep your time.":"Detén las fugas. Recupera tu tiempo.","Get every dollar.":"Gana cada dólar.",
+    "Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Cornerstone AI builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up":"La mayoría de los trabajadores pierden decenas de miles al año por presupuestos bajos y trabajo sin pagar. Cornerstone AI te crea una app a la medida que tapa las fugas, asegura que seas rentable y logra que te paguen — configurada",
+    "for":"para","you, one honest price.":"ti, un precio honesto.",
+    "See your found money →":"Ve tu dinero recuperado →",
+    "✓ 7-day free trial · ✓ Built & set up for you · ✓ Cancel anytime":"✓ Prueba gratis de 7 días · ✓ Instalada para ti · ✓ Cancela cuando quieras",
+    // calculator
+    "The found-money calculator":"La calculadora de dinero recuperado","See what you're leaving on the table":"Ve lo que estás dejando sobre la mesa",
+    "Most contractors charge their hourly rate with":"La mayoría de los contratistas cobra su tarifa por hora",
+    "no overhead or profit built in":"sin gastos generales ni ganancia incluidos",
+    "— and never see the money they're owed. Punch in your numbers:":"— y nunca ven el dinero que se les debe. Ingresa tus números:",
+    "Your hourly rate":"Tu tarifa por hora","Billable hours per week":"Horas facturables por semana","Weeks worked per year":"Semanas trabajadas al año",
+    "Monthly business overhead — costs only, not your pay (truck, tools, insurance, gas, phone…)":"Gastos generales mensuales — solo costos, no tu pago (camión, herramientas, seguro, gasolina, teléfono…)",
+    "Profit margin you":"Margen de ganancia que","should":"deberías","make (%)":"obtener (%)",
+    "You could be leaving roughly":"Podrías estar dejando aproximadamente","on the table":"sobre la mesa","every year":"cada año",
+    "— overhead + profit you've earned but never charged for.":"— gastos y ganancia que ganaste pero nunca cobraste.",
+    "That's real money back in your pocket":"Es dinero real de vuelta en tu bolsillo","Enter your numbers above":"Ingresa tus números arriba",
+    "Get the app that fixes this →":"Obtén la app que lo arregla →",
+    // what we do
+    "What we do":"Qué hacemos","Your whole business, run by AI":"Todo tu negocio, manejado por IA",
+    "Not a pile of tools — one connected system that runs the job from bid to bank.":"No un montón de herramientas — un solo sistema que maneja el trabajo del presupuesto al banco.",
+    "Profitable bids":"Presupuestos rentables","Auto-adds overhead + profit and shows the \"found money\" you'd have missed. Win the job":"Agrega gastos y ganancia automáticamente y muestra el \"dinero recuperado\" que habrías perdido. Gana el trabajo","and":"y","the margin.":"y el margen.",
+    "The whole job":"El trabajo completo","Lead → bid → won → invoice → paid. Change orders, proposals, follow-ups, photos — all in one place.":"Prospecto → presupuesto → ganado → factura → pagado. Órdenes de cambio, propuestas, seguimientos, fotos — todo en un lugar.",
+    "AI that works for you":"IA que trabaja para ti","Snap a photo for an instant estimate, scan receipts, price materials, and answer your phone — built in.":"Toma una foto para un estimado al instante, escanea recibos, cotiza materiales y contesta tu teléfono — incluido.",
+    "Get paid faster":"Cobra más rápido","Send clean invoices, take payment, and chase the unpaid balances automatically so nothing slips.":"Envía facturas limpias, recibe pagos y cobra los saldos pendientes automáticamente para que nada se te escape.",
+    "Your built-in coach":"Tu coach integrado","Goals, daily plans, and reminders that keep your business growing — not just surviving.":"Metas, planes diarios y recordatorios que mantienen tu negocio creciendo — no solo sobreviviendo.",
+    "English & Spanish":"Inglés y Español","The whole app works in both languages, so your whole crew can use it. Tap to switch, anytime.":"Toda la app funciona en ambos idiomas, para que toda tu cuadrilla la use. Toca para cambiar, cuando quieras.",
+    // foundation
+    "Our foundation":"Nuestra base","\"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.\"":"\"Hagan lo que hagan, trabajen de buena gana, como para el Señor y no como para nadie en este mundo.\"",
+    "This is the standard I'm held to. I promise to work earnestly and diligently for you — not for my own sake, but in service of a purpose deeper than my own understanding. Honesty, integrity, and excellence aren't features here. They're the foundation.":"Este es el estándar que me exijo. Prometo trabajar con esmero y diligencia por ti — no por mi propio bien, sino al servicio de un propósito más profundo que mi propio entendimiento. La honestidad, la integridad y la excelencia no son características aquí. Son la base.",
+    // founder
+    "Meet the founder":"Conoce al fundador","Built on the job site":"Formado en la obra",
+    "I was raised in San Diego, California — but really, I grew up on the job site. My father, my grandfather, and my great-grandfather all built their lives in the trades. My dad owns his own finished carpentry business, and from the time I was a kid I watched what honest, hard work actually looks like up close. Attention to detail. Showing up. Doing it right when no one's watching.":"Crecí en San Diego, California — pero en realidad, crecí en la obra. Mi padre, mi abuelo y mi bisabuelo construyeron sus vidas en los oficios. Mi papá tiene su propio negocio de carpintería de acabados, y desde niño vi de cerca cómo es el trabajo honesto y duro. Atención al detalle. Presentarse. Hacerlo bien cuando nadie está mirando.",
+    "Those weren't things I taught myself — they were instilled in me, and I carry them today not by my own strength but by God's grace.":"Esas cosas no me las enseñé yo — me fueron inculcadas, y las llevo hoy no por mi propia fuerza sino por la gracia de Dios.",
+    "\"Trust in the LORD with all your heart, and lean not on your own understanding.\" (Proverbs 3:5)":"\"Confía en el SEÑOR de todo corazón, y no en tu propia inteligencia.\" (Proverbios 3:5)",
+    "I've seen the sacrifice and sweat my family poured into blue-collar work — and how often hard-working tradesmen never see every dollar they've truly earned. So I made it my mission to build software that exposes the leaks, wins back your time, and makes sure you get paid for every ounce of work you put in.":"He visto el sacrificio y el sudor que mi familia entregó al trabajo manual — y cuántas veces los trabajadores esforzados nunca ven cada dólar que de verdad ganaron. Por eso hice mi misión crear software que expone las fugas, recupera tu tiempo y asegura que te paguen por cada gota de trabajo que pones.",
+    "It's just me — and that's on purpose. You're not passed off to a call center. You get one person who knows your business and stands behind the work personally.":"Soy solo yo — y es a propósito. No te pasan a un centro de llamadas. Tienes a una persona que conoce tu negocio y respalda el trabajo personalmente.",
+    // comparison
+    "Why Cornerstone":"Por qué Cornerstone","More value. One honest price.":"Más valor. Un precio honesto.",
+    "Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.":"Las demás apps te venden una herramienta — y luego te cobran de más por todo lo demás. Nosotros no.",
+    "What you get":"Lo que obtienes","The other guys":"Los otros",
+    "Builds the bid AND builds in your profit (found money)":"Crea el presupuesto Y agrega tu ganancia (dinero recuperado)","Estimates cost only —":"Solo estima el costo —",
+    "One connected system (bid → paid)":"Un sistema conectado (presupuesto → pagado)","Separate apps / add-ons":"Apps separadas / complementos",
+    "AI photo & voice estimates":"Estimados con IA por foto y voz","Pricey top tiers only":"Solo en planes caros",
+    "Bilingual (English & Spanish)":"Bilingüe (Inglés y Español)","Built-in business coach":"Coach de negocio integrado",
+    "Set up FOR you (done-for-you)":"Configurada PARA ti (hecho por nosotros)","Figure it out yourself":"Arréglatelas tú solo",
+    "Everything included, one price":"Todo incluido, un precio","$500–600/mo with add-ons":"$500–600/mes con complementos",
+    // pricing
+    "Pricing":"Precios","Start for $9.99. Free for 7 days.":"Empieza por $9.99. Gratis por 7 días.",
+    "One low setup, a week free, then the plan that fits you. Everything included — no add-on games.":"Una instalación baja, una semana gratis, luego el plan que te queda. Todo incluido — sin juegos de complementos.",
+    "Basic":"Básico","Solo, mostly bidding":"Solo, mayormente presupuestos","Profitable bidding + found money":"Presupuestos rentables + dinero recuperado",
+    "Full job tracking & invoicing":"Seguimiento de trabajos y facturación completos","~20 AI estimates / mo":"~20 estimados con IA / mes",
+    "Receipt scanning":"Escaneo de recibos","1 user":"1 usuario","Start free":"Empieza gratis",
+    "Most popular":"Más popular","Balanced":"Balanceado","Most contractors":"La mayoría de contratistas",
+    "Everything in Basic, plus:":"Todo lo de Básico, más:","~100 AI estimates / mo":"~100 estimados con IA / mes",
+    "AI receptionist (250 texts)":"Recepcionista IA (250 mensajes)","Design previews & coach":"Vistas de diseño y coach","Up to 3 users":"Hasta 3 usuarios",
+    "Premium":"Premium","Crews & high-volume":"Cuadrillas y alto volumen","Everything in Balanced, plus:":"Todo lo de Balanceado, más:",
+    "Unlimited AI estimates*":"Estimados con IA ilimitados*","AI receptionist (1,500 texts)":"Recepcionista IA (1,500 mensajes)",
+    "Priority support":"Soporte prioritario","Up to 10 users":"Hasta 10 usuarios",
+    "*Unlimited = generous fair-use cap a normal business won't reach.":"*Ilimitado = un límite de uso justo y generoso que un negocio normal no alcanza.",
+    // how it works
+    "Your custom app, ready in minutes":"Tu app a la medida, lista en minutos",
+    "Tell us about your business":"Cuéntanos sobre tu negocio","A quick guided Q&A — your rates, crew, and how you work. A couple minutes.":"Un cuestionario guiado rápido — tus tarifas, cuadrilla y cómo trabajas. Un par de minutos.",
+    "We build it for you":"La construimos para ti","Your app is configured to your exact numbers and trade — no setup headaches.":"Tu app se configura a tus números y oficio exactos — sin dolores de cabeza.",
+    "Open it and run your business":"Ábrela y maneja tu negocio","Sign in on your phone, free for 7 days. If you love it, you're billed monthly. If not, cancel.":"Inicia sesión en tu teléfono, gratis por 7 días. Si te encanta, se cobra mensual. Si no, cancela.",
+    // faq
+    "Questions":"Preguntas","Good to know":"Bueno saber",
+    "Is my data safe and private?":"¿Mis datos están seguros y privados?","Yes. Your business data is yours — protected and never sold. You're in full control, and you can export or cancel anytime.":"Sí. Los datos de tu negocio son tuyos — protegidos y nunca vendidos. Tienes el control total, y puedes exportar o cancelar cuando quieras.",
+    "What's the $9.99 setup for?":"¿Para qué es la instalación de $9.99?","It covers personalizing the app to your exact business during onboarding. It's one-time and non-refundable, which keeps things serious on both sides. Then you get 7 days free before any monthly charge.":"Cubre personalizar la app a tu negocio exacto durante la configuración. Es único y no reembolsable, lo que mantiene las cosas serias de ambos lados. Luego tienes 7 días gratis antes de cualquier cobro mensual.",
+    "Do I need to be tech-savvy?":"¿Necesito saber de tecnología?","Not at all. It's built phone-first for the jobsite — big buttons, simple steps. And it's set up":"Para nada. Está hecha primero para el teléfono y la obra — botones grandes, pasos simples. Y está configurada","you, so there's nothing to figure out.":"ti, así que no hay nada que descifrar.",
+    "Can I cancel?":"¿Puedo cancelar?","Anytime, in a tap. No contracts, no cancellation fees. If it's not making you money, you shouldn't pay for it.":"Cuando quieras, con un toque. Sin contratos, sin cargos por cancelar. Si no te hace ganar dinero, no deberías pagarla.",
+    "Which plan should I pick?":"¿Qué plan elijo?","Start the quick setup and we'll recommend the right plan based on your answers — most contractors land on Balanced.":"Empieza la configuración rápida y te recomendaremos el plan correcto según tus respuestas — la mayoría elige Balanceado.",
+    // final + footer
+    "Ready to get every dollar?":"¿Listo para ganar cada dólar?","Build your custom app, free for 7 days. Just $9.99 to start.":"Crea tu app a la medida, gratis por 7 días. Solo $9.99 para empezar.",
+    "\"Trust in the LORD with all your heart…\" — Proverbs 3:5":"\"Confía en el SEÑOR de todo corazón…\" — Proverbios 3:5","Foundation":"Base",
+    "Cornerstone AI provides estimating & job-management software, not accounting, tax, or legal advice — confirm your business and tax numbers with a professional. The found-money calculator is an estimate based on the figures you enter, not a guarantee. © 2026 Cornerstone AI. San Diego, CA.":"Cornerstone AI ofrece software de estimación y gestión de trabajos, no asesoría contable, fiscal ni legal — confirma tus números de negocio e impuestos con un profesional. La calculadora de dinero recuperado es un estimado basado en las cifras que ingresas, no una garantía. © 2026 Cornerstone AI. San Diego, CA.",
+    // wizard
+    "Let’s get you set up 🛠️":"Vamos a configurarte 🛠️","First — who are you? So we can build it for you and reach out.":"Primero — ¿quién eres? Para construirla por ti y contactarte.",
+    "Your name":"Tu nombre","Email":"Correo","Phone":"Teléfono","Next →":"Siguiente →","← Back":"← Atrás",
+    "Your business":"Tu negocio","Business name":"Nombre del negocio","Your trade":"Tu oficio","Choose your trade…":"Elige tu oficio…",
+    "General Contractor":"Contratista general","Carpentry / Finish":"Carpintería / Acabados","Remodeling":"Remodelación","Plumbing":"Plomería","Electrical":"Electricidad","HVAC":"HVAC (clima)","Painting":"Pintura","Concrete / Masonry":"Concreto / Albañilería","Roofing":"Techado","Landscaping":"Jardinería","Flooring":"Pisos","Handyman":"Manitas","Other":"Otro",
+    "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
+    "Let’s pick your plan":"Elijamos tu plan","Jobs/bids per month":"Trabajos/presupuestos por mes","People who’ll use it":"Personas que la usarán","Want an AI receptionist to answer calls & texts?":"¿Quieres una recepcionista IA que conteste llamadas y mensajes?","Yes":"Sí","Not now":"Ahora no","See my plan →":"Ver mi plan →",
+    "Based on your answers, we recommend":"Según tus respuestas, recomendamos","$9.99 setup · 7-day free trial · cancel anytime":"$9.99 instalación · prueba gratis de 7 días · cancela cuando quieras","Claim my spot →":"Aparta mi lugar →",
+    "We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.":"Estamos incorporando a nuestros primeros contratistas personalmente — te enviaremos un correo para terminar. Sin cargo hoy.",
+    "Rough estimate, ~48 working weeks/yr.":"Estimado aproximado, ~48 semanas laborales/año.","on the table every year — your app fixes that.":"sobre la mesa cada año — tu app lo arregla.","You’re leaving about":"Estás dejando unos","Done":"Listo"
+  };
+  var SITE_REV=null;
+  function siteRev(){ if(!SITE_REV){ SITE_REV={}; for(var k in SITE_ES){ if(!SITE_REV[SITE_ES[k]]) SITE_REV[SITE_ES[k]]=k; } } return SITE_REV; }
+  function siteLang(){ try{ return localStorage.getItem('cornerstone.lang')==='es'?'es':'en'; }catch(e){ return 'en'; } }
+  function setSiteLang(l){ try{ localStorage.setItem('cornerstone.lang', l); }catch(e){} translateSite(); paintLangToggle(); if(typeof calc==='function') calc(); }
+  function translateSite(){
+    try{
+      var map = siteLang()==='es' ? SITE_ES : siteRev();
+      var w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n, list=[];
+      while(n=w.nextNode()){ list.push(n); }
+      list.forEach(function(node){ var raw=node.nodeValue, k=raw.trim(); if(!k) return; if(map[k]) node.nodeValue=raw.replace(k, map[k]); });
+      document.querySelectorAll('input[placeholder]').forEach(function(el){ var p=(el.getAttribute('placeholder')||'').trim(); if(map[p]) el.setAttribute('placeholder', map[p]); });
+      document.querySelectorAll('option').forEach(function(o){ var k=o.textContent.trim(); if(map[k]) o.textContent=map[k]; });
+    }catch(e){}
+  }
+  function paintLangToggle(){ var es=siteLang()==='es'; var b=document.getElementById('langToggle'); if(b) b.textContent = es?'EN':'ES'; var bm=document.getElementById('langToggleM'); if(bm) bm.textContent = es?'English':'Español'; }
+  function toggleLang(){ setSiteLang(siteLang()==='es'?'en':'es'); }
+
   // Found-money calculator
   function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
   function calc(){
@@ -445,8 +559,9 @@
     if(found<0||isNaN(found)||!isFinite(found))found=0;
     document.getElementById('found').textContent=money(found);
     var pill=document.getElementById('pill');
-    if(found>0){ pill.textContent='≈ '+money(found/12)+' / month back in your pocket'; }
-    else { pill.textContent='Enter your numbers above'; }
+    var es=siteLang()==='es';
+    if(found>0){ pill.textContent='≈ '+money(found/12)+(es?' / mes de vuelta en tu bolsillo':' / month back in your pocket'); }
+    else { pill.textContent=es?'Ingresa tus números arriba':'Enter your numbers above'; }
   }
   ['rate','hours','weeks','oh','profit'].forEach(function(id){
     document.getElementById(id).addEventListener('input',calc);
@@ -516,6 +631,7 @@
         '<button class="btn btn-p btn-lg" style="width:100%" onclick="closeGet()">Done</button></div>';
     }
     document.getElementById('wzBody').innerHTML=b;
+    if(siteLang()==='es') translateSite();
   }
   function wzCapture(){ var s=wz.step, g=function(id){var e=document.getElementById(id);return e?e.value:undefined;};
     if(s===1){ wz.data.name=g('w_name'); wz.data.email=g('w_email'); wz.data.phone=g('w_phone'); }
@@ -545,6 +661,10 @@
 
   // close mobile menu on link tap
   document.querySelectorAll('#nav a').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('nav').classList.remove('open'); }); });
+
+  // apply saved language on load
+  if(siteLang()==='es') translateSite();
+  paintLangToggle();
 </script>
 </body>
 </html>
