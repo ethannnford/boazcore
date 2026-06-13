@@ -153,7 +153,7 @@
   footer{background:var(--ink);color:#aab1d6;padding:48px 0 30px;font-size:14px}
   footer .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
   footer .logo{color:#fff}.footer-verse{color:#8b93c4;font-style:italic;margin-top:8px}
-  .disclaimer{margin-top:26px;padding-top:22px;border-top:1px solid #2c3157;color:#727aa8;font-size:12.5px;line-height:1.7}
+  .disclaimer{margin-top:26px;padding-top:22px;border-top:1px solid #2c3157;color:#aab1d6;font-size:13px;line-height:1.7}
 
   /* modal */
   .modal-bg{position:fixed;inset:0;background:rgba(15,18,42,.6);backdrop-filter:blur(4px);z-index:100;
@@ -219,11 +219,11 @@
     </div>
     <div class="calc">
       <div class="calc-card">
-        <div class="field"><label>Your hourly rate</label><div class="row"><span>$</span><input id="rate" type="number" value="125" inputmode="decimal"></div></div>
-        <div class="field"><label>Billable hours per week</label><div class="row"><input id="hours" type="number" value="40" inputmode="decimal"></div></div>
-        <div class="field"><label>Weeks worked per year</label><div class="row"><input id="weeks" type="number" value="48" inputmode="decimal"></div></div>
-        <div class="field"><label>True monthly overhead (truck, tools, insurance, gas, phone…)</label><div class="row"><span>$</span><input id="oh" type="number" value="3300" inputmode="decimal"></div></div>
-        <div class="field"><label>Profit margin you <i>should</i> make (%)</label><div class="row"><input id="profit" type="number" value="15" inputmode="decimal"><span>%</span></div></div>
+        <div class="field"><label>Your hourly rate</label><div class="row"><span>$</span><input id="rate" type="number" min="0" value="125" inputmode="decimal"></div></div>
+        <div class="field"><label>Billable hours per week</label><div class="row"><input id="hours" type="number" min="0" value="40" inputmode="decimal"></div></div>
+        <div class="field"><label>Weeks worked per year</label><div class="row"><input id="weeks" type="number" min="0" value="48" inputmode="decimal"></div></div>
+        <div class="field"><label>Monthly business overhead — costs only, not your pay (truck, tools, insurance, gas, phone…)</label><div class="row"><span>$</span><input id="oh" type="number" min="0" value="3300" inputmode="decimal"></div></div>
+        <div class="field"><label>Profit margin you <i>should</i> make (%)</label><div class="row"><input id="profit" type="number" min="0" value="15" inputmode="decimal"><span>%</span></div></div>
       </div>
       <div class="result">
         <div class="sub">You could be leaving roughly</div>
@@ -290,7 +290,7 @@
       <table>
         <thead><tr><th>What you get</th><th class="us">Cornerstone AI</th><th>The other guys</th></tr></thead>
         <tbody>
-          <tr><td>Builds the bid AND guarantees profit (found money)</td><td class="us"><span class="yes">✓</span></td><td>Estimates cost only — <span class="no">✗</span></td></tr>
+          <tr><td>Builds the bid AND builds in your profit (found money)</td><td class="us"><span class="yes">✓</span></td><td>Estimates cost only — <span class="no">✗</span></td></tr>
           <tr><td>One connected system (bid → paid)</td><td class="us"><span class="yes">✓</span></td><td>Separate apps / add-ons</td></tr>
           <tr><td>AI photo &amp; voice estimates</td><td class="us"><span class="yes">✓</span></td><td>Pricey top tiers only</td></tr>
           <tr><td>Bilingual (English &amp; Spanish)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
@@ -333,7 +333,7 @@
         <button class="btn btn-g" onclick="openGet()">Start free</button>
       </div>
     </div>
-    <p class="price-note">All plans: <b>$9.99 one-time setup</b> · <b>7-day free trial</b> · cancel anytime. Not sure which? Our quick setup recommends the right one for you.</p>
+    <p class="price-note">All plans: <b>$9.99 one-time setup</b> · <b>7-day free trial</b> · cancel anytime. Not sure which? Our quick setup recommends the right one for you.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
   </div>
 </section>
 
@@ -425,7 +425,7 @@
     // money left on table = overhead never charged for + profit margin never added
     var profitMissed=(revenue)*profit;
     var found=annualOverhead+profitMissed;
-    if(found<0)found=0;
+    if(found<0||isNaN(found)||!isFinite(found))found=0;
     document.getElementById('found').textContent=money(found);
     var pill=document.getElementById('pill');
     if(found>0){ pill.textContent='≈ '+money(found/12)+' / month back in your pocket'; }
@@ -442,6 +442,7 @@
   // Get Started modal
   function openGet(){ document.getElementById('getModal').classList.add('show'); document.body.style.overflow='hidden'; }
   function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('getModal').classList.contains('show')) closeGet(); });
 
   // close mobile menu on link tap
   document.querySelectorAll('#nav a').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('nav').classList.remove('open'); }); });
