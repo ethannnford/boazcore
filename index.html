@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cornerstone AI — custom software for tradesmen. Stop the leaks, keep your time, get every dollar. Built for you, set up for you, one transparent price.">
+<meta name="theme-color" content="#2c47c4">
+<title>Cornerstone AI — Stop the leaks. Get every dollar.</title>
+<style>
+  :root{
+    --indigo:#3f5fe0; --indigo-d:#2c47c4; --ink:#15182a; --body:#3a3f55;
+    --muted:#6b7280; --line:#e7e9f2; --bg:#ffffff; --soft:#f6f7fc;
+    --cream:#f4f1ea; --gold:#c9962f; --green:#1f9d57; --radius:18px;
+    --grad:linear-gradient(135deg,#3f5fe0 0%,#2c47c4 100%);
+    --shadow:0 10px 40px rgba(28,40,120,.08); --shadow-sm:0 2px 12px rgba(28,40,120,.06);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--body);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{color:var(--ink);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  section{padding:88px 0}
+  .eyebrow{color:var(--indigo);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+  .lead{font-size:18px;color:var(--muted);max-width:620px}
+  .center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:18px;letter-spacing:-.02em}
+  .logo .mark{width:30px;height:30px;border-radius:8px;background:var(--grad);display:grid;place-items:center;
+    color:#fff;font-size:16px;box-shadow:var(--shadow-sm)}
+  .navlinks{display:flex;align-items:center;gap:28px}
+  .navlinks a{color:var(--body);font-weight:600;font-size:15px}
+  .navlinks a:hover{color:var(--indigo)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;
+    padding:12px 22px;border-radius:999px;cursor:pointer;border:0;transition:transform .12s ease,box-shadow .12s ease;white-space:nowrap}
+  .btn:active{transform:scale(.97)}
+  .btn-p{background:var(--grad);color:#fff;box-shadow:0 6px 20px rgba(63,95,224,.35)}
+  .btn-p:hover{box-shadow:0 10px 28px rgba(63,95,224,.45)}
+  .btn-g{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-g:hover{border-color:var(--indigo);color:var(--indigo)}
+  .btn-lg{padding:15px 30px;font-size:16px}
+  .menu-btn{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink)}
+
+  /* hero */
+  .hero{padding:84px 0 70px;text-align:center;background:radial-gradient(1100px 480px at 50% -10%,#eef1fe 0%,#fff 60%)}
+  .hero h1{font-size:clamp(34px,6vw,60px);margin-bottom:20px}
+  .hero h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lead{font-size:20px;margin-bottom:30px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:26px;color:var(--muted);font-size:14px;font-weight:600}
+  .trust b{color:var(--ink)}
+
+  /* calculator */
+  .calc-sec{background:var(--ink);color:#fff}
+  .calc-sec h2,.calc-sec h3{color:#fff}
+  .calc-sec .lead{color:#aab1d6}
+  .calc-sec .eyebrow{color:#8fa2ff}
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:40px;align-items:center}
+  .calc-card{background:#1d2138;border:1px solid #2c3157;border-radius:var(--radius);padding:28px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:13px;font-weight:700;color:#c3c9ec;margin-bottom:7px}
+  .field .row{display:flex;align-items:center;background:#11142a;border:1px solid #313764;border-radius:12px;padding:0 14px}
+  .field .row span{color:#7c84b5;font-weight:700}
+  .field input{flex:1;background:none;border:0;color:#fff;font-size:18px;font-weight:700;padding:13px 8px;outline:none;width:100%}
+  .field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .result{text-align:center;padding:10px}
+  .result .big{font-size:clamp(40px,7vw,64px);font-weight:800;background:linear-gradient(135deg,#7d94ff,#c9962f);
+    -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.05;margin:6px 0}
+  .result .sub{color:#aab1d6;font-size:16px;max-width:340px;margin:0 auto}
+  .result .pill{display:inline-block;background:#11142a;border:1px solid #313764;border-radius:999px;
+    padding:8px 16px;color:#8fe3b0;font-weight:700;font-size:14px;margin-top:18px}
+  .result .btn{margin-top:22px}
+
+  /* generic cards / grid */
+  .grid{display:grid;gap:22px;margin-top:42px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);text-align:left}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+  .card h3{font-size:19px;margin-bottom:8px}
+  .card p{font-size:15px;color:var(--muted)}
+
+  /* foundation */
+  .foundation{background:var(--cream)}
+  .verse{max-width:720px;margin:0 auto;text-align:center}
+  .verse blockquote{font-size:clamp(22px,3.4vw,30px);color:var(--ink);font-weight:700;line-height:1.4;font-style:italic;margin:18px 0}
+  .verse cite{color:var(--gold);font-weight:800;font-style:normal;font-size:15px;letter-spacing:.04em}
+  .verse p{margin-top:22px;color:var(--body);font-size:17px}
+
+  /* founder */
+  .founder{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;margin-top:10px}
+  .founder .photo{width:200px;height:200px;border-radius:24px;background:var(--grad);display:grid;place-items:center;
+    color:#fff;font-size:64px;box-shadow:var(--shadow)}
+  .founder p{font-size:16px;color:var(--body);margin-bottom:14px}
+  .founder p:last-child{margin-bottom:0}
+
+  /* comparison */
+  .compare{overflow-x:auto;margin-top:40px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  table{width:100%;border-collapse:collapse;min-width:560px;background:#fff}
+  th,td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+  thead th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  thead th.us{background:var(--grad);color:#fff}
+  td.us{font-weight:700;color:var(--ink)}
+  tbody tr:last-child td{border-bottom:0}
+  .yes{color:var(--green);font-weight:800}.no{color:#c2475a;font-weight:800}
+
+  /* pricing */
+  .pricing{background:var(--soft)}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px;align-items:stretch}
+  .tier{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:30px 26px;display:flex;flex-direction:column;position:relative}
+  .tier.pop{border-color:var(--indigo);box-shadow:0 16px 50px rgba(63,95,224,.18);transform:translateY(-6px)}
+  .tier .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;
+    font-size:12px;font-weight:800;letter-spacing:.06em;padding:6px 16px;border-radius:999px;text-transform:uppercase}
+  .tier h3{font-size:20px;margin-bottom:4px}
+  .tier .who{color:var(--muted);font-size:14px;margin-bottom:18px;min-height:40px}
+  .tier .price{font-size:42px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+  .tier .price small{font-size:16px;color:var(--muted);font-weight:600}
+  .tier ul{list-style:none;margin:20px 0 24px}
+  .tier li{padding:8px 0 8px 28px;position:relative;font-size:15px;color:var(--body)}
+  .tier li::before{content:'✓';position:absolute;left:0;color:var(--indigo);font-weight:800}
+  .tier .btn{width:100%;margin-top:auto}
+  .price-note{text-align:center;margin-top:28px;color:var(--muted);font-size:15px}
+  .price-note b{color:var(--ink)}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:42px}
+  .step{text-align:center}
+  .step .n{width:54px;height:54px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;
+    font-size:22px;font-weight:800;margin:0 auto 16px;box-shadow:var(--shadow-sm)}
+  .step h3{font-size:18px;margin-bottom:6px}.step p{font-size:15px;color:var(--muted)}
+
+  /* faq */
+  .faq{max-width:760px;margin:36px auto 0}
+  .q{border-bottom:1px solid var(--line)}
+  .q button{width:100%;text-align:left;background:none;border:0;padding:20px 0;font-size:17px;font-weight:700;
+    color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .q .a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:15px}
+  .q.open .a{max-height:240px;padding-bottom:20px}
+  .q button .chev{transition:transform .3s ease;color:var(--indigo);flex:0 0 auto}
+  .q.open button .chev{transform:rotate(180deg)}
+
+  /* final cta */
+  .final{background:var(--grad);color:#fff;text-align:center}
+  .final h2{color:#fff;font-size:clamp(28px,4.5vw,42px);margin-bottom:14px}
+  .final p{color:#dfe5ff;font-size:18px;max-width:520px;margin:0 auto 28px}
+  .final .btn-p{background:#fff;color:var(--indigo-d);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+
+  /* footer */
+  footer{background:var(--ink);color:#aab1d6;padding:48px 0 30px;font-size:14px}
+  footer .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  footer .logo{color:#fff}.footer-verse{color:#8b93c4;font-style:italic;margin-top:8px}
+  .disclaimer{margin-top:26px;padding-top:22px;border-top:1px solid #2c3157;color:#727aa8;font-size:12.5px;line-height:1.7}
+
+  /* modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(15,18,42,.6);backdrop-filter:blur(4px);z-index:100;
+    display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:#fff;border-radius:22px;max-width:460px;width:100%;padding:34px;box-shadow:var(--shadow);position:relative}
+  .modal h3{font-size:24px;margin-bottom:8px}.modal p{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .modal .x{position:absolute;top:16px;right:18px;background:none;border:0;font-size:24px;color:var(--muted);cursor:pointer}
+  .flow{list-style:none;margin:18px 0}
+  .flow li{padding:10px 0 10px 36px;position:relative;font-size:15px;color:var(--body);font-weight:600}
+  .flow li span{position:absolute;left:0;top:8px;width:24px;height:24px;border-radius:50%;background:var(--soft);
+    color:var(--indigo);font-size:13px;font-weight:800;display:grid;place-items:center}
+
+  @media(max-width:820px){
+    section{padding:64px 0}
+    .navlinks{display:none}.menu-btn{display:block}
+    .navlinks.open{display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;background:#fff;
+      padding:18px 22px;gap:16px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+    .calc{grid-template-columns:1fr}
+    .g3,.tiers,.steps{grid-template-columns:1fr}
+    .tier.pop{transform:none}
+    .founder{grid-template-columns:1fr;text-align:center}.founder .photo{margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="mark">◢</span> Cornerstone<span style="color:var(--indigo)">&nbsp;AI</span></a>
+    <div class="navlinks" id="nav">
+      <a href="#calc">Found Money</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#foundation">Our Foundation</a>
+      <button class="btn btn-p" onclick="openGet()">Get Started</button>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Custom software for the trades</div>
+    <h1>Stop the leaks. Keep your time.<br><span class="hl">Get every dollar.</span></h1>
+    <p class="lead">Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Cornerstone AI builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up <i>for</i> you, one honest price.</p>
+    <div class="cta-row">
+      <button class="btn btn-p btn-lg" onclick="openGet()">Get Started — $9.99</button>
+      <a class="btn btn-g btn-lg" href="#calc">See your found money →</a>
+    </div>
+    <div class="trust">✓ 7-day free trial &nbsp;·&nbsp; ✓ Built &amp; set up for you &nbsp;·&nbsp; ✓ Cancel anytime</div>
+  </div>
+</header>
+
+<!-- FOUND MONEY CALCULATOR -->
+<section class="calc-sec" id="calc">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow">The found-money calculator</div>
+      <h2 style="font-size:clamp(28px,4.5vw,40px)">See what you're leaving on the table</h2>
+      <p class="lead">Most contractors charge their hourly rate with <b style="color:#fff">no overhead or profit built in</b> — and never see the money they're owed. Punch in your numbers:</p>
+    </div>
+    <div class="calc">
+      <div class="calc-card">
+        <div class="field"><label>Your hourly rate</label><div class="row"><span>$</span><input id="rate" type="number" value="125" inputmode="decimal"></div></div>
+        <div class="field"><label>Billable hours per week</label><div class="row"><input id="hours" type="number" value="40" inputmode="decimal"></div></div>
+        <div class="field"><label>Weeks worked per year</label><div class="row"><input id="weeks" type="number" value="48" inputmode="decimal"></div></div>
+        <div class="field"><label>True monthly overhead (truck, tools, insurance, gas, phone…)</label><div class="row"><span>$</span><input id="oh" type="number" value="3300" inputmode="decimal"></div></div>
+        <div class="field"><label>Profit margin you <i>should</i> make (%)</label><div class="row"><input id="profit" type="number" value="15" inputmode="decimal"><span>%</span></div></div>
+      </div>
+      <div class="result">
+        <div class="sub">You could be leaving roughly</div>
+        <div class="big" id="found">$0</div>
+        <div class="sub">on the table <b style="color:#fff">every year</b> — overhead + profit you've earned but never charged for.</div>
+        <div class="pill" id="pill">That's real money back in your pocket</div>
+        <div><button class="btn btn-p btn-lg" onclick="openGet()">Get the app that fixes this →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="what">
+  <div class="wrap center">
+    <div class="eyebrow">What we do</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Your whole business, run by AI</h2>
+    <p class="lead">Not a pile of tools — one connected system that runs the job from bid to bank.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ic">💸</div><h3>Profitable bids</h3><p>Auto-adds overhead + profit and shows the "found money" you'd have missed. Win the job <i>and</i> the margin.</p></div>
+      <div class="card"><div class="ic">📋</div><h3>The whole job</h3><p>Lead → bid → won → invoice → paid. Change orders, proposals, follow-ups, photos — all in one place.</p></div>
+      <div class="card"><div class="ic">📷</div><h3>AI that works for you</h3><p>Snap a photo for an instant estimate, scan receipts, price materials, and answer your phone — built in.</p></div>
+      <div class="card"><div class="ic">💳</div><h3>Get paid faster</h3><p>Send clean invoices, take payment, and chase the unpaid balances automatically so nothing slips.</p></div>
+      <div class="card"><div class="ic">🗓️</div><h3>Your built-in coach</h3><p>Goals, daily plans, and reminders that keep your business growing — not just surviving.</p></div>
+      <div class="card"><div class="ic">🌎</div><h3>English &amp; Spanish</h3><p>The whole app works in both languages, so your whole crew can use it. Tap to switch, anytime.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDATION -->
+<section class="foundation" id="foundation">
+  <div class="wrap verse">
+    <div class="eyebrow" style="color:var(--gold)">Our foundation</div>
+    <blockquote>"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."</blockquote>
+    <cite>— Colossians 3:23</cite>
+    <p>This is the standard I'm held to. I promise to work earnestly and diligently for you — not for my own sake, but in service of a purpose deeper than my own understanding. Honesty, integrity, and excellence aren't features here. They're the foundation.</p>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="wrap">
+    <div class="eyebrow">Meet the founder</div>
+    <h2 style="font-size:clamp(28px,4.5vw,38px);margin-bottom:8px">Built on the job site</h2>
+    <div class="founder">
+      <div class="photo">✝</div>
+      <div>
+        <p>I was raised in San Diego, California — but really, I grew up on the job site. My father, my grandfather, and my great-grandfather all built their lives in the trades. My dad owns his own finished carpentry business, and from the time I was a kid I watched what honest, hard work actually looks like up close. Attention to detail. Showing up. Doing it right when no one's watching.</p>
+        <p>Those weren't things I taught myself — they were instilled in me, and I carry them today not by my own strength but by God's grace. <i>"Trust in the LORD with all your heart, and lean not on your own understanding." (Proverbs 3:5)</i></p>
+        <p>I've seen the sacrifice and sweat my family poured into blue-collar work — and how often hard-working tradesmen never see every dollar they've truly earned. So I made it my mission to build software that exposes the leaks, wins back your time, and makes sure you get paid for every ounce of work you put in.</p>
+        <p style="font-weight:700;color:var(--ink)">It's just me — and that's on purpose. You're not passed off to a call center. You get one person who knows your business and stands behind the work personally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section style="background:var(--soft)" id="compare">
+  <div class="wrap center">
+    <div class="eyebrow">Why Cornerstone</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">More value. One honest price.</h2>
+    <p class="lead">Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.</p>
+    <div class="compare">
+      <table>
+        <thead><tr><th>What you get</th><th class="us">Cornerstone AI</th><th>The other guys</th></tr></thead>
+        <tbody>
+          <tr><td>Builds the bid AND guarantees profit (found money)</td><td class="us"><span class="yes">✓</span></td><td>Estimates cost only — <span class="no">✗</span></td></tr>
+          <tr><td>One connected system (bid → paid)</td><td class="us"><span class="yes">✓</span></td><td>Separate apps / add-ons</td></tr>
+          <tr><td>AI photo &amp; voice estimates</td><td class="us"><span class="yes">✓</span></td><td>Pricey top tiers only</td></tr>
+          <tr><td>Bilingual (English &amp; Spanish)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>Built-in business coach</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>Set up FOR you (done-for-you)</td><td class="us"><span class="yes">✓</span></td><td>Figure it out yourself</td></tr>
+          <tr><td>Everything included, one price</td><td class="us"><span class="yes">✓</span></td><td>$500–600/mo with add-ons</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap center">
+    <div class="eyebrow">Pricing</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Start for $9.99. Free for 7 days.</h2>
+    <p class="lead">One low setup, a week free, then the plan that fits you. Everything included — no add-on games.</p>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Basic</h3>
+        <div class="who">Solo, mostly bidding</div>
+        <div class="price">$49.99<small>/mo</small></div>
+        <ul><li>Profitable bidding + found money</li><li>Full job tracking &amp; invoicing</li><li>~20 AI estimates / mo</li><li>Receipt scanning</li><li>1 user</li></ul>
+        <button class="btn btn-g" onclick="openGet()">Start free</button>
+      </div>
+      <div class="tier pop">
+        <div class="tag">Most popular</div>
+        <h3>Balanced</h3>
+        <div class="who">Most contractors</div>
+        <div class="price">$149.99<small>/mo</small></div>
+        <ul><li>Everything in Basic, plus:</li><li>~100 AI estimates / mo</li><li>AI receptionist (250 texts)</li><li>Design previews &amp; coach</li><li>Up to 3 users</li></ul>
+        <button class="btn btn-p" onclick="openGet()">Start free</button>
+      </div>
+      <div class="tier">
+        <h3>Premium</h3>
+        <div class="who">Crews &amp; high-volume</div>
+        <div class="price">$249.99<small>/mo</small></div>
+        <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>AI receptionist (1,500 texts)</li><li>Priority support</li><li>Up to 10 users</li></ul>
+        <button class="btn btn-g" onclick="openGet()">Start free</button>
+      </div>
+    </div>
+    <p class="price-note">All plans: <b>$9.99 one-time setup</b> · <b>7-day free trial</b> · cancel anytime. Not sure which? Our quick setup recommends the right one for you.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap center">
+    <div class="eyebrow">How it works</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Your custom app, ready in minutes</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Tell us about your business</h3><p>A quick guided Q&amp;A — your rates, crew, and how you work. A couple minutes.</p></div>
+      <div class="step"><div class="n">2</div><h3>We build it for you</h3><p>Your app is configured to your exact numbers and trade — no setup headaches.</p></div>
+      <div class="step"><div class="n">3</div><h3>Open it and run your business</h3><p>Sign in on your phone, free for 7 days. If you love it, you're billed monthly. If not, cancel.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--soft)" id="faq">
+  <div class="wrap center">
+    <div class="eyebrow">Questions</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Good to know</h2>
+    <div class="faq">
+      <div class="q"><button onclick="tog(this)">Is my data safe and private?<span class="chev">⌄</span></button><div class="a">Yes. Your business data is yours — protected and never sold. You're in full control, and you can export or cancel anytime.</div></div>
+      <div class="q"><button onclick="tog(this)">What's the $9.99 setup for?<span class="chev">⌄</span></button><div class="a">It covers personalizing the app to your exact business during onboarding. It's one-time and non-refundable, which keeps things serious on both sides. Then you get 7 days free before any monthly charge.</div></div>
+      <div class="q"><button onclick="tog(this)">Do I need to be tech-savvy?<span class="chev">⌄</span></button><div class="a">Not at all. It's built phone-first for the jobsite — big buttons, simple steps. And it's set up <i>for</i> you, so there's nothing to figure out.</div></div>
+      <div class="q"><button onclick="tog(this)">Can I cancel?<span class="chev">⌄</span></button><div class="a">Anytime, in a tap. No contracts, no cancellation fees. If it's not making you money, you shouldn't pay for it.</div></div>
+      <div class="q"><button onclick="tog(this)">Which plan should I pick?<span class="chev">⌄</span></button><div class="a">Start the quick setup and we'll recommend the right plan based on your answers — most contractors land on Balanced.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="start">
+  <div class="wrap">
+    <h2>Ready to get every dollar?</h2>
+    <p>Build your custom app, free for 7 days. Just $9.99 to start.</p>
+    <button class="btn btn-p btn-lg" onclick="openGet()">Get Started</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div>
+        <div class="logo"><span class="mark">◢</span> Cornerstone AI</div>
+        <div class="footer-verse">"Trust in the LORD with all your heart…" — Proverbs 3:5</div>
+      </div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <a href="#calc">Found Money</a><a href="#pricing">Pricing</a><a href="#foundation">Foundation</a>
+        <a href="#" onclick="openGet();return false">Get Started</a>
+      </div>
+    </div>
+    <div class="disclaimer">
+      Cornerstone AI provides estimating &amp; job-management software, not accounting, tax, or legal advice — confirm your business and tax numbers with a professional. The found-money calculator is an estimate based on the figures you enter, not a guarantee. © 2026 Cornerstone AI. San Diego, CA.
+    </div>
+  </div>
+</footer>
+
+<!-- GET STARTED MODAL -->
+<div class="modal-bg" id="getModal" onclick="if(event.target===this)closeGet()">
+  <div class="modal">
+    <button class="x" onclick="closeGet()">×</button>
+    <h3>Let's build your app 🛠️</h3>
+    <p>Here's exactly how it works:</p>
+    <ul class="flow">
+      <li><span>1</span>Answer a quick Q&amp;A about your business</li>
+      <li><span>2</span>We build your app, set up to your numbers</li>
+      <li><span>3</span>Pay $9.99, then it's free for 7 days</li>
+      <li><span>4</span>Sign in on your phone &amp; run your business</li>
+    </ul>
+    <p style="font-size:14px">We're onboarding our first contractors personally right now. Drop your info and I'll get you set up myself.</p>
+    <a class="btn btn-p btn-lg" style="width:100%" href="mailto:hello@cornerstoneai.io?subject=I want to get started with Cornerstone AI&body=Hey! I'd like to get set up. My business: %0D%0AMy trade: %0D%0AMy phone: ">Email me to get started →</a>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px;margin-bottom:0;text-align:center">Online signup &amp; instant checkout coming soon.</p>
+  </div>
+</div>
+
+<script>
+  // Found-money calculator
+  function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
+  function calc(){
+    var rate=+document.getElementById('rate').value||0,
+        hours=+document.getElementById('hours').value||0,
+        weeks=+document.getElementById('weeks').value||0,
+        oh=+document.getElementById('oh').value||0,
+        profit=(+document.getElementById('profit').value||0)/100;
+    var annualHours=hours*weeks;
+    var revenue=rate*annualHours;
+    var annualOverhead=oh*12;
+    // money left on table = overhead never charged for + profit margin never added
+    var profitMissed=(revenue)*profit;
+    var found=annualOverhead+profitMissed;
+    if(found<0)found=0;
+    document.getElementById('found').textContent=money(found);
+    var pill=document.getElementById('pill');
+    if(found>0){ pill.textContent='≈ '+money(found/12)+' / month back in your pocket'; }
+    else { pill.textContent='Enter your numbers above'; }
+  }
+  ['rate','hours','weeks','oh','profit'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',calc);
+  });
+  calc();
+
+  // FAQ accordion
+  function tog(btn){ btn.parentElement.classList.toggle('open'); }
+
+  // Get Started modal
+  function openGet(){ document.getElementById('getModal').classList.add('show'); document.body.style.overflow='hidden'; }
+  function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
+
+  // close mobile menu on link tap
+  document.querySelectorAll('#nav a').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('nav').classList.remove('open'); }); });
+</script>
+</body>
+</html>
