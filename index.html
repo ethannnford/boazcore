@@ -20,7 +20,7 @@
     color:var(--body);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
   h1,h2,h3,h4{color:var(--ink);line-height:1.15;letter-spacing:-.02em;font-weight:800}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
   section{padding:88px 0}
   .eyebrow{color:var(--indigo);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
   .lead{font-size:18px;color:var(--muted);max-width:620px}
@@ -102,14 +102,16 @@
   .founder p:last-child{margin-bottom:0}
 
   /* comparison */
-  .compare{overflow-x:auto;margin-top:40px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
-  table{width:100%;border-collapse:collapse;min-width:560px;background:#fff}
-  th,td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
-  thead th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-  thead th.us{background:var(--grad);color:#fff}
-  td.us{font-weight:700;color:var(--ink)}
+  .compare{overflow-x:auto;margin-top:40px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;min-width:720px;background:#fff}
+  th,td{padding:15px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+  td:not(:first-child),th:not(:first-child){text-align:center}
+  th:first-child,td:first-child{font-weight:600;color:var(--body)}
+  thead th{background:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
+  thead th.us{background:var(--grad);color:#fff;font-size:16px;text-transform:none;letter-spacing:0}
+  td.us{font-weight:800;color:var(--ink);background:#f1f4ff}
   tbody tr:last-child td{border-bottom:0}
-  .yes{color:var(--green);font-weight:800}.no{color:#c2475a;font-weight:800}
+  .yes{color:var(--green);font-weight:800;font-size:18px}.no{color:#c2475a;font-weight:700;font-size:16px}
 
   /* pricing */
   .pricing{background:var(--soft)}
@@ -306,18 +308,20 @@
     <p class="lead">Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.</p>
     <div class="compare">
       <table>
-        <thead><tr><th>What you get</th><th class="us">Boaz</th><th>The other guys</th></tr></thead>
+        <thead><tr><th>What you get</th><th class="us">Boaz</th><th>Jobber</th><th>Housecall Pro</th><th>ServiceTitan</th></tr></thead>
         <tbody>
-          <tr><td>Builds the bid AND builds in your profit (found money)</td><td class="us"><span class="yes">✓</span></td><td>Estimates cost only — <span class="no">✗</span></td></tr>
-          <tr><td>One connected system (bid → paid)</td><td class="us"><span class="yes">✓</span></td><td>Separate apps / add-ons</td></tr>
-          <tr><td>AI photo &amp; voice estimates</td><td class="us"><span class="yes">✓</span></td><td>Pricey top tiers only</td></tr>
-          <tr><td>Bilingual (English &amp; Spanish)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Built-in business coach</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Set up FOR you (done-for-you)</td><td class="us"><span class="yes">✓</span></td><td>Figure it out yourself</td></tr>
-          <tr><td>Everything included, one price</td><td class="us"><span class="yes">✓</span></td><td>$500–600/mo with add-ons</td></tr>
+          <tr><td>Starting price</td><td class="us">$49.99/mo</td><td>~$39–349/mo</td><td>~$49–299/mo</td><td>$300+/mo</td></tr>
+          <tr><td>One-time setup</td><td class="us">just $9.99</td><td>—</td><td>—</td><td>High / custom</td></tr>
+          <tr><td>Builds your profit INTO every bid (found money)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>Done-for-you setup &amp; personalization</td><td class="us"><span class="yes">✓</span></td><td>DIY</td><td>DIY</td><td>Paid onboarding</td></tr>
+          <tr><td>Bilingual English &amp; Spanish built-in</td><td class="us"><span class="yes">✓</span></td><td>Limited</td><td>Limited</td><td>Limited</td></tr>
+          <tr><td>Everything in one flat price — no add-ons</td><td class="us"><span class="yes">✓</span></td><td>Tiered + add-ons</td><td>Tiered + add-ons</td><td>Enterprise quote</td></tr>
+          <tr><td>Made for solo &amp; small crews (not bloated)</td><td class="us"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>Talk straight to the founder</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
         </tbody>
       </table>
     </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px;max-width:760px;margin-left:auto;margin-right:auto">Competitor names are trademarks of their respective owners. Pricing &amp; features are approximate, based on publicly listed plans (2026), and may change — always check their current site. Comparison reflects typical small-contractor plans.</p>
   </div>
 </section>
 
@@ -501,6 +505,14 @@
     "Why Boaz":"Por qué Boaz","More value. One honest price.":"Más valor. Un precio honesto.",
     "Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.":"Las demás apps te venden una herramienta — y luego te cobran de más por todo lo demás. Nosotros no.",
     "What you get":"Lo que obtienes","The other guys":"Los otros",
+    "Starting price":"Precio inicial","One-time setup":"Pago único de configuración","just $9.99":"solo $9.99","High / custom":"Alto / personalizado",
+    "Builds your profit INTO every bid (found money)":"Incluye TU ganancia en cada presupuesto (dinero recuperado)",
+    "Done-for-you setup & personalization":"Configuración y personalización hechas para ti","DIY":"Hazlo tú mismo","Paid onboarding":"Incorporación de pago",
+    "Bilingual English & Spanish built-in":"Bilingüe inglés y español incluido","Limited":"Limitado",
+    "Everything in one flat price — no add-ons":"Todo en un precio fijo — sin extras","Tiered + add-ons":"Por niveles + extras","Enterprise quote":"Cotización empresarial",
+    "Made for solo & small crews (not bloated)":"Hecho para solos y cuadrillas pequeñas (sin relleno)",
+    "Talk straight to the founder":"Habla directo con el fundador",
+    "Competitor names are trademarks of their respective owners. Pricing & features are approximate, based on publicly listed plans (2026), and may change — always check their current site. Comparison reflects typical small-contractor plans.":"Los nombres de competidores son marcas de sus respectivos dueños. Los precios y funciones son aproximados, basados en planes publicados (2026), y pueden cambiar — revisa siempre su sitio actual. La comparación refleja planes típicos para contratistas pequeños.",
     "Builds the bid AND builds in your profit (found money)":"Crea el presupuesto Y agrega tu ganancia (dinero recuperado)","Estimates cost only —":"Solo estima el costo —",
     "One connected system (bid → paid)":"Un sistema conectado (presupuesto → pagado)","Separate apps / add-ons":"Apps separadas / complementos",
     "AI photo & voice estimates":"Estimados con IA por foto y voz","Pricey top tiers only":"Solo en planes caros",
