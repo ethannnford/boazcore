@@ -682,11 +682,21 @@
     var d=wz.data, btn=document.getElementById('w_submit');
     if(!/.+@.+\..+/.test(d.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; }
     if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
-    var payload={ access_key:WZ_KEY, subject:'New Boaz lead: '+(d.name||'')+' ('+wzTier()+')', from_name:'Boaz Website',
-      Name:d.name||'', Email:d.email||'', Phone:d.phone||'', Business:d.biz||'', Trade:d.trade||'',
-      Rate:d.rate||'', HoursPerWeek:d.hours||'', MonthlyOverhead:d.oh||'', ProfitPct:d.profit||'', TaxPct:d.tax||'',
-      JobsPerMonth:d.jobs||'', CrewSize:d.crew||'', WantReceptionist:d.recept||'',
-      FoundMoneyPerYear:money(wzFound()), RecommendedPlan:wzTier() };
+    var found=money(wzFound()), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
+    var summary='NEW BOAZ LEAD\n\n'+
+      (d.name||'Someone')+(d.biz?' — '+d.biz:'')+(d.trade?' ('+d.trade+')':'')+'\n'+
+      'Recommended: '+tier+' ('+price+'/mo) + $9.99 setup\n'+
+      'Leaving ~'+found+'/yr on the table\n\n'+
+      'CONTACT → '+(d.email||'')+(d.phone?'  ·  '+d.phone:'')+'\n\n'+
+      'NEXT STEP: reach out, onboard them, and collect the $9.99 setup + first month.';
+    var payload={ access_key:WZ_KEY,
+      subject:'🔥 New lead: '+(d.name||'?')+' — '+tier+' ('+price+'/mo)', from_name:'Boaz Website',
+      message:summary,
+      'Name':d.name||'', 'Email':d.email||'', 'Phone':d.phone||'', 'Business':d.biz||'', 'Trade':d.trade||'',
+      'Recommended Plan':tier+' ('+price+'/mo)', 'Found Money / Year':found,
+      'Hourly Rate':d.rate?('$'+d.rate):'', 'Billable Hours/Week':d.hours||'', 'Monthly Overhead':d.oh?('$'+d.oh):'',
+      'Profit %':d.profit||'', 'Tax %':d.tax||'',
+      'Jobs / Month':d.jobs||'', 'Crew Size':d.crew||'', 'Wants AI Receptionist':d.recept||'' };
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
       .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
