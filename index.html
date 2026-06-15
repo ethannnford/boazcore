@@ -337,7 +337,7 @@
         <div class="who">Solo, mostly bidding</div>
         <div class="price">$49.99<small>/mo</small></div>
         <ul><li>Profitable bidding + found money</li><li>Full job tracking &amp; invoicing</li><li>~20 AI estimates / mo</li><li>Receipt scanning</li><li>1 user</li></ul>
-        <button class="btn btn-g" onclick="openGet()">Start free</button>
+        <button class="btn btn-g" onclick="goPay('Basic')">Start free</button>
       </div>
       <div class="tier pop">
         <div class="tag">Most popular</div>
@@ -345,14 +345,14 @@
         <div class="who">Most contractors</div>
         <div class="price">$149.99<small>/mo</small></div>
         <ul><li>Everything in Basic, plus:</li><li>~100 AI estimates / mo</li><li>AI receptionist (250 texts)</li><li>Design previews &amp; coach</li><li>Up to 3 users</li></ul>
-        <button class="btn btn-p" onclick="openGet()">Start free</button>
+        <button class="btn btn-p" onclick="goPay('Balanced')">Start free</button>
       </div>
       <div class="tier">
         <h3>Premium</h3>
         <div class="who">Crews &amp; high-volume</div>
         <div class="price">$249.99<small>/mo</small></div>
         <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>AI receptionist (1,500 texts)</li><li>Priority support</li><li>Up to 10 users</li></ul>
-        <button class="btn btn-g" onclick="openGet()">Start free</button>
+        <button class="btn btn-g" onclick="goPay('Premium')">Start free</button>
       </div>
     </div>
     <p class="price-note">All plans: <b>7-day free trial</b> · <b>no setup fee</b> · cancel anytime. Not sure which? Our quick setup recommends the right one for you.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
@@ -555,7 +555,7 @@
     "General Contractor":"Contratista general","Carpentry / Finish":"Carpintería / Acabados","Remodeling":"Remodelación","Plumbing":"Plomería","Electrical":"Electricidad","HVAC":"HVAC (clima)","Painting":"Pintura","Concrete / Masonry":"Concreto / Albañilería","Roofing":"Techado","Landscaping":"Jardinería","Flooring":"Pisos","Handyman":"Manitas","Other":"Otro",
     "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
     "Let’s pick your plan":"Elijamos tu plan","Jobs/bids per month":"Trabajos/presupuestos por mes","People who’ll use it":"Personas que la usarán","Want an AI receptionist to answer calls & texts?":"¿Quieres una recepcionista IA que conteste llamadas y mensajes?","Yes":"Sí","Not now":"Ahora no","See my plan →":"Ver mi plan →",
-    "Based on your answers, we recommend":"Según tus respuestas, recomendamos","7-day free trial · no setup fee · cancel anytime":"prueba gratis de 7 días · sin cuota de instalación · cancela cuando quieras","Claim my spot →":"Aparta mi lugar →",
+    "Based on your answers, we recommend":"Según tus respuestas, recomendamos","7-day free trial · no setup fee · cancel anytime":"prueba gratis de 7 días · sin cuota de instalación · cancela cuando quieras","Claim my spot →":"Aparta mi lugar →","Start my 7-day free trial →":"Comienza mi prueba gratis de 7 días →",
     "We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.":"Estamos incorporando a nuestros primeros contratistas personalmente — te enviaremos un correo para terminar. Sin cargo hoy.",
     "Rough estimate, ~48 working weeks/yr.":"Estimado aproximado, ~48 semanas laborales/año.","on the table every year — your app fixes that.":"sobre la mesa cada año — tu app lo arregla.","You’re leaving about":"Estás dejando unos","Done":"Listo"
   };
@@ -608,6 +608,12 @@
   // ===== Get Started — onboarding Q&A wizard =====
   // TODO: paste your real Web3Forms access key (free at web3forms.com) so leads email you.
   var WZ_KEY = '6099b5b6-9a42-452a-8947-cbc3e3cbf5b2';
+  var STRIPE_LINKS = {
+    Basic:'https://buy.stripe.com/test_3cIdRb9gQ4II5Q79iJ48000',
+    Balanced:'https://buy.stripe.com/test_5kQ8wR50A5MM0vNbqR48001',
+    Premium:'https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002'
+  };
+  function goPay(tier){ var l=STRIPE_LINKS[tier]; if(l){ window.location.href=l; } }
   var wz = { step:1, data:{} };
   function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function tradeOpts(sel){
@@ -656,7 +662,7 @@
       b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">7-day free trial · no setup fee · cancel anytime</div></div>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Claim my spot →</button>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Start my 7-day free trial →</button>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
@@ -699,8 +705,8 @@
       'Jobs / Month':d.jobs||'', 'Crew Size':d.crew||'', 'Wants AI Receptionist':d.recept||'' };
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
-      .catch(function(){ if(btn){btn.textContent='Claim my spot →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
+      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ var l=STRIPE_LINKS[wzTier()]; if(l){ window.location.href=l; } else { wz.step=6; renderWz(); } } else { throw new Error('submit failed'); } })
+      .catch(function(){ if(btn){btn.textContent='Start my 7-day free trial →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
   }
 
   // close mobile menu on link tap
