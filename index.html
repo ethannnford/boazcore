@@ -77,6 +77,7 @@
   .result .sub{color:#aab1d6;font-size:16px;max-width:340px;margin:0 auto}
   .result .pill{display:inline-block;background:#11142a;border:1px solid #313764;border-radius:999px;
     padding:8px 16px;color:#8fe3b0;font-weight:700;font-size:14px;margin-top:18px}
+  a.btn{text-decoration:none}
   .result .btn{margin-top:22px}
 
   /* generic cards / grid */
@@ -337,7 +338,7 @@
         <div class="who">Solo, mostly bidding</div>
         <div class="price">$49.99<small>/mo</small></div>
         <ul><li>Profitable bidding + found money</li><li>Full job tracking &amp; invoicing</li><li>~20 AI estimates / mo</li><li>Receipt scanning</li><li>1 user</li></ul>
-        <button class="btn btn-g" onclick="goPay('Basic')">Start free</button>
+        <a class="btn btn-g" href="https://buy.stripe.com/test_3cIdRb9gQ4II5Q79iJ48000" target="_blank" rel="noopener">Start free</a>
       </div>
       <div class="tier pop">
         <div class="tag">Most popular</div>
@@ -345,14 +346,14 @@
         <div class="who">Most contractors</div>
         <div class="price">$149.99<small>/mo</small></div>
         <ul><li>Everything in Basic, plus:</li><li>~100 AI estimates / mo</li><li>AI receptionist (250 texts)</li><li>Design previews &amp; coach</li><li>Up to 3 users</li></ul>
-        <button class="btn btn-p" onclick="goPay('Balanced')">Start free</button>
+        <a class="btn btn-p" href="https://buy.stripe.com/test_5kQ8wR50A5MM0vNbqR48001" target="_blank" rel="noopener">Start free</a>
       </div>
       <div class="tier">
         <h3>Premium</h3>
         <div class="who">Crews &amp; high-volume</div>
         <div class="price">$249.99<small>/mo</small></div>
         <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>AI receptionist (1,500 texts)</li><li>Priority support</li><li>Up to 10 users</li></ul>
-        <button class="btn btn-g" onclick="goPay('Premium')">Start free</button>
+        <a class="btn btn-g" href="https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002" target="_blank" rel="noopener">Start free</a>
       </div>
     </div>
     <p class="price-note">All plans: <b>7-day free trial</b> · <b>no setup fee</b> · cancel anytime. Not sure which? Our quick setup recommends the right one for you.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
@@ -663,7 +664,7 @@
       b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">7-day free trial · no setup fee · cancel anytime</div></div>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzPay()">Start my 7-day free trial →</button>'+
+        '<a class="btn btn-p btn-lg" style="width:100%" id="w_submit" href="'+STRIPE_LINKS[tier]+'" target="_blank" rel="noopener" onclick="wzSubmit()">Start my 7-day free trial →</a>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
