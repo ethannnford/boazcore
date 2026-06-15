@@ -138,6 +138,40 @@
   .billtoggle .bt.on{background:var(--grad);color:#fff}
   .billtoggle .bt span{font-size:11px;opacity:.92;margin-left:3px}
   .billsub{font-size:13px;color:var(--indigo);font-weight:700;min-height:18px;margin-top:-4px;margin-bottom:2px}
+  /* reviews */
+  .reviews{background:#fff}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px;text-align:left}
+  .rev{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .rev .stars{color:#f5a623;font-size:17px;letter-spacing:2px}
+  .rev p{margin:12px 0 16px;color:var(--body);font-size:15px;line-height:1.6}
+  .rev .who{font-weight:700;color:var(--ink);font-size:14px}
+  .rev .who span{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-top:2px}
+  /* app showcase */
+  .showcase{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:42px;text-align:left}
+  .feat{border-bottom:1px solid var(--line)}
+  .feat>button{width:100%;display:flex;align-items:center;gap:12px;background:none;border:none;cursor:pointer;padding:16px 4px;font-size:17px;font-weight:700;color:var(--ink);text-align:left}
+  .feat>button .fic{font-size:22px}
+  .feat>button .chev{margin-left:auto;transition:transform .2s;color:var(--muted)}
+  .feat.on>button{color:var(--indigo)}
+  .feat.on>button .chev{transform:rotate(180deg)}
+  .feat .fbody{max-height:0;overflow:hidden;transition:max-height .28s ease;color:var(--body);font-size:15px;line-height:1.6}
+  .feat.on .fbody{max-height:180px;padding:0 4px 16px}
+  .phone-wrap{display:flex;justify-content:center}
+  .phone{width:296px;height:600px;background:#0f122a;border-radius:42px;padding:13px;box-shadow:var(--shadow);position:relative}
+  .phone::before{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:120px;height:22px;background:#0f122a;border-radius:0 0 15px 15px;z-index:3}
+  .phone-screen{width:100%;height:100%;background:#f4f5fb;border-radius:31px;overflow:hidden;display:flex;flex-direction:column}
+  .ps-top{background:var(--grad);color:#fff;padding:40px 18px 16px;font-weight:800;font-size:16px}
+  .ps-body{padding:15px;flex:1;overflow:hidden}
+  .ps-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px;color:var(--body);display:flex;justify-content:space-between;gap:8px}
+  .ps-row b{color:var(--ink)}
+  .ps-big{background:var(--grad);color:#fff;border-radius:14px;padding:15px;text-align:center;margin-bottom:10px}
+  .ps-big .n{font-size:28px;font-weight:800}
+  .ps-big .s{font-size:11px;opacity:.92}
+  .ps-bub{background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 12px;font-size:13px;margin-bottom:8px;max-width:85%}
+  .ps-bub.me{background:var(--indigo);color:#fff;border-color:var(--indigo);margin-left:auto}
+  .ps-img{height:120px;border-radius:12px;background:linear-gradient(135deg,#7d94ff,#c9962f);margin-bottom:10px;display:flex;align-items:flex-end;padding:10px;color:#fff;font-weight:700;font-size:13px}
+  .ps-chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12px;margin:0 5px 6px 0;color:var(--body)}
+  @media(max-width:760px){ .showcase{grid-template-columns:1fr;gap:28px} .rev-grid{grid-template-columns:1fr} .phone{width:260px;height:530px} .phone-wrap{order:-1} }
 
   /* steps */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:42px}
@@ -194,7 +228,7 @@
 </head>
 <body>
 
-<div class="promo" id="promo">🔥 Limited-time founding deal — the first 200 contractors get <b>50% OFF</b> with code <b>FOUNDING50</b></div>
+<div class="promo" id="promo">🔥 Limited-time offer — <b>Startup 50% off</b> with code <b>STARTUP50</b> · lock in your rate for as long as you stay</div>
 
 <nav>
   <div class="wrap nav">
@@ -204,6 +238,7 @@
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#foundation">Our Foundation</a>
+      <a href="mailto:ethan@boazcore.com">Contact</a>
       <button class="btn btn-p" onclick="openGet()">Get Started</button>
     </div>
     <button class="langbtn" id="langToggle" onclick="toggleLang()">ES</button>
@@ -218,10 +253,10 @@
     <h1>Stop the leaks. Keep your time.<br><span class="hl">Get every dollar.</span></h1>
     <p class="lead">Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up <i>for</i> you, one honest price.</p>
     <div class="cta-row">
-      <button class="btn btn-p btn-lg" onclick="openGet()">Start 14 days free →</button>
+      <button class="btn btn-p btn-lg" onclick="openGet()">Start 21 days free →</button>
       <a class="btn btn-g btn-lg" href="#calc">See your found money →</a>
     </div>
-    <div class="trust">✓ 14-day free trial · ✓ Built &amp; set up for you · ✓ Cancel anytime</div>
+    <div class="trust">✓ 21-day free trial · ✓ Built &amp; set up for you · ✓ Cancel anytime</div>
   </div>
 </header>
 
@@ -252,19 +287,36 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="wrap center">
+    <div class="eyebrow">What contractors say</div>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Trusted by the people who build</h2>
+    <p class="lead">We only publish real, verified reviews from contractors we've worked with — these spots fill as we onboard. Want yours here?</p>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>“Replace this with a real contractor's words. Boaz only shows verified reviews from actual clients.”</p><div class="who">Verified review<span>Add as you onboard clients</span></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>“Your second real review goes here — keep it honest, in their own words, with their name and trade.”</p><div class="who">Verified review<span>Add as you onboard clients</span></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>“A third real review here. Real proof beats hype — we'd rather earn it than fake it.”</p><div class="who">Verified review<span>Add as you onboard clients</span></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT WE DO -->
 <section id="what">
   <div class="wrap center">
     <div class="eyebrow">What we do</div>
     <h2 style="font-size:clamp(28px,4.5vw,40px)">Your whole business, run by AI</h2>
-    <p class="lead">Not a pile of tools — one connected system that runs the job from bid to bank.</p>
-    <div class="grid g3">
-      <div class="card"><div class="ic">💸</div><h3>Profitable bids</h3><p>Auto-adds overhead + profit and shows the "found money" you'd have missed. Win the job <i>and</i> the margin.</p></div>
-      <div class="card"><div class="ic">📋</div><h3>The whole job</h3><p>Lead → bid → won → invoice → paid. Change orders, proposals, follow-ups, photos — all in one place.</p></div>
-      <div class="card"><div class="ic">📷</div><h3>AI that works for you</h3><p>Snap a photo for an instant estimate, scan receipts, price materials, and answer your phone — built in.</p></div>
-      <div class="card"><div class="ic">💳</div><h3>Get paid faster</h3><p>Send clean invoices, take payment, and chase the unpaid balances automatically so nothing slips.</p></div>
-      <div class="card"><div class="ic">🗓️</div><h3>Your built-in coach</h3><p>Goals, daily plans, and reminders that keep your business growing — not just surviving.</p></div>
-      <div class="card"><div class="ic">🌎</div><h3>English &amp; Spanish</h3><p>The whole app works in both languages, so your whole crew can use it. Tap to switch, anytime.</p></div>
+    <p class="lead">Tap a feature to see it on your phone. Not a pile of tools — one connected system from bid to bank.</p>
+    <div class="showcase">
+      <div class="feat-list" id="featList">
+        <div class="feat on"><button onclick="selectFeat(this,0)"><span class="fic">🔨</span>Profitable Bid Builder<span class="chev">⌄</span></button><div class="fbody">Builds overhead + profit into every bid automatically and shows the "found money" you'd have missed. Win the job <i>and</i> the margin.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,1)"><span class="fic">📷</span>AI Photo Estimate<span class="chev">⌄</span></button><div class="fbody">Snap a photo of the job and get a draft estimate in seconds — materials and labor scoped for you.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,2)"><span class="fic">🧾</span>Receipt Scanning<span class="chev">⌄</span></button><div class="fbody">Snap your supplier receipts and Boaz learns your real prices — so every bid uses your actual costs.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,3)"><span class="fic">📱</span>AI Receptionist<span class="chev">⌄</span></button><div class="fbody">Answers your texts, qualifies the lead, and books the job — 24/7, even when you're on the tools.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,4)"><span class="fic">🎨</span>Design Previews<span class="chev">⌄</span></button><div class="fbody">Show your client the finished look before you start — turn a photo into a finished-job render.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,5)"><span class="fic">🧠</span>Business Coach<span class="chev">⌄</span></button><div class="fbody">Pricing, profit, and growth advice on tap — grounded in your real numbers.</div></div>
+      </div>
+      <div class="phone-wrap"><div class="phone"><div class="phone-screen" id="appScreen"></div></div></div>
     </div>
   </div>
 </section>
@@ -344,8 +396,8 @@
 <section class="pricing" id="pricing">
   <div class="wrap center">
     <div class="eyebrow">Pricing</div>
-    <h2 style="font-size:clamp(28px,4.5vw,40px)">Free for 14 days. Then one honest price.</h2>
-    <p class="lead">No setup fee. Two weeks free, then the plan that fits you. Everything included — no add-on games.</p>
+    <h2 style="font-size:clamp(28px,4.5vw,40px)">Free for 21 days. Then one honest price.</h2>
+    <p class="lead">No setup fee. Three weeks free, then the plan that fits you. Everything included — no add-on games.</p>
     <div class="billtoggle" role="group" aria-label="Billing period">
       <button class="bt on" id="bt_monthly" onclick="setBill('monthly',this)">Monthly</button>
       <button class="bt" id="bt_q" onclick="setBill('q',this)">3 Months <span>−10%</span></button>
@@ -378,7 +430,7 @@
         <a class="btn btn-g" href="https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002" target="_blank" rel="noopener">Start free</a>
       </div>
     </div>
-    <p class="price-note">🔥 <b>Founding deal:</b> first 200 contractors get <b>50% off</b> with code <b>FOUNDING50</b> at checkout.<br>All plans: <b>14-day free trial</b> · <b>no setup fee</b> · cancel anytime · save with 3-month &amp; annual billing.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
+    <p class="price-note">🔥 <b>Limited-time offer:</b> Startup 50% off with code <b>STARTUP50</b> at checkout — your sale price stays locked as long as you keep your plan.<br>All plans: <b>21-day free trial</b> · <b>no setup fee</b> · cancel anytime · save with 3-month &amp; annual billing.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
   </div>
 </section>
 
@@ -390,7 +442,7 @@
     <div class="steps">
       <div class="step"><div class="n">1</div><h3>Tell us about your business</h3><p>A quick guided Q&amp;A — your rates, crew, and how you work. A couple minutes.</p></div>
       <div class="step"><div class="n">2</div><h3>We build it for you</h3><p>Your app is configured to your exact numbers and trade — no setup headaches.</p></div>
-      <div class="step"><div class="n">3</div><h3>Open it and run your business</h3><p>Sign in on your phone, free for 14 days. If you love it, you're billed monthly. If not, cancel.</p></div>
+      <div class="step"><div class="n">3</div><h3>Open it and run your business</h3><p>Sign in on your phone, free for 21 days. If you love it, you're billed monthly. If not, cancel.</p></div>
     </div>
   </div>
 </section>
@@ -402,9 +454,10 @@
     <h2 style="font-size:clamp(28px,4.5vw,40px)">Good to know</h2>
     <div class="faq">
       <div class="q"><button onclick="tog(this)">Is my data safe and private?<span class="chev">⌄</span></button><div class="a">Yes. Your business data is yours — protected and never sold. You're in full control, and you can export or cancel anytime.</div></div>
-      <div class="q"><button onclick="tog(this)">Is there a setup fee?<span class="chev">⌄</span></button><div class="a">No — personalizing your app to your exact business is included free. You get 14 days to try everything, then your monthly plan kicks in. Cancel anytime.</div></div>
+      <div class="q"><button onclick="tog(this)">Is there a setup fee?<span class="chev">⌄</span></button><div class="a">No — personalizing your app to your exact business is included free. You get 21 days to try everything, then your monthly plan kicks in. Cancel anytime.</div></div>
       <div class="q"><button onclick="tog(this)">Do I need to be tech-savvy?<span class="chev">⌄</span></button><div class="a">Not at all. It's built phone-first for the jobsite — big buttons, simple steps. And it's set up <i>for</i> you, so there's nothing to figure out.</div></div>
       <div class="q"><button onclick="tog(this)">Can I cancel?<span class="chev">⌄</span></button><div class="a">Anytime, in a tap. No contracts, no cancellation fees. If it's not making you money, you shouldn't pay for it.</div></div>
+      <div class="q"><button onclick="tog(this)">If I sign up during a sale, do I keep that price?<span class="chev">⌄</span></button><div class="a">Yes — that's our promise. Lock in your sale price and you keep it for as long as you stay on that plan. It only changes if you switch plans, or cancel and start a new membership later. We honor the price you signed up at.</div></div>
       <div class="q"><button onclick="tog(this)">Which plan should I pick?<span class="chev">⌄</span></button><div class="a">Start the quick setup and we'll recommend the right plan based on your answers — most contractors land on Balanced.</div></div>
     </div>
   </div>
@@ -414,7 +467,7 @@
 <section class="final" id="start">
   <div class="wrap">
     <h2>Ready to get every dollar?</h2>
-    <p>Build your custom app, free for 14 days. No setup fee.</p>
+    <p>Build your custom app, free for 21 days. No setup fee.</p>
     <button class="btn btn-p btn-lg" onclick="openGet()">Get Started</button>
   </div>
 </section>
@@ -476,15 +529,15 @@
   // ===== i18n (English / Español) =====
   var SITE_ES = {
     // nav
-    "Found Money":"Dinero Recuperado","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base",
-    "Get Started":"Empezar","Start 14 days free →":"Comienza 14 días gratis →",
+    "Found Money":"Dinero Recuperado","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base","Contact":"Contacto",
+    "Get Started":"Empezar","Start 21 days free →":"Comienza 21 días gratis →",
     // hero
     "Custom software for the trades":"Software a la medida para los oficios",
     "Stop the leaks. Keep your time.":"Detén las fugas. Recupera tu tiempo.","Get every dollar.":"Gana cada dólar.",
     "Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up":"La mayoría de los trabajadores pierden decenas de miles al año por presupuestos bajos y trabajo sin pagar. Boaz te crea una app a la medida que tapa las fugas, asegura que seas rentable y logra que te paguen — configurada",
     "for":"para","you, one honest price.":"ti, un precio honesto.",
     "See your found money →":"Ve tu dinero recuperado →",
-    "✓ 14-day free trial · ✓ Built & set up for you · ✓ Cancel anytime":"✓ Prueba gratis de 14 días · ✓ Instalada para ti · ✓ Cancela cuando quieras",
+    "✓ 21-day free trial · ✓ Built & set up for you · ✓ Cancel anytime":"✓ Prueba gratis de 21 días · ✓ Instalada para ti · ✓ Cancela cuando quieras",
     // calculator
     "The found-money calculator":"La calculadora de dinero recuperado","See what you're leaving on the table":"Ve lo que estás dejando sobre la mesa",
     "Most contractors charge their hourly rate with":"La mayoría de los contratistas cobra su tarifa por hora",
@@ -499,6 +552,11 @@
     "Get the app that fixes this →":"Obtén la app que lo arregla →",
     // what we do
     "What we do":"Qué hacemos","Your whole business, run by AI":"Todo tu negocio, manejado por IA",
+    "Tap a feature to see it on your phone. Not a pile of tools — one connected system from bid to bank.":"Toca una función para verla en tu teléfono. No un montón de herramientas — un solo sistema del presupuesto al banco.",
+    "Profitable Bid Builder":"Constructor de Presupuestos Rentables","AI Photo Estimate":"Estimado con IA por Foto","Receipt Scanning":"Escaneo de Recibos","AI Receptionist":"Recepcionista con IA","Design Previews":"Vistas Previas de Diseño","Business Coach":"Coach de Negocios",
+    "What contractors say":"Lo que dicen los contratistas","Trusted by the people who build":"La confianza de quienes construyen",
+    "We only publish real, verified reviews from contractors we've worked with — these spots fill as we onboard. Want yours here?":"Solo publicamos reseñas reales y verificadas de contratistas con quienes hemos trabajado — estos espacios se llenan a medida que crecemos. ¿Quieres la tuya aquí?",
+    "Verified review":"Reseña verificada","Add as you onboard clients":"Se agrega al sumar clientes",
     "Not a pile of tools — one connected system that runs the job from bid to bank.":"No un montón de herramientas — un solo sistema que maneja el trabajo del presupuesto al banco.",
     "Profitable bids":"Presupuestos rentables","Auto-adds overhead + profit and shows the \"found money\" you'd have missed. Win the job":"Agrega gastos y ganancia automáticamente y muestra el \"dinero recuperado\" que habrías perdido. Gana el trabajo","and":"y","the margin.":"y el margen.",
     "The whole job":"El trabajo completo","Lead → bid → won → invoice → paid. Change orders, proposals, follow-ups, photos — all in one place.":"Prospecto → presupuesto → ganado → factura → pagado. Órdenes de cambio, propuestas, seguimientos, fotos — todo en un lugar.",
@@ -549,15 +607,15 @@
     "Set up FOR you (done-for-you)":"Configurada PARA ti (hecho por nosotros)","Figure it out yourself":"Arréglatelas tú solo",
     "Everything included, one price":"Todo incluido, un precio","$500–600/mo with add-ons":"$500–600/mes con complementos",
     // pricing
-    "Pricing":"Precios","Free for 14 days. Then one honest price.":"Gratis por 14 días. Luego un precio honesto.",
-    "🔥 Limited-time founding deal — the first 200 contractors get":"🔥 Oferta fundadora por tiempo limitado — los primeros 200 contratistas reciben",
+    "Pricing":"Precios","Free for 21 days. Then one honest price.":"Gratis por 21 días. Luego un precio honesto.",
+    "🔥 Limited-time offer —":"🔥 Oferta por tiempo limitado —","Startup 50% off":"Startup 50% de descuento","· lock in your rate for as long as you stay":"· mantén tu precio mientras sigas con nosotros",
     "50% OFF":"50% DE DESCUENTO","50% off":"50% de descuento","with code":"con el código",
     "Monthly":"Mensual","3 Months":"3 Meses","Annual":"Anual",
-    "Founding deal:":"Oferta fundadora:","first 200 contractors get":"los primeros 200 contratistas reciben","at checkout.":"en el pago.",
-    "All plans:":"Todos los planes:","14-day free trial":"prueba gratis de 14 días","no setup fee":"sin cuota de instalación",
+    "Limited-time offer:":"Oferta por tiempo limitado:","Startup 50% off with code":"Startup 50% de descuento con el código","at checkout — your sale price stays locked as long as you keep your plan.":"en el pago — tu precio de oferta queda fijo mientras mantengas tu plan.",
+    "All plans:":"Todos los planes:","21-day free trial":"prueba gratis de 21 días","no setup fee":"sin cuota de instalación",
     "cancel anytime · save with 3-month & annual billing.":"cancela cuando quieras · ahorra con facturación trimestral y anual.",
     "*Unlimited = generous fair-use cap a normal business won't reach.":"*Ilimitado = límite de uso justo y generoso que un negocio normal no alcanza.",
-    "No setup fee. Two weeks free, then the plan that fits you. Everything included — no add-on games.":"Sin cuota de instalación. Dos semanas gratis, luego el plan que te queda. Todo incluido — sin complementos.",
+    "No setup fee. Three weeks free, then the plan that fits you. Everything included — no add-on games.":"Sin cuota de instalación. Tres semanas gratis, luego el plan que te queda. Todo incluido — sin complementos.",
     "Basic":"Básico","Solo, mostly bidding":"Solo, mayormente presupuestos","Profitable bidding + found money":"Presupuestos rentables + dinero recuperado",
     "Full job tracking & invoicing":"Seguimiento de trabajos y facturación completos","~20 AI estimates / mo":"~20 estimados con IA / mes",
     "Receipt scanning":"Escaneo de recibos","1 user":"1 usuario","Start free":"Empieza gratis",
@@ -572,16 +630,17 @@
     "Your custom app, ready in minutes":"Tu app a la medida, lista en minutos",
     "Tell us about your business":"Cuéntanos sobre tu negocio","A quick guided Q&A — your rates, crew, and how you work. A couple minutes.":"Un cuestionario guiado rápido — tus tarifas, cuadrilla y cómo trabajas. Un par de minutos.",
     "We build it for you":"La construimos para ti","Your app is configured to your exact numbers and trade — no setup headaches.":"Tu app se configura a tus números y oficio exactos — sin dolores de cabeza.",
-    "Open it and run your business":"Ábrela y maneja tu negocio","Sign in on your phone, free for 14 days. If you love it, you're billed monthly. If not, cancel.":"Inicia sesión en tu teléfono, gratis por 14 días. Si te encanta, se cobra mensual. Si no, cancela.",
+    "Open it and run your business":"Ábrela y maneja tu negocio","Sign in on your phone, free for 21 days. If you love it, you're billed monthly. If not, cancel.":"Inicia sesión en tu teléfono, gratis por 21 días. Si te encanta, se cobra mensual. Si no, cancela.",
     // faq
     "Questions":"Preguntas","Good to know":"Bueno saber",
     "Is my data safe and private?":"¿Mis datos están seguros y privados?","Yes. Your business data is yours — protected and never sold. You're in full control, and you can export or cancel anytime.":"Sí. Los datos de tu negocio son tuyos — protegidos y nunca vendidos. Tienes el control total, y puedes exportar o cancelar cuando quieras.",
-    "Is there a setup fee?":"¿Hay cuota de instalación?","No — personalizing your app to your exact business is included free. You get 14 days to try everything, then your monthly plan kicks in. Cancel anytime.":"No — personalizar tu app a tu negocio está incluido gratis. Tienes 14 días para probar todo, luego empieza tu plan mensual. Cancela cuando quieras.",
+    "Is there a setup fee?":"¿Hay cuota de instalación?","No — personalizing your app to your exact business is included free. You get 21 days to try everything, then your monthly plan kicks in. Cancel anytime.":"No — personalizar tu app a tu negocio está incluido gratis. Tienes 21 días para probar todo, luego empieza tu plan mensual. Cancela cuando quieras.",
     "Do I need to be tech-savvy?":"¿Necesito saber de tecnología?","Not at all. It's built phone-first for the jobsite — big buttons, simple steps. And it's set up":"Para nada. Está hecha primero para el teléfono y la obra — botones grandes, pasos simples. Y está configurada","you, so there's nothing to figure out.":"ti, así que no hay nada que descifrar.",
     "Can I cancel?":"¿Puedo cancelar?","Anytime, in a tap. No contracts, no cancellation fees. If it's not making you money, you shouldn't pay for it.":"Cuando quieras, con un toque. Sin contratos, sin cargos por cancelar. Si no te hace ganar dinero, no deberías pagarla.",
+    "If I sign up during a sale, do I keep that price?":"Si me inscribo durante una oferta, ¿conservo ese precio?","Yes — that's our promise. Lock in your sale price and you keep it for as long as you stay on that plan. It only changes if you switch plans, or cancel and start a new membership later. We honor the price you signed up at.":"Sí — esa es nuestra promesa. Fija tu precio de oferta y lo conservas mientras sigas en ese plan. Solo cambia si cambias de plan, o cancelas y abres una nueva membresía. Honramos el precio con el que te inscribiste.",
     "Which plan should I pick?":"¿Qué plan elijo?","Start the quick setup and we'll recommend the right plan based on your answers — most contractors land on Balanced.":"Empieza la configuración rápida y te recomendaremos el plan correcto según tus respuestas — la mayoría elige Balanceado.",
     // final + footer
-    "Ready to get every dollar?":"¿Listo para ganar cada dólar?","Build your custom app, free for 14 days. No setup fee.":"Crea tu app a la medida, gratis por 14 días. Sin cuota de instalación.",
+    "Ready to get every dollar?":"¿Listo para ganar cada dólar?","Build your custom app, free for 21 days. No setup fee.":"Crea tu app a la medida, gratis por 21 días. Sin cuota de instalación.",
     "\"Trust in the LORD with all your heart…\" — Proverbs 3:5":"\"Confía en el SEÑOR de todo corazón…\" — Proverbios 3:5","Foundation":"Base",
     "Boaz provides estimating & job-management software, not accounting, tax, or legal advice — confirm your business and tax numbers with a professional. The found-money calculator is an estimate based on the figures you enter, not a guarantee. © 2026 Boaz. San Diego, CA.":"Boaz ofrece software de estimación y gestión de trabajos, no asesoría contable, fiscal ni legal — confirma tus números de negocio e impuestos con un profesional. La calculadora de dinero recuperado es un estimado basado en las cifras que ingresas, no una garantía. © 2026 Boaz. San Diego, CA.",
     // wizard
@@ -591,8 +650,8 @@
     "General Contractor":"Contratista general","Carpentry / Finish":"Carpintería / Acabados","Remodeling":"Remodelación","Plumbing":"Plomería","Electrical":"Electricidad","HVAC":"HVAC (clima)","Painting":"Pintura","Concrete / Masonry":"Concreto / Albañilería","Roofing":"Techado","Landscaping":"Jardinería","Flooring":"Pisos","Handyman":"Manitas","Other":"Otro",
     "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
     "Let’s pick your plan":"Elijamos tu plan","Jobs/bids per month":"Trabajos/presupuestos por mes","People who’ll use it":"Personas que la usarán","Want an AI receptionist to answer calls & texts?":"¿Quieres una recepcionista IA que conteste llamadas y mensajes?","Yes":"Sí","Not now":"Ahora no","See my plan →":"Ver mi plan →",
-    "Based on your answers, we recommend":"Según tus respuestas, recomendamos","14-day free trial · no setup fee · cancel anytime":"prueba gratis de 14 días · sin cuota de instalación · cancela cuando quieras",
-    "🔥 Use code FOUNDING50 at checkout for 50% off — first 200 contractors only":"🔥 Usa el código FOUNDING50 en el pago para 50% de descuento — solo los primeros 200 contratistas","Claim my spot →":"Aparta mi lugar →","Start my 14-day free trial →":"Comienza mi prueba gratis de 14 días →",
+    "Based on your answers, we recommend":"Según tus respuestas, recomendamos","21-day free trial · no setup fee · cancel anytime":"prueba gratis de 21 días · sin cuota de instalación · cancela cuando quieras",
+    "🔥 Use code STARTUP50 at checkout for 50% off — your rate stays locked as long as you stay":"🔥 Usa el código STARTUP50 en el pago para 50% de descuento — tu precio queda fijo mientras sigas","Claim my spot →":"Aparta mi lugar →","Start my 21-day free trial →":"Comienza mi prueba gratis de 21 días →",
     "We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.":"Estamos incorporando a nuestros primeros contratistas personalmente — te enviaremos un correo para terminar. Sin cargo hoy.",
     "Rough estimate, ~48 working weeks/yr.":"Estimado aproximado, ~48 semanas laborales/año.","on the table every year — your app fixes that.":"sobre la mesa cada año — tu app lo arregla.","You’re leaving about":"Estás dejando unos","Done":"Listo"
   };
@@ -628,6 +687,17 @@
       sub.textContent=(es?'facturado $':'billed $')+total+per+(es?' · ahorra ':' · save ')+save+'%';
     });
   }
+
+  // ----- App showcase phone screens -----
+  var APP_SCREENS=[
+    '<div class="ps-top">◢ Bid Builder</div><div class="ps-body"><div class="ps-row"><span>Labor · 10 hr</span><b>$1,250</b></div><div class="ps-row"><span>Overhead + burden</span><b>$500</b></div><div class="ps-row"><span>Materials + markup</span><b>$230</b></div><div class="ps-big"><div class="s">Profitable bid total</div><div class="n">$2,523</div></div><div class="ps-row" style="color:#1a7f4b"><span>✅ Found money baked in</span><b>$1,055</b></div></div>',
+    '<div class="ps-top">◢ AI Photo Estimate</div><div class="ps-body"><div class="ps-img">📷 Job photo → scoped</div><div class="ps-row"><span>Hang &amp; finish door</span><b>$375</b></div><div class="ps-row"><span>Prime + paint walls</span><b>$1,000</b></div><div class="ps-row"><span>Materials</span><b>$345</b></div></div>',
+    '<div class="ps-top">◢ Receipt Scanning</div><div class="ps-body"><div class="ps-row"><span>2x4-8ft stud</span><b>$5 / ea</b></div><div class="ps-row"><span>½" drywall 4x8</span><b>$14 / ea</b></div><div class="ps-row"><span>Primer (gal)</span><b>$29</b></div><div><span class="ps-chip">🧾 The Home Depot</span><span class="ps-chip">Saved to your prices</span></div></div>',
+    '<div class="ps-top">◢ AI Receptionist</div><div class="ps-body"><div class="ps-bub">Hey, do you do kitchen remodels?</div><div class="ps-bub me">Yes! What\'s your name and timing?</div><div class="ps-bub">John — hoping to start next month</div><div><span class="ps-chip">✅ Lead captured</span></div></div>',
+    '<div class="ps-top">◢ Design Preview</div><div class="ps-body"><div class="ps-img">🎨 Finished-look render</div><div class="ps-row"><span>Before</span><span>Bare drywall</span></div><div class="ps-row"><span>After</span><b>Modern kitchen</b></div></div>',
+    '<div class="ps-top">◢ Business Coach</div><div class="ps-body"><div class="ps-bub me">Am I charging enough?</div><div class="ps-bub">Your true rate is $164/hr — you\'re at $125. That\'s ~$72k/yr left on the table.</div></div>'
+  ];
+  function selectFeat(btn,n){ document.querySelectorAll('#featList .feat').forEach(function(f){ f.classList.remove('on'); }); var item=btn.closest('.feat'); if(item) item.classList.add('on'); var s=document.getElementById('appScreen'); if(s) s.innerHTML=APP_SCREENS[n]||''; }
   function paintLangToggle(){ var es=siteLang()==='es'; var b=document.getElementById('langToggle'); if(b) b.textContent = es?'EN':'ES'; var bm=document.getElementById('langToggleM'); if(bm) bm.textContent = es?'English':'Español'; }
   function toggleLang(){ setSiteLang(siteLang()==='es'?'en':'es'); }
 
@@ -717,9 +787,9 @@
       var found=wzFound(), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
       b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
-        '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">14-day free trial · no setup fee · cancel anytime</div></div>'+
-        '<div style="text-align:center;font-size:13px;color:var(--indigo);font-weight:800;margin:-4px 0 10px">🔥 Use code FOUNDING50 at checkout for 50% off — first 200 contractors only</div>'+
-        '<a class="btn btn-p btn-lg" style="width:100%" id="w_submit" href="'+STRIPE_LINKS[tier]+'" target="_blank" rel="noopener" onclick="wzSubmit()">Start my 14-day free trial →</a>'+
+        '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">21-day free trial · no setup fee · cancel anytime</div></div>'+
+        '<div style="text-align:center;font-size:13px;color:var(--indigo);font-weight:800;margin:-4px 0 10px">🔥 Use code STARTUP50 at checkout for 50% off — your rate stays locked as long as you stay</div>'+
+        '<a class="btn btn-p btn-lg" style="width:100%" id="w_submit" href="'+STRIPE_LINKS[tier]+'" target="_blank" rel="noopener" onclick="wzSubmit()">Start my 21-day free trial →</a>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
@@ -763,7 +833,7 @@
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
       .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
-      .catch(function(){ if(btn){btn.textContent='Start my 14-day free trial →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
+      .catch(function(){ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
   }
 
   // close mobile menu on link tap
@@ -773,6 +843,7 @@
   if(siteLang()==='es') translateSite();
   paintLangToggle();
   renderBill();
+  (function(){ var s=document.getElementById('appScreen'); if(s) s.innerHTML=APP_SCREENS[0]; })();
 </script>
 </body>
 </html>
