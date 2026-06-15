@@ -613,7 +613,8 @@
     Balanced:'https://buy.stripe.com/test_5kQ8wR50A5MM0vNbqR48001',
     Premium:'https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002'
   };
-  function goPay(tier){ var l=STRIPE_LINKS[tier]; if(l){ window.location.href=l; } }
+  function goPay(tier){ var l=STRIPE_LINKS[tier]; if(l){ window.open(l,'_blank'); } }
+  function wzPay(){ if(!/.+@.+\..+/.test(wz.data.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; } var l=STRIPE_LINKS[wzTier()]; if(l){ window.open(l,'_blank'); } wzSubmit(); }
   var wz = { step:1, data:{} };
   function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function tradeOpts(sel){
@@ -662,7 +663,7 @@
       b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">7-day free trial · no setup fee · cancel anytime</div></div>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Start my 7-day free trial →</button>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzPay()">Start my 7-day free trial →</button>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
@@ -705,7 +706,7 @@
       'Jobs / Month':d.jobs||'', 'Crew Size':d.crew||'', 'Wants AI Receptionist':d.recept||'' };
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ var l=STRIPE_LINKS[wzTier()]; if(l){ window.location.href=l; } else { wz.step=6; renderWz(); } } else { throw new Error('submit failed'); } })
+      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
       .catch(function(){ if(btn){btn.textContent='Start my 7-day free trial →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
   }
 
