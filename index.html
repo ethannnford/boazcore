@@ -693,6 +693,10 @@
     "Let’s get you set up 🛠️":"Vamos a configurarte 🛠️","First — who are you? So we can build it for you and reach out.":"Primero — ¿quién eres? Para construirla por ti y contactarte.",
     "Your name":"Tu nombre","Email":"Correo","Phone":"Teléfono","Next →":"Siguiente →","← Back":"← Atrás",
     "Your business":"Tu negocio","Business name":"Nombre del negocio","Your trade":"Tu oficio","Choose your trade…":"Elige tu oficio…",
+    "This is what we set up for you — including what shows on your invoices. Add what you have, skip the rest.":"Esto es lo que configuramos para ti — incluido lo que aparece en tus facturas. Agrega lo que tengas, omite el resto.",
+    "Contractor license # (optional)":"Licencia de contratista # (opcional)","Business address (optional — shows on invoices)":"Dirección del negocio (opcional — aparece en facturas)",
+    "Markups & invoicing — optional, we set smart defaults":"Márgenes y facturación — opcional, ponemos valores inteligentes",
+    "Materials markup %":"Margen de materiales %","Subs/rentals markup %":"Margen subcontratistas/rentas %","Labor burden %":"Carga laboral %","Contingency %":"Contingencia %","Payment terms (optional)":"Términos de pago (opcional)",
     "General Contractor":"Contratista general","Carpentry / Finish":"Carpintería / Acabados","Remodeling":"Remodelación","Plumbing":"Plomería","Electrical":"Electricidad","HVAC":"HVAC (clima)","Painting":"Pintura","Concrete / Masonry":"Concreto / Albañilería","Roofing":"Techado","Landscaping":"Jardinería","Flooring":"Pisos","Handyman":"Manitas","Other":"Otro",
     "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
     "Let’s pick your plan":"Elijamos tu plan","Jobs/bids per month":"Trabajos/presupuestos por mes","People who’ll use it":"Personas que la usarán","Want an AI receptionist to answer calls & texts?":"¿Quieres una recepcionista IA que conteste llamadas y mensajes?","Yes":"Sí","Not now":"Ahora no","See my plan →":"Ver mi plan →",
@@ -815,16 +819,24 @@
         '<label class="wzl">Email</label><input class="wzi" id="w_email" type="email" value="'+esc(d.email||'')+'" placeholder="you@email.com">'+
         '<label class="wzl">Phone</label><input class="wzi" id="w_phone" type="tel" value="'+esc(d.phone||'')+'" placeholder="(555) 123-4567">'+wznav();
     } else if(s===2){
-      b='<h3>Your business</h3>'+
+      b='<h3>Your business</h3><p>This is what we set up for you — including what shows on your invoices. Add what you have, skip the rest.</p>'+
         '<label class="wzl">Business name</label><input class="wzi" id="w_biz" value="'+esc(d.biz||'')+'" placeholder="e.g. Ford Carpentry">'+
-        '<label class="wzl">Your trade</label><select class="wzi" id="w_trade">'+tradeOpts(d.trade)+'</select>'+wznav();
+        '<label class="wzl">Your trade</label><select class="wzi" id="w_trade">'+tradeOpts(d.trade)+'</select>'+
+        '<label class="wzl">Contractor license # (optional)</label><input class="wzi" id="w_license" value="'+esc(d.license||'')+'" placeholder="CSLB #1234567">'+
+        '<label class="wzl">Business address (optional — shows on invoices)</label><input class="wzi" id="w_addr" value="'+esc(d.addr||'')+'" placeholder="123 Main St, San Diego, CA">'+wznav();
     } else if(s===3){
       b='<h3>Your numbers</h3><p>So every bid is actually profitable.</p>'+
         '<div class="wzg"><div><label class="wzl">Hourly rate</label><div class="wzig"><span>$</span><input class="wzi" id="w_rate" type="number" inputmode="decimal" value="'+esc(d.rate||'')+'" placeholder="125"></div></div>'+
         '<div><label class="wzl">Billable hrs/week</label><input class="wzi" id="w_hours" type="number" inputmode="decimal" value="'+esc(d.hours||'')+'" placeholder="40"></div></div>'+
         '<label class="wzl">Monthly overhead (costs, not your pay)</label><div class="wzig"><span>$</span><input class="wzi" id="w_oh" type="number" inputmode="decimal" value="'+esc(d.oh||'')+'" placeholder="3000"></div>'+
         '<div class="wzg"><div><label class="wzl">Profit %</label><input class="wzi" id="w_profit" type="number" inputmode="decimal" value="'+esc(d.profit||'15')+'"></div>'+
-        '<div><label class="wzl">Tax %</label><input class="wzi" id="w_tax" type="number" inputmode="decimal" value="'+esc(d.tax||'')+'" placeholder="8"></div></div>'+wznav();
+        '<div><label class="wzl">Tax %</label><input class="wzi" id="w_tax" type="number" inputmode="decimal" value="'+esc(d.tax||'')+'" placeholder="8"></div></div>'+
+        '<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><div class="wzl" style="margin-bottom:8px">Markups &amp; invoicing — optional, we set smart defaults</div>'+
+        '<div class="wzg"><div><label class="wzl">Materials markup %</label><input class="wzi" id="w_mat" type="number" inputmode="decimal" value="'+esc(d.mat||'')+'" placeholder="15"></div>'+
+        '<div><label class="wzl">Subs/rentals markup %</label><input class="wzi" id="w_subs" type="number" inputmode="decimal" value="'+esc(d.subs||'')+'" placeholder="10"></div></div>'+
+        '<div class="wzg"><div><label class="wzl">Labor burden %</label><input class="wzi" id="w_burden" type="number" inputmode="decimal" value="'+esc(d.burden||'')+'" placeholder="25"></div>'+
+        '<div><label class="wzl">Contingency %</label><input class="wzi" id="w_cont" type="number" inputmode="decimal" value="'+esc(d.cont||'')+'" placeholder="10"></div></div>'+
+        '<label class="wzl">Payment terms (optional)</label><input class="wzi" id="w_terms" value="'+esc(d.terms||'')+'" placeholder="Net 15 · 50% deposit"></div>'+wznav();
     } else if(s===4){
       b='<h3>Let’s pick your plan</h3>'+
         '<div class="wzg"><div><label class="wzl">Jobs/bids per month</label><input class="wzi" id="w_jobs" type="number" inputmode="decimal" value="'+esc(d.jobs||'')+'" placeholder="10"></div>'+
@@ -851,8 +863,8 @@
   }
   function wzCapture(){ var s=wz.step, g=function(id){var e=document.getElementById(id);return e?e.value:undefined;};
     if(s===1){ wz.data.name=g('w_name'); wz.data.email=g('w_email'); wz.data.phone=g('w_phone'); }
-    else if(s===2){ wz.data.biz=g('w_biz'); wz.data.trade=g('w_trade'); }
-    else if(s===3){ ['rate','hours','oh','profit','tax'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
+    else if(s===2){ wz.data.biz=g('w_biz'); wz.data.trade=g('w_trade'); wz.data.license=g('w_license'); wz.data.addr=g('w_addr'); }
+    else if(s===3){ ['rate','hours','oh','profit','tax','mat','subs','burden','cont','terms'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
     else if(s===4){ wz.data.jobs=g('w_jobs'); wz.data.crew=g('w_crew'); } }
   function wzPick(k,v){ wzCapture(); wz.data[k]=v; renderWz(); }
   function wzNext(){ wzCapture();
