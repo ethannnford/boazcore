@@ -104,16 +104,65 @@
   .founder p:last-child{margin-bottom:0}
 
   /* comparison */
-  .compare{overflow-x:auto;margin-top:40px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
-  table{width:100%;border-collapse:collapse;min-width:880px;background:#fff}
-  th,td{padding:15px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
-  td:not(:first-child),th:not(:first-child){text-align:center}
-  th:first-child,td:first-child{font-weight:600;color:var(--body)}
-  thead th{background:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
-  thead th.us{background:var(--grad);color:#fff;font-size:16px;text-transform:none;letter-spacing:0}
-  td.us{font-weight:800;color:var(--ink);background:#f1f4ff}
-  tbody tr:last-child td{border-bottom:0}
-  .yes{color:var(--green);font-weight:800;font-size:18px}.no{color:#c2475a;font-weight:700;font-size:16px}
+  /* comparison — liquid glass */
+  #compare{position:relative;background:
+    radial-gradient(620px 320px at 20% -8%,rgba(79,70,229,.13),transparent 70%),
+    radial-gradient(560px 320px at 88% 108%,rgba(124,58,237,.12),transparent 70%),
+    var(--soft)}
+  .vs{position:relative;margin:40px auto 0;max-width:1060px;border-radius:26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.5));
+    -webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
+    border:1px solid rgba(255,255,255,.72);
+    box-shadow:0 28px 70px -28px rgba(46,42,98,.4),inset 0 1px 0 rgba(255,255,255,.9);
+    overflow-x:auto;overflow-y:hidden}
+  .vs-hint{display:none}
+  .vstab{width:100%;border-collapse:separate;border-spacing:0;min-width:780px}
+  .vstab th,.vstab td{padding:13px 12px;text-align:center;font-size:13px;
+    border-bottom:1px solid rgba(22,24,55,.06);color:var(--body);white-space:nowrap;vertical-align:middle}
+  .vstab thead th{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);padding:18px 12px}
+  .vstab .vs-feat{position:sticky;left:0;z-index:2;text-align:left;font-weight:600;color:var(--ink);
+    white-space:normal;min-width:212px;max-width:244px;line-height:1.3;
+    background:linear-gradient(90deg,rgba(255,255,255,.95) 88%,rgba(255,255,255,0))}
+  .vstab thead .vs-feat{background:linear-gradient(90deg,rgba(247,248,255,.97) 88%,rgba(247,248,255,0))}
+  .vstab th.us{color:#fff;background:var(--grad);font-size:15px;text-transform:none;letter-spacing:0;
+    border-top-left-radius:14px;border-top-right-radius:14px;position:relative;overflow:hidden;
+    box-shadow:0 12px 26px -12px rgba(99,67,229,.85)}
+  .vstab th.us::after{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+    transform:skewX(-18deg);animation:vsSheen 4.8s ease-in-out infinite}
+  @keyframes vsSheen{0%,100%{left:-60%}55%{left:130%}}
+  .vstab td.us{background:linear-gradient(180deg,rgba(79,70,229,.1),rgba(124,58,237,.07));
+    box-shadow:inset 1px 0 0 rgba(124,58,237,.18),inset -1px 0 0 rgba(124,58,237,.18);
+    font-weight:800;color:var(--ink);font-size:13.5px}
+  .vstab tbody tr:last-child td.us{border-bottom-left-radius:14px;border-bottom-right-radius:14px;
+    box-shadow:inset 1px 0 0 rgba(124,58,237,.18),inset -1px 0 0 rgba(124,58,237,.18),inset 0 -1px 0 rgba(124,58,237,.2)}
+  .vstab tbody tr{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+  .vs.in tbody tr{opacity:1;transform:none}
+  .vstab tbody tr:hover td{background-color:rgba(255,255,255,.55)}
+  .vstab tbody tr:hover td.us{background-image:linear-gradient(180deg,rgba(79,70,229,.17),rgba(124,58,237,.12))}
+  .vstab tbody tr:hover .vs-feat{color:var(--indigo)}
+  .ck{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:50%;background:var(--grad);
+    color:#fff;font-size:12px;font-weight:900;box-shadow:0 5px 12px -3px rgba(99,67,229,.7);
+    transform:scale(.4);opacity:0;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .35s}
+  .vs.in .ck{transform:scale(1);opacity:1}
+  .vstab td.us .ck{width:26px;height:26px;font-size:13px}
+  .cy{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
+    background:rgba(34,197,94,.13);color:#15a34a;font-size:11px;font-weight:800}
+  .cx{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;
+    background:rgba(22,24,55,.05);color:#b7bacb;font-size:11px;font-weight:800}
+  .tok{font-size:10px;font-weight:700;color:var(--muted);background:rgba(22,24,55,.06);
+    padding:4px 8px;border-radius:999px}
+  @media (max-width:760px){
+    .vs-hint{display:block;text-align:center;font-size:11px;font-weight:700;color:var(--muted);
+      letter-spacing:.03em;padding:12px 0 2px}
+    .vstab .vs-feat{min-width:150px;max-width:168px;font-size:12px}
+    .vstab th,.vstab td{font-size:12px;padding:11px 8px}
+    .vstab thead th{font-size:10.5px;padding:14px 8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .vstab tbody tr{opacity:1;transform:none;transition:none}.ck{opacity:1;transform:none}.vstab th.us::after{display:none}
+  }
 
   /* pricing */
   .pricing{background:var(--soft)}
@@ -384,31 +433,32 @@
 </section>
 
 <!-- COMPARISON -->
-<section style="background:var(--soft)" id="compare">
+<section id="compare">
   <div class="wrap center">
     <div class="eyebrow">Why Boaz</div>
     <h2 style="font-size:clamp(28px,4.5vw,40px)">More value. One honest price.</h2>
     <p class="lead">Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.</p>
-    <div class="compare">
-      <table>
-        <thead><tr><th>What you get</th><th class="us">Boaz</th><th>Joist</th><th>SimplyWise</th><th>Jobber</th><th>Housecall Pro</th><th>ServiceTitan</th></tr></thead>
+    <div class="vs" id="vs">
+      <div class="vs-hint">← Swipe to compare every app →</div>
+      <table class="vstab">
+        <thead><tr><th class="vs-feat"></th><th class="us">Boaz</th><th>Joist</th><th>SimplyWise</th><th>Jobber</th><th>Housecall Pro</th><th>ServiceTitan</th></tr></thead>
         <tbody>
-          <tr><td>Starting price</td><td class="us">$49.99/mo</td><td>~$8–32/mo</td><td>~$20–30/mo</td><td>~$39–349/mo</td><td>~$49–299/mo</td><td>$300+/mo</td></tr>
-          <tr><td>What it actually is</td><td class="us">All-in-one AI trade OS</td><td>Invoicing only</td><td>Receipts only</td><td>Scheduling / CRM</td><td>Field service</td><td>Enterprise</td></tr>
-          <tr><td>Builds your profit INTO every bid (found money)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>AI photo → estimate</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Estimator uses your real prices &amp; learns your pace</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>AI voice estimate</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Receipt scanning → your real prices</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td>Add-on</td></tr>
-          <tr><td>AI receptionist (texts back &amp; qualifies leads 24/7)</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td>Add-on</td><td>Add-on</td></tr>
-          <tr><td>AI design previews</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Built-in business coach</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Pro invoices, deposits &amp; progress payments</td><td class="us"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
-          <tr><td>Payments land straight in YOUR bank — we never hold your funds</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          <tr><td>Done-for-you setup &amp; personalization</td><td class="us"><span class="yes">✓</span></td><td>DIY</td><td>DIY</td><td>DIY</td><td>DIY</td><td>Paid onboarding</td></tr>
-          <tr><td>Bilingual English &amp; Spanish built-in</td><td class="us"><span class="yes">✓</span></td><td>Limited</td><td>Limited</td><td>Limited</td><td>Limited</td><td>Limited</td></tr>
-          <tr><td>Everything in one flat price — no add-ons</td><td class="us"><span class="yes">✓</span></td><td>Tiered + add-ons</td><td><span class="yes">✓</span></td><td>Tiered + add-ons</td><td>Tiered + add-ons</td><td>Enterprise quote</td></tr>
-          <tr><td>Talk straight to the founder</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td class="vs-feat">Starting price</td><td class="us"><b>$49.99</b></td><td>~$8–32</td><td>~$20–30</td><td>~$39–349</td><td>~$49–299</td><td>$300+</td></tr>
+          <tr><td class="vs-feat">What it actually is</td><td class="us">All-in-one AI trade OS</td><td>Invoicing only</td><td>Receipts only</td><td>Scheduling / CRM</td><td>Field service</td><td>Enterprise</td></tr>
+          <tr><td class="vs-feat">Builds your profit INTO every bid (found money)</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">AI photo → estimate</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">Estimator uses your real prices &amp; learns your pace</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">AI voice estimate</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">Receipt scanning → your real prices</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cy">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="tok">Add-on</span></td></tr>
+          <tr><td class="vs-feat">AI receptionist (texts back &amp; qualifies leads 24/7)</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cy">✓</span></td><td><span class="cx">✗</span></td><td><span class="tok">Add-on</span></td><td><span class="tok">Add-on</span></td></tr>
+          <tr><td class="vs-feat">AI design previews</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">Built-in business coach</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">Pro invoices, deposits &amp; progress payments</td><td class="us"><span class="ck">✓</span></td><td><span class="cy">✓</span></td><td><span class="cx">✗</span></td><td><span class="cy">✓</span></td><td><span class="cy">✓</span></td><td><span class="cy">✓</span></td></tr>
+          <tr><td class="vs-feat">Payments land straight in YOUR bank — we never hold your funds</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">Done-for-you setup &amp; personalization</td><td class="us"><span class="ck">✓</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">Paid onboarding</span></td></tr>
+          <tr><td class="vs-feat">Bilingual English &amp; Spanish built-in</td><td class="us"><span class="ck">✓</span></td><td><span class="tok">Limited</span></td><td><span class="tok">Limited</span></td><td><span class="tok">Limited</span></td><td><span class="tok">Limited</span></td><td><span class="tok">Limited</span></td></tr>
+          <tr><td class="vs-feat">Everything in one flat price — no add-ons</td><td class="us"><span class="ck">✓</span></td><td><span class="tok">Tiered + add-ons</span></td><td><span class="cy">✓</span></td><td><span class="tok">Tiered + add-ons</span></td><td><span class="tok">Tiered + add-ons</span></td><td><span class="tok">Enterprise quote</span></td></tr>
+          <tr><td class="vs-feat">Talk straight to the founder</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -634,6 +684,7 @@
     "Why Boaz":"Por qué Boaz","More value. One honest price.":"Más valor. Un precio honesto.",
     "Every other app sells you a tool — then nickel-and-dimes you for the rest. We don't.":"Las demás apps te venden una herramienta — y luego te cobran de más por todo lo demás. Nosotros no.",
     "What you get":"Lo que obtienes","The other guys":"Los otros",
+    "Other apps":"Otras apps","One honest price":"Un precio honesto","Rare":"Raro","flat /mo":"fijo /mes","/mo + add-ons":"/mes + extras",
     "Starting price":"Precio inicial","One-time setup":"Pago único de configuración","just $9.99":"solo $9.99","High / custom":"Alto / personalizado",
     "Builds your profit INTO every bid (found money)":"Incluye TU ganancia en cada presupuesto (dinero recuperado)",
     "Done-for-you setup & personalization":"Configuración y personalización hechas para ti","DIY":"Hazlo tú mismo","Paid onboarding":"Incorporación de pago",
@@ -796,6 +847,16 @@
   });
   calc();
 
+  // Comparison: reveal rows on scroll + stagger the checkmarks
+  (function(){
+    var vs=document.getElementById('vs'); if(!vs) return;
+    vs.querySelectorAll('.vstab tbody tr').forEach(function(r,i){ r.style.transitionDelay=(i*0.045)+'s'; });
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ vs.classList.add('in'); io.disconnect(); } }); },{threshold:.18});
+      io.observe(vs);
+    } else { vs.classList.add('in'); }
+  })();
+
   // FAQ accordion
   function tog(btn){ btn.parentElement.classList.toggle('open'); }
 
@@ -926,7 +987,7 @@
   // Base44-style scroll reveal (class added only via JS, so no-JS = fully visible)
   (function(){
     if(!('IntersectionObserver' in window)) return;
-    var sel='#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .compare,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .billtoggle,#pricing .tiers,#pricing .price-note,#how .eyebrow,#how h2,#how .steps,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
+    var sel='#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .vs,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .billtoggle,#pricing .tiers,#pricing .price-note,#how .eyebrow,#how h2,#how .steps,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
     var els=document.querySelectorAll(sel);
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
