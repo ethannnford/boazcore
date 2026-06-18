@@ -305,11 +305,14 @@
         <div class="field"><label>Weeks worked per year</label><div class="row"><input id="weeks" type="number" min="0" value="48" inputmode="decimal"></div></div>
         <div class="field"><label>Monthly business overhead — costs only, not your pay (truck, tools, insurance, gas, phone…)</label><div class="row"><span>$</span><input id="oh" type="number" min="0" value="3300" inputmode="decimal"></div></div>
         <div class="field"><label>Profit margin you <i>should</i> make (%)</label><div class="row"><input id="profit" type="number" min="0" value="15" inputmode="decimal"><span>%</span></div></div>
+        <div class="field"><label>Labor burden — optional (workers' comp, insurance, payroll tax) (%)</label><div class="row"><input id="burden" type="number" min="0" value="0" inputmode="decimal"><span>%</span></div></div>
+        <div class="field"><label>Contingency buffer — optional (for the unknowns) (%)</label><div class="row"><input id="cont" type="number" min="0" value="0" inputmode="decimal"><span>%</span></div></div>
       </div>
       <div class="result">
         <div class="sub">You could be leaving roughly</div>
         <div class="big" id="found">$0</div>
         <div class="sub">on the table <b style="color:#fff">every year</b> — overhead + profit you've earned but never charged for.</div>
+        <div id="truerate" style="margin:14px 0 4px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.10);font-size:15px;line-height:1.5"></div>
         <div class="pill" id="pill">That's real money back in your pocket</div>
         <div><button class="btn btn-p btn-lg" onclick="openGet()">Get the app that fixes this →</button></div>
       </div>
@@ -566,6 +569,8 @@
     "no overhead or profit built in":"sin gastos generales ni ganancia incluidos",
     "— and never see the money they're owed. Punch in your numbers:":"— y nunca ven el dinero que se les debe. Ingresa tus números:",
     "Your hourly rate":"Tu tarifa por hora","Billable hours per week":"Horas facturables por semana","Weeks worked per year":"Semanas trabajadas al año",
+    "Labor burden — optional (workers' comp, insurance, payroll tax) (%)":"Carga laboral — opcional (compensación, seguro, impuestos de nómina) (%)",
+    "Contingency buffer — optional (for the unknowns) (%)":"Margen de contingencia — opcional (para lo imprevisto) (%)",
     "Monthly business overhead — costs only, not your pay (truck, tools, insurance, gas, phone…)":"Gastos generales mensuales — solo costos, no tu pago (camión, herramientas, seguro, gasolina, teléfono…)",
     "Profit margin you":"Margen de ganancia que","should":"deberías","make (%)":"obtener (%)",
     "You could be leaving roughly":"Podrías estar dejando aproximadamente","on the table":"sobre la mesa","every year":"cada año",
@@ -761,21 +766,32 @@
         hours=+document.getElementById('hours').value||0,
         weeks=+document.getElementById('weeks').value||0,
         oh=+document.getElementById('oh').value||0,
-        profit=(+document.getElementById('profit').value||0)/100;
+        profit=(+document.getElementById('profit').value||0)/100,
+        burden=(+document.getElementById('burden').value||0)/100,
+        cont=(+document.getElementById('cont').value||0)/100;
     var annualHours=hours*weeks;
-    var revenue=rate*annualHours;
-    var annualOverhead=oh*12;
-    // money left on table = overhead never charged for + profit margin never added
-    var profitMissed=(revenue)*profit;
-    var found=annualOverhead+profitMissed;
+    // Overhead spread across each billable hour — exactly how the app's Bid Builder does it.
+    var ohPerHr = annualHours>0 ? (oh*12)/annualHours : 0;
+    // TRUE billable rate = the same conditions the app bakes into a profitable bid:
+    // (your rate + labor burden) + overhead/hr → contingency buffer → profit margin on top.
+    var trueRate = (rate*(1+burden) + ohPerHr) * (1+cont) * (1+profit);
+    if(!isFinite(trueRate)||trueRate<0)trueRate=0;
+    // Found money = the gap between your TRUE rate and what you charge now, over a year.
+    var found=(trueRate-rate)*annualHours;
     if(found<0||isNaN(found)||!isFinite(found))found=0;
     document.getElementById('found').textContent=money(found);
-    var pill=document.getElementById('pill');
     var es=siteLang()==='es';
+    var tr=document.getElementById('truerate');
+    if(rate>0 && trueRate>0){
+      tr.innerHTML=(es?'Tu tarifa real debería ser ':'Your true rate should be ')
+        +'<b style="color:#fff">'+money(trueRate)+(es?'/hora':'/hr')+'</b>'
+        +(es?' — hoy cobras ':' — you’re charging ')+money(rate)+(es?'/hora.':'/hr.');
+    } else { tr.textContent=''; }
+    var pill=document.getElementById('pill');
     if(found>0){ pill.textContent='≈ '+money(found/12)+(es?' / mes de vuelta en tu bolsillo':' / month back in your pocket'); }
     else { pill.textContent=es?'Ingresa tus números arriba':'Enter your numbers above'; }
   }
-  ['rate','hours','weeks','oh','profit'].forEach(function(id){
+  ['rate','hours','weeks','oh','profit','burden','cont'].forEach(function(id){
     document.getElementById(id).addEventListener('input',calc);
   });
   calc();
@@ -803,8 +819,10 @@
   function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('getModal').classList.contains('show')) closeGet(); });
 
-  function wzFound(){ var d=wz.data, rate=+d.rate||0, hw=+d.hours||40, oh=+d.oh||0, pr=(+d.profit||15)/100;
-    var f=(oh*12)+(rate*hw*48*pr); if(f<0||isNaN(f)||!isFinite(f))f=0; return f; }
+  function wzFound(){ var d=wz.data, rate=+d.rate||0, hw=+d.hours||40, oh=+d.oh||0, pr=(+d.profit||15)/100, bd=(+d.burden||0)/100, ct=(+d.cont||0)/100;
+    var annual=hw*48, ohph=annual>0?(oh*12)/annual:0;
+    var tr=(rate*(1+bd)+ohph)*(1+ct)*(1+pr); // same true-rate engine as the calculator + app
+    var f=(tr-rate)*annual; if(f<0||isNaN(f)||!isFinite(f))f=0; return f; }
   function wzTier(){ var d=wz.data, jobs=+d.jobs||0, crew=+d.crew||1, rec=(d.recept==='yes'), tier='Basic';
     if(jobs>15||crew>1) tier='Balanced'; if(rec||crew>=3||jobs>30) tier='Premium'; return tier; }
   function wznav(label){ return '<div class="wznav">'+(wz.step>1?'<button type="button" class="btn btn-g" onclick="wzBack()">← Back</button>':'<span></span>')+
