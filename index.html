@@ -328,6 +328,12 @@
   @media (prefers-reduced-motion:reduce){
     .orb,.hero h1 .hl,.hero .eyebrow,.hero h1,.hero .lead,.hero .cta-row,.hero .trust{animation:none}
   }
+  /* staggered reveals + floating phone */
+  .srev{opacity:0}
+  .srev.in{animation:heroUp .7s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes phoneFloat{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-12px) rotate(.6deg)}}
+  .phone{animation:phoneFloat 7s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){ .srev{opacity:1} .srev.in,.phone{animation:none} }
 </style>
 </head>
 <body>
@@ -1013,10 +1019,13 @@
   // Base44-style scroll reveal (class added only via JS, so no-JS = fully visible)
   (function(){
     if(!('IntersectionObserver' in window)) return;
-    var sel='#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .vs,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .billtoggle,#pricing .tiers,#pricing .price-note,#how .eyebrow,#how h2,#how .steps,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
+    var sel='#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .vs,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .billtoggle,#pricing .price-note,#how .eyebrow,#how h2,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
     var els=document.querySelectorAll(sel);
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+    [['#pricing .tiers .tier',90],['#how .steps .step',110]].forEach(function(g){
+      document.querySelectorAll(g[0]).forEach(function(el,i){ el.classList.add('srev'); el.style.animationDelay=(i*g[1])+'ms'; io.observe(el); });
+    });
   })();
 
   // Nav lifts on scroll
