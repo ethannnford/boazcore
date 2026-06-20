@@ -2,10 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Security: lock resource origins. Inline JS/CSS need 'unsafe-inline' (whole site is inline);
+     a long-term win is moving JS to an external file to drop it. GitHub Pages already sends
+     X-Content-Type-Options: nosniff. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; frame-src https://*.stripe.com; form-action 'self' https://api.web3forms.com">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Boaz — custom software for tradesmen. Stop the leaks, keep your time, get every dollar. Built for you, set up for you, one transparent price.">
 <meta name="theme-color" content="#2c47c4">
 <title>Boaz — Stop the leaks. Get every dollar.</title>
+<link rel="canonical" href="https://boazcore.com/">
+<!-- Open Graph / Twitter — rich previews when the link is shared (texts, FB trades groups). -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Boaz">
+<meta property="og:url" content="https://boazcore.com/">
+<meta property="og:title" content="Boaz — Stop the leaks. Get every dollar.">
+<meta property="og:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing & an AI receptionist — built & set up for you, one honest price.">
+<meta property="og:image" content="https://boazcore.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Boaz — custom software for tradesmen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boaz — Stop the leaks. Get every dollar.">
+<meta name="twitter:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing & an AI receptionist — built & set up for you, one honest price.">
+<meta name="twitter:image" content="https://boazcore.com/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Boaz",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://boazcore.com/",
+  "description": "Custom software for tradesmen — profitable bidding, AI photo/voice estimates, invoicing & payments, an AI text receptionist, and a business coach. Built and set up for you.",
+  "offers": [
+    { "@type": "Offer", "name": "Basic", "price": "49.99", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Balanced", "price": "149.99", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Premium", "price": "249.99", "priceCurrency": "USD" }
+  ],
+  "publisher": { "@type": "Organization", "name": "Boaz", "email": "ethan@boazcore.com", "url": "https://boazcore.com/" }
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='5' width='20' height='3.4' rx='1.4'/%3E%3Crect x='5' y='23' width='22' height='3.6' rx='1.5'/%3E%3Crect x='9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='14.9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='20.8' y='9.5' width='2.2' height='13' rx='1'/%3E%3C/g%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
@@ -394,6 +431,34 @@
   .qav{width:46px;height:46px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px;flex:none}
   .qname{font-weight:800;color:var(--ink);font-size:15px}
   .qrole{font-size:13px;color:var(--muted)}
+
+  /* Calculator result share buttons (Save as PDF / Text) */
+  .resshare{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .rsbtn{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+    padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+  .rsbtn:hover{background:rgba(255,255,255,.24)}
+
+  /* Exit-intent modal */
+  .modal-x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:22px;color:var(--muted);cursor:pointer;line-height:1}
+  .modal.ei{text-align:center;max-width:420px}
+  .modal.ei .ei-emoji{font-size:44px;margin-bottom:6px}
+  .modal.ei h3{font-size:23px}
+  .modal.ei p{margin-bottom:20px}
+  .ei-dismiss{display:block;width:100%;margin-top:12px;background:none;border:0;color:var(--muted);font-size:13px;
+    font-weight:600;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:2px}
+
+  /* Print-only found-money one-pager (Save as PDF) */
+  #printcard{display:none}
+  @media print{
+    body > *{display:none !important}
+    #printcard{display:block !important;padding:0.6in;font-family:var(--sans);color:#10131f}
+    #printcard .pc-brand{font-weight:800;letter-spacing:.04em;color:#3a55d9;font-size:20px;margin-bottom:28px}
+    #printcard .pc-h{font-size:30px;font-weight:800;margin-bottom:8px}
+    #printcard .pc-sub{color:#454b5d;font-size:14px;max-width:520px;margin-bottom:26px}
+    #printcard .pc-big{font-size:62px;font-weight:800;color:#1f9d57;letter-spacing:-.02em}
+    #printcard .pc-line{font-size:17px;color:#10131f;margin-top:8px}
+    #printcard .pc-foot{margin-top:36px;font-size:12px;color:#737a8c;border-top:1px solid #e9ebf2;padding-top:14px}
+  }
 </style>
 </head>
 <body>
@@ -470,6 +535,10 @@
         <div id="truerate" style="margin:14px 0 4px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.10);font-size:15px;line-height:1.5"></div>
         <div class="pill" id="pill">That's real money back in your pocket</div>
         <div><button class="btn btn-p btn-lg" onclick="openGet()">Get the app that fixes this →</button></div>
+        <div class="resshare">
+          <button class="rsbtn" onclick="shareFound('text')">📲 Text it to me</button>
+          <button class="rsbtn" onclick="shareFound('print')">🧾 Save as PDF</button>
+        </div>
       </div>
     </div>
   </div>
@@ -698,6 +767,28 @@ HIDDEN-->
   </div>
 </footer>
 
+<!-- EXIT-INTENT / SCROLL-DEPTH CAPTURE (fires once) -->
+<div class="modal-bg" id="eiModal" onclick="if(event.target===this)closeEi()">
+  <div class="modal ei">
+    <button class="modal-x" onclick="closeEi()" aria-label="Close">✕</button>
+    <div class="ei-emoji">💸</div>
+    <h3 id="eiTitle">Before you go…</h3>
+    <p id="eiBody">Most tradesmen quietly leave tens of thousands a year on the table. See your number — it takes 2 minutes, and we'll help you win it back.</p>
+    <button class="btn btn-p btn-lg" style="width:100%" onclick="closeEi();openGet()">Show me my found money →</button>
+    <button class="ei-dismiss" onclick="closeEi()">No thanks, I'm pricing perfectly</button>
+  </div>
+</div>
+
+<!-- PRINT-ONLY found-money summary (Save as PDF) -->
+<div id="printcard">
+  <div class="pc-brand">▌▌▌ Boaz</div>
+  <h1 class="pc-h">Your Found-Money Estimate</h1>
+  <p class="pc-sub">What you could be leaving on the table every year — overhead + profit you've earned but never charged for.</p>
+  <div class="pc-big" id="pcFound">$0</div>
+  <div class="pc-line" id="pcRate"></div>
+  <p class="pc-foot">Estimated with the Boaz found-money calculator at boazcore.com. For planning only — your real number depends on your jobs.</p>
+</div>
+
 <!-- GET STARTED MODAL -->
 <div class="modal-bg" id="getModal" onclick="if(event.target===this)closeGet()">
   <div class="modal wz">
@@ -760,6 +851,11 @@ HIDDEN-->
     "— overhead + profit you've earned but never charged for.":"— gastos y ganancia que ganaste pero nunca cobraste.",
     "That's real money back in your pocket":"Es dinero real de vuelta en tu bolsillo","Enter your numbers above":"Ingresa tus números arriba",
     "Get the app that fixes this →":"Obtén la app que lo arregla →",
+    "📲 Text it to me":"📲 Envíamelo por texto","🧾 Save as PDF":"🧾 Guardar como PDF",
+    "Before you go…":"Antes de irte…",
+    "Most tradesmen quietly leave tens of thousands a year on the table. See your number — it takes 2 minutes, and we'll help you win it back.":"La mayoría de los tradesmen dejan decenas de miles al año sobre la mesa. Mira tu número — toma 2 minutos y te ayudamos a recuperarlo.",
+    "Show me my found money →":"Muéstrame mi dinero recuperado →",
+    "No thanks, I'm pricing perfectly":"No gracias, mi precio es perfecto",
     // what we do
     "What we do":"Qué hacemos","Your whole business, run by AI":"Todo tu negocio, manejado por IA",
     "Tap a feature to see it on your phone. Not a pile of tools — one connected system from bid to bank.":"Toca una función para verla en tu teléfono. No un montón de herramientas — un solo sistema del presupuesto al banco.",
@@ -973,6 +1069,7 @@ HIDDEN-->
     // Found money = the gap between your TRUE rate and what you charge now, over a year.
     var found=(trueRate-rate)*annualHours;
     if(found<0||isNaN(found)||!isFinite(found))found=0;
+    _lastFound=found; _lastTrueRate=trueRate; _lastRate=rate; // expose for share + exit-intent
     document.getElementById('found').textContent=money(found);
     var es=siteLang()==='es';
     var tr=document.getElementById('truerate');
@@ -1017,6 +1114,52 @@ HIDDEN-->
     var arr=['General Contractor','Carpentry / Finish','Remodeling','Plumbing','Electrical','HVAC','Painting','Concrete / Masonry','Roofing','Landscaping','Flooring','Handyman','Other'];
     return '<option value="">Choose your trade…</option>'+arr.map(function(x){return '<option'+(sel===x?' selected':'')+'>'+x+'</option>';}).join('');
   }
+  // ----- Share the found-money result (Save as PDF / Text) -----
+  var _lastFound=0, _lastTrueRate=0, _lastRate=0;
+  function shareFound(mode){
+    var es=siteLang()==='es';
+    var foundStr=money(_lastFound||0);
+    if(mode==='print'){
+      var pf=document.getElementById('pcFound'); if(pf) pf.textContent=foundStr;
+      var pr=document.getElementById('pcRate');
+      if(pr) pr.innerHTML = (_lastRate>0 && _lastTrueRate>0)
+        ? (es?'Tu tarifa real debería ser <b>':'Your true rate should be <b>')+money(_lastTrueRate)+(es?'/hora</b> — cobras <b>':'/hr</b> — you charge <b>')+money(_lastRate)+(es?'/hora</b>.':'/hr</b>.')
+        : '';
+      window.print(); return;
+    }
+    // 'text' — SMS on mobile, clipboard elsewhere
+    var msg=(es?'Según el calculador de Boaz, dejo ~':'Per the Boaz calculator, I\'m leaving ~')+foundStr+(es?'/año sobre la mesa. Míralo: https://boazcore.com':'/yr on the table. See yours: https://boazcore.com');
+    if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)){ location.href='sms:&body='+encodeURIComponent(msg); return; }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(msg).then(function(){ alert(es?'Copiado — pégalo en un mensaje.':'Copied — paste it into a text to yourself.'); },function(){ prompt(es?'Copia esto:':'Copy this:',msg); }); }
+    else { prompt(es?'Copia esto:':'Copy this:',msg); }
+  }
+
+  // ----- Exit-intent / scroll-depth lead capture (fires once) -----
+  function eiSeen(){ try{ return localStorage.getItem('boaz.ei')==='1'; }catch(e){ return _eiShown; } }
+  function eiMark(){ _eiShown=true; try{ localStorage.setItem('boaz.ei','1'); }catch(e){} }
+  function openEi(){
+    if(_eiShown || eiSeen()) return;
+    if(document.getElementById('getModal').classList.contains('show')) return; // don't stack on the wizard
+    eiMark();
+    var es=siteLang()==='es';
+    if(_lastFound>0){
+      var t=document.getElementById('eiTitle'), b=document.getElementById('eiBody');
+      if(t) t.textContent=(es?'Estás dejando ~':'You\'re leaving ~')+money(_lastFound)+(es?'/año':'/yr');
+      if(b) b.textContent=(es?'Eso es dinero que ganaste pero nunca cobraste. Te ayudamos a recuperarlo — configúrala en 2 minutos.':'That\'s money you earned but never charged for. We\'ll help you win it back — get set up in 2 minutes.');
+    }
+    document.getElementById('eiModal').classList.add('show'); document.body.style.overflow='hidden';
+  }
+  function closeEi(){ document.getElementById('eiModal').classList.remove('show'); document.body.style.overflow=''; }
+  var _eiShown=false;
+  // Desktop: mouse leaves toward the top (close-tab intent)
+  document.addEventListener('mouseout', function(e){ if(e.clientY<=0 && !e.relatedTarget && !e.toElement) openEi(); });
+  // Mobile/touch: fired once at 75% scroll depth
+  window.addEventListener('scroll', function(){
+    if(_eiShown) return;
+    var sc=window.scrollY||document.documentElement.scrollTop, h=document.documentElement.scrollHeight-window.innerHeight;
+    if(h>0 && sc/h>0.75) openEi();
+  }, {passive:true});
+
   function openGet(){ wz={step:1,data:{}}; document.getElementById('getModal').classList.add('show'); document.body.style.overflow='hidden'; renderWz(); }
   function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('getModal').classList.contains('show')) closeGet(); });
@@ -1103,7 +1246,7 @@ HIDDEN-->
       'Leaving ~'+found+'/yr on the table\n\n'+
       'CONTACT → '+(d.email||'')+(d.phone?'  ·  '+d.phone:'')+'\n\n'+
       'NEXT STEP: reach out, onboard them, and get them onto their plan (first month).';
-    var payload={ access_key:WZ_KEY,
+    var payload={ access_key:WZ_KEY, botcheck:'', /* Web3Forms honeypot — real users leave empty */
       subject:'🔥 New lead: '+(d.name||'?')+' — '+tier+' ('+price+'/mo)', from_name:'Boaz Website',
       message:summary,
       'Name':d.name||'', 'Email':d.email||'', 'Phone':d.phone||'', 'Business':d.biz||'', 'Trade':d.trade||'',
