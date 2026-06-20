@@ -900,8 +900,11 @@ HIDDEN-->
   };
   var SITE_REV=null;
   function siteRev(){ if(!SITE_REV){ SITE_REV={}; for(var k in SITE_ES){ if(!SITE_REV[SITE_ES[k]]) SITE_REV[SITE_ES[k]]=k; } } return SITE_REV; }
-  function siteLang(){ try{ return localStorage.getItem('boaz.lang')==='es'?'es':'en'; }catch(e){ return 'en'; } }
-  function setSiteLang(l){ try{ localStorage.setItem('boaz.lang', l); }catch(e){} translateSite(); paintLangToggle(); if(typeof renderBill==='function') renderBill(); if(typeof calc==='function') calc(); }
+  // In-memory source of truth + best-effort localStorage. Works even where localStorage
+  // throws (file:// in Safari, private mode), so the language toggle never silently no-ops.
+  var _lang=null;
+  function siteLang(){ if(_lang) return _lang; try{ _lang = localStorage.getItem('boaz.lang')==='es'?'es':'en'; }catch(e){ _lang='en'; } return _lang; }
+  function setSiteLang(l){ _lang = l==='es'?'es':'en'; try{ localStorage.setItem('boaz.lang', _lang); }catch(e){} translateSite(); paintLangToggle(); if(typeof renderBill==='function') renderBill(); if(typeof calc==='function') calc(); }
   function translateSite(){
     try{
       var map = siteLang()==='es' ? SITE_ES : siteRev();
