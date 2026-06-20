@@ -618,7 +618,7 @@ HIDDEN-->
         <div class="price" data-base="49.99">$49.99<small>/mo</small></div>
         <div class="billsub"></div>
         <ul><li>Profitable bidding + found money</li><li>Full job tracking &amp; invoicing</li><li>~20 AI photo/voice estimates / mo</li><li>50 receipt scans / mo</li><li>5 design previews / mo</li><li>Business coach</li><li>1 user</li></ul>
-        <a class="btn btn-g" href="https://buy.stripe.com/test_3cIdRb9gQ4II5Q79iJ48000" target="_blank" rel="noopener">Start free</a>
+        <button class="btn btn-g" onclick="openGet()">Start free</button>
       </div>
       <div class="tier pop">
         <div class="tag">Most popular</div>
@@ -627,7 +627,7 @@ HIDDEN-->
         <div class="price" data-base="149.99">$149.99<small>/mo</small></div>
         <div class="billsub"></div>
         <ul><li>Everything in Basic, plus:</li><li>~100 AI photo/voice estimates / mo</li><li>300 receipt scans / mo</li><li>AI receptionist — 250 texts / mo</li><li>25 design previews / mo</li><li>Up to 3 users</li></ul>
-        <a class="btn btn-p" href="https://buy.stripe.com/test_5kQ8wR50A5MM0vNbqR48001" target="_blank" rel="noopener">Start free</a>
+        <button class="btn btn-p" onclick="openGet()">Start free</button>
       </div>
       <div class="tier">
         <h3>Premium</h3>
@@ -635,7 +635,7 @@ HIDDEN-->
         <div class="price" data-base="249.99">$249.99<small>/mo</small></div>
         <div class="billsub"></div>
         <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>1,000 receipt scans / mo</li><li>AI receptionist — 1,500 texts / mo</li><li>100 design previews / mo</li><li>Priority support</li><li>Up to 10 users</li></ul>
-        <a class="btn btn-g" href="https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002" target="_blank" rel="noopener">Start free</a>
+        <button class="btn btn-g" onclick="openGet()">Start free</button>
       </div>
     </div>
     <p class="price-note"><b>Limited-time offer:</b> Startup 25% off with code <b>STARTUP25</b> at checkout — your sale price stays locked as long as you keep your plan.<br>All plans: <b>21-day free trial</b> · <b>no setup fee</b> · cancel anytime · save with 3-month &amp; annual billing.<br><span style="font-size:13px">One discount at a time — STARTUP25 or annual billing, whichever you pick.</span><br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
@@ -690,7 +690,6 @@ HIDDEN-->
       <div style="display:flex;gap:24px;flex-wrap:wrap">
         <a href="#calc">Found Money</a><a href="#pricing">Pricing</a><a href="#foundation">Foundation</a>
         <a href="#" onclick="openGet();return false">Get Started</a><a href="mailto:ethan@boazcore.com">ethan@boazcore.com</a>
-        <a href="https://search.google.com/local/writereview?placeid=YOUR_GOOGLE_PLACE_ID" target="_blank" rel="noopener">★ Leave us a Google review</a>
       </div>
     </div>
     <div class="disclaimer">
@@ -738,7 +737,7 @@ HIDDEN-->
   // ===== i18n (English / Español) =====
   var SITE_ES = {
     // nav
-    "Found Money":"Dinero Recuperado","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base","Contact":"Contacto",
+    "Found Money":"Dinero Recuperado","One app replaces your":"Una sola app reemplaza tu","patchwork of tools":"montón de herramientas dispersas","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base","Contact":"Contacto",
     "Get Started":"Empezar","Start 21 days free →":"Comienza 21 días gratis →",
     // hero
     "Custom software for the trades":"Software a la medida para los oficios",
@@ -785,7 +784,6 @@ HIDDEN-->
     "Invoice #003":"Factura #003","Drywall install":"Instalación de tablaroca","Gypsum board":"Panel de yeso","+ Change order: added outlet":"+ Orden de cambio: enchufe agregado","client-approved":"aprobado por el cliente","Tax":"Impuesto","Total due":"Total a pagar","🔁 Change order applied":"🔁 Orden de cambio aplicada","💳 Paid · Apr 12 · 2 days early":"💳 Pagado · 12 abr · 2 días antes",
     "Dashboard":"Panel","REVENUE · THIS MONTH":"INGRESOS · ESTE MES","▲ 10% vs last month":"▲ 10% vs el mes pasado","Bids won":"Presupuestos ganados","Avg margin":"Margen prom.",
     "Tap a feature to watch it on your phone. Eight tools, one connected system — from the first bid to money in the bank.":"Toca una función para verla en tu teléfono. Ocho herramientas, un solo sistema conectado — del primer presupuesto al dinero en el banco.",
-    "★ Leave us a Google review":"★ Déjanos una reseña en Google",
     "What contractors say":"Lo que dicen los contratistas","Trusted by the people who build":"La confianza de quienes construyen",
     "We only publish real, verified reviews from contractors we've worked with — these spots fill as we onboard. Want yours here?":"Solo publicamos reseñas reales y verificadas de contratistas con quienes hemos trabajado — estos espacios se llenan a medida que crecemos. ¿Quieres la tuya aquí?",
     "Verified review":"Reseña verificada","Add as you onboard clients":"Se agrega al sumar clientes",
@@ -1009,14 +1007,12 @@ HIDDEN-->
   // TODO: paste your real Web3Forms access key (free at web3forms.com) so leads email you.
   var WZ_KEY = '6099b5b6-9a42-452a-8947-cbc3e3cbf5b2';
   var STRIPE_LINKS = {
-    Basic:'https://buy.stripe.com/test_3cIdRb9gQ4II5Q79iJ48000',
-    Balanced:'https://buy.stripe.com/test_5kQ8wR50A5MM0vNbqR48001',
-    Premium:'https://buy.stripe.com/test_dRmeVf9gQa327YfdyZ48002'
+    Basic:'', Balanced:'', Premium:'' /* TODO: paste live buy.stripe.com links once Stripe Connect is live, then re-wire CTAs */
   };
   function goPay(tier){ var l=STRIPE_LINKS[tier]; if(l){ window.open(l,'_blank'); } }
   function wzPay(){ if(!/.+@.+\..+/.test(wz.data.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; } var l=STRIPE_LINKS[wzTier()]; if(l){ window.open(l,'_blank'); } wzSubmit(); }
   var wz = { step:1, data:{} };
-  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function tradeOpts(sel){
     var arr=['General Contractor','Carpentry / Finish','Remodeling','Plumbing','Electrical','HVAC','Painting','Concrete / Masonry','Roofing','Landscaping','Flooring','Handyman','Other'];
     return '<option value="">Choose your trade…</option>'+arr.map(function(x){return '<option'+(sel===x?' selected':'')+'>'+x+'</option>';}).join('');
@@ -1074,7 +1070,7 @@ HIDDEN-->
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">21-day free trial · no setup fee · cancel anytime</div></div>'+
         '<div style="text-align:center;font-size:13px;color:var(--indigo);font-weight:800;margin:-4px 0 10px">🔥 Use code STARTUP25 at checkout for 25% off — your rate stays locked as long as you stay</div>'+
-        '<a class="btn btn-p btn-lg" style="width:100%" id="w_submit" href="'+STRIPE_LINKS[tier]+'" target="_blank" rel="noopener" onclick="wzSubmit()">Start my 21-day free trial →</a>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Start my 21-day free trial →</button>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
