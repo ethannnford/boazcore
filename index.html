@@ -987,7 +987,7 @@ HIDDEN-->
     "Markups & invoicing — optional, we set smart defaults":"Márgenes y facturación — opcional, ponemos valores inteligentes",
     "Materials markup %":"Margen de materiales %","Subs/rentals markup %":"Margen subcontratistas/rentas %","Labor burden %":"Carga laboral %","Contingency %":"Contingencia %","Payment terms (optional)":"Términos de pago (opcional)",
     "General Contractor":"Contratista general","Carpentry / Finish":"Carpintería / Acabados","Remodeling":"Remodelación","Plumbing":"Plomería","Electrical":"Electricidad","HVAC":"HVAC (clima)","Painting":"Pintura","Concrete / Masonry":"Concreto / Albañilería","Roofing":"Techado","Landscaping":"Jardinería","Flooring":"Pisos","Handyman":"Manitas","Other":"Otro",
-    "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
+    "Your numbers":"Tus números","So every bid is actually profitable.":"Para que cada presupuesto sea rentable.","Hourly rate":"Tarifa por hora","Helper rate ($/hr)":"Tarifa de ayudante ($/h)","Installer rate ($/hr)":"Tarifa de instalador ($/h)","Billable hrs/week":"Horas fact./semana","Monthly overhead (costs, not your pay)":"Gastos mensuales (costos, no tu pago)","Profit %":"Ganancia %","Tax %":"Impuesto %",
     "Let’s pick your plan":"Elijamos tu plan","Jobs/bids per month":"Trabajos/presupuestos por mes","People who’ll use it":"Personas que la usarán","Want an AI receptionist to answer & qualify your texts?":"¿Quieres una recepcionista IA que responda y califique tus mensajes?","Yes":"Sí","Not now":"Ahora no","See my plan →":"Ver mi plan →",
     "Based on your answers, we recommend":"Según tus respuestas, recomendamos","21-day free trial · no setup fee · cancel anytime":"prueba gratis de 21 días · sin cuota de instalación · cancela cuando quieras",
     "🔥 Use code STARTUP25 at checkout for 25% off — your rate stays locked as long as you stay":"🔥 Usa el código STARTUP25 en el pago para 25% de descuento — tu precio queda fijo mientras sigas","Claim my spot →":"Aparta mi lugar →","Start my 21-day free trial →":"Comienza mi prueba gratis de 21 días →",
@@ -1193,6 +1193,8 @@ HIDDEN-->
       b='<h3>Your numbers</h3><p>So every bid is actually profitable.</p>'+
         '<div class="wzg"><div><label class="wzl">Hourly rate</label><div class="wzig"><span>$</span><input class="wzi" id="w_rate" type="number" inputmode="decimal" value="'+esc(d.rate||'')+'" placeholder="125"></div></div>'+
         '<div><label class="wzl">Billable hrs/week</label><input class="wzi" id="w_hours" type="number" inputmode="decimal" value="'+esc(d.hours||'')+'" placeholder="40"></div></div>'+
+        '<div class="wzg"><div><label class="wzl">Helper rate ($/hr)</label><div class="wzig"><span>$</span><input class="wzi" id="w_helper" type="number" inputmode="decimal" value="'+esc(d.helper||'')+'" placeholder="35"></div></div>'+
+        '<div><label class="wzl">Installer rate ($/hr)</label><div class="wzig"><span>$</span><input class="wzi" id="w_installer" type="number" inputmode="decimal" value="'+esc(d.installer||'')+'" placeholder="50"></div></div></div>'+
         '<label class="wzl">Monthly overhead (costs, not your pay)</label><div class="wzig"><span>$</span><input class="wzi" id="w_oh" type="number" inputmode="decimal" value="'+esc(d.oh||'')+'" placeholder="3000"></div>'+
         '<div class="wzg"><div><label class="wzl">Profit %</label><input class="wzi" id="w_profit" type="number" inputmode="decimal" value="'+esc(d.profit||'15')+'"></div>'+
         '<div><label class="wzl">Tax %</label><input class="wzi" id="w_tax" type="number" inputmode="decimal" value="'+esc(d.tax||'')+'" placeholder="8"></div></div>'+
@@ -1229,7 +1231,7 @@ HIDDEN-->
   function wzCapture(){ var s=wz.step, g=function(id){var e=document.getElementById(id);return e?e.value:undefined;};
     if(s===1){ wz.data.name=g('w_name'); wz.data.email=g('w_email'); wz.data.phone=g('w_phone'); }
     else if(s===2){ wz.data.biz=g('w_biz'); wz.data.trade=g('w_trade'); wz.data.license=g('w_license'); wz.data.addr=g('w_addr'); }
-    else if(s===3){ ['rate','hours','oh','profit','tax','mat','subs','burden','cont','terms'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
+    else if(s===3){ ['rate','hours','helper','installer','oh','profit','tax','mat','subs','burden','cont','terms'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
     else if(s===4){ wz.data.jobs=g('w_jobs'); wz.data.crew=g('w_crew'); } }
   function wzPick(k,v){ wzCapture(); wz.data[k]=v; renderWz(); }
   function wzNext(){ wzCapture();
@@ -1253,7 +1255,7 @@ HIDDEN-->
       message:summary,
       'Name':d.name||'', 'Email':d.email||'', 'Phone':d.phone||'', 'Business':d.biz||'', 'Trade':d.trade||'',
       'Recommended Plan':tier+' ('+price+'/mo)', 'Found Money / Year':found,
-      'Hourly Rate':d.rate?('$'+d.rate):'', 'Billable Hours/Week':d.hours||'', 'Monthly Overhead':d.oh?('$'+d.oh):'',
+      'Hourly Rate':d.rate?('$'+d.rate):'', 'Helper Rate':d.helper?('$'+d.helper):'', 'Installer Rate':d.installer?('$'+d.installer):'', 'Billable Hours/Week':d.hours||'', 'Monthly Overhead':d.oh?('$'+d.oh):'',
       'Profit %':d.profit||'', 'Tax %':d.tax||'',
       'Jobs / Month':d.jobs||'', 'Crew Size':d.crew||'', 'Wants AI Receptionist':d.recept||'' };
     if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
