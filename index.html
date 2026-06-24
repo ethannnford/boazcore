@@ -5,7 +5,7 @@
 <!-- Security: lock resource origins. Inline JS/CSS need 'unsafe-inline' (whole site is inline);
      a long-term win is moving JS to an external file to drop it. GitHub Pages already sends
      X-Content-Type-Options: nosniff. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; frame-src https://*.stripe.com; form-action 'self' https://api.web3forms.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com https://boaz-app-mocha.vercel.app; frame-src https://*.stripe.com; form-action 'self' https://api.web3forms.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Boaz — custom software for tradesmen. Stop the leaks, keep your time, get every dollar. Built for you, set up for you, one transparent price.">
@@ -1105,11 +1105,25 @@ HIDDEN-->
   // ===== Get Started — onboarding Q&A wizard =====
   // TODO: paste your real Web3Forms access key (free at web3forms.com) so leads email you.
   var WZ_KEY = '6099b5b6-9a42-452a-8947-cbc3e3cbf5b2';
-  var STRIPE_LINKS = {
-    Basic:'', Balanced:'', Premium:'' /* TODO: paste live buy.stripe.com links once Stripe Connect is live, then re-wire CTAs */
-  };
-  function goPay(tier){ var l=STRIPE_LINKS[tier]; if(l){ window.open(l,'_blank'); } }
-  function wzPay(){ if(!/.+@.+\..+/.test(wz.data.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; } var l=STRIPE_LINKS[wzTier()]; if(l){ window.open(l,'_blank'); } wzSubmit(); }
+  // Boaz app API base (Stripe checkout + account onboarding). Switch to https://app.boazcore.com when that domain is live.
+  var APP_API = 'https://boaz-app-mocha.vercel.app';
+  // Start real Stripe Checkout for the recommended plan, carrying the whole Q&A so the
+  // account is created + fully configured on payment. The server filters to known fields.
+  // Falls back to lead capture on any failure — a customer is NEVER dead-ended.
+  function wzCheckout(){
+    var d=wz.data, btn=document.getElementById('w_submit');
+    if(!/.+@.+\..+/.test(d.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; }
+    if(btn){ btn.textContent='Starting checkout…'; btn.disabled=true; }
+    var plan=(wzTier()||'Balanced').toLowerCase();
+    fetch(APP_API+'/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:plan,email:d.email,answers:d})})
+      .then(function(r){ return r.json().then(function(j){ return {status:r.status,body:j}; }); })
+      .then(function(res){
+        if(res.status===200 && res.body && res.body.url){ window.location.href=res.body.url; return; }
+        if(res.status===409 && res.body && res.body.existingAccount){ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} alert('You already have a Boaz account — please sign in to manage your plan.'); window.location.href=(res.body.loginUrl||(APP_API+'/login')); return; }
+        throw new Error((res.body&&res.body.error)||'checkout failed');
+      })
+      .catch(function(){ /* never dead-end — capture the lead so we can reach them */ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} wzSubmit(); });
+  }
   var wz = { step:1, data:{} };
   function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function tradeOpts(sel){
@@ -1217,7 +1231,7 @@ HIDDEN-->
         (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
         '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">21-day free trial · no setup fee · cancel anytime</div></div>'+
         '<div style="text-align:center;font-size:13px;color:var(--indigo);font-weight:800;margin:-4px 0 10px">🔥 Use code STARTUP25 at checkout for 25% off — your rate stays locked as long as you stay</div>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzSubmit()">Start my 21-day free trial →</button>'+
+        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzCheckout()">Start my 21-day free trial →</button>'+
         '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
         '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
     } else {
