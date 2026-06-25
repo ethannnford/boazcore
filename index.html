@@ -485,7 +485,7 @@
 <header class="hero" id="top">
   <div class="orb orb1"></div><div class="orb orb2"></div>
   <div class="wrap center">
-    <div class="eyebrow">Built with tradesmen, for tradesmen</div>
+    <div class="eyebrow">We sell you your time back</div>
     <h1>Stop the leaks. Keep your time.<br><span class="hl">Get every dollar.</span></h1>
     <p class="lead">Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up <i>for</i> you, one honest price.</p>
     <div class="cta-row">
@@ -533,6 +533,7 @@
         <div class="big" id="found">$0</div>
         <div class="sub">on the table <b style="color:#fff">every year</b> — overhead + profit you've earned but never charged for.</div>
         <div id="truerate" style="margin:14px 0 4px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.10);font-size:15px;line-height:1.5"></div>
+        <div id="payback" style="margin:8px 0 4px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.92)"></div>
         <div class="pill" id="pill">That's real money back in your pocket</div>
         <div><button class="btn btn-p btn-lg" onclick="openGet()">Get the app that fixes this →</button></div>
         <div class="resshare">
@@ -833,6 +834,7 @@ HIDDEN-->
     "Found Money":"Dinero Recuperado","One app replaces your":"Una sola app reemplaza tu","patchwork of tools":"montón de herramientas dispersas","How it works":"Cómo funciona","Pricing":"Precios","Our Foundation":"Nuestra Base","Contact":"Contacto",
     "Get Started":"Empezar","Start 21 days free →":"Comienza 21 días gratis →",
     // hero
+    "We sell you your time back":"Te devolvemos tu tiempo",
     "Custom software for the trades":"Software a la medida para los oficios",
     "Stop the leaks. Keep your time.":"Detén las fugas. Recupera tu tiempo.","Get every dollar.":"Gana cada dólar.",
     "Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up":"La mayoría de los trabajadores pierden decenas de miles al año por presupuestos bajos y trabajo sin pagar. Boaz te crea una app a la medida que tapa las fugas, asegura que seas rentable y logra que te paguen — configurada",
@@ -1080,6 +1082,17 @@ HIDDEN-->
         +'<b style="color:#fff">'+money(trueRate)+(es?'/hora':'/hr')+'</b>'
         +(es?' — hoy cobras ':' — you’re charging ')+money(rate)+(es?'/hora.':'/hr.');
     } else { tr.textContent=''; }
+    // "We sell you your time back" — pays for itself line, anchored on the Balanced plan ($149.99)
+    // and the visitor's OWN true rate, so the proof is personal and honest.
+    var pb=document.getElementById('payback');
+    if(trueRate>0){
+      var hrs=149.99/trueRate;
+      var span;
+      if(hrs<1.05){ span=es?'menos de una hora':'under an hour'; }
+      else { span=(Math.round(hrs*10)/10)+(es?' horas':' hours'); }
+      pb.innerHTML=(es?'A esa tarifa, Boaz se paga solo la primera vez que te ahorra <b style="color:#fff">'+span+'</b> al mes — más o menos un presupuesto. La mayoría ahorra mucho más.'
+                      :'At that rate, Boaz pays for itself the first time it saves you <b style="color:#fff">'+span+'</b> a month — about one quote. Most save far more.');
+    } else { pb.textContent=''; }
     var pill=document.getElementById('pill');
     if(found>0){ pill.textContent='≈ '+money(found/12)+(es?' / mes de vuelta en tu bolsillo':' / month back in your pocket'); }
     else { pill.textContent=es?'Ingresa tus números arriba':'Enter your numbers above'; }
