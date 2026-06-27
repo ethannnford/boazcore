@@ -5,7 +5,7 @@
 <!-- Security: lock resource origins. Inline JS/CSS need 'unsafe-inline' (whole site is inline);
      a long-term win is moving JS to an external file to drop it. GitHub Pages already sends
      X-Content-Type-Options: nosniff. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com https://boaz-app-mocha.vercel.app; frame-src https://*.stripe.com; form-action 'self' https://api.web3forms.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Boaz — custom software for tradesmen. Stop the leaks, keep your time, get every dollar. Built for you, set up for you, one transparent price.">
@@ -869,41 +869,7 @@ HIDDEN-->
   <p class="pc-foot">Estimated with the Boaz found-money calculator at boazcore.com. For planning only — your real number depends on your jobs.</p>
 </div>
 
-<!-- GET STARTED MODAL -->
-<div class="modal-bg" id="getModal" onclick="if(event.target===this)closeGet()">
-  <div class="modal wz">
-    <button class="x" onclick="closeGet()">×</button>
-    <div class="wzbar"><div class="wzfill" id="wzFill"></div></div>
-    <div id="wzBody"></div>
-  </div>
-</div>
 
-<style>
-  .modal.wz{max-width:480px;max-height:90vh;overflow:auto}
-  .wzbar{height:6px;background:var(--soft);border-radius:999px;overflow:hidden;margin:2px 0 18px}
-  .wzfill{height:100%;background:var(--grad);border-radius:999px;transition:width .35s ease;width:20%}
-  #wzBody h3{font-size:22px;margin-bottom:6px;color:var(--ink)}
-  #wzBody>p{color:var(--muted);font-size:14px;margin-bottom:4px}
-  .wzl{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:14px 0 6px}
-  .wzi{width:100%;padding:13px 14px;font-size:16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit;outline:none}
-  .wzi:focus{border-color:var(--indigo)}
-  .wzg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .wzig{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding-left:12px;background:#fff}
-  .wzig span{color:var(--muted);font-weight:700}
-  .wzig .wzi{border:0;padding-left:6px}
-  .opts{display:flex;gap:10px;margin-top:6px}
-  .opt{flex:1;padding:13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:700;color:var(--ink);cursor:pointer;font-size:15px}
-  .opt.on{border-color:var(--indigo);background:#eef1fe;color:var(--indigo-d)}
-  .wznav{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
-  .wznav .btn{width:auto;padding:12px 20px}
-  .wzfound{text-align:center;background:var(--ink);color:#fff;border-radius:16px;padding:18px;margin:10px 0}
-  .wzfound .s{color:#aab1d6;font-size:14px}
-  .wzbig{font-size:40px;font-weight:800;background:linear-gradient(135deg,#7d94ff,#c9962f);-webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 0}
-  .wzrec{text-align:center;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
-  .wzrec .s{color:var(--muted);font-size:13px}
-  .wzrec .rt{font-size:22px;font-weight:800;color:var(--indigo);margin:3px 0}
-  .wzfine{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
-</style>
 <script>
   // ===== i18n (English / Español) =====
   var SITE_ES = {
@@ -1229,34 +1195,6 @@ HIDDEN-->
   // FAQ accordion
   function tog(btn){ btn.parentElement.classList.toggle('open'); }
 
-  // ===== Get Started — onboarding Q&A wizard =====
-  // TODO: paste your real Web3Forms access key (free at web3forms.com) so leads email you.
-  var WZ_KEY = '6099b5b6-9a42-452a-8947-cbc3e3cbf5b2';
-  // Boaz app API base (Stripe checkout + account onboarding). Switch to https://app.boazcore.com when that domain is live.
-  var APP_API = 'https://boaz-app-mocha.vercel.app';
-  // Start real Stripe Checkout for the recommended plan, carrying the whole Q&A so the
-  // account is created + fully configured on payment. The server filters to known fields.
-  // Falls back to lead capture on any failure — a customer is NEVER dead-ended.
-  function wzCheckout(){
-    var d=wz.data, btn=document.getElementById('w_submit');
-    if(!/.+@.+\..+/.test(d.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; }
-    if(btn){ btn.textContent='Starting checkout…'; btn.disabled=true; }
-    var plan=(wzTier()||'Balanced').toLowerCase();
-    fetch(APP_API+'/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:plan,email:d.email,answers:d})})
-      .then(function(r){ return r.json().then(function(j){ return {status:r.status,body:j}; }); })
-      .then(function(res){
-        if(res.status===200 && res.body && res.body.url){ window.location.href=res.body.url; return; }
-        if(res.status===409 && res.body && res.body.existingAccount){ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} alert('You already have a Boaz account — please sign in to manage your plan.'); window.location.href=(res.body.loginUrl||(APP_API+'/login')); return; }
-        throw new Error((res.body&&res.body.error)||'checkout failed');
-      })
-      .catch(function(){ /* never dead-end — capture the lead so we can reach them */ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} wzSubmit(); });
-  }
-  var wz = { step:1, data:{} };
-  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-  function tradeOpts(sel){
-    var arr=['General Contractor','Carpentry / Finish','Remodeling','Plumbing','Electrical','HVAC','Painting','Concrete / Masonry','Roofing','Landscaping','Flooring','Handyman','Other'];
-    return '<option value="">Choose your trade…</option>'+arr.map(function(x){return '<option'+(sel===x?' selected':'')+'>'+x+'</option>';}).join('');
-  }
   // ----- Share the found-money result (Save as PDF / Text) -----
   var _lastFound=0, _lastTrueRate=0, _lastRate=0;
   function shareFound(mode){
@@ -1282,7 +1220,6 @@ HIDDEN-->
   function eiMark(){ _eiShown=true; try{ localStorage.setItem('boaz.ei','1'); }catch(e){} }
   function openEi(){
     if(_eiShown || eiSeen()) return;
-    if(document.getElementById('getModal').classList.contains('show')) return; // don't stack on the wizard
     eiMark();
     var es=siteLang()==='es';
     if(_lastFound>0){
@@ -1307,106 +1244,7 @@ HIDDEN-->
   // 21-day free trial (no Stripe needed for the trial — payment only at conversion). This keeps
   // the marketing site safe to ship live independently of the Stripe live-flip.
   function openGet(){ window.location.href='https://app.boazcore.com/signup'; }
-  function closeGet(){ document.getElementById('getModal').classList.remove('show'); document.body.style.overflow=''; }
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.getElementById('getModal').classList.contains('show')) closeGet(); });
 
-  function wzFound(){ var d=wz.data, rate=+d.rate||0, hw=+d.hours||40, oh=+d.oh||0, pr=(+d.profit||15)/100, bd=(+d.burden||0)/100, ct=(+d.cont||0)/100;
-    var annual=hw*48, ohph=annual>0?(oh*12)/annual:0;
-    var tr=(rate*(1+bd)+ohph)*(1+ct)*(1+pr); // same true-rate engine as the calculator + app
-    var f=(tr-rate)*annual; if(f<0||isNaN(f)||!isFinite(f))f=0; return f; }
-  function wzTier(){ var d=wz.data, jobs=+d.jobs||0, crew=+d.crew||1, rec=(d.recept==='yes'), tier='Basic';
-    if(jobs>15||crew>1) tier='Balanced'; if(rec||crew>=3||jobs>30) tier='Premium'; return tier; }
-  function wznav(label){ return '<div class="wznav">'+(wz.step>1?'<button type="button" class="btn btn-g" onclick="wzBack()">← Back</button>':'<span></span>')+
-    '<button type="button" class="btn btn-p" onclick="wzNext()">'+(label||'Next →')+'</button></div>'; }
-  function renderWz(){
-    var s=wz.step, d=wz.data;
-    document.getElementById('wzFill').style.width=Math.round((Math.min(s,5)/5)*100)+'%';
-    var b='';
-    if(s===1){
-      b='<h3>Let’s get you set up 🛠️</h3><p>First — who are you? So we can build it for you and reach out.</p>'+
-        '<label class="wzl">Your name</label><input class="wzi" id="w_name" value="'+esc(d.name||'')+'" placeholder="Your name">'+
-        '<label class="wzl">Email</label><input class="wzi" id="w_email" type="email" value="'+esc(d.email||'')+'" placeholder="you@email.com">'+
-        '<label class="wzl">Phone</label><input class="wzi" id="w_phone" type="tel" value="'+esc(d.phone||'')+'" placeholder="(555) 123-4567">'+wznav();
-    } else if(s===2){
-      b='<h3>Your business</h3><p>This is what we set up for you — including what shows on your invoices. Add what you have, skip the rest.</p>'+
-        '<label class="wzl">Business name</label><input class="wzi" id="w_biz" value="'+esc(d.biz||'')+'" placeholder="e.g. Ford Carpentry">'+
-        '<label class="wzl">Your trade</label><select class="wzi" id="w_trade">'+tradeOpts(d.trade)+'</select>'+
-        '<label class="wzl">Contractor license # (optional)</label><input class="wzi" id="w_license" value="'+esc(d.license||'')+'" placeholder="CSLB #1234567">'+
-        '<label class="wzl">Business address (optional — shows on invoices)</label><input class="wzi" id="w_addr" value="'+esc(d.addr||'')+'" placeholder="123 Main St, San Diego, CA">'+wznav();
-    } else if(s===3){
-      b='<h3>Your numbers</h3><p>So every bid is actually profitable.</p>'+
-        '<div class="wzg"><div><label class="wzl">Hourly rate</label><div class="wzig"><span>$</span><input class="wzi" id="w_rate" type="number" inputmode="decimal" value="'+esc(d.rate||'')+'" placeholder="125"></div></div>'+
-        '<div><label class="wzl">Billable hrs/week</label><input class="wzi" id="w_hours" type="number" inputmode="decimal" value="'+esc(d.hours||'')+'" placeholder="40"></div></div>'+
-        '<div class="wzg"><div><label class="wzl">Helper rate ($/hr)</label><div class="wzig"><span>$</span><input class="wzi" id="w_helper" type="number" inputmode="decimal" value="'+esc(d.helper||'')+'" placeholder="35"></div></div>'+
-        '<div><label class="wzl">Installer rate ($/hr)</label><div class="wzig"><span>$</span><input class="wzi" id="w_installer" type="number" inputmode="decimal" value="'+esc(d.installer||'')+'" placeholder="50"></div></div></div>'+
-        '<label class="wzl">Monthly overhead (costs, not your pay)</label><div class="wzig"><span>$</span><input class="wzi" id="w_oh" type="number" inputmode="decimal" value="'+esc(d.oh||'')+'" placeholder="3000"></div>'+
-        '<div class="wzg"><div><label class="wzl">Profit %</label><input class="wzi" id="w_profit" type="number" inputmode="decimal" value="'+esc(d.profit||'15')+'"></div>'+
-        '<div><label class="wzl">Tax %</label><input class="wzi" id="w_tax" type="number" inputmode="decimal" value="'+esc(d.tax||'')+'" placeholder="8"></div></div>'+
-        '<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><div class="wzl" style="margin-bottom:8px">Markups &amp; invoicing — optional, we set smart defaults</div>'+
-        '<div class="wzg"><div><label class="wzl">Materials markup %</label><input class="wzi" id="w_mat" type="number" inputmode="decimal" value="'+esc(d.mat||'')+'" placeholder="15"></div>'+
-        '<div><label class="wzl">Subs/rentals markup %</label><input class="wzi" id="w_subs" type="number" inputmode="decimal" value="'+esc(d.subs||'')+'" placeholder="10"></div></div>'+
-        '<div class="wzg"><div><label class="wzl">Labor burden %</label><input class="wzi" id="w_burden" type="number" inputmode="decimal" value="'+esc(d.burden||'')+'" placeholder="25"></div>'+
-        '<div><label class="wzl">Contingency %</label><input class="wzi" id="w_cont" type="number" inputmode="decimal" value="'+esc(d.cont||'')+'" placeholder="10"></div></div>'+
-        '<label class="wzl">Payment terms (optional)</label><input class="wzi" id="w_terms" value="'+esc(d.terms||'')+'" placeholder="Net 15 · 50% deposit"></div>'+wznav();
-    } else if(s===4){
-      b='<h3>Let’s pick your plan</h3>'+
-        '<div class="wzg"><div><label class="wzl">Jobs/bids per month</label><input class="wzi" id="w_jobs" type="number" inputmode="decimal" value="'+esc(d.jobs||'')+'" placeholder="10"></div>'+
-        '<div><label class="wzl">People who’ll use it</label><input class="wzi" id="w_crew" type="number" inputmode="decimal" value="'+esc(d.crew||'1')+'"></div></div>'+
-        '<label class="wzl">Want an AI receptionist to answer &amp; qualify your texts?</label>'+
-        '<div class="opts"><button type="button" class="opt'+(d.recept==='yes'?' on':'')+'" onclick="wzPick(\'recept\',\'yes\')">Yes</button>'+
-        '<button type="button" class="opt'+(d.recept==='no'?' on':'')+'" onclick="wzPick(\'recept\',\'no\')">Not now</button></div>'+wznav('See my plan →');
-    } else if(s===5){
-      var found=wzFound(), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
-      b='<h3>You’re all set'+(d.name?', '+esc(d.name):'')+'! 🎉</h3>'+
-        (found>0?'<div class="wzfound"><div class="s">You’re leaving about</div><div class="wzbig">'+money(found)+'</div><div class="s">on the table every year — your app fixes that.</div><div class="s" style="font-size:11px;margin-top:6px;opacity:.8">Rough estimate, ~48 working weeks/yr.</div></div>':'')+
-        '<div class="wzrec"><div class="s">Based on your answers, we recommend</div><div class="rt">'+tier+' — '+price+'/mo</div><div class="s">21-day free trial · no setup fee · cancel anytime</div></div>'+
-        '<div style="text-align:center;font-size:13px;color:var(--indigo);font-weight:800;margin:-4px 0 10px">🔥 Use code STARTUP25 at checkout for 25% off — your rate stays locked as long as you stay</div>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" id="w_submit" onclick="wzCheckout()">Start my 21-day free trial →</button>'+
-        '<p class="wzfine">We’re onboarding our first contractors personally — we’ll email you to finish setup. No charge today.</p>'+
-        '<div class="wznav" style="margin-top:10px"><button type="button" class="btn btn-g" onclick="wzBack()">← Back</button><span></span></div>';
-    } else {
-      b='<div style="text-align:center"><div style="font-size:50px">🙏</div><h3>You’re in'+(d.name?', '+esc(d.name):'')+'!</h3>'+
-        '<p style="margin-bottom:18px">Thanks for trusting us. We’ll reach out at <b>'+esc(d.email||'')+'</b> to get your app set up. Talk soon.</p>'+
-        '<button class="btn btn-p btn-lg" style="width:100%" onclick="closeGet()">Done</button></div>';
-    }
-    document.getElementById('wzBody').innerHTML=b;
-    if(siteLang()==='es') translateSite();
-  }
-  function wzCapture(){ var s=wz.step, g=function(id){var e=document.getElementById(id);return e?e.value:undefined;};
-    if(s===1){ wz.data.name=g('w_name'); wz.data.email=g('w_email'); wz.data.phone=g('w_phone'); }
-    else if(s===2){ wz.data.biz=g('w_biz'); wz.data.trade=g('w_trade'); wz.data.license=g('w_license'); wz.data.addr=g('w_addr'); }
-    else if(s===3){ ['rate','hours','helper','installer','oh','profit','tax','mat','subs','burden','cont','terms'].forEach(function(k){ var v=g('w_'+k); if(v!==undefined) wz.data[k]=v; }); }
-    else if(s===4){ wz.data.jobs=g('w_jobs'); wz.data.crew=g('w_crew'); } }
-  function wzPick(k,v){ wzCapture(); wz.data[k]=v; renderWz(); }
-  function wzNext(){ wzCapture();
-    if(wz.step===1 && !/.+@.+\..+/.test(wz.data.email||'')){ alert('Please enter a valid email so we can reach you.'); return; }
-    if(wz.step===3 && !(+wz.data.rate>0)){ alert('Enter your hourly rate so your bids are accurate.'); return; }
-    wz.step++; renderWz(); document.querySelector('.modal.wz').scrollTop=0; }
-  function wzBack(){ wzCapture(); if(wz.step>1){ wz.step--; renderWz(); } }
-  function wzSubmit(){
-    var d=wz.data, btn=document.getElementById('w_submit');
-    if(!/.+@.+\..+/.test(d.email||'')){ alert('Please go back and enter a valid email so we can reach you.'); return; }
-    if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
-    var found=money(wzFound()), tier=wzTier(), price={Basic:'$49.99',Balanced:'$149.99',Premium:'$249.99'}[tier];
-    var summary='NEW BOAZ LEAD\n\n'+
-      (d.name||'Someone')+(d.biz?' — '+d.biz:'')+(d.trade?' ('+d.trade+')':'')+'\n'+
-      'Recommended: '+tier+' ('+price+'/mo)\n'+
-      'Leaving ~'+found+'/yr on the table\n\n'+
-      'CONTACT → '+(d.email||'')+(d.phone?'  ·  '+d.phone:'')+'\n\n'+
-      'NEXT STEP: reach out, onboard them, and get them onto their plan (first month).';
-    var payload={ access_key:WZ_KEY, botcheck:'', /* Web3Forms honeypot — real users leave empty */
-      subject:'🔥 New lead: '+(d.name||'?')+' — '+tier+' ('+price+'/mo)', from_name:'Boaz Website',
-      message:summary,
-      'Name':d.name||'', 'Email':d.email||'', 'Phone':d.phone||'', 'Business':d.biz||'', 'Trade':d.trade||'',
-      'Recommended Plan':tier+' ('+price+'/mo)', 'Found Money / Year':found,
-      'Hourly Rate':d.rate?('$'+d.rate):'', 'Helper Rate':d.helper?('$'+d.helper):'', 'Installer Rate':d.installer?('$'+d.installer):'', 'Billable Hours/Week':d.hours||'', 'Monthly Overhead':d.oh?('$'+d.oh):'',
-      'Profit %':d.profit||'', 'Tax %':d.tax||'',
-      'Jobs / Month':d.jobs||'', 'Crew Size':d.crew||'', 'Wants AI Receptionist':d.recept||'' };
-    if(WZ_KEY==='YOUR_WEB3FORMS_ACCESS_KEY'){ console.log('LEAD (set WZ_KEY to email these):',payload); wz.step=6; renderWz(); return; }
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json();}).then(function(j){ if(j&&j.success){ wz.step=6; renderWz(); } else { throw new Error('submit failed'); } })
-      .catch(function(){ if(btn){btn.textContent='Start my 21-day free trial →';btn.disabled=false;} alert('Hmm, that didn’t go through. Please try again, or email us and we’ll get you set up.'); });
-  }
 
   // close mobile menu on link tap
   document.querySelectorAll('#nav a').forEach(function(a){ a.addEventListener('click',function(){ document.getElementById('nav').classList.remove('open'); }); });
