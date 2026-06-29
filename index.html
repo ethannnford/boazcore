@@ -247,10 +247,6 @@
   .promo{background:#10131f;color:#eef0fa;text-align:center;padding:11px 16px;font-size:13.5px;font-weight:500;line-height:1.45;letter-spacing:.01em;border-bottom:1px solid rgba(255,255,255,.08)}
   .promo b{font-weight:700;color:#fff}
   .promo .code{font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:2px 9px;border-radius:6px;letter-spacing:.06em;text-decoration:none}
-  .billtoggle{display:inline-flex;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:5px;margin-top:34px}
-  .billtoggle .bt{border:none;background:none;cursor:pointer;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:700;color:var(--muted)}
-  .billtoggle .bt.on{background:var(--grad);color:#fff}
-  .billtoggle .bt span{font-size:11px;opacity:.92;margin-left:3px}
   .billsub{font-size:13px;color:var(--indigo);font-weight:700;min-height:24px;margin-top:2px;margin-bottom:4px}
   .pricesave{display:inline-block;background:rgba(31,157,87,.12);color:#15823f;font-weight:800;font-size:11.5px;
     letter-spacing:.03em;padding:3px 9px;border-radius:6px;border:1px solid rgba(31,157,87,.22)}
@@ -646,7 +642,7 @@
   <div class="wrap center">
     <div class="eyebrow">What we do</div>
     <h2 style="font-size:clamp(31px,4.8vw,47px)">Your whole business, run by AI</h2>
-    <p class="lead">Tap a feature to watch it on your phone. Eight tools, one connected system — from the first bid to money in the bank.</p>
+    <p class="lead">Tap a feature to watch it on your phone. Nine tools, one connected system — from the first bid to money in the bank.</p>
     <div class="showcase">
       <div class="feat-list" id="featList">
         <div class="feat on"><button onclick="selectFeat(this,0)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 18 9l-2 2-3.5-3.5z"></path><path d="m11.5 8.5-7 7a1.8 1.8 0 0 0 2.5 2.5l7-7"></path><path d="M13 3.5 19.5 10M16.5 7.5l3-3"></path></svg></span>Profitable Bid Builder<span class="chev">⌄</span></button><div class="fbody">Builds overhead + profit into every bid automatically and shows the "found money" you'd have missed. Win the job and the margin.</div></div>
@@ -657,6 +653,7 @@
         <div class="feat"><button onclick="selectFeat(this,5)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.3 2h4.6c.2-.8.7-1.5 1.3-2A6 6 0 0 0 12 3z"></path></svg></span>Business Coach<span class="chev">⌄</span></button><div class="fbody">Pricing, profit, and growth advice on tap — grounded in your real numbers, day or night.</div></div>
         <div class="feat"><button onclick="selectFeat(this,6)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"></rect><path d="M3 9.5h18M7 14.5h4"></path></svg></span>Invoicing, Deposits &amp; Payments<span class="chev">⌄</span></button><div class="fbody">Turn a won bid into a clean, branded invoice in one tap — your logo, your scope, never your margins. Take a deposit up front, bill progress draws as the job moves, and track every balance to paid. Clients pay by card and the money lands straight in YOUR bank — Boaz never holds your funds, the #1 thing contractors hate about Joist.</div></div>
         <div class="feat"><button onclick="selectFeat(this,7)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"></path><path d="M8 15v-3M12 15V8M16 15v-5"></path></svg></span>Owner Dashboard<span class="chev">⌄</span></button><div class="fbody">See revenue, win rate, and margin at a glance — your whole business in one screen, in English or Spanish.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,8)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"></path><path d="m4 15 4-4 3 3 5-6"></path><circle cx="17" cy="9" r="1.4"></circle></svg></span>AI Money Co-pilot<span class="chev">⌄</span></button><div class="fbody">Watches your numbers and flags what matters — your most profitable jobs, where margin's running thin, money still owed to you, and roughly what to set aside for taxes. Insights to understand your own numbers, not financial advice. Premium.</div></div>
       </div>
       <div class="phone-wrap"><div class="phone"><div class="phone-screen" id="appScreen"></div></div></div>
     </div>
@@ -796,6 +793,7 @@
           <tr><td class="vs-feat">AI receptionist (texts back &amp; qualifies leads 24/7)</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cy">✓</span></td><td><span class="cx">✗</span></td><td><span class="tok">Add-on</span></td><td><span class="tok">Add-on</span></td></tr>
           <tr><td class="vs-feat">AI design previews</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
           <tr><td class="vs-feat">Built-in business coach</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td class="vs-feat">AI Money Co-pilot — automatic profit, cash &amp; tax insights</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
           <tr><td class="vs-feat">Pro invoices, deposits &amp; progress payments</td><td class="us"><span class="ck">✓</span></td><td><span class="cy">✓</span></td><td><span class="cx">✗</span></td><td><span class="cy">✓</span></td><td><span class="cy">✓</span></td><td><span class="cy">✓</span></td></tr>
           <tr><td class="vs-feat">Payments land straight in YOUR bank — we never hold your funds</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
           <tr><td class="vs-feat">Done-for-you setup &amp; personalization</td><td class="us"><span class="ck">✓</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">DIY</span></td><td><span class="tok">Paid onboarding</span></td></tr>
@@ -842,11 +840,6 @@ HIDDEN-->
     <h2 style="font-size:clamp(31px,4.8vw,47px)">Free for 14 days. Then one honest price.</h2>
     <p class="lead">No setup fee. Two weeks free, then the plan that fits you. Everything included — no add-on games.</p>
     <p class="roi-line" style="max-width:640px;margin:0 auto 22px;font-weight:700;color:#3a55d9;background:rgba(58,85,217,.08);border-radius:14px;padding:12px 16px;line-height:1.4">💡 If Boaz saves you just 1–3 hours a month on quoting &amp; coordinating, it's already paid for itself — most guys save a lot more.</p>
-    <div class="billtoggle" role="group" aria-label="Billing period">
-      <button class="bt on" id="bt_monthly" onclick="setBill('monthly',this)">Monthly</button>
-      <button class="bt" id="bt_q" onclick="setBill('q',this)">3 Months <span>−10%</span></button>
-      <button class="bt" id="bt_year" onclick="setBill('year',this)">Annual <span>−25%</span></button>
-    </div>
     <div class="tiers">
       <div class="tier">
         <h3>Basic</h3>
@@ -871,11 +864,11 @@ HIDDEN-->
         <div class="who">Crews &amp; high-volume</div>
         <div class="price" data-base="199.99">$199.99<small>/mo</small></div>
         <div class="billsub"></div>
-        <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>1,000 receipt scans / mo</li><li>AI receptionist — 1,500 texts / mo</li><li>100 design previews / mo</li><li>Priority support</li><li>Up to 10 users</li></ul>
+        <ul><li>Everything in Balanced, plus:</li><li>🧠 AI Money Co-pilot — automatic profit, cash &amp; tax insights</li><li>Unlimited AI estimates*</li><li>1,000 receipt scans / mo</li><li>AI receptionist — 1,500 texts / mo</li><li>100 design previews / mo</li><li>Priority support</li><li>Up to 10 users</li></ul>
         <button class="btn btn-g" onclick="openGet()">Start free</button>
       </div>
     </div>
-    <p class="price-note"><b>Limited-time offer:</b> Startup 25% off with code <b>STARTUP25</b> at checkout — your sale price stays locked as long as you keep your plan.<br>All plans: <b>14-day free trial</b> · <b>no setup fee</b> · cancel anytime · save with 3-month &amp; annual billing.<br><span style="font-size:13px">One discount at a time — STARTUP25 or annual billing, whichever you pick.</span><br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
+    <p class="price-note"><b>Limited-time offer:</b> Startup 25% off with code <b>STARTUP25</b> at checkout — your sale price stays locked as long as you keep your plan.<br>All plans: <b>14-day free trial</b> · <b>no setup fee</b> · cancel anytime.<br><span style="font-size:13px">*Unlimited = generous fair-use cap a normal business won't reach.</span></p>
   </div>
 </section>
 
@@ -1055,7 +1048,7 @@ HIDDEN-->
     "Coach":"Coach","Am I charging enough?":"¿Estoy cobrando lo suficiente?","Short answer — no. Your true rate is $164/hr, and you're at $125.":"Respuesta corta — no. Tu tarifa real es $164/h, y estás en $125.","LEFT ON THE TABLE / YEAR":"DINERO PERDIDO / AÑO","Let's fix your pricing →":"Arreglemos tus precios →",
     "Invoice #003":"Factura #003","Drywall install":"Instalación de tablaroca","Gypsum board":"Panel de yeso","+ Change order: added outlet":"+ Orden de cambio: enchufe agregado","client-approved":"aprobado por el cliente","Tax":"Impuesto","Total due":"Total a pagar","🔁 Change order applied":"🔁 Orden de cambio aplicada","💳 Paid · Apr 12 · 2 days early":"💳 Pagado · 12 abr · 2 días antes",
     "Dashboard":"Panel","REVENUE · THIS MONTH":"INGRESOS · ESTE MES","▲ 10% vs last month":"▲ 10% vs el mes pasado","Bids won":"Presupuestos ganados","Avg margin":"Margen prom.",
-    "Tap a feature to watch it on your phone. Eight tools, one connected system — from the first bid to money in the bank.":"Toca una función para verla en tu teléfono. Ocho herramientas, un solo sistema conectado — del primer presupuesto al dinero en el banco.",
+    "Tap a feature to watch it on your phone. Nine tools, one connected system — from the first bid to money in the bank.":"Toca una función para verla en tu teléfono. Nueve herramientas, un solo sistema conectado — del primer presupuesto al dinero en el banco.",
     "What contractors say":"Lo que dicen los contratistas","Trusted by the people who build":"La confianza de quienes construyen",
     "We only publish real, verified reviews from contractors we've worked with — these spots fill as we onboard. Want yours here?":"Solo publicamos reseñas reales y verificadas de contratistas con quienes hemos trabajado — estos espacios se llenan a medida que crecemos. ¿Quieres la tuya aquí?",
     "Verified review":"Reseña verificada","Add as you onboard clients":"Se agrega al sumar clientes",
@@ -1118,11 +1111,12 @@ HIDDEN-->
     "Pricing":"Precios","Free for 14 days. Then one honest price.":"Gratis por 14 días. Luego un precio honesto.",
     "Limited-time offer —":"🔥 Oferta por tiempo limitado —","Startup 25% off":"Startup 25% de descuento","· lock in your rate for as long as you stay":"· mantén tu precio mientras sigas con nosotros",
     "25% OFF":"25% DE DESCUENTO","25% off":"25% de descuento","with code":"con el código",
-    "Monthly":"Mensual","3 Months":"3 Meses","Annual":"Anual",
+    "AI Money Co-pilot — automatic profit, cash & tax insights":"Copiloto de Dinero IA — perspectivas automáticas de ganancias, flujo de caja e impuestos",
+    "🧠 AI Money Co-pilot — automatic profit, cash & tax insights":"🧠 Copiloto de Dinero IA — perspectivas automáticas de ganancias, flujo de caja e impuestos",
+    "AI Money Co-pilot":"Copiloto de Dinero IA",
+    "Watches your numbers and flags what matters — your most profitable jobs, where margin's running thin, money still owed to you, and roughly what to set aside for taxes. Insights to understand your own numbers, not financial advice. Premium.":"Vigila tus números y señala lo que importa — tus trabajos más rentables, dónde el margen se adelgaza, el dinero que aún te deben y aproximadamente cuánto apartar para impuestos. Perspectivas para entender tus propios números, no asesoría financiera. Premium.",
     "Limited-time offer:":"Oferta por tiempo limitado:","Startup 25% off with code":"Startup 25% de descuento con el código","at checkout — your sale price stays locked as long as you keep your plan.":"en el pago — tu precio de oferta queda fijo mientras mantengas tu plan.",
     "All plans:":"Todos los planes:","14-day free trial":"prueba gratis de 14 días","no setup fee":"sin cuota de instalación",
-    "cancel anytime · save with 3-month & annual billing.":"cancela cuando quieras · ahorra con facturación trimestral y anual.",
-    "One discount at a time — STARTUP25 or annual billing, whichever you pick.":"Un descuento a la vez — STARTUP25 o facturación anual, el que prefieras.",
     "*Unlimited = generous fair-use cap a normal business won't reach.":"*Ilimitado = límite de uso justo y generoso que un negocio normal no alcanza.",
     "No setup fee. Two weeks free, then the plan that fits you. Everything included — no add-on games.":"Sin cuota de instalación. Dos semanas gratis, luego el plan que te queda. Todo incluido — sin complementos.",
     "Basic":"Básico","For a side gig or a few jobs a month":"Para un trabajo extra o unos pocos trabajos al mes","Profitable bidding + found money":"Presupuestos rentables + dinero recuperado",
@@ -1188,7 +1182,6 @@ HIDDEN-->
 
   // ----- Billing period toggle (Monthly / 3-Month -10% / Annual -25%) -----
   var BILLP='monthly';
-  function setBill(p, btn){ BILLP=p; document.querySelectorAll('.billtoggle .bt').forEach(function(b){ b.classList.remove('on'); }); if(btn) btn.classList.add('on'); renderBill(); }
   function renderBill(){
     var es=siteLang()==='es';
     var mult = BILLP==='q'?0.9 : (BILLP==='year'?0.75 : 1);
@@ -1219,7 +1212,8 @@ HIDDEN-->
     PSBAR+'<div class="ps-top"><span class="bk">‹</span>Design Preview<span class="av">🎨</span></div><div class="ps-body"><div class="ps-img"><span>🎨 Finished-look render</span></div><div class="ps-stats"><div class="ps-stat"><div class="l">Before</div><div class="n" style="font-size:13px">Bare drywall</div></div><div class="ps-stat"><div class="l">After</div><div class="n" style="font-size:13px">Modern kitchen</div></div></div><span class="ps-chip">Share with client →</span></div>',
     PSBAR+'<div class="ps-top"><span class="bk">‹</span>Coach<span class="av">🧠</span></div><div class="ps-body"><div class="ps-bub me">Am I charging enough?</div><div class="ps-bub">Short answer — no. Your true rate is $164/hr, and you\'re at $125.</div><div class="ps-hero"><div class="s">LEFT ON THE TABLE / YEAR</div><div class="n">$72,000</div><div class="delta">Let\'s fix your pricing →</div></div></div>',
     PSBAR+'<div class="ps-top"><span class="bk">‹</span>Invoice #003<span class="av">FC</span></div><div class="ps-body"><div class="ps-card"><div class="ps-row"><span>Drywall install</span><b>$1,000</b></div><div class="ps-row"><span>Gypsum board</span><b>$300</b></div><div class="ps-row"><span class="ps-green">+ Change order: added outlet<span class="sub">client-approved</span></span><b class="ps-green">+$180</b></div><div class="ps-row"><span>Tax</span><b>$116</b></div><div class="ps-row"><span><b>Total due</b></span><b>$1,596</b></div></div><span class="ps-chip">🔁 Change order applied</span><div class="ps-pay">💳 Paid · Apr 12 · 2 days early</div></div>',
-    PSBAR+'<div class="ps-top"><span class="bk">‹</span>Dashboard<span class="av">FC</span></div><div class="ps-body"><div class="ps-hero"><div class="s">REVENUE · THIS MONTH</div><div class="n">$44,690</div><div class="delta">▲ 10% vs last month</div></div><div class="ps-stats"><div class="ps-stat"><div class="l">Bids won</div><div class="n">24</div><div class="up">▲ 5%</div></div><div class="ps-stat"><div class="l">Avg margin</div><div class="n">31%</div><div class="up">▲ 4%</div></div></div><div class="ps-card"><div class="ps-bars"><i style="height:42%"></i><i style="height:56%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:86%"></i><i style="height:100%"></i></div></div></div>'
+    PSBAR+'<div class="ps-top"><span class="bk">‹</span>Dashboard<span class="av">FC</span></div><div class="ps-body"><div class="ps-hero"><div class="s">REVENUE · THIS MONTH</div><div class="n">$44,690</div><div class="delta">▲ 10% vs last month</div></div><div class="ps-stats"><div class="ps-stat"><div class="l">Bids won</div><div class="n">24</div><div class="up">▲ 5%</div></div><div class="ps-stat"><div class="l">Avg margin</div><div class="n">31%</div><div class="up">▲ 4%</div></div></div><div class="ps-card"><div class="ps-bars"><i style="height:42%"></i><i style="height:56%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:86%"></i><i style="height:100%"></i></div></div></div>',
+    PSBAR+'<div class="ps-top"><span class="bk">‹</span>Money Co-pilot<span class="av">🧠</span></div><div class="ps-body"><div class="ps-hero"><div class="s">YOUR MONEY · THIS MONTH</div><div class="n">31% margin</div><div class="delta">▲ healthy — up 4 pts</div></div><div class="ps-card"><div class="ps-row"><span class="ps-green">💡 Bath remodel — your best job<span class="sub">42% margin</span></span><b class="ps-green">+$3.2k</b></div><div class="ps-row"><span>⚠️ Deck job running thin<span class="sub">7% margin — check change orders</span></span><b>$420</b></div><div class="ps-row"><span>🧾 Set aside for taxes<span class="sub">~25% of profit</span></span><b>$2,150</b></div></div><span class="ps-chip">📥 $6,400 still owed — chase it</span></div>'
   ];
   function selectFeat(btn,n){ document.querySelectorAll('#featList .feat').forEach(function(f){ f.classList.remove('on'); }); var item=btn.closest('.feat'); if(item) item.classList.add('on'); var s=document.getElementById('appScreen'); if(s){ s.innerHTML=APP_SCREENS[n]||''; if(typeof translateSite==='function') translateSite(); s.classList.remove('swap'); void s.offsetWidth; s.classList.add('swap'); } }
   function paintLangToggle(){ var es=siteLang()==='es'; var b=document.getElementById('langToggle'); if(b) b.textContent = es?'EN':'ES'; var bm=document.getElementById('langToggleM'); if(bm) bm.textContent = es?'English':'Español'; }
@@ -1349,7 +1343,7 @@ HIDDEN-->
   // Base44-style scroll reveal (class added only via JS, so no-JS = fully visible)
   (function(){
     if(!('IntersectionObserver' in window)) return;
-    var sel='#dashboard .eyebrow,#dashboard h2,#dashboard .lead,#dashboard .reveal,#time .eyebrow,#time h2,#time .lead,#time .reveal,#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .vs,#says .eyebrow,#says h2,#says .lead,#says .qcard,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .billtoggle,#pricing .price-note,#how .eyebrow,#how h2,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
+    var sel='#dashboard .eyebrow,#dashboard h2,#dashboard .lead,#dashboard .reveal,#time .eyebrow,#time h2,#time .lead,#time .reveal,#calc .center,#calc .calc,#what .eyebrow,#what h2,#what .lead,#what .showcase,#compare .eyebrow,#compare h2,#compare .lead,#compare .vs,#says .eyebrow,#says h2,#says .lead,#says .qcard,#pricing .eyebrow,#pricing h2,#pricing .lead,#pricing .price-note,#how .eyebrow,#how h2,#faq .eyebrow,#faq h2,#faq .faq,#foundation .wrap>*,.final .wrap';
     var els=document.querySelectorAll(sel);
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
