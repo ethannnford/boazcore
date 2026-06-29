@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <!-- Security: lock resource origins. Inline JS/CSS need 'unsafe-inline' (whole site is inline);
      a long-term win is moving JS to an external file to drop it. GitHub Pages already sends
@@ -17,14 +16,14 @@
 <meta property="og:site_name" content="Boaz">
 <meta property="og:url" content="https://boazcore.com/">
 <meta property="og:title" content="Boaz — Stop the leaks. Get every dollar.">
-<meta property="og:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing & an AI receptionist — built & set up for you, one honest price.">
+<meta property="og:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing &amp; an AI receptionist — built &amp; set up for you, one honest price.">
 <meta property="og:image" content="https://boazcore.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="Boaz — custom software for tradesmen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Boaz — Stop the leaks. Get every dollar.">
-<meta name="twitter:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing & an AI receptionist — built & set up for you, one honest price.">
+<meta name="twitter:description" content="Custom software for tradesmen. Profitable bids, AI estimates, invoicing &amp; an AI receptionist — built &amp; set up for you, one honest price.">
 <meta name="twitter:image" content="https://boazcore.com/og.png">
 <script type="application/ld+json">
 {
@@ -43,9 +42,261 @@
   "publisher": { "@type": "Organization", "name": "Boaz", "email": "ethan@boazcore.com", "url": "https://boazcore.com/" }
 }
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='5' width='20' height='3.4' rx='1.4'/%3E%3Crect x='5' y='23' width='22' height='3.6' rx='1.5'/%3E%3Crect x='9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='14.9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='20.8' y='9.5' width='2.2' height='13' rx='1'/%3E%3C/g%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='5' width='20' height='3.4' rx='1.4'/%3E%3Crect x='5' y='23' width='22' height='3.6' rx='1.5'/%3E%3Crect x='9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='14.9' y='9.5' width='2.2' height='13' rx='1'/%3E%3Crect x='20.8' y='9.5' width='2.2' height='13' rx='1'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9a3a9cd0-30a8-48b8-b2a7-6e31a79ec37d") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("469cf10d-c59f-4e19-a648-948084ac202c") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8581bf09-7792-48a2-bdbb-2c82950a3d4e") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3950745e-5e8c-4759-9f21-a489a491e942") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9a3a9cd0-30a8-48b8-b2a7-6e31a79ec37d") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("469cf10d-c59f-4e19-a648-948084ac202c") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("8581bf09-7792-48a2-bdbb-2c82950a3d4e") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("3950745e-5e8c-4759-9f21-a489a491e942") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e2ef0da1-da32-4541-995d-a9fa8613b12b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("96a96227-e53a-4c6c-8bbe-b11315c9f7e7") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("6b46b4fc-601a-4951-9c82-6e83f2989bf9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("172f302d-091b-4083-b23b-cb244314bc0d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("e2ef0da1-da32-4541-995d-a9fa8613b12b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("96a96227-e53a-4c6c-8bbe-b11315c9f7e7") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6b46b4fc-601a-4951-9c82-6e83f2989bf9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("172f302d-091b-4083-b23b-cb244314bc0d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("e2ef0da1-da32-4541-995d-a9fa8613b12b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("96a96227-e53a-4c6c-8bbe-b11315c9f7e7") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6b46b4fc-601a-4951-9c82-6e83f2989bf9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("172f302d-091b-4083-b23b-cb244314bc0d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("e2ef0da1-da32-4541-995d-a9fa8613b12b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("96a96227-e53a-4c6c-8bbe-b11315c9f7e7") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("6b46b4fc-601a-4951-9c82-6e83f2989bf9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("172f302d-091b-4083-b23b-cb244314bc0d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("e2ef0da1-da32-4541-995d-a9fa8613b12b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("96a96227-e53a-4c6c-8bbe-b11315c9f7e7") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("6b46b4fc-601a-4951-9c82-6e83f2989bf9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("172f302d-091b-4083-b23b-cb244314bc0d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 <style>
   :root{
     --indigo:#3a55d9; --indigo-d:#2840bd; --ink:#10131f; --body:#454b5d;
@@ -469,11 +720,13 @@
 </head>
 <body>
 
+
+
 <div class="promo" id="promo">Limited-time offer — <b>Startup 25% off</b> with code <span class="code">STARTUP25</span> · lock in your rate for as long as you stay</div>
 
 <nav>
   <div class="wrap nav">
-    <a class="logo" href="#top"><span class="mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden><rect x="3.6" y="2.4" width="16.8" height="2.7" rx="1.1"/><rect x="2.6" y="18.9" width="18.8" height="2.9" rx="1.2"/><rect x="6.3" y="6" width="1.8" height="11.6" rx=".8"/><rect x="11.1" y="6" width="1.8" height="11.6" rx=".8"/><rect x="15.9" y="6" width="1.8" height="11.6" rx=".8"/></svg></span> Boaz</a>
+    <a class="logo" href="#top"><span class="mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden=""><rect x="3.6" y="2.4" width="16.8" height="2.7" rx="1.1"></rect><rect x="2.6" y="18.9" width="18.8" height="2.9" rx="1.2"></rect><rect x="6.3" y="6" width="1.8" height="11.6" rx=".8"></rect><rect x="11.1" y="6" width="1.8" height="11.6" rx=".8"></rect><rect x="15.9" y="6" width="1.8" height="11.6" rx=".8"></rect></svg></span> Boaz</a>
     <div class="navlinks" id="nav">
       <a href="#calc">Found Money</a>
       <a href="#how">How it works</a>
@@ -490,50 +743,105 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero" id="top">
-  <div class="orb orb1"></div><div class="orb orb2"></div>
-  <div class="wrap center">
+<header class="hero" id="top" data-screen-label="Hero">
+  <div class="hero-bg">
+    <img class="hero-after" alt="The same kitchen reimagined by Boaz AI — bright white cabinets, warm wood floors, new finishes." src="hero-after.jpg" width="1200" height="896">
+    <img class="hero-before" alt="A dated kitchen photographed before the Boaz AI redesign." src="hero-before.jpg" width="1200" height="896">
+  </div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-chip hero-chip-1" aria-hidden="true"><span class="dot"></span> Scanning the space…</div>
+  <div class="hero-chip hero-chip-2" aria-hidden="true"><span class="spark">✦</span> Redesigned by Boaz AI</div>
+  <div class="wrap hero-inner">
     <div class="eyebrow">We sell you your time back</div>
     <h1>Stop the leaks. Keep your time.<br><span class="hl">Get every dollar.</span></h1>
-    <p class="lead">Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up <i>for</i> you, one honest price.</p>
+    <p class="lead">Boaz bids jobs, scans receipts, answers your calls, redesigns spaces, and watches your money — one AI app built for the trades.</p>
     <div class="cta-row">
-      <button class="btn btn-p btn-lg" onclick="openGet()">Start 14 days free →</button>
-      <a class="btn btn-g btn-lg" href="#calc">See your found money →</a>
+      <button class="btn btn-p btn-lg" onclick="openGet()">Start free <span aria-hidden="true">→</span></button>
+      <a class="btn btn-hero-ghost btn-lg" href="#calc">See your found money <span aria-hidden="true">→</span></a>
     </div>
-    <div class="trust"><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:var(--indigo)"><path d="m5 12.5 4.5 4.5L19 6.5"/></svg>14-day free trial</span><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:var(--indigo)"><path d="m5 12.5 4.5 4.5L19 6.5"/></svg>Built &amp; set up for you</span><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:var(--indigo)"><path d="m5 12.5 4.5 4.5L19 6.5"/></svg>Shaped with real tradesmen</span><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:var(--indigo)"><path d="m5 12.5 4.5 4.5L19 6.5"/></svg>Cancel anytime</span></div>
-    <!-- AI redesign demo — auto-loops. Real before/after of the SAME kitchen, generated by
-         Boaz's own Design Preview engine, scan-revealed top→down. CSP-safe (same-origin JPGs). -->
-    <div class="ai-demo" aria-hidden="true">
-      <div class="ai-frame"><div class="ai-stage">
-        <img class="ai-after" src="hero-after.jpg" alt="Kitchen remodel — the finished look Boaz previewed" width="1200" height="896">
-        <img class="ai-before" src="hero-before.jpg" alt="Kitchen before the remodel" width="1200" height="896">
-        <div class="ai-scan"></div>
-        <div class="ai-tag ai-tag-1">📷 Snap the space</div>
-        <div class="ai-tag ai-tag-2">✨ AI redesign</div>
-      </div></div>
-      <div class="ai-cap">Snap a photo → Boaz shows the <b>finished look</b></div>
-    </div>
+    <div class="trust"><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:#a9b4ff"><path d="m5 12.5 4.5 4.5L19 6.5"></path></svg>14-day free trial</span><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:#a9b4ff"><path d="m5 12.5 4.5 4.5L19 6.5"></path></svg>no setup fee</span><span style="display:inline-flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;color:#a9b4ff"><path d="m5 12.5 4.5 4.5L19 6.5"></path></svg>cancel anytime</span></div>
   </div>
 </header>
 
 <style>
-/* ===== Hero AI-redesign demo (auto-loops; real before/after photos, scan reveal) ===== */
-.ai-demo{margin:48px auto 0;max-width:440px;animation:heroUp .8s cubic-bezier(.2,.7,.2,1) .32s both}
-.ai-frame{position:relative;border-radius:22px;overflow:hidden;background:#0e1326;box-shadow:var(--shadow);border:1px solid var(--line)}
-.ai-stage{position:relative;aspect-ratio:16/10;overflow:hidden;isolation:isolate}
-.ai-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.ai-before{animation:aiWipe 6s ease-in-out infinite}
-.ai-scan{position:absolute;left:0;right:0;top:0;height:16px;background:linear-gradient(rgba(124,150,255,0),rgba(124,150,255,.95),rgba(124,150,255,0));box-shadow:0 0 22px 6px rgba(124,150,255,.55);opacity:0;animation:aiScan 6s ease-in-out infinite}
-.ai-tag{position:absolute;left:14px;top:14px;font-size:12.5px;font-weight:800;color:#fff;background:rgba(16,19,38,.74);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;opacity:0}
-.ai-tag-1{animation:aiTag1 6s ease-in-out infinite}
-.ai-tag-2{background:var(--grad);border-color:transparent;animation:aiTag2 6s ease-in-out infinite}
-.ai-cap{margin-top:15px;font-size:14.5px;font-weight:600;color:var(--muted);text-align:center}
-.ai-cap b{color:var(--ink);font-weight:800}
-@keyframes aiWipe{0%,14%{clip-path:inset(0 0 0 0)}50%,82%{clip-path:inset(100% 0 0 0)}94%,100%{clip-path:inset(0 0 0 0)}}
-@keyframes aiScan{0%,12%{opacity:0;top:-4%}16%{opacity:1}48%{opacity:1;top:92%}52%,100%{opacity:0;top:92%}}
-@keyframes aiTag1{0%,12%{opacity:0;transform:translateY(-5px)}17%,34%{opacity:1;transform:none}44%,100%{opacity:0}}
-@keyframes aiTag2{0%,44%{opacity:0;transform:translateY(-5px)}52%,80%{opacity:1;transform:none}90%,100%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.ai-before{animation:none;clip-path:inset(100% 0 0 0)}.ai-scan,.ai-tag-1{display:none}.ai-tag-2{animation:none;opacity:1}}
+/* ===== Immersive AI hero — auto-loops: scan sweep → AI redesign reveal → reset ===== */
+.hero{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;
+  min-height:min(860px,94vh);padding:130px 0 108px;text-align:left;background:#080b1a;color:#fff}
+.hero .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero .hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:66% 50%;
+  animation:heroZoom 26s ease-in-out infinite}
+.hero .hero-bg img.hero-before{animation:heroZoom 26s ease-in-out infinite, aiWipe 8.4s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes heroZoom{0%,100%{transform:scale(1.06)}50%{transform:scale(1.13)}}
+@keyframes aiWipe{0%,15%{clip-path:inset(0 0 0 0)}46%,80%{clip-path:inset(100% 0 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}
+/* scan band sits UNDER the scrim, so it glows over the kitchen but never washes over the text */
+.hero .hero-scan{position:absolute;left:-4%;right:-4%;height:96px;top:-18%;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(120,124,255,0),rgba(134,142,255,.20) 52%,rgba(196,204,255,.85) 92%,rgba(134,142,255,0));
+  border-bottom:2px solid rgba(208,214,255,.95);box-shadow:0 0 48px 14px rgba(122,112,255,.42);
+  mix-blend-mode:screen;opacity:0;animation:heroScan 8.4s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes heroScan{0%{top:-18%;opacity:0}8%{opacity:.95}46%{top:100%;opacity:.95}54%,100%{top:100%;opacity:0}}
+/* faint scanning grid that flashes during the sweep — reads as "AI reading the room" */
+.hero .hero-grid{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;
+  background-image:linear-gradient(rgba(150,160,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(150,160,255,.5) 1px,transparent 1px);
+  background-size:46px 46px;-webkit-mask-image:radial-gradient(120% 80% at 70% 45%,#000,transparent 72%);mask-image:radial-gradient(120% 80% at 70% 45%,#000,transparent 72%);
+  mix-blend-mode:screen;animation:heroGrid 8.4s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes heroGrid{0%,5%{opacity:0}14%{opacity:.5}44%{opacity:.38}52%,100%{opacity:0}}
+/* scrim — opaque indigo behind the text, clearing toward the right so the kitchen breathes */
+.hero .hero-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:
+  linear-gradient(95deg,rgba(7,10,24,.96) 0%,rgba(10,14,33,.88) 28%,rgba(10,14,33,.46) 54%,rgba(8,11,26,.26) 76%,rgba(8,11,26,.5) 100%),
+  linear-gradient(180deg,rgba(7,10,24,.42) 0%,transparent 24%,transparent 58%,rgba(7,10,24,.82) 100%),
+  radial-gradient(135% 105% at 8% 34%,rgba(74,62,206,.36),transparent 56%)}
+/* live status chips floating on the image */
+.hero .hero-chip{position:absolute;z-index:3;right:34px;bottom:36px;display:inline-flex;align-items:center;gap:8px;
+  font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:#fff;padding:9px 16px;border-radius:999px;
+  background:rgba(11,15,32,.62);border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+  box-shadow:0 10px 34px -10px rgba(0,0,0,.6);opacity:0;white-space:nowrap}
+.hero .hero-chip .dot{width:8px;height:8px;border-radius:50%;background:#7fd0ff;animation:chipPulse 1.5s ease-out infinite}
+.hero .hero-chip .spark{color:#e8d6ff;font-size:13px}
+@keyframes chipPulse{0%{box-shadow:0 0 0 0 rgba(127,208,255,.55)}100%{box-shadow:0 0 0 10px rgba(127,208,255,0)}}
+.hero .hero-chip-1{animation:chip1 8.4s cubic-bezier(.76,0,.24,1) infinite}
+.hero .hero-chip-2{background:linear-gradient(135deg,#3a55d9,#7c46d9);border-color:transparent;animation:chip2 8.4s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes chip1{0%,3%{opacity:0;transform:translateY(7px)}9%,40%{opacity:1;transform:none}48%,100%{opacity:0;transform:translateY(-7px)}}
+@keyframes chip2{0%,48%{opacity:0;transform:translateY(7px)}57%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-7px)}}
+/* content */
+.hero .hero-inner{position:relative;z-index:4;max-width:660px;text-align:left}
+.hero .eyebrow{color:#aab4ff;font-weight:800;margin-bottom:20px}
+.hero h1{color:#fff;font-size:clamp(40px,6.3vw,72px);margin-bottom:22px;letter-spacing:-.038em;line-height:1.02;
+  text-shadow:0 2px 34px rgba(0,0,0,.4)}
+.hero h1 .hl{background:linear-gradient(102deg,#aeb8ff 0%,#dcb8ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{color:rgba(234,237,251,.92);font-size:clamp(17px,2.1vw,21px);max-width:548px;margin-bottom:36px;
+  text-shadow:0 1px 18px rgba(0,0,0,.4)}
+.hero .cta-row{justify-content:flex-start}
+.hero .trust{justify-content:flex-start;color:rgba(255,255,255,.84);margin-top:30px;gap:12px 22px}
+.hero .trust b{color:#fff}
+.btn-hero-ghost{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.36);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.btn-hero-ghost:hover{background:rgba(255,255,255,.17);border-color:rgba(255,255,255,.62);color:#fff}
+.hero-spot{display:none!important}
+@media (max-width:820px){
+  /* stack: a reserved image band up top (where the chip floats) → text below over the dark scrim */
+  .hero{min-height:auto;padding:clamp(200px,38vh,310px) 0 64px;align-items:flex-start}
+  .hero .hero-bg img{object-position:62% 38%}
+  .hero .hero-scrim{background:
+    linear-gradient(180deg,rgba(7,10,24,.30) 0%,rgba(7,10,24,.10) 20%,rgba(7,10,24,.62) 50%,rgba(7,10,24,.96) 100%),
+    radial-gradient(120% 56% at 50% 100%,rgba(74,62,206,.34),transparent 72%)}
+  .hero .hero-inner{max-width:none;text-align:center}
+  .hero .eyebrow{margin-bottom:14px}
+  .hero .cta-row,.hero .trust{justify-content:center}
+  .hero .hero-chip{right:50%;transform:translateX(50%);bottom:auto;top:clamp(88px,14vh,152px)}
+  .hero .hero-chip-1{animation:chip1m 8.4s cubic-bezier(.76,0,.24,1) infinite}
+  .hero .hero-chip-2{animation:chip2m 8.4s cubic-bezier(.76,0,.24,1) infinite}
+}
+@keyframes chip1m{0%,3%{opacity:0}9%,40%{opacity:1}48%,100%{opacity:0}}
+@keyframes chip2m{0%,48%{opacity:0}57%,90%{opacity:1}97%,100%{opacity:0}}
+@media (max-width:560px){ .hero .cta-row .btn{flex:1 1 auto} .hero .hero-chip{top:74px} }
+@media (prefers-reduced-motion:reduce){
+  .hero .hero-bg img,.hero .hero-bg img.hero-before{animation:none}
+  .hero .hero-bg img.hero-before{clip-path:inset(100% 0 0 0)}
+  .hero .hero-scan,.hero .hero-grid,.hero .hero-chip-1{display:none}
+  .hero .hero-chip-2{animation:none;opacity:1}
+  .hero .hero-chip .dot{animation:none}
+}
 </style>
 
 <!-- REPLACES YOUR STACK -->
@@ -593,14 +901,14 @@
     <p class="lead">Tap a feature to watch it on your phone. Eight tools, one connected system — from the first bid to money in the bank.</p>
     <div class="showcase">
       <div class="feat-list" id="featList">
-        <div class="feat on"><button onclick="selectFeat(this,0)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 18 9l-2 2-3.5-3.5z"/><path d="m11.5 8.5-7 7a1.8 1.8 0 0 0 2.5 2.5l7-7"/><path d="M13 3.5 19.5 10M16.5 7.5l3-3"/></svg></span>Profitable Bid Builder<span class="chev">⌄</span></button><div class="fbody">Builds overhead + profit into every bid automatically and shows the "found money" you'd have missed. Win the job and the margin.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,1)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.2"/></svg></span>AI Photo &amp; Voice Estimate<span class="chev">⌄</span></button><div class="fbody">Snap a photo or just talk it out — Boaz scopes the materials and labor into a draft bid in seconds. It uses your real material prices from scanned receipts, and learns your crew's pace over time — so every estimate gets more accurate to how you actually work, not a generic guess.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,2)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l2-1.4 2 1.4 2-1.4 2 1.4 2-1.4 2 1.4V3l-2 1.4L16 3l-2 1.4L12 3l-2 1.4L8 3z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>Receipt Scanning<span class="chev">⌄</span></button><div class="fbody">Snap your supplier receipts and Boaz learns your real prices — so every bid uses your actual costs, not guesses.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,3)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a7.5 7.5 0 0 1-10.9 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></span>AI Receptionist<span class="chev">⌄</span></button><div class="fbody">Texts your customers back in seconds, qualifies the job, and hands you a warm lead — 24/7, even when you're up on a ladder. Never let a lead go cold again.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,4)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 16 4.5-4 3.5 3 3-2.5 5 4.5"/></svg></span>Design Previews<span class="chev">⌄</span></button><div class="fbody">Show your client the finished look before you start — turn a photo of the space into a finished-job render.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,5)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.3 2h4.6c.2-.8.7-1.5 1.3-2A6 6 0 0 0 12 3z"/></svg></span>Business Coach<span class="chev">⌄</span></button><div class="fbody">Pricing, profit, and growth advice on tap — grounded in your real numbers, day or night.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,6)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"/><path d="M3 9.5h18M7 14.5h4"/></svg></span>Invoicing, Deposits &amp; Payments<span class="chev">⌄</span></button><div class="fbody">Turn a won bid into a clean, branded invoice in one tap — your logo, your scope, never your margins. Take a deposit up front, bill progress draws as the job moves, and track every balance to paid. Clients pay by card and the money lands straight in YOUR bank — Boaz never holds your funds, the #1 thing contractors hate about Joist.</div></div>
-        <div class="feat"><button onclick="selectFeat(this,7)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M8 15v-3M12 15V8M16 15v-5"/></svg></span>Owner Dashboard<span class="chev">⌄</span></button><div class="fbody">See revenue, win rate, and margin at a glance — your whole business in one screen, in English or Spanish.</div></div>
+        <div class="feat on"><button onclick="selectFeat(this,0)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 18 9l-2 2-3.5-3.5z"></path><path d="m11.5 8.5-7 7a1.8 1.8 0 0 0 2.5 2.5l7-7"></path><path d="M13 3.5 19.5 10M16.5 7.5l3-3"></path></svg></span>Profitable Bid Builder<span class="chev">⌄</span></button><div class="fbody">Builds overhead + profit into every bid automatically and shows the "found money" you'd have missed. Win the job and the margin.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,1)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.2"></circle></svg></span>AI Photo &amp; Voice Estimate<span class="chev">⌄</span></button><div class="fbody">Snap a photo or just talk it out — Boaz scopes the materials and labor into a draft bid in seconds. It uses your real material prices from scanned receipts, and learns your crew's pace over time — so every estimate gets more accurate to how you actually work, not a generic guess.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,2)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l2-1.4 2 1.4 2-1.4 2 1.4 2-1.4 2 1.4V3l-2 1.4L16 3l-2 1.4L12 3l-2 1.4L8 3z"></path><path d="M9 8h6M9 12h6M9 16h3"></path></svg></span>Receipt Scanning<span class="chev">⌄</span></button><div class="fbody">Snap your supplier receipts and Boaz learns your real prices — so every bid uses your actual costs, not guesses.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,3)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a7.5 7.5 0 0 1-10.9 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 12z"></path><path d="M9 11h.01M12 11h.01M15 11h.01"></path></svg></span>AI Receptionist<span class="chev">⌄</span></button><div class="fbody">Texts your customers back in seconds, qualifies the job, and hands you a warm lead — 24/7, even when you're up on a ladder. Never let a lead go cold again.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,4)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.2"></rect><circle cx="8.5" cy="9.5" r="1.6"></circle><path d="m4 16 4.5-4 3.5 3 3-2.5 5 4.5"></path></svg></span>Design Previews<span class="chev">⌄</span></button><div class="fbody">Show your client the finished look before you start — turn a photo of the space into a finished-job render.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,5)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.3 2h4.6c.2-.8.7-1.5 1.3-2A6 6 0 0 0 12 3z"></path></svg></span>Business Coach<span class="chev">⌄</span></button><div class="fbody">Pricing, profit, and growth advice on tap — grounded in your real numbers, day or night.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,6)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"></rect><path d="M3 9.5h18M7 14.5h4"></path></svg></span>Invoicing, Deposits &amp; Payments<span class="chev">⌄</span></button><div class="fbody">Turn a won bid into a clean, branded invoice in one tap — your logo, your scope, never your margins. Take a deposit up front, bill progress draws as the job moves, and track every balance to paid. Clients pay by card and the money lands straight in YOUR bank — Boaz never holds your funds, the #1 thing contractors hate about Joist.</div></div>
+        <div class="feat"><button onclick="selectFeat(this,7)"><span class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"></path><path d="M8 15v-3M12 15V8M16 15v-5"></path></svg></span>Owner Dashboard<span class="chev">⌄</span></button><div class="fbody">See revenue, win rate, and margin at a glance — your whole business in one screen, in English or Spanish.</div></div>
       </div>
       <div class="phone-wrap"><div class="phone"><div class="phone-screen" id="appScreen"></div></div></div>
     </div>
@@ -651,19 +959,19 @@
     <p class="lead">The late-night quoting, the chasing, the paperwork — Boaz takes it off your plate, so you can be on the tools or home with your family.</p>
     <div class="grid g3">
       <div class="card reveal">
-        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.2"/></svg></span>
+        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.2"></circle></svg></span>
         <div style="font-weight:800;color:var(--indigo);font-size:14px;margin-bottom:4px">Minutes, not hours</div>
         <h3 style="font-size:19px;margin:2px 0 6px;color:var(--ink)">Quoting &amp; estimates</h3>
         <p style="color:var(--body);font-size:15px;line-height:1.55">Snap a photo and Boaz drafts a profitable bid in seconds — no more an hour at the kitchen table after dinner.</p>
       </div>
       <div class="card reveal">
-        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a7.5 7.5 0 0 1-10.9 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></span>
+        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a7.5 7.5 0 0 1-10.9 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 12z"></path><path d="M9 11h.01M12 11h.01M15 11h.01"></path></svg></span>
         <div style="font-weight:800;color:var(--indigo);font-size:14px;margin-bottom:4px">24/7, never miss a lead</div>
         <h3 style="font-size:19px;margin:2px 0 6px;color:var(--ink)">Answering &amp; coordinating</h3>
         <p style="color:var(--body);font-size:15px;line-height:1.55">The AI receptionist texts customers back and qualifies the job while you're up on a ladder — no more thumbing replies between cuts.</p>
       </div>
       <div class="card reveal">
-        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"/><path d="M3 9.5h18M7 14.5h4"/></svg></span>
+        <span style="display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(58,85,217,.1);color:var(--indigo);align-items:center;justify-content:center;margin-bottom:14px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"></rect><path d="M3 9.5h18M7 14.5h4"></path></svg></span>
         <div style="font-weight:800;color:var(--indigo);font-size:14px;margin-bottom:4px">One tap to paid</div>
         <h3 style="font-size:19px;margin:2px 0 6px;color:var(--ink)">Invoicing &amp; getting paid</h3>
         <p style="color:var(--body);font-size:15px;line-height:1.55">Turn a won bid into a branded invoice in one tap — deposits, progress draws, and follow-ups handled, so the money lands without the chase.</p>
@@ -785,7 +1093,7 @@ HIDDEN-->
     <div class="eyebrow">Pricing</div>
     <h2 style="font-size:clamp(31px,4.8vw,47px)">Free for 14 days. Then one honest price.</h2>
     <p class="lead">No setup fee. Three weeks free, then the plan that fits you. Everything included — no add-on games.</p>
-    <p class="roi-line" style="max-width:640px;margin:0 auto 22px;font-weight:700;color:#3a55d9;background:rgba(58,85,217,.08);border-radius:14px;padding:12px 16px;line-height:1.4">💡 If Boaz saves you just 1–3 hours a month on quoting &amp; coordinating, it&apos;s already paid for itself — most guys save a lot more.</p>
+    <p class="roi-line" style="max-width:640px;margin:0 auto 22px;font-weight:700;color:#3a55d9;background:rgba(58,85,217,.08);border-radius:14px;padding:12px 16px;line-height:1.4">💡 If Boaz saves you just 1–3 hours a month on quoting &amp; coordinating, it's already paid for itself — most guys save a lot more.</p>
     <div class="billtoggle" role="group" aria-label="Billing period">
       <button class="bt on" id="bt_monthly" onclick="setBill('monthly',this)">Monthly</button>
       <button class="bt" id="bt_q" onclick="setBill('q',this)">3 Months <span>−10%</span></button>
@@ -865,7 +1173,7 @@ HIDDEN-->
   <div class="wrap">
     <div class="frow">
       <div>
-        <div class="logo"><span class="mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden><rect x="3.6" y="2.4" width="16.8" height="2.7" rx="1.1"/><rect x="2.6" y="18.9" width="18.8" height="2.9" rx="1.2"/><rect x="6.3" y="6" width="1.8" height="11.6" rx=".8"/><rect x="11.1" y="6" width="1.8" height="11.6" rx=".8"/><rect x="15.9" y="6" width="1.8" height="11.6" rx=".8"/></svg></span> Boaz</div>
+        <div class="logo"><span class="mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden=""><rect x="3.6" y="2.4" width="16.8" height="2.7" rx="1.1"></rect><rect x="2.6" y="18.9" width="18.8" height="2.9" rx="1.2"></rect><rect x="6.3" y="6" width="1.8" height="11.6" rx=".8"></rect><rect x="11.1" y="6" width="1.8" height="11.6" rx=".8"></rect><rect x="15.9" y="6" width="1.8" height="11.6" rx=".8"></rect></svg></span> Boaz</div>
         <div class="footer-verse">"Trust in the LORD with all your heart…" — Proverbs 3:5</div>
       </div>
       <div style="display:flex;gap:24px;flex-wrap:wrap">
@@ -952,6 +1260,10 @@ HIDDEN-->
     "Most tradesmen quietly lose tens of thousands a year to under-priced bids and unpaid work. Boaz builds you a custom app that plugs the leaks, makes sure you're actually profitable, and gets you paid — set up":"La mayoría de los trabajadores pierden decenas de miles al año por presupuestos bajos y trabajo sin pagar. Boaz te crea una app a la medida que tapa las fugas, asegura que seas rentable y logra que te paguen — configurada",
     "for":"para","you, one honest price.":"ti, un precio honesto.",
     "See your found money →":"Ve tu dinero recuperado →",
+    "Boaz bids jobs, scans receipts, answers your calls, redesigns spaces, and watches your money — one AI app built for the trades.":"Boaz cotiza trabajos, escanea recibos, contesta tus llamadas, rediseña espacios y cuida tu dinero — una sola app de IA hecha para los oficios.",
+    "Scanning the space…":"Escaneando el espacio…",
+    "Redesigned by Boaz AI":"Rediseñado por Boaz IA",
+    "cancel anytime":"cancela cuando quieras",
     "✓ 14-day free trial · ✓ Built & set up for you · ✓ Cancel anytime":"✓ Prueba gratis de 14 días · ✓ Instalada para ti · ✓ Cancela cuando quieras",
     // calculator
     "The found-money calculator":"La calculadora de dinero recuperado","See what you're leaving on the table":"Ve lo que estás dejando sobre la mesa",
@@ -1488,5 +1800,35 @@ HIDDEN-->
   })();
 })();
 </script>
-</body>
-</html>
+<style>
+/* ===== Redesign polish: accessibility + section rhythm ===== */
+a:focus-visible,button:focus-visible,input:focus-visible,.btn:focus-visible{outline:3px solid var(--indigo);outline-offset:3px;border-radius:10px}
+.hero a:focus-visible,.hero button:focus-visible,.calc-sec :focus-visible,.final :focus-visible,footer :focus-visible{outline-color:#cdd6ff}
+/* let the immersive hero bleed straight into the comparison strip */
+.replaces{background:linear-gradient(180deg,#fbfbfe,#ffffff)}
+/* gentle section seams so the rhythm reads intentional under the new hero */
+#what,#dashboard,#compare,#pricing,#how{position:relative}
+/* tighten the trust row so the three guarantees read as one calm line */
+.hero .trust span{font-weight:600}
+/* ===== smooth gradient blends between contrasting sections (no hairlines) ===== */
+/* dark hero dissolves into the light "replaces" strip — kill the old 1px borders */
+.replaces{position:relative;border-top:0;border-bottom:0;background:#ffffff}
+.replaces .wrap{position:relative;z-index:1;padding-top:104px;padding-bottom:42px}
+.replaces::before{content:"";position:absolute;left:0;right:0;top:-1px;height:96px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#0a0e1f 0%,rgba(11,15,33,.88) 22%,rgba(13,17,36,.52) 50%,rgba(16,20,40,.2) 72%,rgba(255,255,255,0) 100%)}
+/* light page eases into the dark calculator and back out — long fades that finish above the copy */
+.calc-sec{position:relative;padding-top:158px;padding-bottom:158px}
+.calc-sec .wrap{position:relative;z-index:1}
+.calc-sec::before{content:"";position:absolute;left:0;right:0;top:-1px;height:140px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#ffffff 0%,#eef0f6 22%,#b6bacb 44%,#5b6079 64%,#23273c 84%,#10131f 100%)}
+.calc-sec::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:140px;z-index:0;pointer-events:none;
+  background:linear-gradient(0deg,#ffffff 0%,#eef0f6 22%,#b6bacb 44%,#5b6079 64%,#23273c 84%,#10131f 100%)}
+/* the indigo final CTA settles into the dark footer */
+.final{position:relative}
+.final::before{content:"";position:absolute;left:0;right:0;bottom:-1px;height:128px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(16,19,31,0) 0%,rgba(16,19,31,.28) 42%,rgba(16,19,31,.72) 74%,#10131f 100%)}
+.final .wrap{position:relative;z-index:1}
+</style>
+
+
+</body></html>
