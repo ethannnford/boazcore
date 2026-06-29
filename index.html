@@ -36,9 +36,9 @@
   "url": "https://boazcore.com/",
   "description": "Custom software for tradesmen — profitable bidding, AI photo/voice estimates, invoicing & payments, an AI text receptionist, and a business coach. Built and set up for you.",
   "offers": [
-    { "@type": "Offer", "name": "Basic", "price": "49.99", "priceCurrency": "USD" },
-    { "@type": "Offer", "name": "Balanced", "price": "149.99", "priceCurrency": "USD" },
-    { "@type": "Offer", "name": "Premium", "price": "249.99", "priceCurrency": "USD" }
+    { "@type": "Offer", "name": "Basic", "price": "39.99", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Balanced", "price": "99.99", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Premium", "price": "199.99", "priceCurrency": "USD" }
   ],
   "publisher": { "@type": "Organization", "name": "Boaz", "email": "ethan@boazcore.com", "url": "https://boazcore.com/" }
 }
@@ -730,7 +730,7 @@
       <table class="vstab">
         <thead><tr><th class="vs-feat"></th><th class="us">Boaz</th><th>Joist</th><th>SimplyWise</th><th>Jobber</th><th>Housecall Pro</th><th>ServiceTitan</th></tr></thead>
         <tbody>
-          <tr><td class="vs-feat">Starting price</td><td class="us"><b>$49.99</b></td><td>~$8–32</td><td>~$20–30</td><td>~$39–349</td><td>~$49–299</td><td>$300+</td></tr>
+          <tr><td class="vs-feat">Starting price</td><td class="us"><b>$39.99</b></td><td>~$8–32</td><td>~$20–30</td><td>~$39–349</td><td>~$49–299</td><td>$300+</td></tr>
           <tr><td class="vs-feat">What it actually is</td><td class="us">All-in-one AI trade OS</td><td>Invoicing only</td><td>Receipts only</td><td>Scheduling / CRM</td><td>Field service</td><td>Enterprise</td></tr>
           <tr><td class="vs-feat">Builds your profit INTO every bid (found money)</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
           <tr><td class="vs-feat">AI photo → estimate</td><td class="us"><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
@@ -795,7 +795,7 @@ HIDDEN-->
       <div class="tier">
         <h3>Basic</h3>
         <div class="who">For a side gig or a few jobs a month</div>
-        <div class="price" data-base="49.99">$49.99<small>/mo</small></div>
+        <div class="price" data-base="39.99">$39.99<small>/mo</small></div>
         <div class="billsub"></div>
         <ul><li>Profitable bidding + found money</li><li>Full job tracking &amp; invoicing</li><li>~20 AI photo/voice estimates / mo</li><li>50 receipt scans / mo</li><li>5 design previews / mo</li><li>Business coach</li><li>1 user</li></ul>
         <button class="btn btn-g" onclick="openGet()">Start free</button>
@@ -804,7 +804,7 @@ HIDDEN-->
         <div class="tag">Most popular</div>
         <h3>Balanced</h3>
         <div class="who">For a working contractor who never wants to miss a lead</div>
-        <div class="price" data-base="149.99">$149.99<small>/mo</small></div>
+        <div class="price" data-base="99.99">$99.99<small>/mo</small></div>
         <div class="billsub"></div>
         <div class="roi" style="margin:4px 0 2px;font-size:13.5px;font-weight:700;color:#3a55d9;background:rgba(58,85,217,.09);border-radius:11px;padding:9px 11px;line-height:1.35;text-align:left">💡 Catch one extra job a month and it more than pays for itself.</div>
         <ul><li>Everything in Basic, plus:</li><li>~100 AI photo/voice estimates / mo</li><li>300 receipt scans / mo</li><li>AI receptionist — 250 texts / mo</li><li>25 design previews / mo</li><li>Up to 3 users</li></ul>
@@ -813,7 +813,7 @@ HIDDEN-->
       <div class="tier">
         <h3>Premium</h3>
         <div class="who">Crews &amp; high-volume</div>
-        <div class="price" data-base="249.99">$249.99<small>/mo</small></div>
+        <div class="price" data-base="199.99">$199.99<small>/mo</small></div>
         <div class="billsub"></div>
         <ul><li>Everything in Balanced, plus:</li><li>Unlimited AI estimates*</li><li>1,000 receipt scans / mo</li><li>AI receptionist — 1,500 texts / mo</li><li>100 design previews / mo</li><li>Priority support</li><li>Up to 10 users</li></ul>
         <button class="btn btn-g" onclick="openGet()">Start free</button>
@@ -1194,11 +1194,11 @@ HIDDEN-->
         +'<b style="color:#fff">'+money(trueRate)+(es?'/hora':'/hr')+'</b>'
         +(es?' — hoy cobras ':' — you’re charging ')+money(rate)+(es?'/hora.':'/hr.');
     } else { tr.textContent=''; }
-    // "We sell you your time back" — pays for itself line, anchored on the Balanced plan ($149.99)
+    // "We sell you your time back" — pays for itself line, anchored on the Balanced plan ($99.99)
     // and the visitor's OWN true rate, so the proof is personal and honest.
     var pb=document.getElementById('payback');
     if(trueRate>0){
-      var hrs=149.99/trueRate;
+      var hrs=99.99/trueRate;
       var span;
       if(hrs<1.05){ span=es?'menos de una hora':'under an hour'; }
       else { span=(Math.round(hrs*10)/10)+(es?' horas':' hours'); }
