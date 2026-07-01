@@ -615,6 +615,9 @@
   radial-gradient(900px 560px at 100% 108%, rgba(58,85,217,.20), transparent 55%),
   linear-gradient(180deg,#0b0e1c 0%,#0e1224 100%);
   color:#fff;padding:clamp(64px,9vw,116px) 0}
+/* smooth seam: blend from the dark hero above (the white section below is handled by .replaces::before) */
+.vidshowcase::before{content:"";position:absolute;left:0;right:0;top:0;height:150px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#080b1a 0%,rgba(8,11,26,0) 100%)}
 .vidshowcase .sc-glow{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(1180px,92%);height:560px;z-index:0;pointer-events:none;
   background:radial-gradient(closest-side,rgba(96,86,255,.28),transparent 70%);filter:blur(18px)}
 .vidshowcase .sc-inner{position:relative;z-index:1;text-align:center;max-width:1080px}
