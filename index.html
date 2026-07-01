@@ -588,6 +588,167 @@
 }
 </style>
 
+<!-- MONEY CO-PILOT (animated, scroll-triggered) -->
+<section class="copilot-sec" id="copilot" data-screen-label="Money Co-pilot">
+  <div class="cop-aura" aria-hidden="true"></div>
+  <div class="wrap cop-grid">
+    <div class="cop-copy">
+      <div class="cop-eyebrow">Your financial brain</div>
+      <h2 class="cop-title">Meet your <span class="cop-hl">Money&nbsp;Co-pilot</span>.</h2>
+      <p class="cop-lead">It watches the margin on every job, flags the ones quietly bleeding money, and tells you exactly what to set aside — like a CFO living in your pocket.</p>
+      <ul class="cop-points">
+        <li><span class="cop-tick">✓</span> Live margin across every active job</li>
+        <li><span class="cop-tick">✓</span> Early warning before a job goes underwater</li>
+        <li><span class="cop-tick">✓</span> Taxes set aside automatically, every month</li>
+      </ul>
+      <div class="cop-note"><b>No other app for the trades has this.</b> It's the difference between <i>busy</i> and <i>profitable</i>.</div>
+    </div>
+
+    <div class="cop-stage">
+      <div class="cop-glow" aria-hidden="true"></div>
+      <div class="cop-phone">
+        <div class="cop-screen">
+          <div class="cop-island" aria-hidden="true"></div>
+          <div class="cop-status"><span>9:41</span><span class="cop-sys">
+            <svg width="17" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="16" height="11" viewBox="0 0 17 12"><path d="M8.5 11.2 11 8.4a3.6 3.6 0 0 0-5 0zM3.2 5.1a8 8 0 0 1 10.6 0l1.7-1.9a10.6 10.6 0 0 0-14 0z"/></svg>
+            <svg width="24" height="12" viewBox="0 0 26 13"><rect x="1" y="1" width="21" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1" opacity=".55"/><rect x="2.5" y="2.5" width="16" height="8" rx="1.5"/><rect x="23.6" y="4.5" width="1.6" height="4" rx=".8" opacity=".55"/></svg>
+          </span></div>
+          <div class="cop-app">
+            <div class="cop-appbar">
+              <div><div class="cop-appk">Money Co-pilot</div><div class="cop-appsub">6 active jobs · this month</div></div>
+              <span class="cop-live"><span class="cop-livedot"></span>Live</span>
+            </div>
+            <div class="cop-metric-card cop-anim">
+              <div class="cop-scan" aria-hidden="true"></div>
+              <div class="cop-mlabel">Average margin</div>
+              <div class="cop-metric-row">
+                <div class="cop-metric"><span class="cop-metric-num">0</span><span class="cop-pct">%</span></div>
+                <span class="cop-delta">▲ 4 pts</span>
+              </div>
+              <svg class="cop-spark" viewBox="0 0 300 84" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="copGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c73ff" stop-opacity=".42"/><stop offset="1" stop-color="#7c73ff" stop-opacity="0"/></linearGradient></defs>
+                <path class="cop-fill" d="M0,62 L43,56 L86,60 L129,42 L172,48 L215,30 L258,36 L300,12 L300,84 L0,84 Z" fill="url(#copGrad)"/>
+                <path class="cop-line" d="M0,62 L43,56 L86,60 L129,42 L172,48 L215,30 L258,36 L300,12" fill="none" stroke="#8b83ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle class="cop-dot2" cx="300" cy="12" r="4" fill="#b7b2ff"/>
+              </svg>
+            </div>
+            <div class="cop-card cop-anim"><span class="cop-ic ok">💡</span><div class="cop-ctext"><div class="cop-tt">Miller kitchen — your most profitable job</div><div class="cop-ss">42% margin · <b>+$3,200</b></div></div></div>
+            <div class="cop-card cop-anim"><span class="cop-ic warn">⚠️</span><div class="cop-ctext"><div class="cop-tt">Deck job is running thin</div><div class="cop-ss">7% margin — check your change orders</div></div></div>
+            <div class="cop-card cop-anim"><span class="cop-ic brand">🧾</span><div class="cop-ctext"><div class="cop-tt">Set aside for taxes</div><div class="cop-ss"><b>$2,150</b> this month</div></div></div>
+          </div>
+          <div class="cop-home" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.copilot-sec{position:relative;overflow:hidden;isolation:isolate;color:#fff;padding:clamp(72px,10vw,132px) 0;
+  background:radial-gradient(1200px 680px at 16% -8%,rgba(109,100,255,.20),transparent 60%),
+    radial-gradient(900px 620px at 108% 112%,rgba(58,85,217,.22),transparent 55%),
+    linear-gradient(180deg,#0b0e1c 0%,#0d1122 100%)}
+.copilot-sec::before{content:"";position:absolute;left:0;right:0;top:0;height:150px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#080b1a 0%,rgba(8,11,26,0) 100%)}
+.copilot-sec .cop-aura{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;
+  background:radial-gradient(620px 620px at 78% 42%,rgba(124,115,255,.22),transparent 68%)}
+.cop-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(32px,5vw,80px);align-items:center}
+.cop-copy{max-width:520px}
+.cop-eyebrow{color:#aab4ff;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;margin-bottom:16px}
+.cop-title{color:#fff;font-size:clamp(32px,4.8vw,54px);letter-spacing:-.03em;line-height:1.03;margin-bottom:20px}
+.cop-hl{background:linear-gradient(102deg,#aeb8ff,#dcb8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cop-lead{color:rgba(234,237,251,.82);font-size:clamp(16px,1.9vw,20px);line-height:1.55;margin-bottom:26px}
+.cop-points{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:12px}
+.cop-points li{display:flex;align-items:flex-start;gap:11px;color:#e7eaf6;font-weight:600;font-size:16px;line-height:1.4}
+.cop-tick{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(124,115,255,.18);color:#b7b2ff;display:grid;place-items:center;font-size:12px;font-weight:800;margin-top:1px}
+.cop-note{color:rgba(234,237,251,.72);font-size:15px;line-height:1.55;padding-left:15px;border-left:2px solid rgba(124,115,255,.5)}
+.cop-note b{color:#fff}
+.cop-stage{position:relative;display:grid;place-items:center;min-height:560px}
+.cop-glow{position:absolute;width:78%;height:70%;z-index:0;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(96,86,255,.34),transparent 72%);filter:blur(14px)}
+.cop-phone{position:relative;z-index:1;width:340px;height:718px;background:#05060a;border-radius:52px;padding:5px;
+  box-shadow:0 50px 110px -28px rgba(30,24,90,.85),0 0 0 2px #2a2b33}
+.cop-screen{position:relative;width:100%;height:100%;background:#0b0e1e;border-radius:47px;overflow:hidden;display:flex;flex-direction:column}
+.cop-island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:100px;height:29px;background:#000;border-radius:999px;z-index:6}
+.cop-status{height:48px;padding:16px 26px 0;display:flex;align-items:flex-start;justify-content:space-between;font-weight:700;font-size:14px;color:#fff;flex:none}
+.cop-status svg{fill:#fff}
+.cop-sys{display:flex;align-items:center;gap:6px}
+.cop-app{flex:1;padding:6px 18px 0;overflow:hidden}
+.cop-appbar{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 16px}
+.cop-appk{font-size:19px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.cop-appsub{font-size:12.5px;color:#8b90ad;font-weight:600;margin-top:2px}
+.cop-live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:#7fe6b0;background:rgba(31,157,87,.14);padding:6px 12px;border-radius:999px;letter-spacing:.02em}
+.cop-livedot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:copPulse 1.6s ease-out infinite}
+@keyframes copPulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}100%{box-shadow:0 0 0 9px rgba(52,211,153,0)}}
+.cop-metric-card{position:relative;background:linear-gradient(180deg,#171b34,#12152a);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:17px 18px 8px;overflow:hidden;
+  box-shadow:0 2px 4px rgba(0,0,0,.25),0 14px 30px rgba(0,0,0,.35)}
+.cop-scan{position:absolute;left:0;right:0;top:0;height:64px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(139,131,255,.28),transparent);opacity:0}
+.cop-mlabel{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#8b90ad}
+.cop-metric-row{display:flex;align-items:center;gap:12px;margin-top:5px}
+.cop-metric{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.cop-pct{font-size:34px;font-weight:800;color:#b7b2ff}
+.cop-delta{display:inline-flex;align-items:center;font-size:13px;font-weight:800;color:#34d399;background:rgba(31,157,87,.16);padding:6px 11px;border-radius:999px}
+.cop-spark{width:100%;height:66px;margin-top:6px;display:block}
+.cop-spark .cop-line{stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 1.7s cubic-bezier(.4,.1,.2,1) .35s}
+.cop-spark .cop-fill{opacity:0;transition:opacity .9s ease .9s}
+.cop-spark .cop-dot2{opacity:0;transition:opacity .5s ease 1.5s}
+.copilot-sec.play .cop-spark .cop-line{stroke-dashoffset:0}
+.copilot-sec.play .cop-spark .cop-fill{opacity:1}
+.copilot-sec.play .cop-spark .cop-dot2{opacity:1;animation:copDot 1.8s ease-out 1.6s infinite}
+@keyframes copDot{0%{filter:drop-shadow(0 0 0 rgba(183,178,255,.8))}100%{filter:drop-shadow(0 0 6px rgba(183,178,255,0))}}
+.cop-card{display:flex;gap:12px;align-items:flex-start;background:#141830;border:1px solid rgba(255,255,255,.06);border-radius:15px;padding:13px 14px;margin-top:10px}
+.cop-ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px}
+.cop-ic.ok{background:rgba(31,157,87,.16)}.cop-ic.warn{background:rgba(217,119,6,.18)}.cop-ic.brand{background:rgba(124,115,255,.18)}
+.cop-tt{font-size:13.5px;font-weight:700;color:#eef0fb;line-height:1.25}
+.cop-ss{font-size:12.5px;color:#9298b5;font-weight:600;margin-top:2px}
+.cop-ss b{color:#cdd2ea}
+.cop-home{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:5px;background:#fff;opacity:.3;border-radius:999px}
+.cop-anim{opacity:0;transform:translateY(20px) scale(.985);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
+.copilot-sec.play .cop-anim{opacity:1;transform:none}
+.copilot-sec.play .cop-metric-card{transition-delay:.1s}
+.copilot-sec.play .cop-metric-card .cop-scan{animation:copScan 1.4s ease-out .3s 1}
+@keyframes copScan{0%{top:0;opacity:.9}100%{top:100%;opacity:0}}
+.copilot-sec.play .cop-card:nth-of-type(3){transition-delay:.9s}
+.copilot-sec.play .cop-card:nth-of-type(4){transition-delay:1.05s}
+.copilot-sec.play .cop-card:nth-of-type(5){transition-delay:1.2s}
+@media (max-width:900px){
+  .cop-grid{grid-template-columns:1fr;gap:44px;text-align:center}
+  .cop-copy{max-width:none;margin:0 auto}
+  .cop-points{display:inline-flex;text-align:left}
+  .cop-note{text-align:left}
+  .cop-stage{min-height:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .cop-anim{opacity:1;transform:none;transition:none}
+  .cop-spark .cop-line{stroke-dashoffset:0;transition:none}
+  .cop-spark .cop-fill{opacity:1}.cop-spark .cop-dot2{opacity:1}
+  .cop-livedot,.copilot-sec.play .cop-spark .cop-dot2{animation:none}
+}
+</style>
+<script>
+(function(){
+  var sec=document.getElementById('copilot'); if(!sec) return;
+  var numEl=sec.querySelector('.cop-metric-num'); var played=false;
+  function countUp(el,to,dur){
+    if(!el) return; var t0=null;
+    function step(ts){ if(t0===null)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(e*to); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  function play(){ if(played) return; played=true; sec.classList.add('play');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(reduce){ if(numEl) numEl.textContent='31'; return; }
+    setTimeout(function(){ countUp(numEl,31,1300); },200);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } }); },{threshold:.3});
+    io.observe(sec);
+    setTimeout(function(){ if(!played) play(); },3000);
+  } else { play(); }
+})();
+</script>
+
 <!-- REPLACES YOUR STACK -->
 <section class="replaces" id="replaces" style="padding:0">
   <div class="wrap">
