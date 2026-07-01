@@ -588,6 +588,60 @@
 }
 </style>
 
+<!-- CINEMATIC VIDEO SHOWCASE -->
+<section class="vidshowcase" id="watch" data-screen-label="Watch it work">
+  <div class="sc-glow" aria-hidden="true"></div>
+  <div class="wrap sc-inner">
+    <div class="sc-eyebrow">The design render</div>
+    <h2 class="sc-title">Show clients the <span class="sc-hl">finished job</span> — before you start.</h2>
+    <p class="sc-lead">Snap a photo of the space. Boaz renders the finished result so your client can picture it — and say yes on the spot.</p>
+    <div class="sc-frame">
+      <div class="sc-bezel">
+        <video class="sc-video" id="heroVideo" muted loop playsinline autoplay preload="metadata" poster="boaz-render-poster.jpg">
+          <source src="boaz-render-web.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="sc-badges">
+      <span class="sc-badge"><span class="sc-dot"></span> Real photo → finished render</span>
+      <span class="sc-badge">Client-ready in minutes</span>
+      <span class="sc-badge">Right inside the app</span>
+    </div>
+  </div>
+</section>
+<style>
+.vidshowcase{position:relative;overflow:hidden;isolation:isolate;background:
+  radial-gradient(1100px 620px at 22% -6%, rgba(109,100,255,.18), transparent 60%),
+  radial-gradient(900px 560px at 100% 108%, rgba(58,85,217,.20), transparent 55%),
+  linear-gradient(180deg,#0b0e1c 0%,#0e1224 100%);
+  color:#fff;padding:clamp(64px,9vw,116px) 0}
+.vidshowcase .sc-glow{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(1180px,92%);height:560px;z-index:0;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(96,86,255,.28),transparent 70%);filter:blur(18px)}
+.vidshowcase .sc-inner{position:relative;z-index:1;text-align:center;max-width:1080px}
+.vidshowcase .sc-eyebrow{color:#aab4ff;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:13px;margin-bottom:16px}
+.vidshowcase .sc-title{color:#fff;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.03em;line-height:1.05;margin:0 auto 16px;max-width:16ch}
+.vidshowcase .sc-hl{background:linear-gradient(102deg,#aeb8ff,#dcb8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vidshowcase .sc-lead{color:rgba(234,237,251,.82);font-size:clamp(16px,2vw,20px);max-width:640px;margin:0 auto clamp(30px,4vw,48px);line-height:1.55}
+.vidshowcase .sc-frame{position:relative;width:100%;max-width:960px;margin:0 auto}
+.vidshowcase .sc-bezel{position:relative;border-radius:20px;padding:10px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px -30px rgba(43,37,120,.75),0 12px 40px -12px rgba(0,0,0,.6);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.vidshowcase .sc-video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#05060a}
+.vidshowcase .sc-sound{position:absolute;right:20px;bottom:20px;display:inline-flex;align-items:center;gap:9px;
+  padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#fff;cursor:pointer;
+  background:rgba(11,15,32,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  font-family:inherit;font-size:14px;font-weight:700;transition:background .2s ease,transform .15s ease}
+.vidshowcase .sc-sound:hover{background:rgba(31,38,74,.82);transform:translateY(-1px)}
+.vidshowcase .sc-sound svg{width:18px;height:18px}
+.vidshowcase .sc-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:clamp(24px,3.4vw,36px)}
+.vidshowcase .sc-badge{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(234,237,251,.92);font-weight:700;font-size:14px}
+.vidshowcase .sc-dot{width:8px;height:8px;border-radius:50%;background:#7fd0ff;box-shadow:0 0 0 0 rgba(127,208,255,.5);animation:scDot 1.6s ease-out infinite}
+@keyframes scDot{0%{box-shadow:0 0 0 0 rgba(127,208,255,.5)}100%{box-shadow:0 0 0 9px rgba(127,208,255,0)}}
+@media (max-width:560px){ .vidshowcase .sc-sound{right:12px;bottom:12px;padding:8px 12px}.vidshowcase .sc-sound-t{display:none} }
+@media (prefers-reduced-motion:reduce){ .vidshowcase .sc-dot{animation:none} }
+</style>
+
 <!-- REPLACES YOUR STACK -->
 <section class="replaces" id="replaces" style="padding:0">
   <div class="wrap">
@@ -1572,4 +1626,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,.btn:focus-visible{outl
 </style>
 
 
+<script>
+/* Cinematic stagger: cascade sibling .reveal elements instead of popping in together.
+   Only sets transition-delay (the existing IntersectionObserver still triggers .in on scroll). */
+(function(){
+  try{
+    var seen=new Map();
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var p=el.parentNode; if(!p) return;
+      var n=(seen.get(p)||0); seen.set(p,n+1);
+      if(n>0) el.style.transitionDelay=Math.min(n*85,420)+'ms';
+    });
+  }catch(e){}
+})();
+</script>
 </body></html>
