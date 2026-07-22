@@ -779,6 +779,11 @@ footer .fine b{color:var(--tx-2)}
   /* hero video: never burn battery offscreen; reduced-motion gets the static poster */
   var hv = document.querySelector('.hero-video');
   if(hv){
+    /* portrait phones get the 9:16 cut — a landscape crop loses the stroke on mobile */
+    if(matchMedia('(max-aspect-ratio: 4/5)').matches){
+      hv.poster = 'img/hero-poster-m1.jpg';
+      var hsrc = hv.querySelector('source'); hsrc.src = 'img/hero-stroke-m1.mp4'; hv.load();
+    }
     if(reduced){ hv.remove(); }
     else {
       new IntersectionObserver(function(es){
