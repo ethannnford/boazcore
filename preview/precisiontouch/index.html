@@ -44,7 +44,7 @@
   --font-d:'Sora','Plus Jakarta Sans',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth; overflow-x:clip}
 body{
   font-family:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif;
   background:var(--ink); color:var(--tx-1);
@@ -780,9 +780,14 @@ footer .fine b{color:var(--tx-2)}
   var hv = document.querySelector('.hero-video');
   if(hv){
     if(reduced){ hv.remove(); }
-    else new IntersectionObserver(function(es){
-      if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
-    }, {threshold:.05}).observe(hv);
+    else {
+      new IntersectionObserver(function(es){
+        if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
+      }, {threshold:.05}).observe(hv);
+      var kick = function(){ hv.play().catch(function(){}); removeEventListener('touchstart', kick); removeEventListener('scroll', kick); };
+      addEventListener('touchstart', kick, {passive:true, once:true});
+      addEventListener('scroll', kick, {passive:true, once:true});
+    }
   }
 
   /* magnetic buttons (fine pointers only) */
