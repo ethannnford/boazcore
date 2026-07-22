@@ -226,7 +226,7 @@ h2{font-family:var(--font-d); font-size:clamp(32px,4.4vw,52px); font-weight:800;
 
 /* ---------- before / after ---------- */
 .ba-wrap{position:relative; border-radius:var(--r-xl); overflow:hidden; border:1px solid var(--line-2);
-  box-shadow:var(--shadow-lg); aspect-ratio:16/9; user-select:none; touch-action:none; cursor:ew-resize}
+  box-shadow:var(--shadow-lg); aspect-ratio:16/9; user-select:none; touch-action:pan-y; cursor:ew-resize}
 .ba-layer{position:absolute; inset:0; filter:saturate(1.14) contrast(1.05)}
 /* Real photos are inlined on the elements; the after layer just needs its clip. */
 .ba-after{clip-path:inset(0 0 0 50%)}
@@ -418,8 +418,9 @@ footer .fine b{color:var(--tx-2)}
 
 <!-- ============ HERO ============ -->
 <section id="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster-v1.jpg" aria-hidden="true">
-    <source src="img/hero-stroke-v1.mp4" type="video/mp4">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster-v1.jpg"
+    data-src-land="img/hero-stroke-v1.mp4" data-src-port="img/hero-stroke-m1.mp4" data-poster-port="img/hero-poster-m1.jpg" aria-hidden="true">
+    <source type="video/mp4">
   </video>
   <div class="hero-scrim"></div>
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
@@ -779,13 +780,13 @@ footer .fine b{color:var(--tx-2)}
   /* hero video: never burn battery offscreen; reduced-motion gets the static poster */
   var hv = document.querySelector('.hero-video');
   if(hv){
-    /* portrait phones get the 9:16 cut — a landscape crop loses the stroke on mobile */
-    if(matchMedia('(max-aspect-ratio: 4/5)').matches){
-      hv.poster = 'img/hero-poster-m1.jpg';
-      var hsrc = hv.querySelector('source'); hsrc.src = 'img/hero-stroke-m1.mp4'; hv.load();
-    }
-    if(reduced){ hv.remove(); }
+    if(reduced){ hv.remove(); } /* reduced-motion: no video element, no video bytes */
     else {
+      /* exactly ONE cut fetches — portrait phones get 9:16, everyone else 16:9 */
+      var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
+      if(portrait) hv.poster = hv.dataset.posterPort;
+      hv.querySelector('source').src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
+      hv.load();
       new IntersectionObserver(function(es){
         if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
       }, {threshold:.05}).observe(hv);
