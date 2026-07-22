@@ -16,6 +16,7 @@
   · Gallery tiles + before/after → his real photos
   · Form action            → Formspree endpoint at launch
 ============================================================= -->
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -66,13 +67,9 @@ img{max-width:100%}
 #loader .bar i{display:block; height:100%; width:0; background:var(--paint-grad); border-radius:inherit; animation:load .9s ease-out forwards}
 @keyframes load{to{width:100%}}
 
-/* ---------- scroll progress + cursor ---------- */
+/* ---------- scroll progress ---------- */
 #progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:150; background:var(--paint-grad)}
-#cursor{position:fixed; width:36px; height:36px; border:1.5px solid var(--paint);
-  border-radius:50%; pointer-events:none; z-index:160; opacity:0;
-  transform:translate(-50%,-50%); transition:width .25s,height .25s,opacity .3s, border-color .25s}
-#cursor.grow{width:64px; height:64px; border-color:var(--paint-2)}
-@media (pointer:coarse){#cursor{display:none}}
+
 
 /* ---------- nav ---------- */
 nav{position:fixed; top:0; left:0; right:0; z-index:100; transition:.35s;
@@ -82,9 +79,8 @@ nav.scrolled{padding:var(--s-3) 0; background:rgba(10,11,16,.72);
 nav .wrap{display:flex; align-items:center; justify-content:space-between}
 .logo{font-family:var(--font-d); font-weight:800; font-size:20px; letter-spacing:-.02em;
   text-decoration:none; color:var(--tx-1); display:flex; align-items:center; gap:10px}
-.logo .chip-mark{width:30px;height:30px;border-radius:9px;background:var(--paint-grad);
-  display:grid;place-items:center; box-shadow:var(--shadow-paint)}
-.logo .chip-mark svg{width:16px;height:16px;stroke:#fff}
+.logo .logo-chip{width:46px;height:36px;border-radius:9px;background:#fff;display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow-md)}
+.logo .logo-chip img{width:100%;height:100%;object-fit:contain;padding:2px}
 .nav-links{display:flex; gap:var(--s-8); align-items:center}
 .nav-links a{color:var(--tx-2); text-decoration:none; font-size:14px; font-weight:600; transition:.2s}
 .nav-links a:hover{color:var(--tx-1)}
@@ -103,13 +99,12 @@ nav .wrap{display:flex; align-items:center; justify-content:space-between}
 #hero{position:relative; min-height:100svh; display:flex; align-items:center;
   padding:140px 0 var(--s-16); overflow:hidden}
 .blob{position:absolute; border-radius:50%; filter:blur(55px); opacity:.38; pointer-events:none; will-change:transform}
-.blob.b1{width:560px;height:560px; background:radial-gradient(circle,#ff5c3540,transparent 65%); top:-120px; right:-80px; animation:drift 14s ease-in-out infinite alternate}
-.blob.b2{width:420px;height:420px; background:radial-gradient(circle,#4f7cff2e,transparent 65%); bottom:-60px; left:-120px; animation:drift 18s ease-in-out infinite alternate-reverse}
+.blob.b1{width:560px;height:560px; background:radial-gradient(circle,#ff5c3540,transparent 65%); top:-120px; right:-80px; }
+.blob.b2{width:420px;height:420px; background:radial-gradient(circle,#4f7cff2e,transparent 65%); bottom:-60px; left:-120px; }
 .blob.b3{width:300px;height:300px; background:radial-gradient(circle,#ffb02026,transparent 65%); top:40%; left:38%; animation:drift 22s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0) scale(1)} to{transform:translate(60px,40px) scale(1.15)}}
 .grain{position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-#paintfx{position:absolute; inset:0; z-index:1; pointer-events:none}
 #hero .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:var(--s-16); align-items:center; position:relative; z-index:2}
 @media(max-width:960px){#hero .wrap{grid-template-columns:1fr; gap:var(--s-12)}}
 .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:var(--r-pill);
@@ -352,6 +347,18 @@ footer .fine b{color:var(--tx-2)}
   .rv{opacity:1; transform:none}
   h1 .line span{transform:none}
 }
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s-16);align-items:center}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:var(--s-10)}}
+.about-photo{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line-2);box-shadow:var(--shadow-lg);aspect-ratio:4/5}
+.about-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.04)}
+.about-badge{position:absolute;left:var(--s-5);bottom:var(--s-5);background:rgba(10,11,16,.78);backdrop-filter:blur(8px);border:1px solid var(--line-2);padding:9px 16px;border-radius:var(--r-pill);font-weight:800;font-size:13px}
+.about-p{color:var(--tx-2);font-size:16px;line-height:1.7;margin:var(--s-5) 0}
+.about-p b{color:var(--tx-1)}
+.about-quote{font-family:var(--font-d);font-size:clamp(19px,2.4vw,24px);font-weight:700;line-height:1.4;letter-spacing:-.01em;border-left:3px solid var(--paint);padding-left:var(--s-5);margin:var(--s-6) 0;color:var(--tx-1)}
+.about-chips{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-6)}
+.about-chips span{background:var(--ink-3);border:1px solid var(--line);padding:8px 16px;border-radius:var(--r-pill);font-size:13px;font-weight:700;color:var(--tx-2)}
 </style>
 </head>
 <body>
@@ -364,14 +371,15 @@ footer .fine b{color:var(--tx-2)}
 
 <div id="loader"><div class="mark">Precision <i>Touch</i> Painting</div><div class="bar"><i></i></div></div>
 <div id="progress"></div>
-<div id="cursor"></div>
+
 
 <nav id="nav">
   <div class="wrap">
-    <a class="logo" href="#hero"><span class="chip-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"/><path d="M12 10v4a2 2 0 0 1-2 2H8a2 2 0 0 0-2 2v3"/></svg></span>Precision Touch Painting</a>
+    <a class="logo" href="#hero"><span class="logo-chip"><img src="img/logo-real.jpg" alt="Precision Touch Painting"></span>Precision Touch Painting</a>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#work">Our Work</a>
+      <a href="#about">About</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
       <a href="#contact" class="btn sm">Free Estimate</a>
@@ -382,7 +390,7 @@ footer .fine b{color:var(--tx-2)}
 <!-- ============ HERO ============ -->
 <section id="hero">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
-  <canvas id="paintfx" aria-hidden="true"></canvas>
+  
   <div class="wrap">
     <div>
       <div class="badge"><span class="dot"></span>San Diego · Licensed &amp; Insured · CSLB #1060554</div>
@@ -501,6 +509,29 @@ footer .fine b{color:var(--tx-2)}
   </div>
 </section>
 
+
+<!-- ============ ABOUT / MEET JEFF ============ -->
+<section id="about" class="sec">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo rv">
+        <img src="img/jeff.jpg" alt="Jeff Cuellar of Precision Touch Painting on the job" loading="lazy">
+        <div class="about-badge">Jeff Cuellar · Owner</div>
+      </div>
+      <div class="rv">
+        <div class="kicker">Meet the Owner</div>
+        <h2 style="font-family:var(--font-d);font-size:clamp(30px,3.6vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.1">Chula Vista born.<br>Painting San Diego since 2019.</h2>
+        <p class="about-p">Jeff Cuellar founded Precision Touch Painting in 2019 and has served <b>200+ happy customers</b> across South County and all of San Diego — homes and businesses, one meticulous job at a time.</p>
+        <blockquote class="about-quote">&ldquo;When I come into a customer&rsquo;s home, they&rsquo;re going to be taken care of &mdash; that&rsquo;s what I want them to know.&rdquo;</blockquote>
+        <p class="about-p">Plenty of people will paint your house without a license — and it shows. Jeff&rsquo;s difference is the unglamorous work done right: thorough prep, quality products, and full transparency. He walks you through the Dunn-Edwards product brochures up front, so when the painting starts, you see exactly what he promised going on your walls.</p>
+        <div class="about-chips">
+          <span>Est. 2019</span><span>CSLB #1060554</span><span>200+ Happy Customers</span><span>Licensed &middot; Bonded &middot; Insured</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TESTIMONIALS ============ -->
 <section id="reviews" class="sec">
   <div class="wrap">
@@ -609,7 +640,7 @@ footer .fine b{color:var(--tx-2)}
 
 <footer>
   <div class="wrap">
-    <img src="img/logo.jpg" alt="Precision Touch Painting" style="height:104px;width:auto;display:block;margin:0 auto var(--s-6);border-radius:16px">
+    <img src="img/logo-real.jpg" alt="Precision Touch Painting" style="height:120px;width:auto;display:block;margin:0 auto var(--s-6);background:#fff;padding:10px 20px;border-radius:16px;box-shadow:var(--shadow-md)">
     <div class="fine"><b>Precision Touch Painting</b> · CSLB #1060554 · Licensed, Bonded &amp; Insured<br>
       Serving San Diego, Chula Vista, El Cajon, La Mesa, National City, Santee &amp; all of SD County</div>
     <div class="fine">© 2026 Precision Touch Painting · Crafted in San Diego</div>
@@ -681,10 +712,10 @@ footer .fine b{color:var(--tx-2)}
     handle.style.left = pct + '%';
   }
   var dragging = false;
-  ba.addEventListener('pointerdown', function(e){ dragging = true; ba.setPointerCapture(e.pointerId); setBA(e.clientX); });
+  ba.addEventListener('pointerdown', function(e){ e.preventDefault(); dragging = true; document.body.style.userSelect='none'; ba.setPointerCapture(e.pointerId); setBA(e.clientX); });
   ba.addEventListener('pointermove', function(e){ if(dragging) setBA(e.clientX); });
-  ba.addEventListener('pointerup', function(){ dragging = false; });
-  ba.addEventListener('pointercancel', function(){ dragging = false; });
+  ba.addEventListener('pointerup', function(){ dragging = false; document.body.style.userSelect=''; });
+  ba.addEventListener('pointercancel', function(){ dragging = false; document.body.style.userSelect=''; });
   /* gentle attract animation until first touch */
   if(!reduced){
     var t = 0, played = false, anim = setInterval(function(){
@@ -705,17 +736,8 @@ footer .fine b{color:var(--tx-2)}
     });
   });
 
-  /* custom cursor + magnetic buttons (fine pointers only) */
+  /* magnetic buttons (fine pointers only) */
   if(matchMedia('(pointer:fine)').matches && !reduced){
-    var cur = document.getElementById('cursor');
-    addEventListener('mousemove', function(e){
-      cur.style.opacity = '1';
-      cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
-    }, {passive:true});
-    document.querySelectorAll('a,button,.ba-wrap').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ cur.classList.add('grow'); });
-      el.addEventListener('mouseleave', function(){ cur.classList.remove('grow'); });
-    });
     document.querySelectorAll('.magnetic').forEach(function(btn){
       btn.addEventListener('mousemove', function(e){
         var r = btn.getBoundingClientRect();
@@ -747,52 +769,7 @@ footer .fine b{color:var(--tx-2)}
     }, {passive:true});
   }
 
-  /* hero paint-particle canvas — cursor sprays paint */
-  var cv = document.getElementById('paintfx'), hero = document.getElementById('hero');
-  if(cv && !reduced){
-    var ctx2 = cv.getContext('2d'), P = [], DPR = 1; /* 1× canvas — the spray reads the same, at a quarter of the pixel cost */
-    function sizeCv(){ cv.width = hero.offsetWidth*DPR; cv.height = hero.offsetHeight*DPR;
-      cv.style.width = hero.offsetWidth+'px'; cv.style.height = hero.offsetHeight+'px'; ctx2.setTransform(DPR,0,0,DPR,0,0); }
-    sizeCv(); addEventListener('resize', sizeCv);
-    var cols = ['255,92,53','255,138,61','46,197,182','79,124,255','255,176,32'];
-    var lastSpawn = 0;
-    function spawn(x, y, n, spread){
-      for(var i=0;i<n;i++){
-        P.push({ x:x+(Math.random()-.5)*spread, y:y+(Math.random()-.5)*spread,
-          vx:(Math.random()-.5)*1.4, vy:(Math.random()-.5)*1.2+.25,
-          r:1.5+Math.random()*5, life:1, c:cols[(Math.random()*cols.length)|0],
-          drip:Math.random()<.14 });
-      }
-      if(P.length>200) P.splice(0, P.length-200);
-    }
-    hero.addEventListener('pointermove', function(e){
-      var now = performance.now(); if(now-lastSpawn<16) return; lastSpawn = now;
-      var r = hero.getBoundingClientRect();
-      spawn(e.clientX-r.left, e.clientY-r.top, 3, 16);
-    }, {passive:true});
-    /* ambient drips on touch devices so mobile isn't empty */
-    if(matchMedia('(pointer:coarse)').matches){
-      setInterval(function(){ if(heroVisible) spawn(Math.random()*hero.offsetWidth, Math.random()*hero.offsetHeight*.8, 2, 30); }, 2200);
-    }
-    var heroVisible = true;
-    new IntersectionObserver(function(es){ heroVisible = es[0].isIntersecting; }).observe(hero);
-    (function loop(){
-      requestAnimationFrame(loop);
-      if(!heroVisible){ if(P.length){ P.length=0; ctx2.clearRect(0,0,hero.offsetWidth,hero.offsetHeight);} return; }
-      ctx2.clearRect(0,0,hero.offsetWidth,hero.offsetHeight);
-      ctx2.globalCompositeOperation = 'lighter';
-      for(var i=P.length-1;i>=0;i--){
-        var p = P[i];
-        p.life -= p.drip ? .006 : .014;
-        if(p.life<=0){ P.splice(i,1); continue; }
-        p.x += p.vx; p.y += p.vy;
-        if(p.drip){ p.vy += .06; p.r *= .999; } else { p.r *= .985; }
-        ctx2.beginPath();
-        ctx2.fillStyle = 'rgba('+p.c+','+(p.life*.55).toFixed(3)+')';
-        ctx2.arc(p.x, p.y, Math.max(p.r,.4), 0, 6.2832); ctx2.fill();
-      }
-    })();
-  }
+
 
   /* scroll-driven paint-fill headline */
   var fl = document.getElementById('fill-line');
