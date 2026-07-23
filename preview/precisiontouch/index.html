@@ -99,7 +99,7 @@ nav .wrap{display:flex; align-items:center; justify-content:space-between}
 #hero{position:relative; min-height:100svh; display:flex; align-items:center;
   padding:140px 0 var(--s-16); overflow:hidden}
 /* ---------- cinematic hero video ("The First Stroke") ---------- */
-.hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:saturate(1.06) brightness(.9)}
+.hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:translateZ(0); backface-visibility:hidden}
 .hero-scrim{position:absolute; inset:0; z-index:1;
   background:linear-gradient(90deg, rgba(10,11,16,.94) 0%, rgba(10,11,16,.78) 42%, rgba(10,11,16,.42) 100%),
   linear-gradient(0deg, rgba(10,11,16,.9) 0%, transparent 30%)}
@@ -113,7 +113,9 @@ nav .wrap{display:flex; align-items:center; justify-content:space-between}
 .grain{position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 #hero .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:var(--s-16); align-items:center; position:relative; z-index:2}
-@media(max-width:960px){#hero .wrap{grid-template-columns:1fr; gap:var(--s-12)}}
+@media(max-width:960px){#hero .wrap{grid-template-columns:1fr; gap:var(--s-12)}
+  /* phones: video is the visual — the swatch-card stack is desktop decor (it reveal-glitched below the fold) */
+  .hero-visual{display:none}}
 .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:var(--r-pill);
   background:rgba(255,92,53,.1); border:1px solid rgba(255,92,53,.25);
   font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--paint-2);
@@ -788,7 +790,7 @@ footer .fine b{color:var(--tx-2)}
       hv.load();
       new IntersectionObserver(function(es){
         if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
-      }, {threshold:.05}).observe(hv);
+      }, {threshold:0, rootMargin:'25% 0px'}).observe(hv);
       var kick = function(){ hv.play().catch(function(){}); removeEventListener('touchstart', kick); removeEventListener('scroll', kick); };
       addEventListener('touchstart', kick, {passive:true, once:true});
       addEventListener('scroll', kick, {passive:true, once:true});
@@ -818,13 +820,12 @@ footer .fine b{color:var(--tx-2)}
     });
   }
 
-  /* hero blob parallax */
-  if(!reduced){
+  /* hero blob parallax — fine pointers only; per-frame layout writes jank phones */
+  if(!reduced && matchMedia('(pointer:fine)').matches){
+    var blobEls = document.querySelectorAll('#hero .blob');
     addEventListener('scroll', function(){
       var y = scrollY;
-      document.querySelectorAll('#hero .blob').forEach(function(b,i){
-        b.style.marginTop = (y * (i+1) * .06) + 'px';
-      });
+      blobEls.forEach(function(b,i){ b.style.transform = 'translateY(' + (y*(i+1)*.06) + 'px)'; });
     }, {passive:true});
   }
 
