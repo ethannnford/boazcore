@@ -99,7 +99,9 @@ nav .wrap{display:flex; align-items:center; justify-content:space-between}
 #hero{position:relative; min-height:100svh; display:flex; align-items:center;
   padding:140px 0 var(--s-16); overflow:hidden}
 /* ---------- cinematic hero video ("The First Stroke") ---------- */
+.hero-poster{position:absolute; inset:0; z-index:0; background:url('img/hero-poster-v1.jpg') center/cover}
 .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:translateZ(0); backface-visibility:hidden}
+.hero-video.suspended{display:none} /* LPM/strict browsers: clean poster, never the native play button */
 .hero-scrim{position:absolute; inset:0; z-index:1;
   background:linear-gradient(90deg, rgba(10,11,16,.94) 0%, rgba(10,11,16,.78) 42%, rgba(10,11,16,.42) 100%),
   linear-gradient(0deg, rgba(10,11,16,.9) 0%, transparent 30%)}
@@ -422,6 +424,7 @@ footer .fine b{color:var(--tx-2)}
 
 <!-- ============ HERO ============ -->
 <section id="hero">
+  <div class="hero-poster" aria-hidden="true"></div>
   <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster-v1.jpg"
     data-src-land="img/hero-stroke-v1.mp4" data-src-port="img/hero-stroke-m1.mp4" data-poster-port="img/hero-poster-m1.jpg" aria-hidden="true"></video>
   <div class="hero-scrim"></div>
@@ -783,16 +786,27 @@ footer .fine b{color:var(--tx-2)}
     else {
       /* exactly ONE cut fetches — src set DIRECTLY on the element (iOS ignores late <source> src) */
       var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches || innerHeight > innerWidth * 1.2;
-      if(portrait) hv.poster = hv.dataset.posterPort;
+      var hp = document.querySelector('.hero-poster');
+      if(portrait){ hv.poster = hv.dataset.posterPort; if(hp) hp.style.backgroundImage = "url('" + hv.dataset.posterPort + "')"; }
       hv.muted = true; hv.playsInline = true; hv.autoplay = true; /* PROPERTIES — iOS demands them, attributes alone fail after dynamic src */
       hv.src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
       hv.load();
       hv.play().catch(function(){});
       hv.addEventListener('loadeddata', function(){ if(hv.paused) hv.play().catch(function(){}); }, {once:true});
+      /* If iOS refuses autoplay (Low Power Mode etc.): hide the video = designed still hero,
+         not a broken-looking play overlay. First touch retries and un-hides if allowed. */
+      hv.addEventListener('playing', function(){ hv.classList.remove('suspended'); });
+      setTimeout(function(){ if(hv.paused) hv.classList.add('suspended'); }, 1200);
       new IntersectionObserver(function(es){
         if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
       }, {threshold:0, rootMargin:'25% 0px'}).observe(hv);
-      var kick = function(){ if(hv.paused) hv.play().catch(function(){}); };
+      var kick = function(){
+        if(hv.paused){
+          hv.classList.remove('suspended');
+          var p = hv.play();
+          if(p && p.catch) p.catch(function(){ hv.classList.add('suspended'); });
+        }
+      };
       ['touchstart','touchend','click','scroll'].forEach(function(ev){ addEventListener(ev, kick, {passive:true}); });
     }
   }
