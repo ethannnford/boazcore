@@ -784,10 +784,11 @@ footer .fine b{color:var(--tx-2)}
       /* exactly ONE cut fetches — src set DIRECTLY on the element (iOS ignores late <source> src) */
       var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
       if(portrait) hv.poster = hv.dataset.posterPort;
-      hv.muted = true; hv.playsInline = true; /* PROPERTIES, not just attributes — iOS autoplay requires both */
+      hv.muted = true; hv.playsInline = true; hv.autoplay = true; /* PROPERTIES — iOS demands them, attributes alone fail after dynamic src */
       hv.src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
       hv.load();
       hv.play().catch(function(){});
+      hv.addEventListener('loadeddata', function(){ if(hv.paused) hv.play().catch(function(){}); }, {once:true});
       new IntersectionObserver(function(es){
         if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
       }, {threshold:0, rootMargin:'25% 0px'}).observe(hv);
