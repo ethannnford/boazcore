@@ -782,7 +782,7 @@ footer .fine b{color:var(--tx-2)}
     if(reduced){ hv.remove(); } /* reduced-motion: no video element, no video bytes */
     else {
       /* exactly ONE cut fetches — src set DIRECTLY on the element (iOS ignores late <source> src) */
-      var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
+      var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches || innerHeight > innerWidth * 1.2;
       if(portrait) hv.poster = hv.dataset.posterPort;
       hv.muted = true; hv.playsInline = true; hv.autoplay = true; /* PROPERTIES — iOS demands them, attributes alone fail after dynamic src */
       hv.src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
