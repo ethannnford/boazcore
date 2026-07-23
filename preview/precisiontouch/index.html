@@ -253,7 +253,7 @@ h2{font-family:var(--font-d); font-size:clamp(32px,4.4vw,52px); font-weight:800;
 .gal .tile{position:relative; border-radius:var(--r-lg); overflow:hidden; aspect-ratio:4/3;
   border:1px solid var(--line-2); transition:transform .35s, box-shadow .35s, border-color .35s; will-change:transform}
 .gal .tile:hover{transform:translateY(-5px) scale(1.012); box-shadow:var(--shadow-lg), 0 10px 40px rgba(255,92,53,.14); border-color:rgba(255,138,61,.45)}
-.gal .tile .ph{position:absolute; inset:0; transition:transform .6s cubic-bezier(.22,1,.36,1), filter .4s;
+.gal .tile .ph{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s cubic-bezier(.22,1,.36,1), filter .4s;
   filter:saturate(1.16) contrast(1.06) brightness(1.02)}
 .gal .tile:hover .ph{transform:scale(1.07); filter:saturate(1.28) contrast(1.08) brightness(1.06)}
 .gal .tile .meta{position:absolute; left:0; right:0; bottom:0; padding:var(--s-10) var(--s-5) var(--s-4);
@@ -276,6 +276,8 @@ h2{font-family:var(--font-d); font-size:clamp(32px,4.4vw,52px); font-weight:800;
 /* ---------- testimonials ---------- */
 #reviews{background:var(--ink-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 .tst-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s-5)}
+.tst-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.tst-3{grid-template-columns:1fr}}
 @media(max-width:820px){.tst-grid{grid-template-columns:1fr}}
 .tst{background:var(--ink-3); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--s-8)}
 .tst .stars{color:var(--sw-gold); letter-spacing:3px; font-size:15px; margin-bottom:var(--s-4)}
@@ -458,7 +460,7 @@ footer .fine b{color:var(--tx-2)}
       <div class="swatch s1" data-name="Sunset Terracotta"></div>
       <div class="swatch s2" data-name="Coastal Teal"></div>
       <div class="swatch s3" data-name="Pacific Blue"></div>
-      <div class="float-card review"><div><div class="stars">★★★★★</div><div class="t2">"Cleanest crew we've ever hired."</div></div></div>
+      <div class="float-card review"><div><div class="stars">★★★★★</div><div class="t2">"The place is looking so good!"</div></div></div>
       <div class="float-card owner"><div class="ava">JC</div><div><div class="t1">Owner &amp; Lead Painter</div><div class="t2">On every job, start to finish</div></div></div>
     </div>
   </div>
@@ -510,8 +512,8 @@ footer .fine b{color:var(--tx-2)}
       <p class="sec-sub">Real deck work by Jeff and the crew. Slide the handle — from sun-beaten to sealed &amp; rich.</p>
     </div>
     <div class="ba-wrap rv" id="ba">
-      <div class="ba-layer ba-before" style="background:url('img/ba-before-v3.jpg') center/cover"></div>
-      <div class="ba-layer ba-after" id="ba-after" style="background:url('img/ba-after-v3.jpg') center/cover"></div>
+      <div class="ba-layer ba-before" style="background:url('img/ba-before-v4.jpg') center/cover"></div>
+      <div class="ba-layer ba-after" id="ba-after" style="background:url('img/ba-after-v4.jpg') center/cover"></div>
       <div class="ba-label l-before">Before</div>
       <div class="ba-label l-after">After</div>
       <div class="ba-handle" id="ba-handle"><div class="grip">
@@ -524,12 +526,12 @@ footer .fine b{color:var(--tx-2)}
     </div>
 
     <div class="gal" style="margin-top:var(--s-8)">
-      <div class="tile rv"><div class="ph" style="background:url('img/g1.jpg') center/cover"></div><div class="meta"><div>Interior &amp; Beams<small>Interior repaint</small></div></div></div>
-      <div class="tile rv"><div class="ph" style="background:url('img/g2.jpg') center/cover"></div><div class="meta"><div>Deck &amp; Fence Staining<small>Wood restoration</small></div></div></div>
-      <div class="tile rv"><div class="ph" style="background:url('img/g3.jpg') center/cover"></div><div class="meta"><div>Front Doors<small>Curb appeal</small></div></div></div>
-      <div class="tile rv"><div class="ph" style="background:url('img/g4.jpg') center/cover"></div><div class="meta"><div>Kitchens<small>Interior</small></div></div></div>
-      <div class="tile rv"><div class="ph" style="background:url('img/g5.jpg') center/cover"></div><div class="meta"><div>Full Exterior<small>Repaint</small></div></div></div>
-      <div class="tile rv"><div class="ph" style="background:url('img/g6.jpg') center/cover"></div><div class="meta"><div>Exterior &amp; Trim<small>Curb appeal</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g1-w.jpg" alt="Interior repaint with wood beams" loading="lazy" decoding="async"><div class="meta"><div>Interior &amp; Beams<small>Interior repaint</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g2-w.jpg" alt="Stained deck and fence by a pool" loading="lazy" decoding="async"><div class="meta"><div>Deck &amp; Fence Staining<small>Wood restoration</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g3-w.jpg" alt="Red front door repaint" loading="lazy" decoding="async"><div class="meta"><div>Front Doors<small>Curb appeal</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g4-w.jpg" alt="Repainted kitchen" loading="lazy" decoding="async"><div class="meta"><div>Kitchens<small>Interior</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g5-w.jpg" alt="Full exterior repaint, Spanish-style home" loading="lazy" decoding="async"><div class="meta"><div>Full Exterior<small>Repaint</small></div></div></div>
+      <div class="tile rv"><img class="ph" src="img/g6-w.jpg" alt="Sage green exterior and trim" loading="lazy" decoding="async"><div class="meta"><div>Exterior &amp; Trim<small>Curb appeal</small></div></div></div>
     </div>
   </div>
 </section>
@@ -556,7 +558,7 @@ footer .fine b{color:var(--tx-2)}
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo rv">
-        <img src="img/jeff-owner.jpg" alt="Jeff Cuellar, owner of Precision Touch Painting" loading="lazy">
+        <img src="img/jeff-owner-2.jpg" alt="Jeff Cuellar, owner of Precision Touch Painting" loading="lazy">
         <div class="about-badge">Jeff Cuellar · Owner</div>
       </div>
       <div class="rv">
@@ -580,22 +582,18 @@ footer .fine b{color:var(--tx-2)}
       <div class="kicker">Reviews</div>
       <h2>Neighbors talk. Here's what they say.</h2>
     </div>
-    <div class="tst-grid">
-      <!-- PLACEHOLDER reviews — swap for his real Google/Yelp reviews -->
+    <div class="tst-grid tst-3">
       <div class="tst rv"><div class="stars">★★★★★</div>
-        <p>"The prep work alone was more thorough than the last two painters we hired combined. Lines are razor sharp and they left the house cleaner than they found it."</p>
-        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#ff5c35,#e8431c)">SR</div><div><div class="t1">Placeholder Review</div><div class="t2">North Park, CA</div></div><span class="job">Full Interior</span></div></div>
+        <p>"Thank you for all the amazing work you and your awesome team are doing."</p>
+        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#ff5c35,#e8431c)">M</div><div><div class="t1">Monty</div><div class="t2">San Diego</div></div><span class="job">Remodel</span></div></div>
       <div class="tst rv"><div class="stars">★★★★★</div>
-        <p>"Showed up on time every single day, finished a day early, and the stucco patching is invisible. Our house looks brand new from the street."</p>
-        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#4f7cff,#3556d4)">MP</div><div><div class="t1">Placeholder Review</div><div class="t2">Chula Vista, CA</div></div><span class="job">Exterior + Stucco</span></div></div>
+        <p>"The place is looking so good — even with the floors still covered! Thank you for all your hard work."</p>
+        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#4f7cff,#3556d4)">S</div><div><div class="t1">Sherri</div><div class="t2">San Diego</div></div><span class="job">Interior</span></div></div>
       <div class="tst rv"><div class="stars">★★★★★</div>
-        <p>"Our kitchen cabinets look factory-finished. People ask if we replaced them. For a fraction of a remodel, this was the best money we've spent on the house."</p>
-        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#2ec5b6,#1a9b8e)">JT</div><div><div class="t1">Placeholder Review</div><div class="t2">La Mesa, CA</div></div><span class="job">Cabinets</span></div></div>
-      <div class="tst rv"><div class="stars">★★★★★</div>
-        <p>"I manage six rentals and he's my only call now. Fair price, fast turnaround between tenants, and zero drama. That's rare in this trade."</p>
-        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#ffb020,#d98e06)">DK</div><div><div class="t1">Placeholder Review</div><div class="t2">El Cajon, CA</div></div><span class="job">Rentals</span></div></div>
+        <p>"I continue to love my backyard — thank you so much for what you did for me."</p>
+        <div class="who"><div class="ava" style="background:linear-gradient(135deg,#2ec5b6,#1a9b8e)">M</div><div><div class="t1">Martha</div><div class="t2">San Diego</div></div><span class="job">Exterior</span></div></div>
     </div>
-    <div class="rating-line rv"><b>★ 5.0</b> average — his real review count &amp; link goes here</div>
+    <div class="rating-line rv"><b>★★★★★</b> — straight from Jeff&apos;s customers&apos; phones</div>
   </div>
 </section>
 
@@ -699,10 +697,11 @@ footer .fine b{color:var(--tx-2)}
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* loader */
-  addEventListener('load', function(){
-    setTimeout(function(){ document.getElementById('loader').classList.add('done'); }, reduced?0:950);
-  });
-  setTimeout(function(){ document.getElementById('loader').classList.add('done'); }, 2500); /* failsafe */
+  var loaderDone = function(){ document.getElementById('loader').classList.add('done'); };
+  /* reveal as soon as the DOM is usable — never hold the page hostage for images on cell signal */
+  if(document.readyState !== 'loading') setTimeout(loaderDone, reduced?0:600);
+  else addEventListener('DOMContentLoaded', function(){ setTimeout(loaderDone, reduced?0:600); });
+  setTimeout(loaderDone, 1500); /* hard failsafe */
 
   /* nav + scroll progress */
   var nav = document.getElementById('nav'), prog = document.getElementById('progress');
