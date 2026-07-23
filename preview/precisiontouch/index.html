@@ -423,9 +423,7 @@ footer .fine b{color:var(--tx-2)}
 <!-- ============ HERO ============ -->
 <section id="hero">
   <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster-v1.jpg"
-    data-src-land="img/hero-stroke-v1.mp4" data-src-port="img/hero-stroke-m1.mp4" data-poster-port="img/hero-poster-m1.jpg" aria-hidden="true">
-    <source type="video/mp4">
-  </video>
+    data-src-land="img/hero-stroke-v1.mp4" data-src-port="img/hero-stroke-m1.mp4" data-poster-port="img/hero-poster-m1.jpg" aria-hidden="true"></video>
   <div class="hero-scrim"></div>
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
   
@@ -783,17 +781,18 @@ footer .fine b{color:var(--tx-2)}
   if(hv){
     if(reduced){ hv.remove(); } /* reduced-motion: no video element, no video bytes */
     else {
-      /* exactly ONE cut fetches — portrait phones get 9:16, everyone else 16:9 */
+      /* exactly ONE cut fetches — src set DIRECTLY on the element (iOS ignores late <source> src) */
       var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
       if(portrait) hv.poster = hv.dataset.posterPort;
-      hv.querySelector('source').src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
+      hv.muted = true; hv.playsInline = true; /* PROPERTIES, not just attributes — iOS autoplay requires both */
+      hv.src = portrait ? hv.dataset.srcPort : hv.dataset.srcLand;
       hv.load();
+      hv.play().catch(function(){});
       new IntersectionObserver(function(es){
         if(es[0].isIntersecting){ hv.play().catch(function(){}); } else { hv.pause(); }
       }, {threshold:0, rootMargin:'25% 0px'}).observe(hv);
-      var kick = function(){ hv.play().catch(function(){}); removeEventListener('touchstart', kick); removeEventListener('scroll', kick); };
-      addEventListener('touchstart', kick, {passive:true, once:true});
-      addEventListener('scroll', kick, {passive:true, once:true});
+      var kick = function(){ if(hv.paused) hv.play().catch(function(){}); };
+      ['touchstart','touchend','click','scroll'].forEach(function(ev){ addEventListener(ev, kick, {passive:true}); });
     }
   }
 
