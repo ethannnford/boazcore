@@ -126,7 +126,16 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
   .float3{animation:float 7s ease-in-out 1.6s infinite}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 }
-@media(max-width:560px){.chip-msg{left:-2%}.chip-appt{right:-2%}.chip-stat{left:0}}
+/* MOBILE: absolute chips bury the portrait at phone widths — they become a clean
+   stack under the card instead. Same content, zero overlap, no clipped edges. */
+@media(max-width:700px){
+  .sess{max-width:440px}
+  .sess-card{padding:2.3rem 1.3rem 1.5rem}
+  .chip{position:static;width:100%;max-width:none;margin-top:.75rem;animation:none;
+    box-shadow:var(--sh-sm);border-radius:18px}
+  .chip-msg{border-bottom-left-radius:18px}
+  .chip-appt,.chip-stat{display:flex;align-items:center}
+}
 
 /* ============ STAT STRIP ============ */
 .stats{padding:1rem 0 0}
