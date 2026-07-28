@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Functional Cognitive Rehab — Telehealth Cognitive Rehabilitation for Brain Injury &amp; Concussion</title>
+<meta name="description" content="Evidence-based cognitive rehabilitation delivered by 11 licensed speech pathologists. Telehealth therapy for traumatic brain injury, concussion, stroke, and Long COVID. English &amp; Spanish.">
+<meta property="og:title" content="Functional Cognitive Rehab">
+<meta property="og:description" content="Evidence-based cognitive rehabilitation, delivered by licensed speech pathologists. Telehealth. English &amp; Spanish.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalBusiness","name":"Functional Cognitive Rehab","url":"https://cogrehab.co","description":"Telehealth-based private practice providing cognitive rehabilitation services to individuals recovering from traumatic brain injuries and concussions.","medicalSpecialty":"Physiotherapy","availableLanguage":["English","Spanish"],"availableService":[{"@type":"MedicalTherapy","name":"Cognitive Rehabilitation"}]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --cream:#F5F3EE; --card:#FFFFFF; --lav:#EFECFA; --lav-2:#E4DFF6;
+  --ink:#191430; --body:#57536B; --line:#E8E5DC;
+  --violet:#5B3FC7; --violet-deep:#3B2A85; --cyan:#3FB6DE; --peach:#F5B98A; --mint:#7CD0B4;
+  --sh-sm:0 1px 2px rgba(25,20,48,.05),0 10px 30px -14px rgba(25,20,48,.12);
+  --sh-lg:0 2px 4px rgba(25,20,48,.04),0 30px 70px -24px rgba(59,42,133,.22);
+  --disp:'Bricolage Grotesque',system-ui,sans-serif;
+  --sans:'Public Sans',system-ui,-apple-system,sans-serif;
+  --r:28px; --wrap:1200px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);color:var(--body);background:var(--cream);
+  font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--disp);color:var(--ink);margin:0;line-height:1.06;letter-spacing:-.025em;font-weight:600}
+p{margin:0 0 1.05em}
+a{color:inherit} img{max-width:100%;display:block}
+.wrap{width:min(100% - 2.5rem,var(--wrap));margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font:700 12px/1 var(--sans);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--violet);background:var(--lav);padding:.55rem 1rem;border-radius:100px}
+section{padding:clamp(4rem,8vw,7rem) 0}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.2,.7,.3,1),transform .85s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1!important;transform:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition-duration:.001ms!important}
+}
+
+/* ============ NAV ============ */
+header{position:fixed;inset:0 0 auto;z-index:50;padding:.9rem 0;transition:background .4s,box-shadow .4s}
+header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 1px 0 rgba(25,20,48,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
+.brand img{width:38px;height:38px}
+.brand b{font:600 17px/1.1 var(--disp);color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.brand b i{display:block;font:700 9px/1.6 var(--sans);font-style:normal;letter-spacing:.2em;color:var(--violet)}
+.nav-pill{display:flex;gap:.35rem;background:#fff;border:1px solid var(--line);border-radius:100px;padding:.35rem;box-shadow:var(--sh-sm)}
+.nav-pill a{font:600 14px/1 var(--sans);color:var(--body);text-decoration:none;padding:.72rem 1.15rem;border-radius:100px;transition:background .3s,color .3s}
+.nav-pill a:hover{background:var(--lav);color:var(--violet-deep)}
+.btn{display:inline-flex;align-items:center;gap:.7rem;border:0;cursor:pointer;text-decoration:none;white-space:nowrap;
+  font:700 15px/1 var(--sans);padding:.62rem .62rem .62rem 1.5rem;border-radius:100px;
+  background:var(--violet);color:#fff;box-shadow:0 10px 26px -10px rgba(91,63,199,.55);
+  transition:transform .3s,box-shadow .3s,background .3s}
+.btn .arr{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--violet);display:grid;place-items:center;font-size:15px;transition:transform .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(91,63,199,.65)}
+.btn:hover .arr{transform:translateX(2px)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.btn.ghost .arr{background:var(--lav);color:var(--violet)}
+.btn.lg{font-size:16px;padding:.72rem .72rem .72rem 1.7rem}
+.btn.lg .arr{width:42px;height:42px}
+@media(max-width:900px){.nav-pill{display:none}}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:8.6rem 0 3rem;overflow:hidden}
+#field{position:absolute;inset:0;z-index:0;opacity:.5}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(2.7rem,6.2vw,4.6rem);max-width:13ch}
+.hero h1 .hl{color:var(--violet)}
+.hero .lede{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:46ch;margin:1.5rem 0 2.2rem}
+.hero-cta{display:flex;gap:.85rem;flex-wrap:wrap;align-items:center}
+.hero-meta{display:flex;align-items:center;gap:.9rem;margin-top:2.4rem}
+.avastack{display:flex}
+.avastack img{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--cream);margin-left:-10px;background:#fff}
+.avastack img:first-child{margin-left:0}
+.hero-meta small{font-size:13.5px;color:var(--body);font-weight:600;line-height:1.45}
+.hero-meta small b{color:var(--ink)}
+
+/* --- the session card (the Nixtio move: product UI as hero) --- */
+.sess{position:relative;max-width:520px;margin-left:auto}
+@media(max-width:960px){.sess{margin:1rem auto 0}}
+.sess-card{position:relative;border-radius:36px;padding:2.6rem 2.2rem 2rem;overflow:hidden;
+  background:linear-gradient(160deg,#EDE9FB 0%,#E3F2F9 60%,#F7EFE4 100%);
+  box-shadow:var(--sh-lg);text-align:center}
+.sess-card::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.sess-live{position:absolute;top:1.4rem;left:1.4rem;display:inline-flex;align-items:center;gap:.45rem;
+  background:#fff;border-radius:100px;padding:.45rem .85rem;font:700 11.5px/1 var(--sans);color:var(--ink);box-shadow:var(--sh-sm)}
+.sess-live i{width:7px;height:7px;border-radius:50%;background:#3ECF8E;animation:blink 2.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.sess-time{position:absolute;top:1.4rem;right:1.4rem;background:rgba(25,20,48,.75);color:#fff;
+  border-radius:100px;padding:.45rem .8rem;font:600 11.5px/1 var(--sans)}
+.sess-card>img{width:min(62%,240px);aspect-ratio:1;border-radius:50%;object-fit:cover;margin:1.6rem auto 1.1rem;
+  box-shadow:0 22px 50px -18px rgba(59,42,133,.45),0 0 0 6px rgba(255,255,255,.85)}
+.sess-name{font:600 1.25rem/1.2 var(--disp);color:var(--ink)}
+.sess-role{font:600 12.5px/1.6 var(--sans);color:var(--violet)}
+.sess-bar{display:flex;justify-content:center;gap:.6rem;margin-top:1.3rem}
+.sess-bar span{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--sh-sm);font-size:17px}
+.sess-bar span.end{background:#F16063;color:#fff}
+/* floating chips */
+.chip{position:absolute;background:#fff;border-radius:18px;box-shadow:var(--sh-lg);z-index:2}
+.chip-msg{left:-9%;top:16%;max-width:230px;padding:.95rem 1.1rem;text-align:left;border-bottom-left-radius:6px}
+.chip-msg p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.chip-msg small{display:block;margin-top:.4rem;font-size:11px;color:var(--body);font-weight:600}
+.chip-msg small b{color:var(--cyan)}
+.chip-appt{right:-8%;top:44%;padding:.85rem 1rem;display:flex;gap:.7rem;align-items:center;text-align:left}
+.chip-appt img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.chip-appt b{display:block;font:700 12.5px/1.35 var(--sans);color:var(--ink)}
+.chip-appt small{font:600 11.5px/1.4 var(--sans);color:var(--body)}
+.chip-stat{left:-4%;bottom:7%;padding:.95rem 1.15rem;display:flex;gap:.75rem;align-items:center;text-align:left}
+.chip-stat .up{width:38px;height:38px;border-radius:50%;background:var(--lav);display:grid;place-items:center;color:var(--violet);font-weight:800}
+.chip-stat b{display:block;font:700 16px/1.1 var(--disp);color:var(--ink)}
+.chip-stat small{font:600 11.5px/1.3 var(--sans);color:var(--body)}
+@media(prefers-reduced-motion:no-preference){
+  .float1{animation:float 6.5s ease-in-out infinite}
+  .float2{animation:float 7.5s ease-in-out .8s infinite}
+  .float3{animation:float 7s ease-in-out 1.6s infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+}
+@media(max-width:560px){.chip-msg{left:-2%}.chip-appt{right:-2%}.chip-stat{left:0}}
+
+/* ============ STAT STRIP ============ */
+.stats{padding:1rem 0 0}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:860px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border-radius:22px;padding:1.7rem 1.4rem;text-align:center;box-shadow:var(--sh-sm);
+  transition:transform .4s cubic-bezier(.2,.7,.3,1),box-shadow .4s}
+.stat:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.stat b{display:block;font:600 clamp(1.7rem,3.4vw,2.3rem)/1 var(--disp);color:var(--ink)}
+.stat span{display:block;margin-top:.5rem;font:700 11.5px/1.4 var(--sans);letter-spacing:.09em;color:var(--body)}
+
+/* ============ SYMPTOMS ============ */
+.sym-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.05rem}
+.sym{background:#fff;border-radius:var(--r);padding:1.8rem 1.65rem;box-shadow:var(--sh-sm);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.sym:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.sym-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.05rem;font-size:20px}
+.i1{background:#EFECFA}.i2{background:#E4F4FB}.i3{background:#FBEFE2}.i4{background:#E7F6F0}.i5{background:#FAECF3}.i6{background:#F1F0E3}
+.sym h3{font-size:1.1rem;margin-bottom:.45rem;font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
+.sym p{font-size:15px;margin:0}
+.sym-foot{margin-top:2.6rem;text-align:center;font-size:1.1rem;color:var(--ink);font-weight:600}
+
+/* ============ APPROACH SPLIT ============ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.4rem,5.5vw,5rem);align-items:center}
+@media(max-width:920px){.split{grid-template-columns:1fr}}
+h2.big{font-size:clamp(2rem,4.3vw,3.1rem);margin:1.1rem 0 1.15rem}
+.check{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;font-size:15.5px}
+.check i{flex:0 0 22px;height:22px;border-radius:50%;background:var(--mint);color:#fff;display:grid;place-items:center;
+  font-style:normal;font-size:12px;font-weight:800;margin-top:.15rem}
+.approach-vis{position:relative;border-radius:36px;overflow:hidden;background:linear-gradient(165deg,#E9E4F9,#DFF0F8 55%,#F6EEE1);
+  aspect-ratio:.92;box-shadow:var(--sh-lg)}
+
+.vis-chip{position:absolute;background:#fff;border-radius:16px;padding:.85rem 1.05rem;box-shadow:var(--sh-lg)}
+.vis-chip b{display:block;font:700 13px/1.3 var(--sans);color:var(--ink)}
+.vis-chip small{font:600 11.5px/1.4 var(--sans);color:var(--body)}
+.vc1{top:9%;left:7%}.vc2{bottom:11%;right:8%;text-align:right}
+
+/* ============ CONDITIONS ============ */
+.cond-row{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+.cond{background:#fff;border-radius:100px;padding:1rem 1.7rem;font:700 15px/1 var(--sans);color:var(--ink);
+  box-shadow:var(--sh-sm);transition:transform .35s,box-shadow .35s,background .35s,color .35s;cursor:default}
+.cond:hover{transform:translateY(-3px);background:var(--violet);color:#fff;box-shadow:0 14px 30px -12px rgba(91,63,199,.55)}
+
+/* ============ PROCESS ============ */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.05rem;counter-reset:step}
+@media(max-width:980px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.proc-grid{grid-template-columns:1fr}}
+.proc{position:relative;background:#fff;border-radius:var(--r);padding:1.9rem 1.6rem 1.7rem;box-shadow:var(--sh-sm);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.proc:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.proc-n{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;margin-bottom:1.15rem;
+  font:600 1.15rem/1 var(--disp);color:var(--violet);background:var(--lav)}
+.proc h3{font-size:1.13rem;margin-bottom:.5rem;letter-spacing:-.015em}
+.proc p{font-size:14.6px;margin:0}
+
+/* ============ TEAM ============ */
+.team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.15rem}
+.mem{flex:1 1 200px;max-width:242px;background:#fff;border-radius:var(--r);padding:1.7rem 1.2rem 1.5rem;text-align:center;
+  cursor:pointer;box-shadow:var(--sh-sm);transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.mem:hover{transform:translateY(-7px);box-shadow:var(--sh-lg)}
+.mem-ph{width:112px;aspect-ratio:1;margin:0 auto 1rem;border-radius:50%;overflow:hidden;
+  background:linear-gradient(160deg,var(--lav),#E4F2F8);padding:5px}
+.mem-ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;
+  transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.mem:hover .mem-ph img{transform:scale(1.06)}
+.mem b{display:block;font:600 1.06rem/1.25 var(--disp);color:var(--ink)}
+.mem .cred{display:block;font:700 11px/1.5 var(--sans);letter-spacing:.08em;color:var(--violet);margin-top:.3rem}
+.mem .role{display:block;font:500 13px/1.45 var(--sans);color:var(--body);margin-top:.4rem}
+.mem .more{display:inline-block;margin-top:.8rem;font:700 12.5px/1 var(--sans);color:var(--violet)}
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:1.5rem;
+  background:rgba(25,20,48,.5);backdrop-filter:blur(8px)}
+.modal.open{display:grid;animation:fade .3s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal-card{background:#fff;border-radius:30px;max-width:600px;width:100%;max-height:86vh;overflow:auto;
+  padding:2.5rem;box-shadow:0 40px 90px -30px rgba(25,20,48,.5);animation:pop .4s cubic-bezier(.2,.7,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+.modal-card img{width:104px;height:104px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;
+  box-shadow:0 12px 28px -12px rgba(59,42,133,.4)}
+.modal-card h3{font-size:1.55rem;margin-bottom:.2rem}
+.modal-card .role{color:var(--violet);font-weight:700;font-size:14px;margin-bottom:1.2rem}
+.modal-x{position:absolute;top:1.3rem;right:1.3rem;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+  background:#fff;color:var(--ink);font-size:17px;box-shadow:var(--sh-sm)}
+
+/* ============ COLIN ============ */
+.story-card{background:#fff;border-radius:40px;padding:clamp(2.2rem,5vw,3.6rem);box-shadow:var(--sh-lg);
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(1.8rem,4vw,3rem);align-items:center;max-width:940px;margin-inline:auto}
+@media(max-width:700px){.story-card{grid-template-columns:1fr;text-align:center;justify-items:center}}
+.story-card img{width:150px;height:150px;border-radius:50%;object-fit:cover;
+  box-shadow:0 0 0 7px var(--lav),0 24px 50px -20px rgba(59,42,133,.35)}
+.story-card blockquote{margin:0;font:500 clamp(1.2rem,2.4vw,1.55rem)/1.5 var(--disp);color:var(--ink);letter-spacing:-.015em}
+.story-card cite{display:block;margin-top:1.1rem;font:700 13.5px/1.4 var(--sans);font-style:normal;color:var(--violet)}
+
+/* ============ TESTIMONIALS — chat bubbles ============ */
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;align-items:start}
+.bub{background:#fff;border-radius:26px;border-bottom-left-radius:8px;padding:1.7rem 1.7rem 1.4rem;
+  box-shadow:var(--sh-sm);position:relative;transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.bub:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+.bub p{font-size:15px;color:var(--ink);margin:0 0 1rem}
+.bub-meta{display:flex;justify-content:space-between;align-items:center}
+.bub-meta b{font:800 12.5px/1 var(--sans);color:var(--violet);letter-spacing:.06em}
+.bub-meta span{font:600 11.5px/1 var(--sans);color:var(--mint)}
+
+.gbadge{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.1rem;background:#fff;border-radius:100px;
+  padding:.7rem 1.3rem;box-shadow:var(--sh-sm);font:600 14.5px/1 var(--sans);color:var(--body)}
+.gbadge b{font:700 16px/1 var(--sans);color:var(--ink)}
+.gstars{color:#F5B301;letter-spacing:.12em;font-size:15px}
+.bub.swap{animation:bubswap .6s ease}
+@keyframes bubswap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============ CONTACT ============ */
+.contact-card{background:#fff;border-radius:40px;box-shadow:var(--sh-lg);padding:clamp(2.2rem,5vw,3.4rem);
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,4.5vw,3.5rem)}
+@media(max-width:880px){.contact-card{grid-template-columns:1fr}}
+.contact-card h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin:.9rem 0 1rem}
+.cinfo{font-size:15px;line-height:1.9}
+.cinfo b{color:var(--ink)}
+.cinfo a{color:var(--violet);font-weight:600;text-decoration:none}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:560px){form .row{grid-template-columns:1fr}}
+label{display:block;font:700 12.5px/1 var(--sans);color:var(--ink);margin:0 0 .45rem;letter-spacing:.03em}
+input,textarea{width:100%;font:500 15px/1.5 var(--sans);color:var(--ink);background:var(--cream);
+  border:1.5px solid transparent;border-radius:14px;padding:.95rem 1.05rem;margin-bottom:1rem;outline:none;
+  transition:border-color .3s,background .3s}
+input:focus,textarea:focus{border-color:var(--violet);background:#fff}
+textarea{min-height:120px;resize:vertical}
+
+/* ============ CTA ============ */
+.cta-card{position:relative;overflow:hidden;border-radius:44px;text-align:center;color:#fff;
+  background:linear-gradient(135deg,var(--violet-deep) 0%,var(--violet) 55%,#7B5CE0 100%);
+  padding:clamp(3rem,7vw,5.2rem) clamp(1.5rem,5vw,4rem);box-shadow:0 40px 90px -30px rgba(59,42,133,.55)}
+.cta-card::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(55% 60% at 12% 15%,rgba(63,182,222,.35),transparent 60%),
+             radial-gradient(50% 55% at 90% 88%,rgba(245,185,138,.28),transparent 62%)}
+.cta-in{position:relative;z-index:1;max-width:640px;margin-inline:auto}
+.cta-in h2{color:#fff;font-size:clamp(2rem,4.5vw,3rem);margin-bottom:1rem}
+.cta-in p{color:rgba(255,255,255,.82);font-size:1.08rem;margin-bottom:2.2rem}
+.cta-in .btn{background:#fff;color:var(--violet-deep)}
+.cta-in .btn .arr{background:var(--violet);color:#fff}
+.cta-note{margin-top:1.5rem;font-size:13.5px;color:rgba(255,255,255,.7);font-weight:600}
+
+footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
+.f-in{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.f-in a{text-decoration:none;font-weight:600}
+.f-in a:hover{color:var(--violet)}
+</style>
+</head>
+<body>
+
+<header id="hdr"><div class="wrap nav">
+  <a class="brand" href="#top"><img src="assets/logo-icon.png" alt="">
+    <b>Functional<i>COGNITIVE REHAB</i></b></a>
+  <nav class="nav-pill">
+    <a href="#help">Who we help</a><a href="#approach">Our approach</a>
+    <a href="#process">How it works</a><a href="#team">Our team</a>
+  </nav>
+  <a class="btn" href="#start">Get started <span class="arr">→</span></a>
+</div></header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">🧠 Telehealth cognitive rehabilitation</span>
+      <h1 style="margin-top:1.2rem">Think clearly again. <span class="hl">We'll show you how.</span></h1>
+      <p class="lede">Evidence-based cognitive rehab for brain injury, concussion, stroke and more — delivered by licensed speech pathologists, from your home, on your schedule.</p>
+      <div class="hero-cta">
+        <a class="btn lg" href="#start">Start your assessment <span class="arr">→</span></a>
+        <a class="btn ghost lg" href="#help">Is this me? <span class="arr">↓</span></a>
+      </div>
+      <div class="hero-meta">
+        <div class="avastack">
+          <img src="assets/tyler-king.png" alt=""><img src="assets/paula-zappala.png" alt="">
+          <img src="assets/stephanie-castro.png" alt=""><img src="assets/colin-misich.png" alt="">
+        </div>
+        <small><b>11 licensed clinicians</b> · ASHA certified<br>English &amp; Spanish</small>
+      </div>
+    </div>
+
+    <!-- the session card -->
+    <div class="sess rv">
+      <div class="sess-card">
+        <span class="sess-live"><i></i> IN SESSION</span>
+        <span class="sess-time">32:14</span>
+        <img src="assets/tyler-king.png" alt="Tyler King in a telehealth session">
+        <div class="sess-name">Tyler King, M.S., CCC-SLP</div>
+        <div class="sess-role">OWNER · SPEECH PATHOLOGIST</div>
+        <div class="sess-bar"><span>🎙️</span><span>📹</span><span>💬</span><span class="end">✕</span></div>
+      </div>
+      <div class="chip chip-msg float1">
+        <p>Great session today — you held focus the whole hour. Same time Thursday?</p>
+        <small>Tyler · just now <b>✓✓</b></small>
+      </div>
+      <div class="chip chip-appt float2">
+        <img src="assets/paula-zappala.png" alt="">
+        <span><b>Next session</b><small>Thu · 2:00 PM · Telehealth</small></span>
+      </div>
+      <div class="chip chip-stat float3">
+        <span class="up">↑</span>
+        <span><b>Week 8</b><small>Attention &amp; recall trending up</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats"><div class="wrap stat-row">
+  <div class="stat rv"><b data-count="11">0</b><span>LICENSED CLINICIANS</span></div>
+  <div class="stat rv"><b data-count="100" data-suffix="%">0</b><span>TELEHEALTH DELIVERED</span></div>
+  <div class="stat rv"><b>CCC-SLP</b><span>ASHA CERTIFIED TEAM</span></div>
+  <div class="stat rv"><b>EN·ES</b><span>BILINGUAL CARE</span></div>
+</div></section>
+
+<!-- ================= SYMPTOMS ================= -->
+<section id="help"><div class="wrap">
+  <div style="text-align:center;max-width:62ch;margin:0 auto 3.2rem" class="rv">
+    <span class="eyebrow">Who we help</span>
+    <h2 class="big">Does any of this sound like you?</h2>
+    <p style="font-size:1.07rem">After a brain injury these things aren't a character flaw, and they aren't permanent. They're symptoms — and they respond to treatment.</p>
+  </div>
+  <div class="sym-grid">
+    <div class="sym rv"><div class="sym-ic i1">📖</div><h3>Reading the same paragraph three times</h3><p>You reach the bottom of the page and realize none of it stayed with you.</p></div>
+    <div class="sym rv"><div class="sym-ic i2">💬</div><h3>Losing your train of thought mid-sentence</h3><p>The word was right there. Now the whole room is waiting on you.</p></div>
+    <div class="sym rv"><div class="sym-ic i3">⏱️</div><h3>Everything takes twice as long</h3><p>Tasks that used to be automatic now demand full concentration — and drain you.</p></div>
+    <div class="sym rv"><div class="sym-ic i4">📉</div><h3>Falling behind at work or school</h3><p>You know you're capable of more. Keeping up has quietly become the whole job.</p></div>
+    <div class="sym rv"><div class="sym-ic i5">📝</div><h3>Forgetting names, plans, appointments</h3><p>You write everything down and things still slip through.</p></div>
+    <div class="sym rv"><div class="sym-ic i6">🫥</div><h3>Being told you "look fine"</h3><p>The injury doesn't show. The difficulty is real, measurable — and treatable.</p></div>
+  </div>
+  <p class="sym-foot rv">Recognized yourself in two or more? An assessment is worth your time.</p>
+</div></section>
+
+<!-- ================= APPROACH ================= -->
+<section id="approach" style="padding-top:2rem"><div class="wrap split">
+  <div class="rv">
+    <span class="eyebrow">Our approach</span>
+    <h2 class="big">What cognitive rehabilitation actually is</h2>
+    <p>A combination of <strong>restorative</strong> and <strong>compensatory</strong> techniques that improve attention, memory, organization, problem-solving, planning and verbal expression.</p>
+    <div style="margin-top:1.4rem">
+      <div class="check"><i>✓</i> Evidence-based strategies and exercises, delivered by speech pathologists who specialize in cognition</div>
+      <div class="check"><i>✓</i> Built around your real goals — your job, your classes, your life</div>
+      <div class="check"><i>✓</i> A clear plan with measurable progress, not an open-ended commitment</div>
+      <div class="check"><i>✓</i> Services offered in English and Spanish</div>
+    </div>
+  </div>
+  <div class="approach-vis rv">
+    <video id="neuronvid" src="assets/neurons-loop-web.mp4" poster="assets/neurons-poster.jpg"
+      muted playsinline autoplay loop preload="metadata" aria-hidden="true"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+    <div class="vis-chip vc1 float1"><b>Connections, rebuilt</b><small>attention · memory · executive function</small></div>
+    <div class="vis-chip vc2 float2"><b>1–3 sessions / week</b><small>from wherever you are</small></div>
+  </div>
+</div></section>
+
+<!-- ================= CONDITIONS ================= -->
+<section style="padding-top:0"><div class="wrap">
+  <div style="text-align:center;margin-bottom:2.4rem" class="rv">
+    <span class="eyebrow">Conditions</span>
+    <h2 class="big">Common diagnoses we treat</h2>
+  </div>
+  <div class="cond-row rv">
+    <span class="cond">Traumatic brain injury</span><span class="cond">Post-concussion syndrome</span>
+    <span class="cond">Stroke</span><span class="cond">Mild cognitive impairment</span>
+    <span class="cond">ADHD</span><span class="cond">Long COVID</span>
+  </div>
+</div></section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process" style="padding-top:2rem"><div class="wrap">
+  <div style="text-align:center;max-width:56ch;margin:0 auto 3rem" class="rv">
+    <span class="eyebrow">How it works</span>
+    <h2 class="big">Four steps, start to independence</h2>
+  </div>
+  <div class="proc-grid">
+    <div class="proc rv"><div class="proc-n">1</div><h3>Comprehensive assessment</h3><p>A full cognitive evaluation to find exactly where the difficulty is — and where it isn't.</p></div>
+    <div class="proc rv"><div class="proc-n">2</div><h3>Individualized plan</h3><p>Built around your actual goals — your job, your classes, your life. Not a worksheet packet.</p></div>
+    <div class="proc rv"><div class="proc-n">3</div><h3>Telehealth sessions</h3><p>One to three sessions per week based on need, from wherever you are.</p></div>
+    <div class="proc rv"><div class="proc-n">4</div><h3>Independence</h3><p>Measurable gains in attention, memory and problem-solving — and a return to your life.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= TEAM ================= -->
+<section id="team" style="padding-top:2rem"><div class="wrap">
+  <div style="text-align:center;max-width:62ch;margin:0 auto 3rem" class="rv">
+    <span class="eyebrow">Our team</span>
+    <h2 class="big">Eleven licensed speech pathologists</h2>
+    <p style="font-size:1.05rem">Every clinician holds a master's degree and ASHA's Certificate of Clinical Competence. Tap anyone to read their background.</p>
+  </div>
+  <div class="team-grid" id="teamGrid"></div>
+</div></section>
+
+<!-- ================= COLIN ================= -->
+<section style="padding-top:1rem"><div class="wrap">
+  <div class="story-card rv">
+    <img src="assets/colin-misich.png" alt="Colin Misich, M.S., CCC-SLP">
+    <div>
+      <blockquote>“As a TBI survivor himself, Colin is most passionate about the work he feels fortunate to be part of — providing cognitive rehabilitation in both English and Spanish to the brain injury community.”</blockquote>
+      <cite>Colin Misich, M.S., CCC-SLP — Speech Pathologist &amp; TBI survivor</cite>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section style="padding-top:2rem"><div class="wrap">
+  <div style="text-align:center;margin-bottom:2.2rem" class="rv">
+    <span class="eyebrow">Patient outcomes</span>
+    <h2 class="big">What our patients say</h2>
+    <div class="gbadge" aria-label="Rated 5.0 out of 5 from 125 Google reviews">
+      <span class="gstars" aria-hidden="true">★★★★★</span>
+      <b>5.0</b> · 125 five-star Google reviews
+    </div>
+  </div>
+  <div class="tg" id="revGrid" aria-live="polite"></div>
+  <p style="text-align:center;margin-top:2.6rem" class="rv"><a class="btn ghost" href="https://www.google.com/search?q=functional+cognitive+rehab+reviews" target="_blank" rel="noopener">Read all 125 reviews on Google <span class="arr">→</span></a></p>
+</div></section>
+
+<!-- ================= CTA ================= -->
+<section id="start" style="padding-top:1rem"><div class="wrap">
+  <div class="cta-card rv"><div class="cta-in">
+    <h2>Let's find out what's actually going on</h2>
+    <p>It starts with a comprehensive cognitive assessment. We'll tell you what we find, what we recommend, and what it takes — before you commit to anything.</p>
+    <a class="btn lg" href="#contact">Book your assessment <span class="arr">→</span></a>
+    <div class="cta-note">Telehealth · English &amp; Spanish · Most major insurance accepted</div>
+  </div></div>
+</div></section>
+
+<section id="contact" style="padding-top:1rem"><div class="wrap">
+  <div class="contact-card rv">
+    <div>
+      <span class="eyebrow">Contact us</span>
+      <h2>Fill out the form and we'll be in contact shortly</h2>
+      <div class="cinfo">
+        <b>Telehealth appointments only</b><br>
+        Monday – Friday · 8am – 6pm PST<br><br>
+        P: <a href="tel:18442217016">844-221-7016</a><br>
+        F: 844-927-0225<br>
+        E: <a href="mailto:info@cogrehab.co">info@cogrehab.co</a><br><br>
+        4079 Governor Dr. #5072<br>San Diego, CA 92122
+      </div>
+    </div>
+    <!-- Wire to the practice's form handler (Formspree/Squarespace) before launch. -->
+    <form action="#" method="POST">
+      <div class="row">
+        <div><label for="fn">FIRST NAME *</label><input id="fn" name="first_name" required autocomplete="given-name"></div>
+        <div><label for="ln">LAST NAME *</label><input id="ln" name="last_name" required autocomplete="family-name"></div>
+      </div>
+      <label for="em">EMAIL *</label><input id="em" type="email" name="email" required autocomplete="email">
+      <label for="ph">PHONE *</label><input id="ph" type="tel" name="phone" required autocomplete="tel">
+      <label for="msg">MESSAGE *</label><textarea id="msg" name="message" required></textarea>
+      <button class="btn lg" type="submit">Send message <span class="arr">→</span></button>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="f-in">
+    <span>© 2026 King Speech Pathology Services, Inc. dba Functional Cognitive Rehab · All rights reserved</span>
+    <span style="display:flex;gap:1.4rem">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="ada.html">ADA Statement</a>
+      <a href="#top">Back to top ↑</a>
+    </span>
+  </div>
+</div></footer>
+
+<div class="modal" id="modal"><button class="modal-x" id="modalX" aria-label="Close">✕</button>
+  <div class="modal-card" id="modalCard"></div></div>
+
+<script>
+const TEAM=[
+ {n:"Tyler King",c:"M.S., CCC-SLP",r:"Owner / Speech Pathologist",f:"tyler-king",
+  b:"Tyler received his Master of Science in Speech and Hearing Sciences at Portland State University, where his studies focused on cognitive rehabilitation for patients recovering from traumatic brain injury (TBI). He has since treated patients with cognitive impairment across a variety of medical settings, presented on TBI rehabilitation at the American Speech-Language-Hearing Association National Convention, and founded Functional Cognitive Rehab. Tyler enjoys spending time with his family and friends, traveling, and golfing."},
+ {n:"Paula Zappala",c:"M.A., CCC-SLP",r:"Clinical Director / Speech Pathologist",f:"paula-zappala",
+  b:"Paula holds a Master of Arts in Communication Sciences and Disorders from Hampton University and brings over 25 years of experience with patient care and clinical leadership. She has worked with individuals with cognitive impairments and neurological deficits across home health, outpatient, and inpatient rehabilitation settings. Passionate about delivering patient-centered programs, Paula focuses on enhancing recovery and quality of life. In her free time, she enjoys spending time with her family, boating, cooking and traveling."},
+ {n:"Stephanie Castro",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"stephanie-castro",
+  b:"Stephanie is a Spanish bilingual SLP who received her Master of Arts in Communication Sciences and Disorders at the University of Central Florida. She has experience with neuro rehabilitation across a variety of settings — including acute care, skilled nursing, assisted living, and outpatient facilities. She is passionate about the importance of follow-up care to improve mental health outcomes for the TBI population. In her free time, you can find her spending time with family, browsing local farmer's markets, and watching the latest film or play at the theater."},
+ {n:"Darbi Haug",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"darbi-haug",
+  b:"Darbi graduated from Indiana University Bloomington with her Master of Arts degree in Speech Language Pathology and experience with numerous research initiatives related to recovery in traumatic brain injury and aphasia populations. She has worked across rehabilitation settings and previously contributed to concussion management protocols for collegiate athletes at Miami University of Ohio. In her free time she enjoys cooking new recipes, creating macrame art, and spoiling her two Labrador mixes, Jeanie and Leo."},
+ {n:"Natalie Brennan",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"natalie-brennan",
+  b:"Natalie graduated from the University of Colorado Boulder with a Master of Arts degree in Speech-Language Pathology. She brings diverse experience in neurorehabilitation across various settings, including acute care, skilled nursing, and outpatient clinics. As a Certified Brain Injury Specialist, she is passionate about providing individualized, evidence-based rehabilitation services for individuals recovering from traumatic brain injuries. In her free time, Natalie enjoys hiking, reading, and spending quality time with friends and family."},
+ {n:"Colin Misich",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:"colin-misich",
+  b:"Colin completed his Master of Science in Speech & Hearing Sciences at Portland State University. He has experience working with a wide range of age groups and patient populations. As a TBI survivor himself, however, Colin is most passionate about the work he feels fortunate to be part of — providing outpatient cognitive rehabilitation services in both English and Spanish to the brain injury community. Outside of work, Colin loves seeing live music, checking out new restaurants with his wife, and doting on their cat named Minnie."},
+ {n:"Chelsey Saenz",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"chelsey-saenz",
+  b:"Chelsey graduated from Texas Tech University Health Sciences Center with a Master of Science in Speech-Language Pathology. She has experience in neurorehabilitation, primarily in outpatient settings, treating individuals with stroke, traumatic brain injury, and other neurological conditions. She is passionate about empowering individuals to regain confidence in their speech, language, and cognitive abilities. In her free time, she enjoys traveling, exploring local coffee shops, and spending time with family and friends, as well as her dog, Lainey."},
+ {n:"Madison Turner",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"madison-turner",
+  b:"Madison earned her Master of Arts degree in Speech-Language Pathology from the University of Toledo. She brings experience from a variety of settings, including home health, outpatient, and post-acute care with a strong focus on supporting individuals with neurological conditions. Madison is committed to helping individuals achieve their highest level of independence and successfully reintegrate into their communities. Outside of work, Madison enjoys spending time outdoors and can often be found rock climbing, snowboarding, or relaxing with her cat, Mort."},
+ {n:"Katherine Matador",c:"M.A., CCC-SLP",r:"Speech Pathologist",f:"katherine-matador",
+  b:"Katherine is a bilingual Spanish SLP with a Master of Arts in Communication Sciences and Disorders from the University of North Carolina at Greensboro. She has worked across inpatient rehabilitation, acute care, and skilled nursing settings, supporting individuals with a wide range of communication and cognitive needs. She is passionate about helping individuals remain engaged in the activities and relationships that matter most to them. Outside of work, she enjoys traveling, cooking, and spending time with her husband and two young sons."},
+ {n:"Eileen Matthews",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:"eileen-matthews",
+  b:"Eileen received her Master of Science in Speech-Language Pathology from New York Medical College. She has enjoyed working with individuals in many settings. Eileen gained experience supporting individuals with brain injury while working at a military-based concussion recovery center. There, she provided therapies to optimize cognitive performance, longevity, and overall wellbeing in special operators and other military populations. In her free time, Eileen enjoys gardening and spending time with her husband and dogs."},
+ {n:"Mikahla Gilbert",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:"mikahla-gilbert",
+  b:"Mikahla received her Master of Science in Speech-Language Pathology from Purdue University, where her studies emphasized adult neurogenic disorders. She has provided services to individuals with cognitive impairments in acute care, skilled nursing, and home and community-based settings. Mikahla is committed to delivering functional, person-centered rehabilitation that emphasizes meaningful goals and practical outcomes. Outside of work, she values time with her family and enjoys reading, gardening, and hand-embroidery."}
+];
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('teamGrid').innerHTML=TEAM.map((m,i)=>`
+ <div class="mem rv" data-i="${i}" tabindex="0" role="button" aria-label="Read ${esc(m.n)}'s background">
+   <div class="mem-ph"><img src="assets/${m.f}.png" alt="${esc(m.n)}" loading="lazy"></div>
+   <b>${esc(m.n)}</b><span class="cred">${esc(m.c)}</span>
+   <span class="role">${esc(m.r)}</span><span class="more">Read bio →</span>
+ </div>`).join('');
+
+const modal=document.getElementById('modal'),card=document.getElementById('modalCard');
+function openBio(i){const m=TEAM[i];
+ card.innerHTML=`<img src="assets/${m.f}.png" alt="${esc(m.n)}"><h3>${esc(m.n)}, ${esc(m.c)}</h3>
+  <div class="role">${esc(m.r)}</div><p style="margin:0">${esc(m.b)}</p>`;
+ modal.classList.add('open');document.body.style.overflow='hidden';}
+function closeBio(){modal.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('teamGrid').addEventListener('click',e=>{const c=e.target.closest('.mem');if(c)openBio(+c.dataset.i)});
+document.getElementById('teamGrid').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;
+ const c=e.target.closest('.mem');if(c){e.preventDefault();openBio(+c.dataset.i)}});
+document.getElementById('modalX').addEventListener('click',closeBio);
+modal.addEventListener('click',e=>{if(e.target===modal)closeBio()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBio()});
+
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
+
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;
+ e.target.classList.add('in');io.unobserve(e.target)})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%5)*80+'ms';io.observe(el)});
+
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+ const el=e.target,to=+el.dataset.count,sfx=el.dataset.suffix||'';
+ if(reduce){el.textContent=to+sfx;cio.unobserve(el);return}
+ const t0=performance.now();
+ (function step(t){const p=Math.min((t-t0)/1300,1),e2=1-Math.pow(1-p,3);
+  el.textContent=Math.round(to*e2)+sfx;if(p<1)requestAnimationFrame(step)})(t0);
+ cio.unobserve(el)}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* Light-mode neural field — faint violet lattice, an accent not a spectacle. */
+function field(canvas,{count=52,link=140,speed=.14,alpha=1}={}){
+ const ctx=canvas.getContext('2d');let w,h,dpr,nodes=[],raf;
+ function size(){dpr=Math.min(devicePixelRatio||1,2);const r=canvas.getBoundingClientRect();
+  w=r.width;h=r.height;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+ function seed(){const n=Math.round(count*Math.min(1,(w*h)/(1400*760))*(w<640?.6:1));
+  nodes=Array.from({length:Math.max(20,n)},()=>({x:Math.random()*w,y:Math.random()*h,
+   vx:(Math.random()-.5)*speed,vy:(Math.random()-.5)*speed,r:Math.random()*1.5+1,ph:Math.random()*7}))}
+ function draw(time){ctx.clearRect(0,0,w,h);
+  for(const n of nodes){n.x+=n.vx;n.y+=n.vy;
+   if(n.x<-30)n.x=w+30;if(n.x>w+30)n.x=-30;if(n.y<-30)n.y=h+30;if(n.y>h+30)n.y=-30}
+  ctx.lineWidth=.8;
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+   const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
+   if(d2>link*link)continue;
+   ctx.strokeStyle=`rgba(105,85,205,${(1-Math.sqrt(d2)/link)*.16*alpha})`;
+   ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+  for(const n of nodes){const b=.5+Math.sin(time/1200+n.ph)*.5;
+   ctx.fillStyle=`rgba(91,63,199,${(.22+.3*b)*alpha})`;
+   ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,7);ctx.fill()}}
+ function loop(t){draw(t);raf=requestAnimationFrame(loop)}
+ function start(){size();seed();if(reduce){draw(0);return}
+  cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
+ let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(start,180)});start();
+ new IntersectionObserver(es=>es.forEach(e=>{if(reduce)return;
+  if(e.isIntersecting){cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
+  else cancelAnimationFrame(raf)}),{threshold:0}).observe(canvas);}
+
+/* ---- Google reviews rotation: real 5-star reviews, 3 visible, one swaps every 5s.
+   Pauses on hover; reduced motion shows a static set. ---- */
+const REVIEWS=[
+ ["I can't recommend Chelsey enough! She is kind, compassionate, and so easy to talk to. From our very first session, she made me feel comfortable and truly listened to without any judgment.","Conny H"],
+ ["Natalie has been a miracle for my life. I was involved in a pretty serious car accident that caused a bad brain injury — memory and other cognitive issues were impacted.","Kevin Gaudet"],
+ ["I had the privilege of working with Darbi after a car accident and a concussion. I never knew this treatment existed but I highly recommend it. We worked through memory, speech, and more.","Jessica Gilbert"],
+ ["Colin was particularly great to work with. He helped me a lot and was very patient. You can reach out to him anytime and he will help out. Great therapist and now a friend.","Ronald McNichols"],
+ ["I've been living with a TBI that completely turned my life upside down. When I was referred to Stephanie, she truly became an answer to my case.","Kassandra Martinez"],
+ ["Natalie helped me understand the limitations from my traumatic brain damage — and how to function in spite of it. She was inspirational, upbeat, informative and encouraging. She truly changed my life.","Sherry Jackson"],
+ ["Katherine was an amazing, thoughtful help in my therapy sessions. I will always appreciate how she helped me navigate this process. 10 out of 10.","Tamika Francois"],
+ ["After a car accident I didn't feel like myself. Mikahla helped me from day one and made me feel understood.","Melissa Palomares"],
+ ["Eileen was very patient and professional while being exceptionally knowledgeable in how TBI affects us both physically and mentally.","Ed Wong"],
+ ["My neurologist recommended the sessions. I learned so much about neuroplasticity, how to heal and create new connections, and how to challenge myself.","Diana DeLaCruz"],
+ ["This practice has great employees, led by great staff, supported by an amazing curriculum that gives patients the most amazing support, tools, and methods.","Joshua Mitchell"],
+ ["Tyler has been amazing in helping me create a plan tailored to me that has allowed me to make steady progress with my cognitive rehabilitation.","Angel Sanchez"]
+];
+const revGrid=document.getElementById('revGrid');
+function bubHTML(r){return `<p>“${esc(r[0])}”</p><div class="bub-meta"><b>— ${esc(r[1])}</b><span>★★★★★ Google review</span></div>`}
+let rIdx=3,slot=0,revTimer;
+revGrid.innerHTML=REVIEWS.slice(0,3).map(r=>`<div class="bub rv in">${bubHTML(r)}</div>`).join('');
+const slots=[...revGrid.children];
+function rotate(){const b=slots[slot];b.classList.remove('swap');void b.offsetWidth;
+ b.innerHTML=bubHTML(REVIEWS[rIdx%REVIEWS.length]);b.classList.add('swap');
+ rIdx++;slot=(slot+1)%3;}
+if(!reduce){revTimer=setInterval(rotate,5000);
+ revGrid.addEventListener('mouseenter',()=>clearInterval(revTimer));
+ revGrid.addEventListener('mouseleave',()=>{clearInterval(revTimer);revTimer=setInterval(rotate,5000)});}
+
+field(document.getElementById('field'),{count:54,link:150,alpha:.9});
+/* Higgsfield render (kling3_0_turbo, 7.5cr): frosted-glass neurons + light threads.
+   iOS rules: props set explicitly; reduced-motion or suspended autoplay → poster frame. */
+(function(){const v=document.getElementById('neuronvid');if(!v)return;
+ v.muted=true;v.playsInline=true;
+ if(reduce){v.removeAttribute('autoplay');v.pause();return}
+ v.play().catch(()=>{/* Low Power Mode: poster carries it */});})();
+</script>
+</body>
+</html>
