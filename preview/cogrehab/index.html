@@ -126,16 +126,51 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
   .float3{animation:float 7s ease-in-out 1.6s infinite}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 }
-/* MOBILE: absolute chips bury the portrait at phone widths — they become a clean
-   stack under the card instead. Same content, zero overlap, no clipped edges. */
+/* ============ MOBILE-FIRST LAYER (≤700px) ============
+   The phone version is the primary experience: tighter hero rhythm, one floating chip
+   kept for personality (small, never covering the face), the rest in a neat grid,
+   and the long card sections become native swipe carousels. */
 @media(max-width:700px){
+  section{padding:3.4rem 0}
+  .hero{padding:7.2rem 0 2.4rem}
+  .eyebrow{font-size:10.5px;letter-spacing:.11em;padding:.5rem .85rem}
+  .hero h1{font-size:clamp(2.5rem,11.5vw,3rem)}
+  .hero .lede{font-size:1.02rem;margin:1.2rem 0 1.6rem}
+  .hero-cta .btn.lg{width:100%;justify-content:space-between}
+  .hero-meta{margin-top:1.7rem}
+  /* session card: msg chip floats small over the card's lower-left (face stays clear);
+     the other two sit in a tidy 2-up grid below */
   .sess{max-width:440px}
-  .sess-card{padding:2.3rem 1.3rem 1.5rem}
-  .chip{position:static;width:100%;max-width:none;margin-top:.75rem;animation:none;
-    box-shadow:var(--sh-sm);border-radius:18px}
-  .chip-msg{border-bottom-left-radius:18px}
-  .chip-appt,.chip-stat{display:flex;align-items:center}
+  .sess-card{padding:2.2rem 1.2rem 1.4rem}
+  .sess-card>img{width:56%}
+  .chip{animation:none}
+  .chip-msg{position:static;max-width:88%;margin:-1.1rem auto 0;box-shadow:var(--sh-lg)}
+  .chip-appt,.chip-stat{position:static;width:100%;max-width:none;margin-top:.7rem;
+    box-shadow:var(--sh-sm);display:flex;align-items:center}
+  .chip-duo{display:grid;grid-template-columns:1fr;gap:0}
+  /* stat strip tighter */
+  .stat{padding:1.15rem .9rem;border-radius:18px}
+  .stat b{font-size:1.5rem}
+  .stat span{font-size:9.5px;letter-spacing:.07em}
+  /* swipe carousels: full-bleed, snap, next-card peek */
+  /* .swipe.swipe: this block sits mid-stylesheet, so the doubled class out-specifies the
+     later base grid rules (.team-grid's wrap, .mem's flex) without !important. */
+  .swipe.swipe{display:flex;flex-wrap:nowrap;gap:.85rem;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;width:100vw;margin-inline:calc(50% - 50vw);
+    padding:0 1.25rem .9rem;scrollbar-width:none;justify-content:flex-start}
+  .swipe.swipe::-webkit-scrollbar{display:none}
+  .swipe.swipe>*{scroll-snap-align:center;flex:0 0 76vw;max-width:none}
+  .team-grid.swipe.swipe>*{flex-basis:64vw}
+  .tg.swipe.swipe>*{flex-basis:84vw}
+  .swipe-hint{display:block;text-align:center;font:600 11.5px/1 var(--sans);color:var(--violet);
+    letter-spacing:.08em;margin:-1.4rem 0 1.4rem;opacity:.75}
+  /* sticky book bar after scrolling past the hero */
+  .bookbar{position:fixed;left:.9rem;right:.9rem;bottom:.9rem;z-index:60;
+    transform:translateY(130%);transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+  .bookbar.show{transform:none}
+  .bookbar .btn{width:100%;justify-content:space-between;box-shadow:0 18px 40px -12px rgba(59,42,133,.6)}
 }
+@media(min-width:701px){.swipe-hint,.bookbar{display:none}}
 
 /* ============ STAT STRIP ============ */
 .stats{padding:1rem 0 0}
@@ -329,6 +364,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
         <p>Great session today — you held focus the whole hour. Same time Thursday?</p>
         <small>Tyler · just now <b>✓✓</b></small>
       </div>
+      <div class="chip-duo">
       <div class="chip chip-appt float2">
         <img src="assets/paula-zappala.png" alt="">
         <span><b>Next session</b><small>Thu · 2:00 PM · Telehealth</small></span>
@@ -336,6 +372,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
       <div class="chip chip-stat float3">
         <span class="up">↑</span>
         <span><b>Week 8</b><small>Attention &amp; recall trending up</small></span>
+      </div>
       </div>
     </div>
   </div>
@@ -549,6 +586,23 @@ document.getElementById('modalX').addEventListener('click',closeBio);
 modal.addEventListener('click',e=>{if(e.target===modal)closeBio()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBio()});
 
+/* Mobile: long card sections become swipe carousels + sticky book bar. */
+if(matchMedia('(max-width:700px)').matches){
+  for(const sel of ['.sym-grid','.team-grid','.tg']){
+    const el=document.querySelector(sel); if(!el)continue;
+    el.classList.add('swipe');
+    const hint=document.createElement('span');hint.className='swipe-hint';hint.textContent='‹ SWIPE ›';
+    el.parentNode.insertBefore(hint,el);
+  }
+  const bar=document.createElement('div');bar.className='bookbar';
+  bar.innerHTML='<a class="btn lg" href="#contact">Book your assessment <span class="arr">→</span></a>';
+  document.body.appendChild(bar);
+  const contact=document.getElementById('contact');
+  addEventListener('scroll',()=>{
+    const nearContact=contact.getBoundingClientRect().top<innerHeight;
+    bar.classList.toggle('show',scrollY>1200&&!nearContact);
+  },{passive:true});
+}
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
 
