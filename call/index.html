@@ -68,13 +68,14 @@
   .btn-p{display:block;width:100%;text-align:center;background:var(--grad);color:#fff;font-weight:800;font-size:17px;
     padding:16px 20px;border-radius:14px;box-shadow:0 6px 18px -4px rgba(58,85,217,.5);letter-spacing:-.01em}
   .btn-p:active{transform:translateY(1px)}
-  /* Cal.com inline embed (progressive enhancement — the button above always works). Both the
-     "or pick a slot" caption and the container stay hidden until Cal reports linkReady, so a
-     slow or failed embed can never strand a giant blank box under the button. */
+  /* Cal.com inline embed (progressive enhancement — the button above always works). The
+     container starts COLLAPSED (height:0, not display:none — Cal won't initialize inside a
+     display:none subtree) and expands only once the embed is actually alive, so a slow or
+     failed embed can never strand a giant blank box under the button. */
   .or{display:none;text-align:center;font-size:12.5px;color:var(--muted);margin:10px 0}
-  #cal-inline{display:none;border-radius:var(--radius);overflow:hidden}
+  #cal-inline{height:0;overflow:hidden;border-radius:var(--radius)}
   .book.cal-ready .or{display:block}
-  .book.cal-ready #cal-inline{display:block;min-height:560px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin-top:6px}
+  .book.cal-ready #cal-inline{height:auto;min-height:560px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin-top:6px}
 
   .fine{border-top:1px solid var(--line);margin-top:30px;padding:18px 0 34px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
   .fine a{color:var(--indigo);font-weight:700}
@@ -152,10 +153,19 @@
     config: { layout: "month_view" }
   });
   Cal.ns["first-bid"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
-  // Reveal the inline embed ONLY when Cal itself says the booking UI is ready — the official
-  // signal, so we never show (or reserve space for) an embed that didn't actually load.
-  Cal.ns["first-bid"]("on", { action: "linkReady", callback: function () {
-    document.getElementById('book').classList.add('cal-ready');
-  } });
+  // Reveal the embed only when it's actually ALIVE: Cal's own linkReady event, or —
+  // belt-and-suspenders — the first postMessage arriving from a *.cal.com frame. Either
+  // signal means real booking UI exists; neither means the button quietly carries alone.
+  (function () {
+    var revealed = false;
+    function reveal() {
+      if (revealed) return; revealed = true;
+      document.getElementById('book').classList.add('cal-ready');
+    }
+    Cal.ns["first-bid"]("on", { action: "linkReady", callback: reveal });
+    window.addEventListener('message', function (e) {
+      try { if (/(^|\.)cal\.com$/.test(new URL(e.origin).hostname)) reveal(); } catch (_) {}
+    });
+  })();
 </script>
 </body></html>
