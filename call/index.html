@@ -86,14 +86,14 @@
 
 <header>
   <a class="logo" href="https://boazcore.com/"><span class="mark">B</span>Boaz</a>
-  <span class="hdr-note">20 min · free · no card</span>
+  <span class="hdr-note">30 min · free · no card</span>
 </header>
 
 <main class="wrap">
   <section class="hero">
     <p class="eyebrow">First Bid Call — Free</p>
     <h1>We build your next bid. <span class="hl">Live. At your rates.</span></h1>
-    <p class="lead">Bring a job you're actually pricing this week. In 20 minutes we set your real numbers — labor rate, overhead, profit — and Boaz builds the full itemized bid in front of you. <b>It's yours to send whether or not you ever sign up.</b></p>
+    <p class="lead">Bring a job you're actually pricing this week. In 30 minutes we set your real numbers — labor rate, overhead, profit — and Boaz builds the full itemized bid in front of you. <b>It's yours to send whether or not you ever sign up.</b></p>
   </section>
 
   <section class="proof" aria-label="Real jobs priced through Boaz">
@@ -150,9 +150,11 @@
   Cal.ns["first-bid"]("inline", {
     elementOrSelector: "#cal-inline",
     calLink: "ethan-ford-qbclw1/first-bid",
-    config: { layout: "month_view" }
+    config: { layout: "month_view", theme: "light" }
   });
-  Cal.ns["first-bid"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  // theme:"light" — the page is light-only, so the embed must never follow a phone's dark
+  // mode and render as a black slab in the middle of a white page.
+  Cal.ns["first-bid"]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "light" });
   // Reveal the embed only when it's actually ALIVE: Cal's own linkReady event, or —
   // belt-and-suspenders — the first postMessage arriving from a *.cal.com frame. Either
   // signal means real booking UI exists; neither means the button quietly carries alone.
