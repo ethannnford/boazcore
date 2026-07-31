@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<!-- Security: same posture as the main site, plus the Cal.com embed (script + frame) and the
+     YouTube video slot (frame, nocookie host). Everything else stays locked to self. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://app.cal.com; frame-src https://cal.com https://app.cal.com https://www.youtube-nocookie.com; connect-src 'self' https://app.cal.com https://cal.com; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Book a free 20-minute call — we build the bid for a job you're pricing right now, at your rates, live. Yours to send whether or not you sign up.">
+<meta name="theme-color" content="#2c47c4">
+<title>First Bid Call — Free | Boaz</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://boazcore.com/call/">
+<meta property="og:title" content="First Bid Call — Free (we build it live)">
+<meta property="og:description" content="20 minutes. Your real job, your rates, a finished bid — free either way. Boaz runs real jobs: a $366K insurance restoration itemized room by room.">
+<meta property="og:image" content="https://boazcore.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#3a55d9; --indigo-d:#2840bd; --ink:#10131f; --body:#454b5d;
+    --muted:#737a8c; --line:#e9ebf2; --bg:#ffffff; --soft:#f5f6fb;
+    --green:#1f9d57; --radius:16px;
+    --grad:linear-gradient(135deg,#3a55d9 0%,#2840bd 100%);
+    --shadow:0 18px 50px -20px rgba(20,28,80,.16); --shadow-sm:0 2px 14px rgba(20,28,80,.05);
+    --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);color:var(--body);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{color:var(--ink);line-height:1.12;letter-spacing:-.025em;font-weight:800;text-wrap:balance}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+  header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:17px;letter-spacing:-.02em}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px;box-shadow:var(--shadow-sm)}
+  .hdr-note{font-size:12.5px;font-weight:700;color:var(--green);white-space:nowrap}
+
+  .hero{padding:40px 0 8px;text-align:left}
+  .eyebrow{color:var(--indigo);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+  .hero h1{font-size:clamp(30px,7.5vw,44px);margin-bottom:14px}
+  .hero h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:17px;color:var(--muted);line-height:1.6;text-wrap:pretty}
+  .lead b{color:var(--ink)}
+
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px 0 6px}
+  .stat{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center}
+  .stat .n{font-size:clamp(17px,4.6vw,24px);font-weight:800;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat .l{font-size:11px;color:var(--muted);font-weight:600;line-height:1.35;margin-top:4px}
+
+  .how{display:grid;gap:10px;margin:22px 0 4px}
+  .step{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow-sm)}
+  .step .k{flex:0 0 26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;margin-top:1px}
+  .step p{font-size:14.5px;line-height:1.5}
+  .step p b{color:var(--ink)}
+
+  /* VSL slot — invisible until VSL_URL is set below. */
+  .vsl{display:none;margin:26px 0 4px}
+  .vsl.on{display:block}
+  .vsl .frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#0c0f1a;box-shadow:var(--shadow)}
+  .vsl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vsl .cap{font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center}
+
+  .book{margin:30px 0 12px}
+  .book h2{font-size:21px;margin-bottom:6px}
+  .book .sub{font-size:14.5px;color:var(--muted);margin-bottom:16px}
+  .btn-p{display:block;width:100%;text-align:center;background:var(--grad);color:#fff;font-weight:800;font-size:17px;
+    padding:16px 20px;border-radius:14px;box-shadow:0 6px 18px -4px rgba(58,85,217,.5);letter-spacing:-.01em}
+  .btn-p:active{transform:translateY(1px)}
+  /* Cal.com inline embed (progressive enhancement — the button above always works). Both the
+     "or pick a slot" caption and the container stay hidden until Cal reports linkReady, so a
+     slow or failed embed can never strand a giant blank box under the button. */
+  .or{display:none;text-align:center;font-size:12.5px;color:var(--muted);margin:10px 0}
+  #cal-inline{display:none;border-radius:var(--radius);overflow:hidden}
+  .book.cal-ready .or{display:block}
+  .book.cal-ready #cal-inline{display:block;min-height:560px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin-top:6px}
+
+  .fine{border-top:1px solid var(--line);margin-top:30px;padding:18px 0 34px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
+  .fine a{color:var(--indigo);font-weight:700}
+  @media (min-width:640px){ .hero{padding-top:52px} .step p{font-size:15px} }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="https://boazcore.com/"><span class="mark">B</span>Boaz</a>
+  <span class="hdr-note">20 min · free · no card</span>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">First Bid Call — Free</p>
+    <h1>We build your next bid. <span class="hl">Live. At your rates.</span></h1>
+    <p class="lead">Bring a job you're actually pricing this week. In 20 minutes we set your real numbers — labor rate, overhead, profit — and Boaz builds the full itemized bid in front of you. <b>It's yours to send whether or not you ever sign up.</b></p>
+  </section>
+
+  <section class="proof" aria-label="Real jobs priced through Boaz">
+    <div class="stat"><div class="n">$366K</div><div class="l">insurance restoration, itemized room&nbsp;by&nbsp;room</div></div>
+    <div class="stat"><div class="n">$83K</div><div class="l">invoice signed on a client's phone</div></div>
+    <div class="stat"><div class="n">$127K</div><div class="l">moved through Boaz in one weekend</div></div>
+  </section>
+
+  <section class="vsl" id="vslWrap">
+    <div class="frame" id="vslFrame"></div>
+    <p class="cap">2 minutes — what we'll do on the call.</p>
+  </section>
+
+  <section class="how" aria-label="How the call works">
+    <div class="step"><span class="k">1</span><p><b>You talk, we set your numbers.</b> Your hourly rate, crew, overhead and the profit you actually want to keep.</p></div>
+    <div class="step"><span class="k">2</span><p><b>We run your real job.</b> Photos or a description of the job you're bidding — Boaz itemizes it line by line.</p></div>
+    <div class="step"><span class="k">3</span><p><b>You leave with the bid.</b> A finished, client-ready document at your prices. Free either way.</p></div>
+  </section>
+
+  <section class="book" id="book">
+    <h2>Grab a time</h2>
+    <p class="sub">Have the job details handy — photos or notes. That's the whole prep.</p>
+    <a class="btn-p" href="https://cal.com/ethan-ford-qbclw1/first-bid" target="_blank" rel="noopener">Book my free First Bid Call →</a>
+    <p class="or">— or pick a slot right here —</p>
+    <div id="cal-inline"></div>
+  </section>
+
+  <p class="fine">Built by Ethan Ford · Boaz runs real contractors' jobs every day — <a href="https://boazcore.com/">see the product</a>.<br>No card, no pressure. Worst case, you walk away with a free bid.</p>
+</main>
+
+<script>
+  // ---- VSL slot ----
+  // Paste the YouTube link here when the video exists (watch URL or ID both fine) and the
+  // player appears; empty string keeps the whole section hidden. No other edits needed.
+  var VSL_URL = '';
+  (function(){
+    if (!VSL_URL) return;
+    var m = VSL_URL.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/) || [null, VSL_URL.trim()];
+    var id = (m[1] || '').replace(/[^\w-]/g, '');
+    if (!id) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1';
+    f.title = 'What we do on the First Bid Call';
+    f.allow = 'accelerometer; encrypted-media; picture-in-picture; web-share';
+    f.setAttribute('allowfullscreen', '');
+    document.getElementById('vslFrame').appendChild(f);
+    document.getElementById('vslWrap').classList.add('on');
+  })();
+
+  // ---- Cal.com inline embed (official snippet; progressive enhancement) ----
+  // If this fails for any reason, the primary button above still books — never a dead end.
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "first-bid", { origin: "https://cal.com" });
+  Cal.ns["first-bid"]("inline", {
+    elementOrSelector: "#cal-inline",
+    calLink: "ethan-ford-qbclw1/first-bid",
+    config: { layout: "month_view" }
+  });
+  Cal.ns["first-bid"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  // Reveal the inline embed ONLY when Cal itself says the booking UI is ready — the official
+  // signal, so we never show (or reserve space for) an embed that didn't actually load.
+  Cal.ns["first-bid"]("on", { action: "linkReady", callback: function () {
+    document.getElementById('book').classList.add('cal-ready');
+  } });
+</script>
+</body></html>
