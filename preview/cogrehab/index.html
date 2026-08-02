@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Functional Cognitive Rehab — Telehealth Cognitive Rehabilitation for Brain Injury &amp; Concussion</title>
-<meta name="description" content="Evidence-based cognitive rehabilitation delivered by 11 licensed speech pathologists. Telehealth therapy for traumatic brain injury, concussion, stroke, and Long COVID. English &amp; Spanish.">
+<meta name="description" content="America’s largest telehealth cognitive rehabilitation clinic — 12 licensed speech pathologists, 5,000+ patients served since 2021, licensed in 25 states. Therapy for traumatic brain injury, concussion, stroke, and Long COVID. English &amp; Spanish.">
 <meta property="og:title" content="Functional Cognitive Rehab">
 <meta property="og:description" content="Evidence-based cognitive rehabilitation, delivered by licensed speech pathologists. Telehealth. English &amp; Spanish.">
 <meta property="og:type" content="website">
@@ -182,13 +182,23 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
 .stat b{display:block;font:600 clamp(1.7rem,3.4vw,2.3rem)/1 var(--disp);color:var(--ink)}
 .stat span{display:block;margin-top:.5rem;font:700 11.5px/1.4 var(--sans);letter-spacing:.09em;color:var(--body)}
 
+/* ============ LICENSURE MAP ============ */
+.usmap{display:grid;grid-template-columns:repeat(11,1fr);gap:6px;max-width:720px;margin:2.4rem auto 0}
+.st{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;font:700 11px/1 var(--sans);
+  color:#B9B4CE;background:#fff;box-shadow:var(--sh-sm);transition:transform .3s,background .3s,color .3s}
+.st.on{background:var(--violet);color:#fff;box-shadow:0 10px 22px -10px rgba(91,63,199,.55)}
+.st.on:hover{transform:translateY(-3px)}
+.map-note{text-align:center;font-size:14.5px;margin-top:1.8rem;color:var(--body)}
+.map-note b{color:var(--ink)}
+@media(max-width:700px){.usmap{gap:3.5px}.st{font-size:8px;border-radius:6px}}
+
 /* ============ SYMPTOMS ============ */
 .sym-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.05rem}
 .sym{background:#fff;border-radius:var(--r);padding:1.8rem 1.65rem;box-shadow:var(--sh-sm);
   transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
 .sym:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
 .sym-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.05rem;font-size:20px}
-.i1{background:#EFECFA}.i2{background:#E4F4FB}.i3{background:#FBEFE2}.i4{background:#E7F6F0}.i5{background:#FAECF3}.i6{background:#F1F0E3}
+.i1{background:#EFECFA}.i2{background:#E4F4FB}.i3{background:#FBEFE2}.i4{background:#E7F6F0}.i5{background:#FAECF3}.i6{background:#F1F0E3}.i7{background:#E9F0FB}.i8{background:#F4EDE4}
 .sym h3{font-size:1.1rem;margin-bottom:.45rem;font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
 .sym p{font-size:15px;margin:0}
 .sym-foot{margin-top:2.6rem;text-align:center;font-size:1.1rem;color:var(--ink);font-weight:600}
@@ -334,9 +344,9 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">🧠 Telehealth cognitive rehabilitation</span>
+      <span class="eyebrow">🧠 America’s largest telehealth cognitive rehab clinic</span>
       <h1 style="margin-top:1.2rem">Think clearly again. <span class="hl">We'll show you how.</span></h1>
-      <p class="lede">Evidence-based cognitive rehab for brain injury, concussion, stroke and more — delivered by licensed speech pathologists, from your home, on your schedule.</p>
+      <p class="lede">Evidence-based cognitive rehab for brain injury, concussion, stroke and more — delivered by licensed speech pathologists, from your home, on your schedule. <strong>Over 5,000 patients served since 2021.</strong></p>
       <div class="hero-cta">
         <a class="btn lg" href="#start">Start your assessment <span class="arr">→</span></a>
         <a class="btn ghost lg" href="#help">Is this me? <span class="arr">↓</span></a>
@@ -346,7 +356,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
           <img src="assets/tyler-king.png" alt=""><img src="assets/paula-zappala.png" alt="">
           <img src="assets/stephanie-castro.png" alt=""><img src="assets/colin-misich.png" alt="">
         </div>
-        <small><b>11 licensed clinicians</b> · ASHA certified<br>English &amp; Spanish</small>
+        <small><b>12 licensed clinicians</b> · ASHA certified<br>English &amp; Spanish</small>
       </div>
     </div>
 
@@ -371,7 +381,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
       </div>
       <div class="chip chip-stat float3">
         <span class="up">↑</span>
-        <span><b>Week 8</b><small>Attention &amp; recall trending up</small></span>
+        <span><b>Week 8</b><small>Attention &amp; recall improving</small></span>
       </div>
       </div>
     </div>
@@ -380,10 +390,20 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
 
 <!-- ================= STATS ================= -->
 <section class="stats"><div class="wrap stat-row">
-  <div class="stat rv"><b data-count="11">0</b><span>LICENSED CLINICIANS</span></div>
-  <div class="stat rv"><b data-count="100" data-suffix="%">0</b><span>TELEHEALTH DELIVERED</span></div>
-  <div class="stat rv"><b>CCC-SLP</b><span>ASHA CERTIFIED TEAM</span></div>
-  <div class="stat rv"><b>EN·ES</b><span>BILINGUAL CARE</span></div>
+  <div class="stat rv"><b data-count="5000" data-suffix="+">0</b><span>PATIENTS SERVED SINCE 2021</span></div>
+  <div class="stat rv"><b data-count="25" data-suffix="">0</b><span>STATES LICENSED &amp; COUNTING</span></div>
+  <div class="stat rv"><b data-count="97" data-suffix="%">0</b><span>REPORT IMPROVED COGNITIVE FUNCTION</span></div>
+  <div class="stat rv"><b data-count="12" data-suffix="">0</b><span>LICENSED SPEECH PATHOLOGISTS</span></div>
+</div></section>
+
+<!-- ================= LICENSURE MAP ================= -->
+<section id="states" style="padding-top:3.4rem;padding-bottom:1rem;display:none"><div class="wrap">
+  <div style="text-align:center;max-width:60ch;margin:0 auto" class="rv">
+    <span class="eyebrow">Where we practice</span>
+    <h2 class="big">Licensed in 25 states — and counting</h2>
+  </div>
+  <div class="usmap rv" id="usmap" role="img" aria-label="Map of U.S. states where Functional Cognitive Rehab clinicians are licensed"></div>
+  <p class="map-note rv"><b>Don't see your state?</b> Reach out anyway — we're adding new state licenses all the time.</p>
 </div></section>
 
 <!-- ================= SYMPTOMS ================= -->
@@ -400,6 +420,8 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
     <div class="sym rv"><div class="sym-ic i4">📉</div><h3>Falling behind at work or school</h3><p>You know you're capable of more. Keeping up has quietly become the whole job.</p></div>
     <div class="sym rv"><div class="sym-ic i5">📝</div><h3>Forgetting names, plans, appointments</h3><p>You write everything down and things still slip through.</p></div>
     <div class="sym rv"><div class="sym-ic i6">🫥</div><h3>Being told you "look fine"</h3><p>The injury doesn't show. The difficulty is real, measurable — and treatable.</p></div>
+    <div class="sym rv"><div class="sym-ic i7">🔋</div><h3>Running out of mental energy by noon</h3><p>A morning of thinking wipes you out for the rest of the day.</p></div>
+    <div class="sym rv"><div class="sym-ic i8">🧭</div><h3>Small decisions feel enormous</h3><p>Planning, choosing, starting — the executive gears grind where they used to spin.</p></div>
   </div>
   <p class="sym-foot rv">Recognized yourself in two or more? An assessment is worth your time.</p>
 </div></section>
@@ -422,7 +444,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
       muted playsinline autoplay loop preload="metadata" aria-hidden="true"
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
     <div class="vis-chip vc1 float1"><b>Connections, rebuilt</b><small>attention · memory · executive function</small></div>
-    <div class="vis-chip vc2 float2"><b>1–3 sessions / week</b><small>from wherever you are</small></div>
+    <div class="vis-chip vc2 float2"><b>1–2 sessions / week</b><small>from wherever you are</small></div>
   </div>
 </div></section>
 
@@ -448,7 +470,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
   <div class="proc-grid">
     <div class="proc rv"><div class="proc-n">1</div><h3>Comprehensive assessment</h3><p>A full cognitive evaluation to find exactly where the difficulty is — and where it isn't.</p></div>
     <div class="proc rv"><div class="proc-n">2</div><h3>Individualized plan</h3><p>Built around your actual goals — your job, your classes, your life. Not a worksheet packet.</p></div>
-    <div class="proc rv"><div class="proc-n">3</div><h3>Telehealth sessions</h3><p>One to three sessions per week based on need, from wherever you are.</p></div>
+    <div class="proc rv"><div class="proc-n">3</div><h3>Telehealth sessions</h3><p>One to two sessions per week based on need, from wherever you are.</p></div>
     <div class="proc rv"><div class="proc-n">4</div><h3>Independence</h3><p>Measurable gains in attention, memory and problem-solving — and a return to your life.</p></div>
   </div>
 </div></section>
@@ -457,7 +479,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
 <section id="team" style="padding-top:2rem"><div class="wrap">
   <div style="text-align:center;max-width:62ch;margin:0 auto 3rem" class="rv">
     <span class="eyebrow">Our team</span>
-    <h2 class="big">Eleven licensed speech pathologists</h2>
+    <h2 class="big">Twelve licensed speech pathologists</h2>
     <p style="font-size:1.05rem">Every clinician holds a master's degree and ASHA's Certificate of Clinical Competence. Tap anyone to read their background.</p>
   </div>
   <div class="team-grid" id="teamGrid"></div>
@@ -468,7 +490,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
   <div class="story-card rv">
     <img src="assets/colin-misich.png" alt="Colin Misich, M.S., CCC-SLP">
     <div>
-      <blockquote>“As a TBI survivor himself, Colin is most passionate about the work he feels fortunate to be part of — providing cognitive rehabilitation in both English and Spanish to the brain injury community.”</blockquote>
+      <blockquote style="quotes:none">As a TBI survivor himself, Colin is most passionate about the work he feels fortunate to be part of — providing cognitive rehabilitation in both English and Spanish to the brain injury community.</blockquote>
       <cite>Colin Misich, M.S., CCC-SLP — Speech Pathologist &amp; TBI survivor</cite>
     </div>
   </div>
@@ -494,7 +516,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
     <h2>Let's find out what's actually going on</h2>
     <p>It starts with a comprehensive cognitive assessment. We'll tell you what we find, what we recommend, and what it takes — before you commit to anything.</p>
     <a class="btn lg" href="#contact">Book your assessment <span class="arr">→</span></a>
-    <div class="cta-note">Telehealth · English &amp; Spanish · Most major insurance accepted</div>
+    <div class="cta-note">Telehealth · English &amp; Spanish · Licensed in 25 states &amp; counting</div>
   </div></div>
 </div></section>
 
@@ -508,12 +530,13 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
         Monday – Friday · 8am – 6pm PST<br><br>
         P: <a href="tel:18442217016">844-221-7016</a><br>
         F: 844-927-0225<br>
-        E: <a href="mailto:info@cogrehab.co">info@cogrehab.co</a><br><br>
-        4079 Governor Dr. #5072<br>San Diego, CA 92122
+        E: <a href="mailto:info@cogrehab.co">info@cogrehab.co</a>
       </div>
     </div>
-    <!-- Wire to the practice's form handler (Formspree/Squarespace) before launch. -->
-    <form action="#" method="POST">
+    <!-- Submissions → info@cogrehab.co. LEAD_ENDPOINT (Formspree, notifications set to
+         info@cogrehab.co) posts via AJAX; while it's empty the form falls back to a
+         pre-filled email compose — either path lands in Tyler's inbox, never a dead form. -->
+    <form id="leadForm" method="POST">
       <div class="row">
         <div><label for="fn">FIRST NAME *</label><input id="fn" name="first_name" required autocomplete="given-name"></div>
         <div><label for="ln">LAST NAME *</label><input id="ln" name="last_name" required autocomplete="family-name"></div>
@@ -522,6 +545,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
       <label for="ph">PHONE *</label><input id="ph" type="tel" name="phone" required autocomplete="tel">
       <label for="msg">MESSAGE *</label><textarea id="msg" name="message" required></textarea>
       <button class="btn lg" type="submit">Send message <span class="arr">→</span></button>
+      <p id="formNote" style="display:none;margin:.9rem 0 0;font:600 14px/1.5 var(--sans)"></p>
     </form>
   </div>
 </div></section>
@@ -563,19 +587,24 @@ const TEAM=[
  {n:"Eileen Matthews",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:"eileen-matthews",
   b:"Eileen received her Master of Science in Speech-Language Pathology from New York Medical College. She has enjoyed working with individuals in many settings. Eileen gained experience supporting individuals with brain injury while working at a military-based concussion recovery center. There, she provided therapies to optimize cognitive performance, longevity, and overall wellbeing in special operators and other military populations. In her free time, Eileen enjoys gardening and spending time with her husband and dogs."},
  {n:"Mikahla Gilbert",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:"mikahla-gilbert",
-  b:"Mikahla received her Master of Science in Speech-Language Pathology from Purdue University, where her studies emphasized adult neurogenic disorders. She has provided services to individuals with cognitive impairments in acute care, skilled nursing, and home and community-based settings. Mikahla is committed to delivering functional, person-centered rehabilitation that emphasizes meaningful goals and practical outcomes. Outside of work, she values time with her family and enjoys reading, gardening, and hand-embroidery."}
+  b:"Mikahla received her Master of Science in Speech-Language Pathology from Purdue University, where her studies emphasized adult neurogenic disorders. She has provided services to individuals with cognitive impairments in acute care, skilled nursing, and home and community-based settings. Mikahla is committed to delivering functional, person-centered rehabilitation that emphasizes meaningful goals and practical outcomes. Outside of work, she values time with her family and enjoys reading, gardening, and hand-embroidery."},
+ // Sarah: credential + bio + headshot pending from Tyler — f:null renders an initials avatar.
+ {n:"Sarah Rosin",c:"M.S., CCC-SLP",r:"Speech Pathologist",f:null,
+  b:"Sarah holds a master's degree in speech-language pathology and provides telehealth cognitive rehabilitation services to individuals recovering from brain injury. Her full bio is on its way."}
 ];
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const avatar=m=>m.f?`assets/${m.f}.png`
+ :'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#EFECFA"/><text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-weight="700" font-size="34" fill="#5B3FC7">${m.n.split(' ').map(w=>w[0]).join('')}</text></svg>`);
 document.getElementById('teamGrid').innerHTML=TEAM.map((m,i)=>`
  <div class="mem rv" data-i="${i}" tabindex="0" role="button" aria-label="Read ${esc(m.n)}'s background">
-   <div class="mem-ph"><img src="assets/${m.f}.png" alt="${esc(m.n)}" loading="lazy"></div>
+   <div class="mem-ph"><img src="${avatar(m)}" alt="${esc(m.n)}" loading="lazy"></div>
    <b>${esc(m.n)}</b><span class="cred">${esc(m.c)}</span>
    <span class="role">${esc(m.r)}</span><span class="more">Read bio →</span>
  </div>`).join('');
 
 const modal=document.getElementById('modal'),card=document.getElementById('modalCard');
 function openBio(i){const m=TEAM[i];
- card.innerHTML=`<img src="assets/${m.f}.png" alt="${esc(m.n)}"><h3>${esc(m.n)}, ${esc(m.c)}</h3>
+ card.innerHTML=`<img src="${avatar(m)}" alt="${esc(m.n)}"><h3>${esc(m.n)}, ${esc(m.c)}</h3>
   <div class="role">${esc(m.r)}</div><p style="margin:0">${esc(m.b)}</p>`;
  modal.classList.add('open');document.body.style.overflow='hidden';}
 function closeBio(){modal.classList.remove('open');document.body.style.overflow='';}
@@ -603,6 +632,24 @@ if(matchMedia('(max-width:700px)').matches){
     bar.classList.toggle('show',scrollY>1200&&!nearContact);
   },{passive:true});
 }
+/* ---- State licensure map ----
+   LICENSED_STATES: fill with Tyler's 25 two-letter codes (e.g. 'CA','TX','FL' …).
+   While empty the whole section stays hidden — no half-lit map ever ships. */
+const LICENSED_STATES=[];
+const STATE_TILES=[["AK",0,0],["ME",10,0],["VT",9,1],["NH",10,1],
+["WA",0,2],["ID",1,2],["MT",2,2],["ND",3,2],["MN",4,2],["WI",5,2],["MI",7,2],["NY",8,2],["MA",9,2],["RI",10,2],
+["OR",0,3],["NV",1,3],["WY",2,3],["SD",3,3],["IA",4,3],["IL",5,3],["IN",6,3],["OH",7,3],["PA",8,3],["NJ",9,3],["CT",10,3],
+["CA",0,4],["UT",1,4],["CO",2,4],["NE",3,4],["MO",4,4],["KY",5,4],["WV",6,4],["VA",7,4],["MD",8,4],["DE",9,4],
+["AZ",1,5],["NM",2,5],["KS",3,5],["AR",4,5],["TN",5,5],["NC",6,5],["SC",7,5],["DC",8,5],
+["OK",3,6],["LA",4,6],["MS",5,6],["AL",6,6],["GA",7,6],
+["HI",0,7],["TX",3,7],["FL",8,7]];
+if(LICENSED_STATES.length){
+  const lic=new Set(LICENSED_STATES.map(x=>x.toUpperCase()));
+  document.getElementById('usmap').innerHTML=STATE_TILES.map(([ab,c,r])=>
+    `<span class="st${lic.has(ab)?' on':''}" style="grid-column:${c+1};grid-row:${r+1}" title="${ab}">${ab}</span>`).join('');
+  document.getElementById('states').style.display='';
+}
+
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
 
@@ -613,10 +660,10 @@ document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%5)
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
  const el=e.target,to=+el.dataset.count,sfx=el.dataset.suffix||'';
- if(reduce){el.textContent=to+sfx;cio.unobserve(el);return}
+ if(reduce){el.textContent=to.toLocaleString('en-US')+sfx;cio.unobserve(el);return}
  const t0=performance.now();
  (function step(t){const p=Math.min((t-t0)/1300,1),e2=1-Math.pow(1-p,3);
-  el.textContent=Math.round(to*e2)+sfx;if(p<1)requestAnimationFrame(step)})(t0);
+  el.textContent=Math.round(to*e2).toLocaleString('en-US')+sfx;if(p<1)requestAnimationFrame(step)})(t0);
  cio.unobserve(el)}),{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
 
@@ -651,18 +698,18 @@ function field(canvas,{count=52,link=140,speed=.14,alpha=1}={}){
 /* ---- Google reviews rotation: real 5-star reviews, 3 visible, one swaps every 5s.
    Pauses on hover; reduced motion shows a static set. ---- */
 const REVIEWS=[
- ["I can't recommend Chelsey enough! She is kind, compassionate, and so easy to talk to. From our very first session, she made me feel comfortable and truly listened to without any judgment.","Conny H"],
- ["Natalie has been a miracle for my life. I was involved in a pretty serious car accident that caused a bad brain injury — memory and other cognitive issues were impacted.","Kevin Gaudet"],
- ["I had the privilege of working with Darbi after a car accident and a concussion. I never knew this treatment existed but I highly recommend it. We worked through memory, speech, and more.","Jessica Gilbert"],
- ["Colin was particularly great to work with. He helped me a lot and was very patient. You can reach out to him anytime and he will help out. Great therapist and now a friend.","Ronald McNichols"],
- ["I've been living with a TBI that completely turned my life upside down. When I was referred to Stephanie, she truly became an answer to my case.","Kassandra Martinez"],
- ["Natalie helped me understand the limitations from my traumatic brain damage — and how to function in spite of it. She was inspirational, upbeat, informative and encouraging. She truly changed my life.","Sherry Jackson"],
- ["Katherine was an amazing, thoughtful help in my therapy sessions. I will always appreciate how she helped me navigate this process. 10 out of 10.","Tamika Francois"],
- ["After a car accident I didn't feel like myself. Mikahla helped me from day one and made me feel understood.","Melissa Palomares"],
- ["Eileen was very patient and professional while being exceptionally knowledgeable in how TBI affects us both physically and mentally.","Ed Wong"],
- ["My neurologist recommended the sessions. I learned so much about neuroplasticity, how to heal and create new connections, and how to challenge myself.","Diana DeLaCruz"],
- ["This practice has great employees, led by great staff, supported by an amazing curriculum that gives patients the most amazing support, tools, and methods.","Joshua Mitchell"],
- ["Tyler has been amazing in helping me create a plan tailored to me that has allowed me to make steady progress with my cognitive rehabilitation.","Angel Sanchez"]
+ ["I can't recommend Chelsey enough! She is kind, compassionate, and so easy to talk to. From our very first session, she made me feel comfortable and truly listened to without any judgment.","Conny H."],
+ ["Natalie has been a miracle for my life. I was involved in a pretty serious car accident that caused a bad brain injury — memory and other cognitive issues were impacted.","Kevin G."],
+ ["I had the privilege of working with Darbi after a car accident and a concussion. I never knew this treatment existed but I highly recommend it. We worked through memory, speech, and more.","Jessica G."],
+ ["Colin was particularly great to work with. He helped me a lot and was very patient. You can reach out to him anytime and he will help out. Great therapist and now a friend.","Ronald M."],
+ ["I've been living with a TBI that completely turned my life upside down. When I was referred to Stephanie, she truly became an answer to my case.","Kassandra M."],
+ ["Natalie helped me understand the limitations from my traumatic brain damage — and how to function in spite of it. She was inspirational, upbeat, informative and encouraging. She truly changed my life.","Sherry J."],
+ ["Katherine was an amazing, thoughtful help in my therapy sessions. I will always appreciate how she helped me navigate this process. 10 out of 10.","Tamika F."],
+ ["After a car accident I didn't feel like myself. Mikahla helped me from day one and made me feel understood.","Melissa P."],
+ ["Eileen was very patient and professional while being exceptionally knowledgeable in how TBI affects us both physically and mentally.","Ed W."],
+ ["My neurologist recommended the sessions. I learned so much about neuroplasticity, how to heal and create new connections, and how to challenge myself.","Diana D."],
+ ["This practice has great employees, led by great staff, supported by an amazing curriculum that gives patients the most amazing support, tools, and methods.","Joshua M."],
+ ["Tyler has been amazing in helping me create a plan tailored to me that has allowed me to make steady progress with my cognitive rehabilitation.","Angel S."]
 ];
 const revGrid=document.getElementById('revGrid');
 function bubHTML(r){return `<p>“${esc(r[0])}”</p><div class="bub-meta"><b>— ${esc(r[1])}</b><span>★★★★★ Google review</span></div>`}
@@ -675,6 +722,30 @@ function rotate(){const b=slots[slot];b.classList.remove('swap');void b.offsetWi
 if(!reduce){revTimer=setInterval(rotate,5000);
  revGrid.addEventListener('mouseenter',()=>clearInterval(revTimer));
  revGrid.addEventListener('mouseleave',()=>{clearInterval(revTimer);revTimer=setInterval(rotate,5000)});}
+
+/* ---- Lead form → info@cogrehab.co ---- */
+const LEAD_ENDPOINT=''; // paste the Formspree endpoint (e.g. https://formspree.io/f/xxxxxxx)
+const leadForm=document.getElementById('leadForm'),formNote=document.getElementById('formNote');
+leadForm.addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const d=new FormData(leadForm);
+  if(!LEAD_ENDPOINT){
+    const body=encodeURIComponent(`Name: ${d.get('first_name')} ${d.get('last_name')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone')}\n\n${d.get('message')}`);
+    location.href=`mailto:info@cogrehab.co?subject=${encodeURIComponent('New inquiry — cogrehab.co')}&body=${body}`;
+    return;
+  }
+  const btn=leadForm.querySelector('button');btn.disabled=true;btn.style.opacity=.6;
+  try{
+    const r=await fetch(LEAD_ENDPOINT,{method:'POST',body:d,headers:{Accept:'application/json'}});
+    if(!r.ok)throw 0;
+    leadForm.reset();
+    formNote.style.display='block';formNote.style.color='#1E9E6A';
+    formNote.textContent='✓ Message sent — we\'ll be in touch shortly.';
+  }catch{
+    formNote.style.display='block';formNote.style.color='#C0392B';
+    formNote.textContent='That didn\'t go through — please email info@cogrehab.co or call 844-221-7016.';
+  }finally{btn.disabled=false;btn.style.opacity=1;}
+});
 
 field(document.getElementById('field'),{count:54,link:150,alpha:.9});
 /* Higgsfield render (kling3_0_turbo, 7.5cr): frosted-glass neurons + light threads.
