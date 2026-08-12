@@ -71,12 +71,20 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
 
 /* ============ HERO ============ */
 .hero{position:relative;padding:8.6rem 0 3rem;overflow:hidden}
-#field{position:absolute;inset:0;z-index:0;opacity:.5}
+/* Aug 12: the constellation carries the hero's side space — stronger everywhere, masked
+   back down behind the copy so the headline stays crisp (edges full, centre ~35%). */
+/* width/height are REQUIRED: <canvas> is a replaced element, so inset:0 alone does NOT
+   stretch it — it kept its intrinsic box and the field only ever drew in the top-left. */
+#field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;opacity:.9;
+  -webkit-mask-image:radial-gradient(ellipse 52% 60% at 50% 45%,rgba(0,0,0,.3),#000 74%);
+  mask-image:radial-gradient(ellipse 52% 60% at 50% 45%,rgba(0,0,0,.3),#000 74%)}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
-.hero h1{font-size:clamp(2.7rem,6.2vw,4.6rem);max-width:13ch}
+/* Aug 12 (Tyler): wider measure on desktop — the headline was breaking to 3 lines and
+   leaving dead space either side of a centred column. */
+.hero h1{font-size:clamp(2.7rem,6.4vw,4.9rem);max-width:19ch}
 .hero h1 .hl{color:var(--violet)}
-.hero .lede{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:46ch;margin:1.5rem 0 2.2rem}
+.hero .lede{font-size:clamp(1.03rem,1.8vw,1.2rem);max-width:60ch;margin:1.5rem 0 2.2rem}
 .hero-cta{display:flex;gap:.85rem;flex-wrap:wrap;align-items:center}
 .hero-meta{display:flex;align-items:center;gap:.9rem;margin-top:2.4rem}
 .avastack{display:flex}
@@ -85,7 +93,9 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
 .hero-meta small{font-size:13.5px;color:var(--body);font-weight:600;line-height:1.45}
 .hero-meta small b{color:var(--ink)}
 /* Aug 10 round: the mock session card is gone — the hero is one centered column now. */
-.hero-grid{grid-template-columns:1fr;justify-items:center;text-align:center}
+/* stretch (not center) the grid item: justify-items:center sizes it to max-content and
+   overflows narrow viewports — the inner max-widths + margin-inline:auto do the centering. */
+.hero-grid{grid-template-columns:1fr;justify-items:stretch;text-align:center}
 .hero h1,.hero .lede{margin-inline:auto}
 .hero-cta,.hero-meta{justify-content:center}
 
@@ -211,10 +221,20 @@ header.solid{background:rgba(245,243,238,.82);backdrop-filter:blur(14px) saturat
 .sym{background:#fff;border-radius:var(--r);padding:1.8rem 1.65rem;box-shadow:var(--sh-sm);
   transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
 .sym:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
-.sym-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.05rem;font-size:20px}
-.i1{background:#EFECFA}.i2{background:#E4F4FB}.i3{background:#FBEFE2}.i4{background:#E7F6F0}.i5{background:#FAECF3}.i6{background:#F1F0E3}.i7{background:#E9F0FB}.i8{background:#F4EDE4}
+/* Aug 12 (Tyler): drawn line icons in the violet system, not platform emoji — emoji
+   render differently on every device and read as clip-art on a clinical page. */
+.sym-ic{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;margin-bottom:1.05rem;
+  background:var(--lav);color:var(--violet)}
+.sym-ic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
 .sym h3{font-size:1.1rem;margin-bottom:.45rem;font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
 .sym p{font-size:15px;margin:0}
+/* ============ PARTNER WITH US ============ */
+.partner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.05rem}
+.partner{background:#fff;border-radius:var(--r);padding:1.9rem 1.7rem;box-shadow:var(--sh-sm);
+  border:1px solid var(--line)}
+.partner h3{font-size:1.08rem;margin-bottom:.45rem;font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
+.partner p{font-size:15px;margin:0}
 .sym-foot{margin-top:2.6rem;text-align:center;font-size:1.1rem;color:var(--ink);font-weight:600}
 
 /* ============ APPROACH SPLIT ============ */
@@ -315,11 +335,18 @@ h2.big{font-size:clamp(2rem,4.3vw,3.1rem);margin:1.1rem 0 1.15rem}
 form .row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
 @media(max-width:560px){form .row{grid-template-columns:1fr}}
 label{display:block;font:700 12.5px/1 var(--sans);color:var(--ink);margin:0 0 .45rem;letter-spacing:.03em}
-input,textarea{width:100%;font:500 15px/1.5 var(--sans);color:var(--ink);background:var(--cream);
+input,textarea,select{width:100%;font:500 15px/1.5 var(--sans);color:var(--ink);background:var(--cream);
   border:1.5px solid transparent;border-radius:14px;padding:.95rem 1.05rem;margin-bottom:1rem;outline:none;
   transition:border-color .3s,background .3s}
-input:focus,textarea:focus{border-color:var(--violet);background:#fff}
+/* background-COLOR, not the shorthand — the shorthand would wipe the select's chevron on focus. */
+input:focus,textarea:focus,select:focus{border-color:var(--violet);background-color:#fff}
 textarea{min-height:120px;resize:vertical}
+/* Native select, chevron drawn in the brand violet so it matches the inputs beside it. */
+select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:2.6rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B3FC7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1.05rem center;background-size:17px}
+select:invalid{color:var(--body)}
+.form-hint{font-size:12.5px;line-height:1.5;color:var(--body);margin:-.55rem 0 1.1rem}
 
 /* ============ CTA ============ */
 .cta-card{position:relative;overflow:hidden;border-radius:44px;text-align:center;color:#fff;
@@ -393,14 +420,14 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
     <p style="font-size:1.07rem">After suffering a brain injury, many people unfortunately experience new difficulty with concentration, memory, problem solving, and word-finding. These things aren’t personality traits and they are not permanent — they’re symptoms, and they respond to treatment.</p>
   </div>
   <div class="sym-grid">
-    <div class="sym rv"><div class="sym-ic i1">📖</div><h3>Reading the same paragraph three times</h3><p>You reach the bottom of the page and realize none of it stayed with you.</p></div>
-    <div class="sym rv"><div class="sym-ic i2">💬</div><h3>Losing your train of thought mid-sentence</h3><p>The word was right there. Now the whole room is waiting on you.</p></div>
-    <div class="sym rv"><div class="sym-ic i3">⏱️</div><h3>Everything takes twice as long</h3><p>Tasks that used to be automatic now demand full concentration — and drain you.</p></div>
-    <div class="sym rv"><div class="sym-ic i4">📉</div><h3>Falling behind at work or school</h3><p>You know you're capable of more. Keeping up has quietly become the whole job.</p></div>
-    <div class="sym rv"><div class="sym-ic i5">📝</div><h3>Forgetting names, plans, appointments</h3><p>You write everything down and things still slip through.</p></div>
-    <div class="sym rv"><div class="sym-ic i6">🫥</div><h3>Being told you "look fine"</h3><p>The injury doesn't show. The difficulty is real, measurable — and treatable.</p></div>
-    <div class="sym rv"><div class="sym-ic i7">🔋</div><h3>Running out of mental energy by noon</h3><p>A morning of thinking wipes you out for the rest of the day.</p></div>
-    <div class="sym rv"><div class="sym-ic i8">🧭</div><h3>Small decisions feel enormous</h3><p>Planning, choosing, starting — the executive gears grind where they used to spin.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6.2C10.4 5 8.4 4.4 6 4.4H3.6v13.2H6c2.4 0 4.4.6 6 1.8 1.6-1.2 3.6-1.8 6-1.8h2.4V4.4H18c-2.4 0-4.4.6-6 1.8Z"/><path d="M12 6.2v13.2"/></svg></div><h3>Reading the same paragraph three times</h3><p>You reach the bottom of the page and realize none of it stayed with you.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.4 13.2c0 3.2-3.4 5.8-7.6 5.8-.9 0-1.8-.12-2.6-.34L4.6 20.4l1.3-3.6C4.5 15.8 3.6 14.2 3.6 12.4 3.6 9.2 7 6.6 11.2 6.6"/><path d="M8.6 12.6h.01M11.6 12.6h.01M14.6 12.6h.01"/><path d="M17.4 3.6v5.2M20 6.2h-5.2"/></svg></div><h3>Losing your train of thought mid-sentence</h3><p>The word was right there. Now the whole room is waiting on you.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12.8" r="8.2"/><path d="M12 8v4.8l3.2 2M9 2.6h6"/></svg></div><h3>Everything takes twice as long</h3><p>Tasks that used to be automatic now demand full concentration — and drain you.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.4 7.2 9 12.8l3.4-3.4 8.2 8.2"/><path d="M20.6 12.4v5.2h-5.2"/><path d="M3.4 20.6h17.2"/></svg></div><h3>Falling behind at work or school</h3><p>You know you're capable of more. Keeping up has quietly become the whole job.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.4" y="5" width="17.2" height="16" rx="3"/><path d="M3.4 9.6h17.2M8 3v4M16 3v4"/><path d="m8.6 14.6 1.8 1.8 3.6-3.6"/></svg></div><h3>Forgetting names, plans, appointments</h3><p>You write everything down and things still slip through.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.4 12S6 5.6 12 5.6 21.6 12 21.6 12 18 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="2.8"/></svg></div><h3>Being told you "look fine"</h3><p>The injury doesn't show. The difficulty is real, measurable — and treatable.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.4" y="7.4" width="16.2" height="9.2" rx="2.6"/><path d="M21.6 10.6v2.8"/><path d="M5.4 10.6v2.8"/></svg></div><h3>Running out of mental energy by noon</h3><p>A morning of thinking wipes you out for the rest of the day.</p></div>
+    <div class="sym rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.4v5M12 15.6v5M3.4 12h5M15.6 12h5"/><path d="m6.6 6.6 2.6 2.6M17.4 6.6l-2.6 2.6M6.6 17.4l2.6-2.6M17.4 17.4l-2.6-2.6"/><circle cx="12" cy="12" r="2.4"/></svg></div><h3>Small decisions feel enormous</h3><p>Planning, choosing, starting — the executive gears grind where they used to spin.</p></div>
   </div>
   <p class="sym-foot rv">Recognize yourself in two or more? An assessment is worth your time.</p>
 </div></section>
@@ -476,7 +503,7 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
   <div style="text-align:center;max-width:62ch;margin:0 auto 3rem" class="rv">
     <span class="eyebrow">Our team</span>
     <h2 class="big">Twelve licensed speech pathologists</h2>
-    <p style="font-size:1.05rem">Every clinician holds a master's degree and ASHA's Certificate of Clinical Competence. Our services are offered in English and Spanish. Tap anyone to read their background.</p>
+    <p style="font-size:1.05rem">Every clinician holds a Master's degree and ASHA's Certificate of Clinical Competence. Our services are offered in English and Spanish. Tap anyone to read their background.</p>
   </div>
   <div class="team-grid" id="teamGrid"></div>
 </div></section>
@@ -505,6 +532,21 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
   </div></div>
 </div></section>
 
+<!-- ================= PARTNER WITH US (Aug 12, Tyler's copy verbatim) ================= -->
+<section id="partner" style="padding-top:3.6rem"><div class="wrap">
+  <div style="text-align:center;max-width:64ch;margin:0 auto 2.4rem" class="rv">
+    <span class="eyebrow">For referring providers</span>
+    <h2 class="big">Partner with us</h2>
+    <p style="font-size:1.07rem">We partner with healthcare providers across the United States to ensure patients receive specialized cognitive rehabilitation. Through timely access, seamless communication, and comprehensive reporting, we make it easy to integrate our services into your patients' continuum of care.</p>
+  </div>
+  <div class="partner-grid">
+    <div class="partner rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.2V12l3.2 1.9"/></svg></div><h3>Timely access</h3><p>Patients are seen quickly — no months-long waitlist between your referral and their first session.</p></div>
+    <div class="partner rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.4 13.4c0 1.9-1.6 3.5-3.5 3.5H8.6L4.2 20.2v-4.1a3.5 3.5 0 0 1-1-2.4V7.1c0-1.9 1.6-3.5 3.5-3.5h10.2c1.9 0 3.5 1.6 3.5 3.5Z"/><path d="M8.4 8.6h7.2M8.4 12h4.8"/></svg></div><h3>Seamless communication</h3><p>You stay in the loop on your patient's progress without chasing anyone down for an update.</p></div>
+    <div class="partner rv"><div class="sym-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2.8H7a2.6 2.6 0 0 0-2.6 2.6v13.2A2.6 2.6 0 0 0 7 21.2h10a2.6 2.6 0 0 0 2.6-2.6V8.4Z"/><path d="M14 2.8v5.6h5.6"/><path d="M8.8 13.4h6.4M8.8 16.8h4.2"/></svg></div><h3>Comprehensive reporting</h3><p>Clear, documented outcomes you can put straight into the chart.</p></div>
+  </div>
+  <p style="text-align:center;margin-top:2.4rem" class="rv"><a class="btn ghost" href="#contact">Refer a patient or start a conversation <span class="arr">→</span></a></p>
+</div></section>
+
 <section id="contact" style="padding-top:1rem"><div class="wrap">
   <div class="contact-card rv">
     <div>
@@ -528,7 +570,12 @@ footer{padding:3rem 0 2.6rem;font-size:14px;color:var(--body)}
       </div>
       <label for="em">EMAIL *</label><input id="em" type="email" name="email" required autocomplete="email">
       <label for="ph">PHONE *</label><input id="ph" type="tel" name="phone" required autocomplete="tel">
+      <label for="st">STATE OF RESIDENCE *</label>
+      <select id="st" name="state" required autocomplete="address-level1">
+        <option value="" selected disabled>Select your state</option>
+      </select>
       <label for="msg">MESSAGE *</label><textarea id="msg" name="message" required></textarea>
+      <p class="form-hint">Please don't include medical details here — we'll gather those securely once we connect.</p>
       <button class="btn lg" type="submit">Send message <span class="arr">→</span></button>
       <p id="formNote" style="display:none;margin:.9rem 0 0;font:600 14px/1.5 var(--sans)"></p>
     </form>
@@ -601,7 +648,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBio()});
 
 /* Mobile: long card sections become swipe carousels + sticky book bar. */
 if(matchMedia('(max-width:700px)').matches){
-  for(const sel of ['.sym-grid','.team-grid','.tg']){
+  for(const sel of ['.sym-grid','.team-grid','.tg','.partner-grid']){
     const el=document.querySelector(sel); if(!el)continue;
     el.classList.add('swipe');
     const hint=document.createElement('span');hint.className='swipe-hint';hint.textContent='‹ SWIPE ›';
@@ -672,29 +719,36 @@ const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)retur
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
 
 /* Light-mode neural field — faint violet lattice, an accent not a spectacle. */
-function field(canvas,{count=52,link=140,speed=.14,alpha=1}={}){
+function field(canvas,{count=52,link=140,speed=.14,alpha=1,web=.16,dot=.22,pulse=.3,dotR=1.5}={}){
  const ctx=canvas.getContext('2d');let w,h,dpr,nodes=[],raf;
- function size(){dpr=Math.min(devicePixelRatio||1,2);const r=canvas.getBoundingClientRect();
-  w=r.width;h=r.height;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+ /* Returns false if the canvas has no box yet (hidden ancestor, layout not settled). Sizing a
+    canvas to 0 leaves it permanently blank, so bail and let the ResizeObserver re-run us. */
+ function size(){const r=canvas.getBoundingClientRect();if(r.width<1||r.height<1)return false;
+  dpr=Math.min(devicePixelRatio||1,2);
+  w=r.width;h=r.height;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);return true}
  function seed(){const n=Math.round(count*Math.min(1,(w*h)/(1400*760))*(w<640?.6:1));
   nodes=Array.from({length:Math.max(20,n)},()=>({x:Math.random()*w,y:Math.random()*h,
-   vx:(Math.random()-.5)*speed,vy:(Math.random()-.5)*speed,r:Math.random()*1.5+1,ph:Math.random()*7}))}
+   vx:(Math.random()-.5)*speed,vy:(Math.random()-.5)*speed,r:Math.random()*dotR+1,ph:Math.random()*7}))}
  function draw(time){ctx.clearRect(0,0,w,h);
   for(const n of nodes){n.x+=n.vx;n.y+=n.vy;
    if(n.x<-30)n.x=w+30;if(n.x>w+30)n.x=-30;if(n.y<-30)n.y=h+30;if(n.y>h+30)n.y=-30}
-  ctx.lineWidth=.8;
+  ctx.lineWidth=1;
   for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
    const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
    if(d2>link*link)continue;
-   ctx.strokeStyle=`rgba(105,85,205,${(1-Math.sqrt(d2)/link)*.16*alpha})`;
+   ctx.strokeStyle=`rgba(91,63,199,${(1-Math.sqrt(d2)/link)*web*alpha})`;
    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
   for(const n of nodes){const b=.5+Math.sin(time/1200+n.ph)*.5;
-   ctx.fillStyle=`rgba(91,63,199,${(.22+.3*b)*alpha})`;
+   ctx.fillStyle=`rgba(59,42,133,${(dot+pulse*b)*alpha})`;
    ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,7);ctx.fill()}}
  function loop(t){draw(t);raf=requestAnimationFrame(loop)}
- function start(){size();seed();if(reduce){draw(0);return}
+ function start(){if(!size())return;seed();if(reduce){draw(0);return}
   cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
- let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(start,180)});start();
+ let rt;const kick=()=>{clearTimeout(rt);rt=setTimeout(start,140)};
+ addEventListener('resize',kick);
+ /* Fires once on observe too — that's what recovers a canvas that measured 0 at first paint. */
+ if(window.ResizeObserver)new ResizeObserver(kick).observe(canvas);
+ start();
  new IntersectionObserver(es=>es.forEach(e=>{if(reduce)return;
   if(e.isIntersecting){cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
   else cancelAnimationFrame(raf)}),{threshold:0}).observe(canvas);}
@@ -727,6 +781,20 @@ if(!reduce){revTimer=setInterval(rotate,5000);
  revGrid.addEventListener('mouseenter',()=>clearInterval(revTimer));
  revGrid.addEventListener('mouseleave',()=>{clearInterval(revTimer);revTimer=setInterval(rotate,5000)});}
 
+/* ---- State of residence (all 50 + DC — telehealth licensure depends on where the PATIENT sits) ---- */
+const US_STATES=[['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],
+ ['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['DC','District of Columbia'],['FL','Florida'],
+ ['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],
+ ['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],
+ ['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],
+ ['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],
+ ['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],
+ ['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],
+ ['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],
+ ['WI','Wisconsin'],['WY','Wyoming']];
+(function(){const s=document.getElementById('st');if(!s)return;
+ s.append(...US_STATES.map(([c,n])=>{const o=document.createElement('option');o.value=c;o.textContent=n;return o}));})();
+
 /* ---- Lead form → info@cogrehab.co ---- */
 const LEAD_ENDPOINT='https://formsubmit.co/ajax/info@cogrehab.co'; // FormSubmit → info@cogrehab.co (first submission emails an activation link to that inbox — click it once)
 const leadForm=document.getElementById('leadForm'),formNote=document.getElementById('formNote');
@@ -735,7 +803,7 @@ leadForm.addEventListener('submit',async ev=>{
   const d=new FormData(leadForm);
   d.append('_subject','New inquiry — cogrehab.co');
   if(!LEAD_ENDPOINT){
-    const body=encodeURIComponent(`Name: ${d.get('first_name')} ${d.get('last_name')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone')}\n\n${d.get('message')}`);
+    const body=encodeURIComponent(`Name: ${d.get('first_name')} ${d.get('last_name')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone')}\nState: ${d.get('state')}\n\n${d.get('message')}`);
     location.href=`mailto:info@cogrehab.co?subject=${encodeURIComponent('New inquiry — cogrehab.co')}&body=${body}`;
     return;
   }
@@ -752,7 +820,7 @@ leadForm.addEventListener('submit',async ev=>{
   }finally{btn.disabled=false;btn.style.opacity=1;}
 });
 
-field(document.getElementById('field'),{count:54,link:150,alpha:.9});
+field(document.getElementById('field'),{count:115,link:150,alpha:1,web:.26,dot:.32,pulse:.38,dotR:2.2});
 /* Higgsfield render (kling3_0_turbo, 7.5cr): frosted-glass neurons + light threads.
    iOS rules: props set explicitly; reduced-motion or suspended autoplay → poster frame. */
 (function(){const v=document.getElementById('neuronvid');if(!v)return;
