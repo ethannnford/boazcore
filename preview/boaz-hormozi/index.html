@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Boaz — Your next bid, done before you leave the driveway</title>
+<meta name="description" content="Snap a photo of the job. Boaz writes the itemized bid at your rates — overhead and profit already in it — and sends it before you leave the driveway.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#3a55d9; --indigo-d:#2840bd; --ink:#10131f; --body:#454b5d;
+    --muted:#737a8c; --line:#e9ebf2; --bg:#ffffff; --soft:#f5f6fb;
+    --green:#1f9d57; --amber:#b45309; --radius:16px;
+    --grad:linear-gradient(135deg,#3a55d9 0%,#2840bd 100%);
+    --shadow:0 18px 50px -20px rgba(20,28,80,.16); --shadow-sm:0 2px 14px rgba(20,28,80,.05);
+    --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);color:var(--body);background:var(--bg);line-height:1.55;
+    -webkit-font-smoothing:antialiased;font-size:16px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+  .narrow{max-width:760px;margin-left:auto;margin-right:auto}
+  h1,h2,h3{color:var(--ink);letter-spacing:-.03em;line-height:1.08;font-weight:800}
+  h2{font-size:clamp(27px,3.9vw,40px);margin-bottom:10px}
+  h3{font-size:19px;letter-spacing:-.02em}
+  .lede{font-size:clamp(16px,2vw,18.5px);color:var(--body)}
+
+  /* ---------- top bar: one job, get out of the way ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;
+    max-width:1080px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--ink);font-size:17px;letter-spacing:-.02em}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--grad);display:grid;
+    place-items:center;color:#fff;font-size:15px}
+  .bar .acts{display:flex;align-items:center;gap:14px}
+  .bar .li{font-size:14.5px;font-weight:700;color:var(--muted)}
+  .btn-sm{background:var(--grad);color:#fff;font-weight:800;font-size:14.5px;
+    padding:9px 17px;border-radius:999px;white-space:nowrap}
+
+  /* ---------- ABOVE THE FOLD — 90% of the work happens here ---------- */
+  .atf{padding:clamp(22px,3.2vw,38px) 0 clamp(26px,3vw,40px);
+    background:
+      radial-gradient(120% 90% at 12% 0%,rgba(58,85,217,.08),transparent 58%),
+      linear-gradient(180deg,#fbfcff 0%,#ffffff 72%)}
+  .atf-grid{display:grid;gap:clamp(26px,4vw,46px);align-items:center}
+  @media(min-width:940px){.atf-grid{grid-template-columns:1.06fr .94fr}}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;
+    letter-spacing:.045em;text-transform:uppercase;color:var(--indigo);
+    background:rgba(58,85,217,.08);border:1px solid rgba(58,85,217,.16);
+    padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+  h1{font-size:clamp(31px,4.1vw,45px);letter-spacing:-.035em;line-height:1.06;margin-bottom:14px}
+  h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:clamp(15.5px,1.75vw,17.5px);color:var(--body);max-width:44ch;margin-bottom:20px}
+  .sub b{color:var(--ink);font-weight:700}
+
+  .cta-p{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    background:var(--grad);color:#fff;font-weight:800;font-size:18px;letter-spacing:-.01em;
+    padding:15px 28px;border-radius:13px;box-shadow:0 10px 26px -8px rgba(58,85,217,.55);
+    width:100%;max-width:370px}
+  .cta-p:active{transform:translateY(1px)}
+  .cta-note{font-size:13px;color:var(--muted);margin-top:10px;max-width:390px}
+  .cta-note a{color:var(--indigo);font-weight:700}
+
+  /* risk reversal — directly under the button, per spec */
+  .reversals{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;max-width:450px}
+  .rev{display:flex;align-items:flex-start;gap:7px;font-size:14px;font-weight:600;color:var(--ink)}
+  .rev svg{flex:0 0 17px;margin-top:2px}
+
+  /* proof strip — real, checkable numbers */
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px;
+    border-top:1px solid var(--line);padding-top:16px;max-width:520px}
+  .proof .n{font-size:clamp(19px,2.6vw,25px);font-weight:800;color:var(--ink);
+    letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .proof .l{font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:2px}
+
+  /* ---------- the hero visual IS the promised outcome ---------- */
+  .doc{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+    overflow:hidden;transform:rotate(-.5deg)}
+  .doc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:13px 16px;border-bottom:1px solid var(--line);background:var(--soft)}
+  .doc-top .who{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--ink);font-size:14px}
+  .doc-top .who .m{width:24px;height:24px;border-radius:7px;background:var(--grad);display:grid;
+    place-items:center;color:#fff;font-size:12px;font-weight:800}
+  .doc-top .st{font-size:11.5px;font-weight:800;color:var(--green);background:rgba(31,157,87,.1);
+    padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .doc-body{padding:16px}
+  .doc-title{font-size:15.5px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+  .doc-meta{font-size:12.5px;color:var(--muted);margin-bottom:13px}
+  .line{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding:9px 0;border-bottom:1px solid var(--line)}
+  .line .d{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.35}
+  .line .q{font-size:11.5px;color:var(--muted);font-weight:500;display:block;margin-top:1px}
+  .line .v{font-size:13.5px;font-weight:800;color:var(--ink);white-space:nowrap;
+    font-variant-numeric:tabular-nums}
+  .built{margin-top:13px;background:rgba(58,85,217,.05);border:1px solid rgba(58,85,217,.14);
+    border-radius:12px;padding:11px 13px}
+  .built .r{display:flex;justify-content:space-between;font-size:12.5px;color:var(--body);
+    padding:2px 0;font-variant-numeric:tabular-nums}
+  .built .r b{color:var(--ink)}
+  .built .tag{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--indigo);margin-bottom:5px}
+  .total{display:flex;align-items:baseline;justify-content:space-between;margin-top:13px;
+    padding-top:12px;border-top:2px solid var(--ink)}
+  .total .lbl{font-size:13px;font-weight:700;color:var(--body)}
+  .total .amt{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums}
+  .stamp{position:relative;margin-top:-14px;margin-left:auto;margin-right:12px;width:max-content;
+    background:#0f1424;color:#fff;font-size:11.5px;font-weight:700;padding:7px 13px;
+    border-radius:999px;box-shadow:0 10px 26px -8px rgba(15,20,36,.5)}
+
+  /* ---------- generic section ---------- */
+  section{padding:clamp(44px,6vw,74px) 0}
+  .sec-soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{max-width:660px;margin-bottom:clamp(22px,3vw,34px)}
+  .sec-head p{font-size:16.5px;color:var(--body);margin-top:8px}
+
+  /* ---------- VSL ---------- */
+  .vsl-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;
+    background:#0c0f1a;box-shadow:var(--shadow)}
+  .vsl-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vsl-cap{font-size:13.5px;color:var(--muted);margin-top:11px;text-align:center}
+
+  /* ---------- 3 steps ---------- */
+  .steps{display:grid;gap:14px;counter-reset:s}
+  @media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+    box-shadow:var(--shadow-sm)}
+  .step .k{width:30px;height:30px;border-radius:9px;background:var(--grad);color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:15px;margin-bottom:12px}
+  .step h3{margin-bottom:5px}
+  .step p{font-size:14.5px}
+
+  /* ---------- wall of love ---------- */
+  .wall{columns:1;column-gap:14px}
+  @media(min-width:640px){.wall{columns:2}}
+  @media(min-width:960px){.wall{columns:3}}
+  .card{break-inside:avoid;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+  .card .q{font-size:15px;color:var(--ink);font-weight:600;line-height:1.5}
+  .card .by{display:flex;align-items:center;gap:9px;margin-top:13px}
+  .card .av{width:32px;height:32px;border-radius:50%;background:var(--grad);color:#fff;
+    display:grid;place-items:center;font-size:12.5px;font-weight:800;flex:0 0 32px}
+  .card .nm{font-size:13.5px;font-weight:800;color:var(--ink);line-height:1.25}
+  .card .tr{font-size:12px;color:var(--muted)}
+  .slot{background:repeating-linear-gradient(45deg,#fbfbfe,#fbfbfe 9px,#f4f5fb 9px,#f4f5fb 18px);
+    border:1.5px dashed #ccd2e6;color:var(--muted);text-align:center;padding:26px 18px;
+    border-radius:var(--radius);margin-bottom:14px;break-inside:avoid}
+  .slot b{display:block;color:var(--ink);font-size:14px;margin-bottom:3px}
+  .slot span{font-size:12.5px;line-height:1.4;display:block}
+
+  /* ---------- stop doing ---------- */
+  .swap{display:grid;gap:12px}
+  @media(min-width:760px){.swap{grid-template-columns:1fr 1fr}}
+  .swap .col{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .swap .col.bad{background:#fdf7f7;border-color:#f3dede}
+  .swap h3{margin-bottom:12px;font-size:16px}
+  .swap li{list-style:none;display:flex;gap:9px;font-size:14.5px;padding:6px 0;color:var(--body)}
+  .swap li b{color:var(--ink);font-weight:700}
+  .swap .x{color:#c0392b;font-weight:800;flex:0 0 14px}
+  .swap .c{color:var(--green);font-weight:800;flex:0 0 14px}
+
+  /* ---------- pricing ---------- */
+  .price-card{background:#fff;border:2px solid var(--indigo);border-radius:22px;padding:clamp(22px,3vw,32px);
+    box-shadow:var(--shadow);max-width:520px;margin:0 auto;position:relative}
+  .price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);
+    color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    padding:6px 15px;border-radius:999px;white-space:nowrap}
+  .price-amt{display:flex;align-items:baseline;justify-content:center;gap:4px;margin:6px 0 4px}
+  .price-amt .a{font-size:clamp(42px,7vw,58px);font-weight:800;color:var(--ink);letter-spacing:-.04em}
+  .price-amt .p{font-size:16px;font-weight:700;color:var(--muted)}
+  .price-sub{text-align:center;font-size:14.5px;color:var(--body);margin-bottom:18px}
+  .price-list{display:grid;gap:9px;margin:18px 0}
+  .price-list li{list-style:none;display:flex;gap:9px;font-size:14.5px;color:var(--body);align-items:flex-start}
+  .price-list b{color:var(--ink);font-weight:700}
+  .addon{margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+  .addon h4{font-size:14px;color:var(--ink);font-weight:800;margin-bottom:3px}
+  .addon p{font-size:13px;color:var(--muted);line-height:1.45}
+
+  /* ---------- founder ---------- */
+  .founder{background:#0d1122;color:#fff;border-radius:22px;padding:clamp(24px,4vw,40px);position:relative;overflow:hidden}
+  .founder::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(90% 120% at 88% 6%,rgba(88,86,214,.36),transparent 60%);pointer-events:none}
+  .founder h2,.founder h3{color:#fff}
+  .founder p{color:#c3c8dc;font-size:16px;position:relative;z-index:1}
+  .founder p+p{margin-top:12px}
+  .founder .sig{margin-top:16px;font-weight:800;color:#fff;font-size:14.5px}
+  .founder .sig span{display:block;color:#8f97b8;font-weight:600;font-size:13px}
+
+  /* ---------- final ---------- */
+  .final{text-align:center}
+  .final .cta-p{margin:0 auto}
+  .final .cta-note,.final .reversals{margin-left:auto;margin-right:auto}
+  .final .reversals{justify-content:center}
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;font-size:13px;color:var(--muted)}
+  footer .fl{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:10px}
+  footer .fl a{font-weight:600}
+  .center{text-align:center}
+
+  /* sticky mobile CTA — the fold follows them down the page */
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);display:none;
+    transform:translateY(110%);transition:transform .28s cubic-bezier(.32,.72,0,1)}
+  .sticky.on{transform:none}
+  .sticky a{display:block;text-align:center;background:var(--grad);color:#fff;font-weight:800;
+    font-size:16.5px;padding:14px;border-radius:12px}
+  @media(max-width:780px){.sticky{display:block}body{padding-bottom:80px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#top"><span class="mark">B</span>Boaz</a>
+    <div class="acts">
+      <a class="li" href="https://app.boazcore.com/login">Log in</a>
+      <a class="btn-sm" href="https://app.boazcore.com/signup">Start free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOVE THE FOLD ============ -->
+<section class="atf" id="top">
+  <div class="wrap atf-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Built with San Diego contractors</span>
+
+      <h1>Your next bid, done <span class="hl">before you leave the driveway.</span></h1>
+
+      <p class="sub">Photograph the job — Boaz writes the itemized bid at <b>your</b> rates with overhead and profit already in it. <b>No spreadsheets, no estimator, no more nights at the kitchen table.</b></p>
+
+      <a class="cta-p" href="https://app.boazcore.com/signup">Build my first bid free →</a>
+      <p class="cta-note">Or <a href="https://cal.com/ethanford" target="_blank" rel="noopener">book a 30-min call</a> and we'll build a real bid you're pricing this week — live, on the call.</p>
+
+      <div class="reversals">
+        <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>14 days free</span>
+        <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancel anytime</span>
+        <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>0% platform fee — we never touch your money</span>
+        <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>Your price locked for life</span>
+      </div>
+
+      <div class="proof">
+        <div><div class="n">$366K</div><div class="l">insurance restoration, itemized room by room</div></div>
+        <div><div class="n">$83K</div><div class="l">invoice signed on a client's phone</div></div>
+        <div><div class="n">$127K</div><div class="l">moved through Boaz in one weekend</div></div>
+      </div>
+    </div>
+
+    <!-- The hero image IS the promised outcome: the finished bid -->
+    <div>
+      <div class="doc">
+        <div class="doc-top">
+          <div class="who"><span class="m">B</span>Your Company</div>
+          <span class="st">● Sent · 9:12 AM</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-title">Kitchen remodel — proposal</div>
+          <div class="doc-meta">Built from 6 photos · 11 minutes ago</div>
+
+          <div class="line"><span class="d">Demo &amp; haul-off<span class="q">1 kitchen · disposal included</span></span><span class="v">$2,240</span></div>
+          <div class="line"><span class="d">Cabinet install<span class="q">18 boxes · 24 hrs @ your rate</span></span><span class="v">$4,680</span></div>
+          <div class="line"><span class="d">Countertop template &amp; set<span class="q">42 sf</span></span><span class="v">$1,910</span></div>
+          <div class="line"><span class="d">Tile backsplash<span class="q">38 sf · mud set</span></span><span class="v">$1,486</span></div>
+          <div class="line"><span class="d">Paint &amp; finish carpentry<span class="q">walls, trim, touch-up</span></span><span class="v">$1,320</span></div>
+
+          <div class="built">
+            <div class="tag">Already inside this number</div>
+            <div class="r"><span>Labor burden</span><b>included</b></div>
+            <div class="r"><span>Monthly overhead, allocated</span><b>included</b></div>
+            <div class="r"><span>Profit target</span><b>18%</b></div>
+          </div>
+
+          <div class="total"><span class="lbl">Client total</span><span class="amt">$14,918</span></div>
+        </div>
+      </div>
+      <div class="stamp">✓ e-signed · deposit paid</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VSL ============ -->
+<section class="sec-soft">
+  <div class="wrap narrow">
+    <div class="sec-head center" style="margin-left:auto;margin-right:auto">
+      <h2>Watch it price a real job before you spend a dollar</h2>
+      <p>Seven minutes. Real screens, no mockups — and the price is on the screen at the end.</p>
+    </div>
+    <div class="vsl-frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/3Ka95Y8YfKY?rel=0&modestbranding=1"
+        title="What Boaz does" allow="accelerometer; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <p class="vsl-cap">No email required to watch. No demo to sit through.</p>
+  </div>
+</section>
+
+<!-- ============ 3 STEPS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Photo to signed bid in three steps</h2>
+      <p>You set your numbers once — about ten minutes. Every bid after that is automatic.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="k">1</div>
+        <h3>Set your real numbers, once</h3>
+        <p>Your hourly rate, monthly overhead, and the profit you actually want to keep. Boaz does the markup-vs-margin math correctly from then on.</p>
+      </div>
+      <div class="step">
+        <div class="k">2</div>
+        <h3>Photograph the job — or just talk it out</h3>
+        <p>Boaz scopes the work line by line and prices it at your rates. Correct a price once and it's saved forever.</p>
+      </div>
+      <div class="step">
+        <div class="k">3</div>
+        <h3>Send it. They sign on their phone.</h3>
+        <p>A branded proposal, e-signed, invoiced, deposit collected — straight to your bank. Boaz takes 0%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT CHANGES ============ -->
+<section class="sec-soft">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The nights you get back, and the money you stop leaving behind</h2>
+      <p>Most contractors are excellent at the work. The business side is what eats the evening.</p>
+    </div>
+    <div class="swap">
+      <div class="col bad">
+        <h3>Tonight, without Boaz</h3>
+        <ul>
+          <li><span class="x">✕</span><span>Two hours at the kitchen table writing one bid</span></li>
+          <li><span class="x">✕</span><span>A <b>20% markup</b> you think is 20% profit — it's about 17%</span></li>
+          <li><span class="x">✕</span><span>An hourly rate with no truck, insurance or burden in it</span></li>
+          <li><span class="x">✕</span><span>Change orders given away to keep the peace</span></li>
+          <li><span class="x">✕</span><span>Receipts in the glovebox until tax season</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Tonight, with Boaz</h3>
+        <ul>
+          <li><span class="c">✓</span><span>The bid went out from the driveway, itemized</span></li>
+          <li><span class="c">✓</span><span>Overhead, burden and profit <b>stacked in the right order</b></span></li>
+          <li><span class="c">✓</span><span>Every rate you correct is learned for the next job</span></li>
+          <li><span class="c">✓</span><span>Change orders priced, signed, added to the invoice</span></li>
+          <li><span class="c">✓</span><span>Receipts photographed once and filed by Boaz</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WALL OF LOVE ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>What contractors say after their first real bid</h2>
+      <p>Real accounts, real jobs. Screenshots beat adjectives.</p>
+    </div>
+    <div class="wall">
+      <div class="slot">
+        <b>📸 Screenshot slot</b>
+        <span>Drop the text from a contractor here — a real message beats any written testimonial. Keep their name only if they said yes.</span>
+      </div>
+      <div class="slot">
+        <b>📸 Screenshot slot</b>
+        <span>The "this replaces Jobber" message. Ask before publishing a company name.</span>
+      </div>
+      <div class="slot">
+        <b>🎥 15-second clip</b>
+        <span>A contractor holding his phone, showing the bid he just sent. Shot vertically, no editing needed.</span>
+      </div>
+      <div class="slot">
+        <b>📄 Before / after</b>
+        <span>His old handwritten estimate next to the Boaz proposal for the same job.</span>
+      </div>
+      <div class="slot">
+        <b>📸 Screenshot slot</b>
+        <span>A payment notification — "client paid $8,400" — with the name blurred.</span>
+      </div>
+      <div class="slot">
+        <b>⭐ Google review</b>
+        <span>Paste the review card once the first ones land.</span>
+      </div>
+    </div>
+    <p class="center" style="font-size:13.5px;color:var(--muted);margin-top:6px">
+      Placeholders only — nothing here gets published until a real customer says yes.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="sec-soft" id="pricing">
+  <div class="wrap">
+    <div class="sec-head center" style="margin-left:auto;margin-right:auto">
+      <h2>One price. Everything in it. Cancel whenever.</h2>
+      <p>Catch one extra job a month and it has already paid for itself.</p>
+    </div>
+    <div class="price-card">
+      <span class="price-badge">Everything included</span>
+      <div class="price-amt"><span class="a">$199.99</span><span class="p">/mo</span></div>
+      <p class="price-sub">Free for 14 days. No setup fee. No tiers, nothing locked.</p>
+      <ul class="price-list">
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span><b>AI photo, voice &amp; text estimating</b> at your real rates</span></li>
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span><b>Branded proposals &amp; e-signature</b> — they sign on their phone</span></li>
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span><b>Invoicing &amp; online payments</b> — straight to your bank, <b>0% platform fee</b></span></li>
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span><b>Money Co-pilot</b> — profit by job, what's owed, what to set aside</span></li>
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span>Change orders, receipt scanning, bank sync, reports &amp; exports</span></li>
+        <li><span class="c" style="color:var(--green);font-weight:800">✓</span><span>English &amp; Spanish · works on any phone</span></li>
+      </ul>
+      <a class="cta-p" href="https://app.boazcore.com/signup" style="max-width:none">Start free — build a bid today →</a>
+      <p class="cta-note" style="max-width:none;text-align:center">Your price is locked the day you join, for as long as you stay.</p>
+
+      <div class="addon">
+        <h4>Bid off plan sets? Add the Plan Estimator — $300/mo</h4>
+        <p>Reads a full commercial bid package and returns a draft takeoff with quantities, risk flags, and the questions worth money. Separate on purpose: if you bid kitchens off photos, you'd never open it, so we don't charge you for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<section>
+  <div class="wrap narrow">
+    <div class="founder">
+      <h2 style="font-size:clamp(23px,3.2vw,32px);margin-bottom:14px">Why this exists</h2>
+      <p>My dad is a general contractor — the best hand on every job I've ever walked onto. The business side ate him alive anyway. Nobody ever handed him the numbers.</p>
+      <p>I grew up on his job sites and watched the same thing happen to guys who were excellent at the work: hours lost to bidding, money left on the table, nights that belonged to their families spent at the kitchen table instead.</p>
+      <p>Boaz is the thing I wish someone had handed him. Time saved. Money secured. Profit established.</p>
+      <div class="sig">Ethan Ford<span>Founder · San Diego, CA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="sec-soft final">
+  <div class="wrap narrow">
+    <h2>Build your next bid free — you keep it either way</h2>
+    <p class="lede" style="margin:10px auto 24px;max-width:52ch">Bring a job you're pricing this week. If Boaz isn't your system, walk away with a finished bid and the margin math for free.</p>
+    <a class="cta-p" href="https://app.boazcore.com/signup">Start free →</a>
+    <p class="cta-note">14 days free · no setup fee · cancel anytime</p>
+    <div class="reversals" style="max-width:520px">
+      <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>No card charged during the trial</span>
+      <span class="rev"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#1f9d57" opacity=".12"/><path d="M6 10.2l2.6 2.6L14 7.4" stroke="#1f9d57" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>Your data is yours, exportable</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap center">
+    <div class="fl">
+      <a href="https://app.boazcore.com/terms">Terms</a>
+      <a href="https://app.boazcore.com/privacy">Privacy</a>
+      <a href="mailto:ethan@boazcore.com">ethan@boazcore.com</a>
+    </div>
+    <p>Boaz · Built in San Diego for the trades.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><a href="https://app.boazcore.com/signup">Build my first bid free →</a></div>
+
+<script>
+  // The sticky bar only earns its space once the real CTA has scrolled away —
+  // otherwise it covers the proof strip with a button that's already on screen.
+  (function () {
+    var hero = document.querySelector('.atf .cta-p'), bar = document.getElementById('sticky');
+    if (!hero || !bar || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (e) {
+      bar.classList.toggle('on', !e[0].isIntersecting);
+    }, { rootMargin: '-10px 0px 0px 0px' }).observe(hero);
+  })();
+</script>
+
+</body>
+</html>
