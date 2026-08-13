@@ -85,7 +85,11 @@ section{padding:62px 0}
   position:relative;background:#e9ebed;border:1px solid var(--line);border-radius:var(--r);
   display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;
   color:var(--ink-3);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  overflow:hidden;
 }
+/* A filled slot is just the photo — no placeholder chrome, no letterboxing. */
+.slot.has-photo{padding:0;border-color:var(--line);background:#e9ebed}
+.slot img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* ---------- NAV ---------- */
 header.nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:50}
@@ -112,14 +116,18 @@ header.nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;t
 /* ---------- HERO ---------- */
 .hero{position:relative;background:#dfe2e5;border-bottom:1px solid var(--line)}
 .hero-photo{
-  min-height:clamp(340px,52vh,520px);display:flex;align-items:center;
-  background:#dfe2e5;position:relative;
+  min-height:clamp(360px,56vh,560px);display:flex;align-items:center;
+  background:#dfe2e5;position:relative;isolation:isolate;
 }
-.hero-photo::before{
-  content:'PHOTO 01 — WIDE SHOT OF A FINISHED METAL ROOF';
-  position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  font-size:10.5px;font-weight:600;letter-spacing:.1em;color:#8b8f95;white-space:nowrap;
+.hero-photo>img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
 }
+/* Scrim: the card has to stay readable over a bright sky without hiding the build. */
+.hero-photo::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(12,14,16,.62) 0%,rgba(12,14,16,.38) 42%,rgba(12,14,16,.12) 72%,rgba(12,14,16,.28) 100%);
+}
+.hero-photo>.wrap{position:relative;z-index:2}
 .hero-card{
   background:#fff;border-radius:var(--r);padding:34px 32px;
   box-shadow:0 2px 4px rgba(0,0,0,.05),0 14px 34px -12px rgba(0,0,0,.16);
@@ -286,6 +294,8 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
 <!-- HERO -->
 <div class="hero">
   <div class="hero-photo">
+    <img src="img/hero-rainbow-deck.jpg" width="1900" height="1424"
+         alt="Concrete deck formed and tied on a Maui build, rainbow over the valley behind it">
     <div class="wrap">
       <div class="hero-card">
         <h1>Metal roofing built for Maui.</h1>
@@ -324,7 +334,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
       <p>We show up when we say we will, we photograph what we find, and we tell you straight whether you need a repair or a roof. Most of our work comes from neighbors telling neighbors, and we'd like to keep it that way.</p>
       <p class="lic">Licensed &amp; insured · License # CT-00000 · Serving Maui since 2015</p>
     </div>
-    <div class="slot">PHOTO 02 — crew, truck, or a finished roof</div>
+    <div class="slot has-photo"><img src="img/reef.jpg" loading="lazy" decoding="async" width="1400" height="933" alt="Reef on site in front of a finished custom home on Maui"></div>
   </div>
 </section>
 
@@ -337,7 +347,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
     </div>
     <div class="svc">
       <div class="svc-card">
-        <div class="slot">PHOTO 03 — standing seam roof</div>
+        <div class="slot has-photo"><img src="img/solar-standing-seam.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Standing seam metal roof with solar array, Maui"></div>
         <div class="svc-body">
           <h3>Metal Roofing</h3>
           <p>Standing seam aluminum with concealed fasteners and custom flashing at every valley and ridge.</p>
@@ -345,7 +355,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
         </div>
       </div>
       <div class="svc-card">
-        <div class="slot">PHOTO 04 — framing or deck build</div>
+        <div class="slot has-photo"><img src="img/framing.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Two-story framing and roof trusses on a Maui hillside build"></div>
         <div class="svc-body">
           <h3>Construction</h3>
           <p>Decks, framing, roof pitch changes, and remodels — licensed general work by the same crew.</p>
@@ -353,7 +363,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
         </div>
       </div>
       <div class="svc-card">
-        <div class="slot">PHOTO 05 — leak or repair detail</div>
+        <div class="slot has-photo"><img src="img/cedar-shake-roof.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Cedar shake roof mid-installation, viewed from above"></div>
         <div class="svc-body">
           <h3>Repairs &amp; Inspections</h3>
           <p>Leaks, storm damage, and failed flashing. We find it, photograph it, and give you an honest answer.</p>
@@ -373,7 +383,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
       <div class="ba-h ba-a" id="baA"><span class="ba-lab">After</span></div>
       <div class="ba-line" id="baL"><div class="ba-knob">⇄</div></div>
     </div>
-    <p class="ba-note">PHOTO 06 + 07 — the same roof, same angle, before and after. Drag the handle.</p>
+    <p class="ba-note">⬆ NEEDS TWO PHOTOS — the same roof from the same spot, before and after. This is usually the highest-converting thing on a contractor site, so it's worth digging for.</p>
   </div>
 </section>
 
@@ -397,12 +407,10 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
   <div class="wrap">
     <div class="head"><h2>Gallery</h2></div>
     <div class="gal">
-      <div class="slot">PHOTO 08 — best finished roof</div>
-      <div class="slot">PHOTO 09 — ridge or valley detail</div>
-      <div class="slot">PHOTO 10 — crew working</div>
-      <div class="slot">PHOTO 11 — deck / framing job</div>
-      <div class="slot">PHOTO 12 — another finished roof</div>
-      <div class="slot">PHOTO 13 — repair or close-up</div>
+      <div class="slot has-photo"><img src="img/finished-home.jpg" loading="lazy" decoding="async" width="1600" height="1028" alt="Finished two-story home with deep eaves and glass railing, Maui"></div>
+      <div class="slot has-photo"><img src="img/carport-detail.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Covered entry with dark metal fascia and standing seam roofline"></div>
+      <div class="slot has-photo"><img src="img/green-roof-build.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Small structure with board-and-batten siding and a planted green roof"></div>
+      <div class="slot has-photo"><img src="img/cedar-siding.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Vertical cedar siding installed from scaffold"></div>
     </div>
   </div>
 </section>
