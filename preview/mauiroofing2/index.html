@@ -453,8 +453,12 @@ section{padding:84px 0;position:relative}
 }
 .faq-q .pm{color:var(--hot);font-size:24px;flex:none;transition:transform .3s;font-family:'Barlow',sans-serif}
 .faq-item.open .pm{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.2,.7,.3,1)}
-.faq-a p{color:var(--tx-2);font-size:15.5px;padding-bottom:22px;max-width:70ch;line-height:1.65}
+/* grid-template-rows, not max-height: animating a layout property thrashes, and a
+   pixel max-height clips the answer if the phone rotates while it is open. */
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.2,.7,.3,1)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a > p{overflow:hidden;color:var(--tx-2);font-size:15.5px;max-width:70ch;line-height:1.65}
+.faq-item.open .faq-a > p{padding-bottom:22px}
 
 /* ---- CONTACT ---- */
 .contact{background:var(--bg-2);border-top:1px solid var(--line)}
@@ -895,9 +899,9 @@ document.querySelectorAll('.rv').forEach((el,i) => {
 /* FAQ */
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
-    const item = q.parentElement, a = item.querySelector('.faq-a'), open = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
-    if(!open){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    const item = q.parentElement, open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if(!open) item.classList.add('open');   // CSS owns the animation now — no height math
   });
 });
 
