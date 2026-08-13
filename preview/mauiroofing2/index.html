@@ -274,10 +274,17 @@ h1.hero-h em{font-style:normal;color:var(--hot);display:block}
 
 /* ============ SECTIONS ============ */
 section{padding:84px 0;position:relative}
-.sec-head{margin-bottom:44px;max-width:760px}
+/* ADX centers every section heading and underlines it with a short orange rule.
+   Kept verbatim — it is the single most recognizable tic on the reference site. */
+.sec-head{margin:0 auto 44px;max-width:760px;text-align:center}
 .sec-k{font-size:10px;color:var(--hot-2);display:block;margin-bottom:14px}
 .sec-h{font-size:clamp(32px,6vw,60px);margin-bottom:16px}
-.sec-p{color:var(--tx-2);font-size:17px;max-width:60ch}
+.sec-head .sec-h::after{content:'';display:block;width:62px;height:3px;background:var(--hot);margin:18px auto 0}
+.sec-p{color:var(--tx-2);font-size:17px;max-width:60ch;margin-left:auto;margin-right:auto}
+/* the hero and the contact column stay left — centering a form label block reads wrong */
+.sec-head.left{margin-left:0;text-align:left}
+.sec-head.left .sec-h::after{margin-left:0}
+.sec-head.left .sec-p{margin-left:0}
 
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
@@ -400,13 +407,43 @@ section{padding:84px 0;position:relative}
 }
 
 /* ---- GALLERY ---- */
-.gal{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
-.gal .slot{aspect-ratio:1}
-.gal .slot:first-child{grid-column:span 2;aspect-ratio:16/10}
-@media(min-width:800px){
-  .gal{grid-template-columns:repeat(4,1fr)}
-  .gal .slot:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+
+/* ---- ADX CONTACT STRIP — orange label cell + phone + email + CTA, full width ---- */
+.cstrip{border-bottom:1px solid var(--line);background:var(--bg-2)}
+.cstrip-in{display:grid;grid-template-columns:1fr}
+.cstrip-cell{
+  display:flex;align-items:center;justify-content:center;gap:13px;
+  padding:20px 18px;border-bottom:1px solid var(--line);text-align:center;
+  transition:background .2s;
 }
+.cstrip-cell:last-child{border-bottom:none}
+a.cstrip-cell:hover{background:var(--bg-3)}
+.cstrip-lead{background:var(--hot);color:#0a0c0e}
+.cstrip-lead b{font-family:'Anton',sans-serif;font-size:25px;text-transform:uppercase;letter-spacing:.01em}
+.cstrip-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--tx-3);display:block;margin-bottom:4px}
+.cstrip-v{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;letter-spacing:.01em}
+.cstrip-ico{font-size:19px;flex:none}
+.cstrip-go{color:var(--hot);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.07em}
+@media(min-width:880px){
+  .cstrip-in{grid-template-columns:.75fr 1fr 1.25fr 1fr}
+  .cstrip-cell{border-bottom:none;border-right:1px solid var(--line)}
+  .cstrip-cell:last-child{border-right:none}
+}
+
+/* ---- GALLERY → swipe carousel (ADX runs a photo carousel, not a static grid) ---- */
+.gal{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:10px;margin:0 -20px;padding-left:20px;padding-right:20px;
+  scrollbar-width:none;
+}
+.gal::-webkit-scrollbar{display:none}
+.gal .slot{flex:0 0 82%;scroll-snap-align:center;aspect-ratio:4/3}
+.gal-hint{
+  display:block;text-align:center;margin-top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--tx-3);
+}
+@media(min-width:800px){ .gal .slot{flex:0 0 31.5%} }
 
 /* ---- OWNER ---- */
 .owner{display:grid;gap:30px;grid-template-columns:1fr;align-items:center}
@@ -588,6 +625,22 @@ body{padding-bottom:0}
   </div>
 </header>
 
+<!-- ADX SIGNATURE: the contact strip sits immediately under the hero, before anything else. -->
+<div class="cstrip">
+  <div class="wrap cstrip-in" style="max-width:100%;padding:0">
+    <div class="cstrip-cell cstrip-lead"><b>Contact.</b></div>
+    <a class="cstrip-cell" href="tel:+18085550123">
+      <span class="cstrip-ico">📞</span>
+      <span><span class="cstrip-k">Phone number</span><span class="cstrip-v num">(808) 555-0123</span></span>
+    </a>
+    <a class="cstrip-cell" href="mailto:aloha@mauiroofing.com">
+      <span class="cstrip-ico">✉️</span>
+      <span><span class="cstrip-k">E-mail</span><span class="cstrip-v" style="text-transform:none;font-size:17px">aloha@mauiroofing.com</span></span>
+    </a>
+    <a class="cstrip-cell" href="#contact"><span class="cstrip-go">Send us a message →</span></a>
+  </div>
+</div>
+
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span>Standing Seam Metal</span><span>Re-Roofs</span><span>Leak Repair</span><span>New Construction</span><span>Decks &amp; Framing</span><span>Gutters</span><span>Roof Inspections</span><span>Remodels</span>
@@ -707,6 +760,7 @@ body{padding-bottom:0}
       <div class="slot"><span class="tag">PHOTO 10 — crew working</span></div>
       <div class="slot"><span class="tag">PHOTO 11 — deck / framing</span></div>
     </div>
+    <span class="gal-hint">← swipe to see more →</span>
   </div>
 </section>
 
@@ -792,7 +846,7 @@ body{padding-bottom:0}
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="wrap ct-grid">
-    <div class="rv">
+    <div class="rv sec-head left" style="max-width:none;margin-bottom:0">
       <span class="sec-k mono">Get in touch</span>
       <h2 class="sec-h d" style="font-size:clamp(30px,5vw,48px)">Free roof<br>check</h2>
       <p class="sec-p" style="margin-bottom:26px">Tell us what's going on and we'll come look. No charge, no pressure — you'll get photos of your own roof and a straight answer either way.</p>
