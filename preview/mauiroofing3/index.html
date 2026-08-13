@@ -121,6 +121,19 @@ header.nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;t
 }
 .hero-photo>img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  opacity:0;transition:opacity 1.6s ease-in-out;
+  /* A very slow drift — enough that the photo feels alive, far short of a swoosh. */
+  animation:heroDrift 28s ease-in-out infinite alternate;
+}
+.hero-photo>img.on{opacity:1}
+@keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.07)}}
+/* Dots let someone skip to the shot they want instead of waiting it out. */
+.hero-dots{position:absolute;right:18px;bottom:16px;z-index:3;display:flex;gap:7px}
+.hero-dots button{width:9px;height:9px;border-radius:50%;padding:0;border:0;cursor:pointer;
+  background:rgba(255,255,255,.42);transition:background .3s,transform .3s}
+.hero-dots button.on{background:#fff;transform:scale(1.25)}
+@media(prefers-reduced-motion:reduce){
+  .hero-photo>img{animation:none;transition:none}
 }
 /* Scrim: the card has to stay readable over a bright sky without hiding the build. */
 .hero-photo::after{
@@ -186,21 +199,43 @@ a.strip-cell:hover{background:var(--bg-alt)}
 .svc-body li::before{content:'';position:absolute;left:0;top:14px;width:7px;height:7px;background:var(--amber);border-radius:50%}
 @media(min-width:820px){.svc{grid-template-columns:repeat(3,1fr)}}
 
-/* ---------- BEFORE / AFTER ---------- */
-.ba{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;cursor:ew-resize;user-select:none;touch-action:none;max-width:940px;margin:0 auto}
-.ba-h{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px}
-.ba-b{background:#cfc7bd}
-.ba-a{background:#c9d3da;clip-path:inset(0 0 0 50%)}
-.ba-lab{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:var(--r);padding:6px 11px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
-.ba-a .ba-lab{margin-left:auto}
-.ba-line{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
-.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--ink-2);box-shadow:0 2px 10px rgba(0,0,0,.18)}
-.ba-note{text-align:center;font-size:12.5px;color:var(--ink-3);margin-top:12px}
-
 /* ---------- GALLERY ---------- */
-.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.gal .slot{aspect-ratio:4/3}
-@media(min-width:820px){.gal{grid-template-columns:repeat(3,1fr)}}
+/* A mosaic, not a grid of equal squares: one photo leads, the rest support.
+   Nine images at equal size reads like a contact sheet — this reads like work. */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gal figure{position:relative;margin:0;overflow:hidden;border-radius:var(--r);
+  border:1px solid var(--line);background:#e9ebed;cursor:zoom-in;aspect-ratio:4/3}
+.gal figure img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.gal figure:hover img{transform:scale(1.05)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;
+  font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.01em;
+  background:linear-gradient(180deg,rgba(10,12,14,0),rgba(10,12,14,.78));
+  opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.gal figure:hover figcaption,.gal figure:focus-within figcaption{opacity:1;transform:none}
+@media(min-width:820px){
+  .gal{grid-template-columns:repeat(4,1fr);grid-auto-rows:190px}
+  .gal figure{aspect-ratio:auto}
+  .gal .g-wide{grid-column:span 2}
+  .gal .g-tall{grid-row:span 2}
+}
+/* Lightbox — a contractor's photos deserve to be seen at full size. */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(8,10,12,.94);display:none;
+  align-items:center;justify-content:center;padding:22px;opacity:0;transition:opacity .25s}
+.lb.on{display:flex}
+.lb.vis{opacity:1}
+.lb img{max-width:100%;max-height:88vh;border-radius:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.lb-x{position:absolute;top:16px;right:20px;background:none;border:0;color:#fff;font-size:32px;
+  line-height:1;cursor:pointer;opacity:.8}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);
+  border:0;color:#fff;font-size:26px;width:48px;height:48px;border-radius:50%;cursor:pointer}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#e8eaed;font-size:13.5px}
+
+/* ---------- SCROLL REVEAL ---------- */
+.rise{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}}
 
 /* ---------- REVIEWS ---------- */
 .rev{display:grid;grid-template-columns:1fr;gap:22px}
@@ -294,8 +329,15 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
 <!-- HERO -->
 <div class="hero">
   <div class="hero-photo">
-    <img src="img/hero-rainbow-deck.jpg" width="1900" height="1424"
+    <img class="hero-slide on" src="img/hero-rainbow-deck.jpg" width="1900" height="1424"
          alt="Concrete deck formed and tied on a Maui build, rainbow over the valley behind it">
+    <img class="hero-slide" src="img/finished-home.jpg" loading="lazy" width="1600" height="1028"
+         alt="Finished two-story home with deep eaves and a glass railing, Maui">
+    <img class="hero-slide" src="img/solar-standing-seam.jpg" loading="lazy" width="1400" height="1050"
+         alt="Standing seam metal roof with a full solar array">
+    <img class="hero-slide" src="img/framing.jpg" loading="lazy" width="1400" height="1050"
+         alt="Two-story framing and roof trusses going up on a Maui hillside">
+    <div class="hero-dots" id="heroDots" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero-card">
         <h1>Metal roofing built for Maui.</h1>
@@ -374,19 +416,6 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
   </div>
 </section>
 
-<!-- BEFORE / AFTER -->
-<section>
-  <div class="wrap">
-    <div class="head"><h2>Before &amp; After</h2></div>
-    <div class="ba" id="ba">
-      <div class="ba-h ba-b"><span class="ba-lab">Before</span></div>
-      <div class="ba-h ba-a" id="baA"><span class="ba-lab">After</span></div>
-      <div class="ba-line" id="baL"><div class="ba-knob">⇄</div></div>
-    </div>
-    <p class="ba-note">⬆ NEEDS TWO PHOTOS — the same roof from the same spot, before and after. This is usually the highest-converting thing on a contractor site, so it's worth digging for.</p>
-  </div>
-</section>
-
 <!-- REVIEWS -->
 <section id="reviews" class="alt">
   <div class="wrap">
@@ -407,10 +436,14 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
   <div class="wrap">
     <div class="head"><h2>Gallery</h2></div>
     <div class="gal">
-      <div class="slot has-photo"><img src="img/finished-home.jpg" loading="lazy" decoding="async" width="1600" height="1028" alt="Finished two-story home with deep eaves and glass railing, Maui"></div>
-      <div class="slot has-photo"><img src="img/carport-detail.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Covered entry with dark metal fascia and standing seam roofline"></div>
-      <div class="slot has-photo"><img src="img/green-roof-build.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Small structure with board-and-batten siding and a planted green roof"></div>
-      <div class="slot has-photo"><img src="img/cedar-siding.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Vertical cedar siding installed from scaffold"></div>
+      <figure class="g-wide" data-full="img/finished-home.jpg" data-cap="Custom home — completed" tabindex="0"><img src="img/finished-home.jpg" loading="lazy" decoding="async" width="1600" height="1028" alt="Finished two-story home with deep eaves and glass railing, Maui"><figcaption>Custom home — completed</figcaption></figure>
+      <figure data-full="img/framing.jpg" data-cap="Framing &amp; trusses" tabindex="0"><img src="img/framing.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Two-story framing and roof trusses on a Maui hillside build"><figcaption>Framing &amp; trusses</figcaption></figure>
+      <figure data-full="img/cedar-shake-roof.jpg" data-cap="Cedar shake re-roof" tabindex="0"><img src="img/cedar-shake-roof.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Cedar shake roof mid-installation viewed from above"><figcaption>Cedar shake re-roof</figcaption></figure>
+      <figure class="g-tall" data-full="img/solar-standing-seam.jpg" data-cap="Standing seam + solar" tabindex="0"><img src="img/solar-standing-seam.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Standing seam metal roof with solar array"><figcaption>Standing seam + solar</figcaption></figure>
+      <figure data-full="img/carport-detail.jpg" data-cap="Entry canopy" tabindex="0"><img src="img/carport-detail.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Covered entry with dark metal fascia and standing seam roofline"><figcaption>Entry canopy</figcaption></figure>
+      <figure data-full="img/cedar-siding.jpg" data-cap="Cedar siding" tabindex="0"><img src="img/cedar-siding.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Vertical cedar siding installed from scaffold"><figcaption>Cedar siding</figcaption></figure>
+      <figure class="g-wide" data-full="img/green-roof-build.jpg" data-cap="Planted green roof" tabindex="0"><img src="img/green-roof-build.jpg" loading="lazy" decoding="async" width="1400" height="1050" alt="Small structure with board-and-batten siding and a planted green roof"><figcaption>Planted green roof</figcaption></figure>
+      <figure data-full="img/hero-rainbow-deck.jpg" data-cap="Deck pour, Haiku" tabindex="0"><img src="img/hero-rainbow-deck.jpg" loading="lazy" decoding="async" width="1900" height="1424" alt="Formed and tied concrete deck with a rainbow over the valley"><figcaption>Deck pour, Haiku</figcaption></figure>
     </div>
   </div>
 </section>
@@ -524,18 +557,6 @@ document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', 
   if(!open) q.classList.add('open');
 }));
 
-/* before / after */
-(function(){
-  const ba=document.getElementById('ba'), a=document.getElementById('baA'), l=document.getElementById('baL');
-  if(!ba) return;
-  let down=false;
-  const set=x=>{const r=ba.getBoundingClientRect();const p=Math.max(2,Math.min(98,((x-r.left)/r.width)*100));a.style.clipPath=`inset(0 0 0 ${p}%)`;l.style.left=p+'%';};
-  ba.addEventListener('pointerdown',e=>{down=true;ba.setPointerCapture(e.pointerId);set(e.clientX)});
-  ba.addEventListener('pointermove',e=>{if(down)set(e.clientX)});
-  ba.addEventListener('pointerup',()=>down=false);
-  ba.addEventListener('pointercancel',()=>down=false);
-})();
-
 /* form */
 document.getElementById('lead').addEventListener('submit', async e => {
   e.preventDefault();
@@ -561,5 +582,88 @@ document.getElementById('lead').addEventListener('submit', async e => {
   }finally{ btn.textContent=t; btn.disabled=false; }
 });
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-x" id="lbX" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbP" aria-label="Previous">&#8249;</button>
+  <img id="lbI" alt="">
+  <button class="lb-nav lb-next" id="lbN" aria-label="Next">&#8250;</button>
+  <p class="lb-cap" id="lbC"></p>
+</div>
+
+<script>
+/* ---- HERO SLIDESHOW ----
+   Crossfade only, 6.5s a slide. Pauses when the tab is hidden so a phone left
+   open on a jobsite isn't burning battery cycling photos nobody is watching. */
+(function () {
+  var slides = [].slice.call(document.querySelectorAll('.hero-slide'));
+  if (slides.length < 2) return;
+  var dots = document.getElementById('heroDots'), i = 0, timer;
+  slides.forEach(function (_, n) {
+    var b = document.createElement('button');
+    if (n === 0) b.className = 'on';
+    b.onclick = function () { go(n); reset(); };
+    dots.appendChild(b);
+  });
+  function go(n) {
+    slides[i].classList.remove('on'); dots.children[i].classList.remove('on');
+    i = n % slides.length;
+    slides[i].classList.add('on'); dots.children[i].classList.add('on');
+  }
+  function tick() { go(i + 1); }
+  function reset() { clearInterval(timer); timer = setInterval(tick, 6500); }
+  reset();
+  document.addEventListener('visibilitychange', function () {
+    document.hidden ? clearInterval(timer) : reset();
+  });
+})();
+
+/* ---- SCROLL REVEAL ---- */
+(function () {
+  var els = document.querySelectorAll('section .head, .gal figure, .svc-card, .about, .rev-card');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e, n) {
+      if (!e.isIntersecting) return;
+      e.target.style.transitionDelay = (n * 60) + 'ms';
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (el) { el.classList.add('rise'); io.observe(el); });
+})();
+
+/* ---- GALLERY LIGHTBOX ---- */
+(function () {
+  var figs = [].slice.call(document.querySelectorAll('.gal figure'));
+  if (!figs.length) return;
+  var lb = document.getElementById('lb'), im = document.getElementById('lbI'),
+      cap = document.getElementById('lbC'), at = 0;
+  function show(n) {
+    at = (n + figs.length) % figs.length;
+    im.src = figs[at].dataset.full;
+    im.alt = figs[at].querySelector('img').alt;
+    cap.textContent = figs[at].dataset.cap;
+  }
+  function open(n) { show(n); lb.classList.add('on'); requestAnimationFrame(function(){lb.classList.add('vis')}); document.body.style.overflow = 'hidden'; }
+  function close() { lb.classList.remove('vis'); setTimeout(function(){lb.classList.remove('on')},220); document.body.style.overflow = ''; }
+  figs.forEach(function (f, n) {
+    f.onclick = function () { open(n); };
+    f.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(n); } };
+  });
+  document.getElementById('lbX').onclick = close;
+  document.getElementById('lbP').onclick = function (e) { e.stopPropagation(); show(at - 1); };
+  document.getElementById('lbN').onclick = function (e) { e.stopPropagation(); show(at + 1); };
+  lb.onclick = function (e) { if (e.target === lb) close(); };
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(at - 1);
+    if (e.key === 'ArrowRight') show(at + 1);
+  });
+})();
+</script>
+
 </body>
 </html>
