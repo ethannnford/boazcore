@@ -240,8 +240,8 @@ a.strip-cell:hover{background:var(--bg-alt)}
 @media(hover:none){.car-nav{opacity:1;background:rgba(255,255,255,.82)}}
 /* progress bar — shows the slide is about to move rather than surprising you */
 .car-bar{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:4;background:rgba(255,255,255,.22)}
-.car-bar i{display:block;height:100%;width:0;background:var(--amber)}
-.car-bar i.run{width:100%;transition:width 5.6s linear}
+.car-bar i{display:block;height:100%;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:left}
+.car-bar i.run{transform:scaleX(1);transition:transform 5.6s linear}
 /* thumbnail rail */
 .car-rail{display:flex;gap:9px;margin-top:11px;overflow-x:auto;padding-bottom:4px;
   scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
