@@ -116,7 +116,9 @@ header.nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;t
 /* ---------- HERO ---------- */
 .hero{position:relative;background:#dfe2e5;border-bottom:1px solid var(--line)}
 .hero-photo{
-  min-height:clamp(360px,56vh,560px);display:flex;align-items:center;
+  min-height:calc(100vh - 65px);
+  min-height:calc(100svh - 65px);
+  display:flex;align-items:center;
   background:#dfe2e5;position:relative;isolation:isolate;
 }
 .hero-photo>img{
