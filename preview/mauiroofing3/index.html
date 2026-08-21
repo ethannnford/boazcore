@@ -160,15 +160,21 @@ header.nav{border-bottom:1px solid var(--line);background:#fff;position:sticky;t
 .btn-a:hover{background:var(--amber-dk)}
 .btn-b{background:#fff;color:var(--ink);border-color:var(--line)}
 .btn-b:hover{border-color:var(--ink-3)}
-/* Phones: the centered card would blanket the photo, so pin a slimmer card to
-   the bottom and let the top half of the first screen be pure photo.
+/* Phones: no card at all — the photo owns the whole first screen and the
+   headline floats over a bottom fade instead of sitting in a white box.
    (This block must stay AFTER the .hero-card base rules — same specificity,
    source order decides the winner.) */
 @media(max-width:760px){
   .hero-photo{align-items:flex-end}
-  /* 74px clears the 52px sticky call bar with a band of photo to spare */
-  .hero-card{padding:24px 20px;margin:180px 0 74px}
-  .hero-card p{font-size:15.5px;margin-bottom:18px}
+  .hero-photo::after{
+    background:linear-gradient(180deg,rgba(12,14,16,.16) 0%,rgba(12,14,16,.06) 38%,rgba(12,14,16,.78) 100%);
+  }
+  .hero-card{
+    background:none;box-shadow:none;border-radius:0;
+    padding:0;margin:200px 0 66px;
+  }
+  .hero-card h1{color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+  .hero-card p{color:rgba(255,255,255,.94);font-size:15.5px;margin-bottom:18px;text-shadow:0 1px 10px rgba(0,0,0,.55)}
   .hero-dots{bottom:62px}
 }
 
