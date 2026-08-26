@@ -18,7 +18,8 @@
           mauissroofing.com + trovaticonstruction.com → 301 at DNS cutover).
    Aug 25 per Ethan: license # and year-started CUT from the page (add back
    only if Reef supplies them). STILL OPEN before the domain goes live:
-   LEAD_ENDPOINT → Formspree URL ("" = demo mode, form doesn't send).
+   LEAD_ENDPOINT → WIRED Aug 25 to FormSubmit → reef@metalroofing.com
+   (activation email must be clicked by Reef before leads deliver).
    Domain SETTLED Aug 25 eve: MAIN = mauissroofing.com (the one he owns);
    mauimetalroofing.com + trovaticonstruction.com = 301 alts at cutover.
 =========================================================================== -->
@@ -582,6 +583,8 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
         </div>
         <div class="f"><label for="d">Tell us about it</label><textarea id="d" name="details" placeholder="Age of the roof, where it's leaking, what town you're in…"></textarea></div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_subject" value="New estimate request from mauissroofing.com">
         <button type="submit" class="btn btn-a" style="width:100%">Send request</button>
         <div class="note" id="note"></div>
@@ -618,7 +621,7 @@ footer{background:#222426;color:#c9ccd0;padding:44px 0 26px;font-size:15px}
    LEAD_ENDPOINT — "" = demo mode. Formspree URL at launch; swap this one line
    for the Boaz lead URL at Growth and the same form becomes a Boaz lead.
    INSTAGRAM_URL — "" = every IG link hides itself. */
-const LEAD_ENDPOINT = "";
+const LEAD_ENDPOINT = "https://formsubmit.co/ajax/reef@metalroofing.com";
 const INSTAGRAM_URL = "https://www.instagram.com/trovaticonstruction/";
 
 document.getElementById('yr').textContent = new Date().getFullYear();
