@@ -142,7 +142,9 @@
   <section class="lf" aria-label="Get the video by email">
     <h3>Can't grab a time right now?</h3>
     <p class="sub">Drop your info — I'll send the video and the booking link straight to your inbox, and give you a call.</p>
-    <form id="leadForm" autocomplete="on">
+    <!-- method=post: with JS broken, a native submit must never GET this PII into the URL
+         (GitHub Pages logs, browser history). A no-JS POST just 405s — nothing leaks. -->
+    <form id="leadForm" method="post" autocomplete="on">
       <div class="row two">
         <input name="name" placeholder="Name" maxlength="60" autocomplete="name">
         <input name="phone" type="tel" placeholder="Phone (for a quick call)" maxlength="30" autocomplete="tel">
