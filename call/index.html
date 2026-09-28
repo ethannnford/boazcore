@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8">
-<!-- Security: same posture as the main site, plus the Cal.com embed (script + frame) and the
-     YouTube video slot (frame, nocookie host). Everything else stays locked to self. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://app.cal.com; frame-src https://cal.com https://app.cal.com https://www.youtube-nocookie.com; connect-src 'self' https://app.cal.com https://cal.com; form-action 'self'">
+<!-- Security: same posture as the main site, plus the Cal.com embed (script + frame), the
+     YouTube video slot (frame, nocookie host), the Meta pixel (script from connect.facebook.net,
+     beacons to facebook.com) and the lead form's POST to app.boazcore.com (same CORS-allowlisted
+     API origin the Ask Boaz widget uses). Everything else stays locked to self. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://www.facebook.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://app.cal.com https://connect.facebook.net; frame-src https://cal.com https://app.cal.com https://www.youtube-nocookie.com; connect-src 'self' https://app.cal.com https://cal.com https://app.boazcore.com https://www.facebook.com https://connect.facebook.net; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Book a free 20-minute call — we build the bid for a job you're pricing right now, at your rates, live. Yours to send whether or not you sign up.">
@@ -77,6 +79,22 @@
   .book.cal-ready .or{display:block}
   .book.cal-ready #cal-inline{height:auto;min-height:560px;border:1px solid var(--line);box-shadow:var(--shadow-sm);margin-top:6px}
 
+  /* Lead form — the "can't book right now" catch. Same soft-card language as .stat. */
+  .lf{margin:26px 0 4px;background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px}
+  .lf h3{font-size:16px;margin-bottom:4px}
+  .lf .sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .lf .row{display:grid;gap:8px;margin-bottom:8px}
+  .lf input,.lf textarea{width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;outline:none}
+  .lf input:focus,.lf textarea:focus{border-color:var(--indigo)}
+  .lf textarea{resize:vertical;min-height:64px}
+  .lf button{width:100%;font:inherit;font-weight:800;font-size:15px;color:#fff;background:var(--grad);border:0;border-radius:12px;padding:13px;cursor:pointer}
+  .lf button:disabled{opacity:.55}
+  .lf .msg{font-size:13px;margin-top:8px;text-align:center}
+  .lf .msg.ok{color:var(--green);font-weight:700}
+  .lf .msg.err{color:#b3261e;font-weight:600}
+  .lf .hp{position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden}
+  @media (min-width:520px){ .lf .row.two{grid-template-columns:1fr 1fr} }
+
   .fine{border-top:1px solid var(--line);margin-top:30px;padding:18px 0 34px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
   .fine a{color:var(--indigo);font-weight:700}
   @media (min-width:640px){ .hero{padding-top:52px} .step p{font-size:15px} }
@@ -121,10 +139,48 @@
     <div id="cal-inline"></div>
   </section>
 
-  <p class="fine">Built by Ethan Ford · Boaz runs real contractors' jobs every day — <a href="https://boazcore.com/">see the product</a>.<br>No card, no pressure. Worst case, you walk away with a free bid.</p>
+  <section class="lf" aria-label="Get the video by email">
+    <h3>Can't grab a time right now?</h3>
+    <p class="sub">Drop your info — I'll send the video and the booking link straight to your inbox, and give you a call.</p>
+    <form id="leadForm" autocomplete="on">
+      <div class="row two">
+        <input name="name" placeholder="Name" maxlength="60" autocomplete="name">
+        <input name="phone" type="tel" placeholder="Phone (for a quick call)" maxlength="30" autocomplete="tel">
+      </div>
+      <div class="row">
+        <input name="email" type="email" placeholder="Email — required" maxlength="120" required autocomplete="email">
+        <textarea name="note" placeholder="What are you bidding right now? (optional)" maxlength="600"></textarea>
+      </div>
+      <!-- honeypot: humans never see it; a filled value gets quietly dropped server-side -->
+      <div class="hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" id="leadBtn">Send me the video →</button>
+      <p class="msg" id="leadMsg" role="status"></p>
+    </form>
+  </section>
+
+  <p class="fine">Built by Ethan Ford · Boaz runs real contractors' jobs every day — <a href="https://boazcore.com/">see the product</a>.<br>No card, no pressure. Worst case, you walk away with a free bid.<br>This page may use the Meta Pixel to measure our ads · <a href="https://app.boazcore.com/privacy">Privacy</a> · <a href="https://app.boazcore.com/terms">Terms</a></p>
 </main>
 
 <script>
+  // ---- Meta pixel (Oct 1 ads) ----
+  // Paste the pixel ID from Meta Events Manager and tracking goes live; empty string = the
+  // snippet never loads (no third-party script, no beacons). Events: PageView on load,
+  // Lead on a form submit, Schedule on a completed cal.com booking in the inline embed.
+  // The cal.com booking PAGE itself is covered separately by cal.com's own Meta Pixel app
+  // (App Store → Analytics → Meta Pixel) — install it with the same ID.
+  var META_PIXEL_ID = '';
+  (function(){
+    if (!META_PIXEL_ID) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  })();
+  function track(ev){ try { if (window.fbq) window.fbq('track', ev); } catch(_) {} }
+
   // ---- VSL slot ----
   // Paste the YouTube link here when the video exists (watch URL or ID both fine) and the
   // player appears; empty string keeps the whole section hidden. No other edits needed.
@@ -167,6 +223,57 @@
     Cal.ns["first-bid"]("on", { action: "linkReady", callback: reveal });
     window.addEventListener('message', function (e) {
       try { if (/(^|\.)cal\.com$/.test(new URL(e.origin).hostname)) reveal(); } catch (_) {}
+    });
+    // A completed booking in the INLINE embed = the conversion the ads buy. (Bookings made on
+    // cal.com's own page — the fallback button — are covered by cal.com's Meta Pixel app.)
+    Cal.ns["first-bid"]("on", { action: "bookingSuccessful", callback: function () { track('Schedule'); } });
+    // Once the embed is alive, the primary button scrolls to it instead of leaving for a new
+    // tab — the booking stays on THIS page where the pixel can see it. If the embed never
+    // came up, the href still opens cal.com: never a dead end.
+    document.querySelector('.btn-p').addEventListener('click', function (e) {
+      if (!revealed) return;
+      e.preventDefault();
+      document.getElementById('cal-inline').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+
+  // ---- Lead form → the setter (instant email in Ethan's voice + same-day call) ----
+  (function () {
+    var form = document.getElementById('leadForm');
+    var btn = document.getElementById('leadBtn');
+    var msg = document.getElementById('leadMsg');
+    if (!form) return;
+    // Source tag: which ad/campaign brought them (utm_campaign or ?src=), for the ops email.
+    var q = new URLSearchParams(location.search);
+    var source = 'call' + (q.get('utm_campaign') || q.get('src') ? ':' + (q.get('utm_campaign') || q.get('src')).slice(0, 60) : '');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = new FormData(form);
+      var email = String(f.get('email') || '').trim();
+      if (!email) { msg.className = 'msg err'; msg.textContent = 'Add your email so I can send it.'; return; }
+      btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Sending…';
+      fetch('https://app.boazcore.com/api/ad-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: String(f.get('name') || ''), email: email, phone: String(f.get('phone') || ''),
+          note: String(f.get('note') || ''), source: source, company: String(f.get('company') || '')
+        })
+      }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            track('Lead');
+            form.reset(); btn.disabled = false;
+            msg.className = 'msg ok'; msg.textContent = 'Check your inbox — the video and booking link are on the way. 📬';
+          } else {
+            btn.disabled = false;
+            msg.className = 'msg err'; msg.textContent = (res.j && res.j.error) || 'That didn’t go through — email ethan@boazcore.com instead.';
+          }
+        })
+        .catch(function () {
+          btn.disabled = false;
+          msg.className = 'msg err'; msg.textContent = 'That didn’t go through — email ethan@boazcore.com instead.';
+        });
     });
   })();
 </script>
