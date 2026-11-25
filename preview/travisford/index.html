@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<!--
+THESIS: A carpenter's site that reads like a builder's monograph: one plain statement of who he
+  is, then the work. Modeled on nsbuilders.com's structure and restraint (owner-pinned reference),
+  in Travis's own identity. Refuses the contractor default of a stock-photo hero with badge rows.
+OWN-WORLD: white ground, near-black ink, one pale stone panel, cedar brown used only as a mark.
+  Archivo throughout, tight at display sizes. Small upper-case meta lines (place, time, license).
+  Portrait work tiles on a strict grid; a black closing field with oversized contact lines.
+STORY: "Third-generation carpenter, Maui-raised, licensed GC. The work is real. I can reach him."
+FIRST VIEWPORT: place and live San Diego time in the bar; a three-line headline at near-full
+  width; one sentence of what he builds; license and founding year as meta; work begins below.
+FORM: single long page, editorial; brief-pinned direction, shaped directly (no concept seed run).
+-->
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Travis Ford Woodworks is a licensed general contractor in San Diego specializing in finish carpentry: doors, built-ins, cabinetry, gates and remodels.">
+<meta name="theme-color" content="#0d0f0e">
+<meta name="robots" content="noindex, nofollow">
+<title>Travis Ford Woodworks — Finish Carpentry and General Contracting, San Diego</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Travis Ford Woodworks — Finish Carpentry and General Contracting, San Diego">
+<meta property="og:description" content="Third-generation carpenter. Raised on Maui. Building in San Diego.">
+<meta property="og:image" content="img/arched-door.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0f0e; --paper:#ffffff; --stone:#ecebe7; --rule:#d9d8d2; --soft:#56594f;
+    --cedar:#8f4a22; --on-ink:#f4f3ef; --on-ink-soft:#b5b6ac;
+    --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+    --pad:clamp(20px,4vw,56px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;width:100%;height:auto}
+  :focus-visible{outline:2px solid var(--cedar);outline-offset:4px}
+  .wrap{padding:0 var(--pad)}
+  .meta{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+  .display{font-weight:500;letter-spacing:-.04em;line-height:.96;text-wrap:balance}
+
+  /* bar */
+  .bar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+  .bar .wrap{display:flex;align-items:center;gap:28px;height:60px}
+  .mark{font-weight:600;font-size:15px;letter-spacing:.02em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
+  .bar nav{display:flex;gap:26px}
+  .bar nav a{font-size:14px;font-weight:500;position:relative;padding:4px 0}
+  .bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+  .bar nav a:hover::after{transform:scaleX(1)}
+  .bar .place{display:flex;gap:14px;color:var(--soft);white-space:nowrap}
+  .bar .place b{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+  /* hero */
+  .hero{padding:clamp(56px,9vw,128px) 0 clamp(40px,5vw,72px)}
+  .hero h1{font-size:clamp(2.6rem,8.2vw,6rem)}
+  .hero h1 span{display:block;overflow:hidden}
+  .hero h1 span i{display:block;font-style:normal;animation:rise 1s var(--ease) both}
+  .hero h1 span:nth-child(2) i{animation-delay:.08s}
+  .hero h1 span:nth-child(3) i{animation-delay:.16s}
+  @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+  .hero .under{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:end;margin-top:clamp(36px,5vw,72px);padding-top:22px;border-top:1px solid var(--ink)}
+  .hero .under p{font-size:clamp(17px,1.5vw,21px);max-width:31em;line-height:1.45}
+  .hero .facts{display:flex;gap:36px;justify-content:flex-end;flex-wrap:wrap;color:var(--soft)}
+  .hero .facts b{display:block;color:var(--ink);font-weight:500;margin-top:4px;letter-spacing:.04em}
+
+  /* work */
+  .work{padding:0 0 clamp(72px,9vw,128px)}
+  .head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid var(--ink);margin-bottom:28px}
+  .head h2{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+  .head a{font-size:14px;font-weight:500;border-bottom:1px solid var(--ink)}
+  .head a:hover{color:var(--cedar);border-color:var(--cedar)}
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,28px) clamp(12px,1.6vw,24px)}
+  .tile .ph{overflow:hidden;background:var(--stone);aspect-ratio:3/4}
+  .tile img{height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+  .tile:hover img{transform:scale(1.035)}
+  .tile figcaption{display:flex;justify-content:space-between;gap:12px;padding-top:10px;font-size:14.5px;font-weight:500}
+  .tile figcaption span{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding-top:2px}
+  .tile.wide{grid-column:span 2}
+  .tile.wide{display:flex;flex-direction:column}
+  .tile.wide .ph{aspect-ratio:auto;flex:1;min-height:0;position:relative}
+  .tile.wide .ph img{position:absolute;inset:0}
+
+  /* statement */
+  .state{background:var(--stone);padding:clamp(72px,10vw,150px) 0}
+  .state .cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.62fr);gap:clamp(32px,6vw,96px);align-items:end}
+  .state p{font-size:clamp(1.9rem,4.4vw,3.75rem);max-width:15em}
+  .state figure{overflow:hidden}
+  .state figcaption{padding-top:10px;color:var(--soft)}
+
+  /* about */
+  .about{padding:clamp(72px,9vw,128px) 0}
+  .about .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,6vw,96px);align-items:start}
+  .about h2{font-size:clamp(2rem,4.2vw,3.5rem);margin-bottom:28px}
+  .about p{font-size:17.5px;max-width:34em;margin-bottom:18px;color:#272a26}
+  .about blockquote{margin:34px 0 0;padding-top:22px;border-top:1px solid var(--ink);font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.02em;line-height:1.25;max-width:24em}
+  .about cite{display:block;margin-top:14px;font-style:normal;color:var(--soft)}
+  .about cite a{border-bottom:1px solid var(--rule)}
+  .about cite a:hover{color:var(--cedar);border-color:var(--cedar)}
+  .about .pics{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,24px)}
+  .about .pics figure{aspect-ratio:3/4;overflow:hidden;background:var(--stone)}
+  .about .pics img{height:100%;object-fit:cover}
+  .about .pics p{font-size:12px;margin:0;max-width:none}
+  .about .pics div:nth-child(2){margin-top:clamp(28px,5vw,72px)}
+
+  /* services + process */
+  .lists{padding:0 0 clamp(72px,9vw,128px)}
+  .four,.three{display:grid;gap:clamp(20px,3vw,44px)}
+  .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .col h3{font-size:clamp(20px,1.9vw,26px);font-weight:500;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
+  .col ul{list-style:none}
+  .col li{padding:9px 0;border-top:1px solid var(--rule);font-size:15.5px;color:#272a26}
+  .col p{font-size:15.5px;color:#272a26;max-width:26em}
+  .lists + .lists{margin-top:0}
+  .step{color:var(--cedar);margin-bottom:14px;display:block}
+
+  /* contact */
+  .contact{background:var(--ink);color:var(--on-ink);padding:clamp(72px,10vw,150px) 0 40px}
+  .contact h2{font-size:clamp(2.6rem,8.2vw,6rem);margin-bottom:clamp(36px,5vw,72px)}
+  .contact .rows{border-top:1px solid #3a3d39}
+  .contact .row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:22px 0;border-bottom:1px solid #3a3d39}
+  .contact .row .meta{color:var(--on-ink-soft)}
+  .contact .row a,.contact .row span.val{font-size:clamp(20px,3vw,40px);font-weight:500;letter-spacing:-.03em;text-align:right}
+  .contact .row a{transition:color .3s ease}
+  .contact .row a:hover{color:#e2a274}
+  .contact .todo{color:#8d8f86;font-size:clamp(16px,1.7vw,22px);letter-spacing:-.01em}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;color:var(--on-ink-soft)}
+
+  @media (max-width:980px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .tile.wide{grid-column:span 2}
+    .tile.wide .ph{aspect-ratio:4/3;flex:none}
+    .four{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .hero .under,.about .cols,.state .cols{grid-template-columns:minmax(0,1fr)}
+    .state figure{max-width:320px}
+    .hero .facts{justify-content:flex-start}
+    .bar .place span.city{display:none}
+  }
+  @media (max-width:640px){
+    .bar nav a:not(.keep){display:none}
+    .three,.four{grid-template-columns:minmax(0,1fr)}
+    .contact .row{flex-direction:column;gap:6px}
+    .contact .row a,.contact .row span.val{text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .hero h1 span i{animation:none}
+    .tile img,.bar nav a::after{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar"><div class="wrap">
+  <a class="mark" href="#top">Travis Ford Woodworks</a>
+  <nav aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a class="keep" href="#contact">Contact</a>
+  </nav>
+  <div class="place meta"><span class="city">San Diego, CA</span><b id="clock" aria-hidden="true"></b></div>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <h1 class="display">
+    <span><i>Third-generation carpenter.</i></span>
+    <span><i>Raised on Maui.</i></span>
+    <span><i>Building in San Diego.</i></span>
+  </h1>
+  <div class="under">
+    <p>Travis Ford Woodworks is a licensed general contractor specializing in finish carpentry: doors, built-ins, cabinetry, gates and full remodels, built by hand.</p>
+    <div class="facts meta">
+      <div>Established<b>2018</b></div>
+      <div>California license<b>CSLB #1084436</b></div>
+      <div>Classification<b>B · General Building</b></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="work" id="work"><div class="wrap">
+  <div class="head"><h2>Selected work</h2><a href="https://www.instagram.com/travisfordwoodworks/" target="_blank" rel="noopener">More on Instagram</a></div>
+  <div class="grid">
+    <figure class="tile"><div class="ph"><img src="img/arched-door.jpg" width="480" height="640" alt="A dark-stained arched plank door with a small arched window, set in a stucco wall"></div><figcaption>Arched entry door <span>Doors</span></figcaption></figure>
+    <figure class="tile"><div class="ph"><img src="img/driveway-gate.jpg" width="480" height="640" alt="A double cedar driveway gate with a row of square openings, hung between white pillars"></div><figcaption>Cedar driveway gate <span>Exterior</span></figcaption></figure>
+    <figure class="tile"><div class="ph"><img src="img/built-ins.jpg" width="480" height="640" alt="A galley room lined floor to ceiling with dark wood cabinetry over a checkerboard tile floor"></div><figcaption>Floor-to-ceiling cabinetry <span>Built-ins</span></figcaption></figure>
+    <figure class="tile"><div class="ph"><img src="img/stone-fireplace.jpg" width="480" height="640" alt="A limestone fireplace wall with a black stone hearth and a built-in window seat"></div><figcaption>Stone fireplace and window seat <span>Living</span></figcaption></figure>
+    <figure class="tile wide"><div class="ph"><img src="img/fireplace-surround.jpg" width="640" height="480" loading="lazy" alt="A white plaster fireplace surround with a floating stone hearth over oak flooring"></div><figcaption>Fireplace surround and floating hearth <span>Living</span></figcaption></figure>
+    <figure class="tile"><div class="ph"><img src="img/vanity.jpg" width="480" height="640" loading="lazy" alt="A bathroom vanity with a wood-framed mirror, stone counter and tall wood cabinet"></div><figcaption>Vanity and framed mirror <span>Bath</span></figcaption></figure>
+    <figure class="tile"><div class="ph"><img src="img/bath.jpg" width="480" height="640" loading="lazy" alt="A remodeled bathroom with an arched tile niche, an arched window and a sliding glass tub door"></div><figcaption>Bathroom remodel <span>Bath</span></figcaption></figure>
+  </div>
+</div></section>
+
+<section class="state"><div class="wrap cols">
+  <p class="display">Most of the work comes from people I've already built for, and the people they send.</p>
+  <figure><img src="img/cedar-enclosure.jpg" width="512" height="640" loading="lazy" alt="A cedar panel fence and gate around a courtyard tree"><figcaption class="meta">Cedar fence and gate</figcaption></figure>
+</div></section>
+
+<section class="about" id="about"><div class="wrap cols">
+  <div>
+    <h2 class="display">Raised around the work.</h2>
+    <p>I grew up on Maui and started on job sites in grade school, working next to my father. I'm the third generation of carpenters in my family.</p>
+    <p>I studied architecture at the University of Hawaiʻi at Mānoa, spent years as a carpenter for other contractors, and settled in San Diego in 2007. In 2018 I started Travis Ford Woodworks.</p>
+    <p>I still build with my own two hands, and I care as much about how a project is run as how it is finished. Every job is priced on its scope of work, and my aim on every one is to deliver more than was expected.</p>
+    <blockquote>"I approach my business as relationship building and each job is about the person."
+      <cite class="meta">Travis Ford, in <a href="https://sdvoyager.com/interview/hidden-gems-meet-travis-ford-of-travis-ford-woodworks-inc/" target="_blank" rel="noopener">SDVoyager's Hidden Gems</a>, 2022</cite>
+    </blockquote>
+  </div>
+  <div class="pics">
+    <div><figure><img src="img/shop.jpg" width="480" height="640" loading="lazy" alt="The workshop: a sliding table saw on a clean concrete floor, with Hawaiian and American flags on the wall"></figure><p class="meta" style="padding-top:10px;color:var(--soft)">The shop</p></div>
+    <div><figure><img src="img/van.jpg" width="480" height="640" loading="lazy" alt="The open back of a work van fitted with labeled drawers and tool storage"></figure><p class="meta" style="padding-top:10px;color:var(--soft)">The shop that travels</p></div>
+  </div>
+</div></section>
+
+<section class="lists" id="services"><div class="wrap">
+  <div class="head"><h2>What I build</h2></div>
+  <div class="four">
+    <div class="col"><h3>Finish carpentry</h3><ul><li>Doors and entries</li><li>Trim and millwork</li><li>Built-ins and cabinetry</li><li>Fireplace surrounds and mantels</li></ul></div>
+    <div class="col"><h3>Exterior woodwork</h3><ul><li>Driveway and garden gates</li><li>Fences and enclosures</li><li>Porch rails and details</li></ul></div>
+    <div class="col"><h3>Remodels</h3><ul><li>Kitchens</li><li>Bathrooms</li><li>Room-by-room renovations</li></ul></div>
+    <div class="col"><h3>General contracting</h3><ul><li>Licensed B general building contractor</li><li>Project management, start to finish</li><li>All types of construction</li></ul></div>
+  </div>
+</div></section>
+
+<section class="lists"><div class="wrap">
+  <div class="head"><h2>How a job runs</h2></div>
+  <div class="three">
+    <div class="col"><span class="step meta">First</span><h3>We walk the job</h3><p>We meet at your home, look at the space together, and talk through what you want built.</p></div>
+    <div class="col"><span class="step meta">Then</span><h3>A clear scope and price</h3><p>You get the work written down and priced by its scope before anything starts.</p></div>
+    <div class="col"><span class="step meta">Then</span><h3>Built by hand</h3><p>Made in the shop where it should be, fitted on site, and finished down to the last detail.</p></div>
+  </div>
+</div></section>
+</main>
+
+<footer class="contact" id="contact"><div class="wrap">
+  <h2 class="display">Have a project in mind?</h2>
+  <div class="rows">
+    <div class="row"><span class="meta">Call or text</span><span class="val todo" data-todo="phone">Phone number to be added</span></div>
+    <div class="row"><span class="meta">Email</span><span class="val todo" data-todo="email">Email to be added</span></div>
+    <div class="row"><span class="meta">Instagram</span><a href="https://www.instagram.com/travisfordwoodworks/" target="_blank" rel="noopener">@travisfordwoodworks</a></div>
+    <div class="row"><span class="meta">Serving</span><span class="val">San Diego County</span></div>
+  </div>
+  <div class="foot meta">
+    <span>© <span id="yr">2026</span> Travis Ford Woodworks, Inc. · CSLB #1084436</span>
+    <span>Site by <a href="https://boazcore.com/">Boaz</a></span>
+  </div>
+</div></footer>
+
+<script>
+  (function(){
+    var el=document.getElementById('clock');
+    function tick(){
+      try{el.textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())}catch(e){el.textContent=''}
+    }
+    tick();setInterval(tick,1000);
+    document.getElementById('yr').textContent=new Date().getFullYear();
+  })();
+</script>
+</body></html>
