@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://script.google.com https://script.googleusercontent.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Website preview · Boaz Websites</title>
+<meta name="description" content="A website preview built by Boaz Websites, San Diego.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#15181b; --mid:#5a6067; --line:#e2e0da; --paper:#faf9f6; --card:#fff; --accent:#1f4d3a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.55 Archivo,system-ui,sans-serif; padding-bottom:132px; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 22px; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:20px 0; gap:16px; }
+  .brand { font-weight:800; font-size:19px; letter-spacing:-.01em; }
+  .call { background:var(--accent); color:#fff; text-decoration:none; font-weight:600; padding:12px 20px; border-radius:999px; white-space:nowrap; }
+  .hero { padding:56px 0 64px; border-bottom:1px solid var(--line); }
+  .kicker { text-transform:uppercase; letter-spacing:.12em; font-size:13px; font-weight:600; color:var(--accent); margin:0 0 16px; }
+  h1 { font-size:clamp(38px,7.2vw,76px); line-height:1.02; letter-spacing:-.03em; font-weight:800; margin:0 0 20px; max-width:14ch; }
+  .lede { font-size:clamp(18px,2.2vw,22px); color:var(--mid); max-width:46ch; margin:0 0 30px; }
+  .stars { display:inline-flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 18px; text-decoration:none; margin-bottom:30px; }
+  .stars b { font-size:26px; }
+  .stars svg { display:block; }
+  .stars span { color:var(--mid); font-size:15px; }
+  .cta { display:flex; gap:12px; flex-wrap:wrap; }
+  .cta a { font-weight:600; text-decoration:none; padding:16px 26px; border-radius:999px; font-size:18px; }
+  .cta .p { background:var(--ink); color:#fff; }
+  .cta .s { border:1.5px solid var(--ink); }
+  section { padding:60px 0; border-bottom:1px solid var(--line); }
+  h2 { font-size:clamp(28px,4vw,42px); letter-spacing:-.02em; line-height:1.1; margin:0 0 28px; font-weight:800; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+  .grid div { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px; font-weight:600; font-size:19px; }
+  .grid div small { display:block; font-weight:400; color:var(--mid); font-size:15px; margin-top:6px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; }
+  .two p { color:var(--mid); margin:0 0 14px; max-width:48ch; }
+  .big { font-size:clamp(44px,8vw,92px); font-weight:800; letter-spacing:-.04em; line-height:1; color:var(--accent); }
+  footer { padding:44px 0; color:var(--mid); font-size:15px; }
+  .fine { font-size:13px; line-height:1.5; max-width:70ch; margin:14px 0 0; }
+  .sample { font-size:13px; color:var(--mid); margin-top:18px; }
+  .bar { position:fixed; left:0; right:0; bottom:0; background:var(--ink); color:#fff; padding:14px 0 16px; z-index:10; }
+  .bar .wrap { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .bar p { margin:0; font-size:15px; line-height:1.4; max-width:62ch; }
+  .bar p b { display:block; font-size:16px; }
+  .bar .acts { display:flex; gap:10px; flex-wrap:wrap; }
+  .bar a { text-decoration:none; font-weight:600; font-size:15px; padding:11px 18px; border-radius:999px; border:1.5px solid #fff; white-space:nowrap; }
+  .bar a.w { background:#fff; color:var(--ink); }
+  .bar .short { display:none; }
+  .strip { background:var(--ink); color:#fff; text-align:center; font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:7px 12px; }
+  #gone { display:none; padding:120px 0; text-align:center; }
+  @media (max-width:700px) {
+    .two { grid-template-columns:1fr; gap:20px; }
+    .hero { padding:32px 0 44px; }
+    section { padding:44px 0; }
+    .call { padding:10px 16px; font-size:15px; }
+    body { padding-bottom:150px; }
+    .bar { padding:10px 0 12px; }
+    .bar .wrap { gap:8px; }
+    .bar p { font-size:13px; }
+    .bar p b { font-size:14px; }
+    .bar .long { display:none; }
+    .bar .short { display:inline; }
+    .bar a { flex:1; text-align:center; padding:9px 12px; font-size:14px; }
+    .bar .acts { width:100%; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<div id="site" hidden>
+  <div class="strip">Sample preview · not a live website</div>
+  <div class="wrap">
+    <header>
+      <div class="brand" data-f="name"></div>
+      <a class="call" data-tel>Call now</a>
+    </header>
+
+    <div class="hero">
+      <p class="kicker"><span data-f="label"></span> · <span data-f="city"></span></p>
+      <h1 data-f="headline"></h1>
+      <p class="lede" data-f="lede"></p>
+      <a class="stars" data-maps target="_blank" rel="noopener">
+        <b data-f="rating"></b>
+        <svg width="112" height="20" viewBox="0 0 112 20" aria-hidden="true"><g fill="#e8a11a"><path id="s" d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/><use href="#s" x="23"/><use href="#s" x="46"/><use href="#s" x="69"/><use href="#s" x="92"/></g></svg>
+        <span><span data-f="reviews"></span> reviews on Google</span>
+      </a>
+      <div class="cta">
+        <a class="p" data-tel>Call <span data-f="phone"></span></a>
+        <a class="s" href="#services">What we do</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <h2>What we do</h2>
+      <div class="grid" id="svc"></div>
+      <p class="sample">Sample list. Your real services, photos and wording go here.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <div>
+        <div class="big"><span data-f="reviews"></span></div>
+        <h2 style="margin-top:10px">neighbors have left a review.</h2>
+      </div>
+      <div>
+        <p>Rated <span data-f="rating"></span> out of 5 on Google. That reputation was earned one job at a time, and it is the first thing a new customer should see.</p>
+        <p><a data-maps target="_blank" rel="noopener">Read the reviews on Google</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <h2>Serving <span data-f="city"></span> and the rest of San Diego County.</h2>
+      <div>
+        <p>Call for a quote. You will talk to the person doing the work.</p>
+        <div class="cta"><a class="p" data-tel>Call <span data-f="phone"></span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><footer><span data-f="name"></span> · <span data-f="city"></span>, CA
+    <p class="fine">This page is a design sample made by Boaz Websites. It is not the website of <span data-f="name"></span>, and <span data-f="name"></span> has not endorsed it. The name, phone number and review count come from the public Google listing. The services listed are examples. To have this sample taken down, email <a href="mailto:ethan@boazcore.com?subject=Remove%20my%20sample">ethan@boazcore.com</a> and it is removed the same day.</p></footer></div>
+
+  <div class="bar">
+    <div class="wrap">
+      <p><b>This is a preview, not a live website.</b>
+        <span class="long">Ethan Ford at Boaz Websites put this sample together for <span data-f="name"></span> from your public Google listing. Want it finished with your photos and your words? $997 flat. You own it.</span>
+        <span class="short">A sample by Ethan at Boaz Websites. $997 flat, you own it.</span></p>
+      <div class="acts">
+        <a class="w" id="reach">Text Ethan</a>
+        <a href="https://boazcore.com/sites/">How it works</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="wait" class="wrap" style="padding:120px 22px;text-align:center;color:#5a6067">Loading your sample...</div>
+
+<div id="gone" class="wrap">
+  <h2>This preview is no longer available.</h2>
+  <p><a href="https://boazcore.com/sites/">Boaz Websites</a></p>
+</div>
+
+<script>
+  // Filled in once the outreach engine is deployed (the web app address ending in /exec).
+  var API = 'https://script.google.com/macros/s/AKfycbwtJqOM-Iu9VOn-p1ECPSPKO2O24MBSWQoFrmYDzDU76IgFZ4_pxtrUd15sg4ibvno/exec';
+  // Ethan's number for the "Text Ethan" button, digits only. Empty = the button emails instead.
+  var ETHAN_SMS = '';
+
+  var KINDS = [
+    [/general contractor|construction|home builder|adu/, 'General contractor', 'Built right, from permit to punch list.',
+      ['Home remodels', 'Room additions', 'ADUs and garage conversions', 'Kitchens', 'Bathrooms', 'Repairs and punch lists']],
+    [/remodel|kitchen|bathroom/, 'Remodeling', 'Kitchens and baths, done right the first time.',
+      ['Kitchen remodels', 'Bathroom remodels', 'Cabinets and counters', 'Tile and flooring', 'Layout changes', 'Finish carpentry']],
+    [/handyman/, 'Handyman', 'The list you have been putting off, handled.',
+      ['Home repairs', 'Doors and trim', 'Drywall patches', 'Fixtures and fans', 'Fence and gate repair', 'Mounting and assembly']],
+    [/concrete|paving|masonry|stucco/, 'Concrete and masonry', 'Flatwork and stonework that lasts.',
+      ['Driveways', 'Patios and walkways', 'Retaining walls', 'Foundations and slabs', 'Stamped and colored finishes', 'Repairs']],
+    [/fence|deck/, 'Fences and decks', 'Straight lines, solid posts, built to last.',
+      ['Wood fences', 'Vinyl and metal fences', 'Gates', 'Decks', 'Patio covers', 'Repairs']],
+    [/paint/, 'Painting', 'Clean lines and a clean job site.',
+      ['Interior painting', 'Exterior painting', 'Cabinet refinishing', 'Stucco and trim', 'Drywall repair', 'Color help']],
+    [/floor|tile|carpet/, 'Flooring and tile', 'Floors and tile set level and tight.',
+      ['Tile installation', 'Hardwood and laminate', 'Luxury vinyl plank', 'Showers and backsplashes', 'Carpet', 'Repairs']],
+    [/roof|gutter/, 'Roofing', 'A dry house and a straight answer.',
+      ['Roof replacement', 'Leak repair', 'Tile and shingle', 'Flat roofs', 'Gutters', 'Inspections']],
+    [/landscap|gardener|tree|pool/, 'Outdoor services', 'A yard you are proud to pull up to.',
+      ['Landscape design', 'Irrigation', 'Planting and sod', 'Tree trimming', 'Regular maintenance', 'Cleanups']],
+    [/plumb/, 'Plumbing', 'Fixed right, priced straight.',
+      ['Leak repair', 'Water heaters', 'Drain cleaning', 'Fixtures and faucets', 'Repipes', 'Emergency calls']],
+    [/electric/, 'Electrical', 'Safe, clean electrical work.',
+      ['Panel upgrades', 'Lighting', 'Outlets and switches', 'EV chargers', 'Troubleshooting', 'Remodel wiring']],
+    [/hvac|appliance|garage door|locksmith/, 'Repair and service', 'Same-week service from someone local.',
+      ['Repairs', 'Installations', 'Maintenance', 'Diagnostics', 'Replacements', 'Emergency calls']],
+    [/clean|wash|junk|pest|moving|detail/, 'Local service', 'Show up on time. Do it right.',
+      ['Homes', 'Businesses', 'One-time jobs', 'Regular service', 'Move in and move out', 'Free quotes']]
+  ];
+
+  function kind(trade) {
+    var t = String(trade || '').toLowerCase();
+    for (var i = 0; i < KINDS.length; i++) if (KINDS[i][0].test(t)) return KINDS[i];
+    return [null, 'Local business', 'Good work. Fair price. Done on time.',
+      ['Free quotes', 'Residential', 'Commercial', 'Repairs', 'New installs', 'Maintenance']];
+  }
+
+  function draw(d) {
+    var k = kind(d.trade);
+    var f = { name: d.name, city: d.city, rating: d.rating, reviews: d.reviews, phone: d.phone,
+      label: k[1], headline: k[2],
+      lede: d.name + ' has ' + d.reviews + ' Google reviews at ' + d.rating + ' stars. This is a quick sample of what your website could look like.' };
+    document.querySelectorAll('[data-f]').forEach(function (el) { el.textContent = f[el.getAttribute('data-f')] || ''; });
+    var tel = 'tel:+1' + String(d.phone).replace(/\D/g, '').slice(-10);
+    document.querySelectorAll('[data-tel]').forEach(function (el) { el.href = tel; });
+    document.querySelectorAll('[data-maps]').forEach(function (el) {
+      if (/^https:\/\/(maps\.google\.com|www\.google\.com|maps\.app\.goo\.gl|g\.co)\//.test(d.maps || '')) el.href = d.maps;
+      else el.removeAttribute('href');
+    });
+    var svc = document.getElementById('svc');
+    k[3].forEach(function (s) { var el = document.createElement('div'); el.textContent = s; svc.appendChild(el); });
+    var msg = 'Hey Ethan, I saw the website preview for ' + d.name + '.';
+    document.getElementById('reach').href = ETHAN_SMS
+      ? 'sms:+1' + ETHAN_SMS + '?&body=' + encodeURIComponent(msg)
+      : 'mailto:ethan@boazcore.com?subject=' + encodeURIComponent('Website for ' + d.name) + '&body=' + encodeURIComponent(msg);
+    if (!ETHAN_SMS) document.getElementById('reach').textContent = 'Email Ethan';
+    document.title = d.name + ' · website preview';
+    document.getElementById('wait').style.display = 'none';
+    document.getElementById('site').hidden = false;
+  }
+  function gone() { document.getElementById('wait').style.display = 'none'; document.getElementById('gone').style.display = 'block'; }
+
+  var parts = location.search.replace(/^\?/, '').split('&');
+  var slug = (parts[0] || '').replace(/[^a-z0-9-]/g, '');
+  var mine = parts.indexOf('me=1') > 0;
+  if (slug === 'demo') {
+    draw({ name: 'Honey Do Done', trade: 'handyman', city: 'Chula Vista', reviews: '34', rating: '5',
+      phone: '(619) 555-0134', maps: '' });
+  } else if (slug && API) {
+    fetch(API + '?p=' + slug + (mine ? '&me=1' : ''))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { d && d.found ? draw(d) : gone(); })
+      .catch(gone);
+  } else { gone(); }
+</script>
+</body>
+</html>
