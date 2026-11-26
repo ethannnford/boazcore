@@ -1,181 +1,318 @@
 <!DOCTYPE html>
 <!--
-THESIS: A carpenter's site that reads like a builder's monograph: one plain statement of who he
-  is, then the work. Modeled on nsbuilders.com's structure and restraint (owner-pinned reference),
-  in Travis's own identity. Refuses the contractor default of a stock-photo hero with badge rows.
-OWN-WORLD: white ground, near-black ink, one pale stone panel, cedar brown used only as a mark.
-  Archivo throughout, tight at display sizes. Small upper-case meta lines (place, time, license).
-  Portrait work tiles on a strict grid; a black closing field with oversized contact lines.
-STORY: "Third-generation carpenter, Maui-raised, licensed GC. The work is real. I can reach him."
-FIRST VIEWPORT: place and live San Diego time in the bar; a three-line headline at near-full
-  width; one sentence of what he builds; license and founding year as meta; work begins below.
-FORM: single long page, editorial; brief-pinned direction, shaped directly (no concept seed run).
+v2 (Nov 25 2026). Direction: nsbuilders.com's motion language (owner's pinned reference), Travis's own content.
+  - Full-bleed photo hero, lines rise, image settles as you scroll.
+  - Selected work = a pinned, scroll-driven slideshow: the project list on one side, the photos on the other.
+    Each project's photos also auto-advance with story-style progress bars. Tap = full-screen slideshow.
+  - Smaller finish pieces = one horizontal slideshow, not a grid.
+  - Testimonials = a slideshow shell with one "being gathered" slide until real words arrive.
+  - Press (SDVoyager Hidden Gems) gets its own panel.
+  - Less is more: process section cut, services condensed.
+TO ADD A PROJECT: add an entry to PROJECTS in the script at the bottom. Photos go in img/w/ (1600px + a -s 900px copy).
+TO ADD A TESTIMONIAL: add an entry to TESTIMONIALS (quote, name, project). The placeholder slide disappears automatically.
+Never publish: street addresses, family photos, the client's house numbers.
 -->
 <html lang="en"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Travis Ford Woodworks is a licensed general contractor in San Diego specializing in finish carpentry: doors, built-ins, cabinetry, gates and remodels.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Travis Ford Woodworks is a licensed general contractor in San Diego: remodels, cabinetry, doors, gates and finish carpentry, built by hand.">
 <meta name="theme-color" content="#0d0f0e">
 <meta name="robots" content="noindex, nofollow">
-<title>Travis Ford Woodworks — Finish Carpentry and General Contracting, San Diego</title>
+<title>Travis Ford Woodworks — Remodels and Finish Carpentry, San Diego</title>
 <meta property="og:type" content="website">
-<meta property="og:title" content="Travis Ford Woodworks — Finish Carpentry and General Contracting, San Diego">
+<meta property="og:title" content="Travis Ford Woodworks — Remodels and Finish Carpentry, San Diego">
 <meta property="og:description" content="Third-generation carpenter. Raised on Maui. Building in San Diego.">
-<meta property="og:image" content="img/arched-door.jpg">
+<meta property="og:image" content="img/w/hero-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/w/hero-wide.jpg" media="(min-width:801px)">
+<link rel="preload" as="image" href="img/w/laundry_1-s.jpg" media="(max-width:800px)">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"GeneralContractor","name":"Travis Ford Woodworks, Inc.","telephone":"+1-858-705-7922","areaServed":"San Diego County, CA","foundingDate":"2018","sameAs":["https://www.instagram.com/travisfordwoodworks/"]}
+</script>
 <style>
   :root{
-    --ink:#0d0f0e; --paper:#ffffff; --stone:#ecebe7; --rule:#d9d8d2; --soft:#56594f;
-    --cedar:#8f4a22; --on-ink:#f4f3ef; --on-ink-soft:#b5b6ac;
+    --ink:#0d0f0e; --paper:#ffffff; --stone:#ecebe7; --rule:#d9d8d2; --soft:#5e6158;
+    --cedar:#9a5226; --on-ink:#f4f3ef; --on-ink-soft:#a9aaa1;
     --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;
     --ease:cubic-bezier(.16,1,.3,1);
     --pad:clamp(20px,4vw,56px);
+    --vh:100svh;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
   a{color:inherit;text-decoration:none}
   img{display:block;width:100%;height:auto}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   :focus-visible{outline:2px solid var(--cedar);outline-offset:4px}
   .wrap{padding:0 var(--pad)}
-  .meta{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-  .display{font-weight:500;letter-spacing:-.04em;line-height:.96;text-wrap:balance}
+  .meta{font-size:12px;font-weight:500;letter-spacing:.09em;text-transform:uppercase}
+  .display{font-weight:400;letter-spacing:-.035em;line-height:1;text-wrap:balance}
+  .link{display:inline-flex;gap:.4em;align-items:baseline;font-size:15px;font-weight:500;border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .3s}
+  .link:hover{color:var(--cedar)}
+
+  /* reveal system */
+  .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+  .ln>span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+  .in .ln>span,.ln.in>span{transform:none}
+  .ln:nth-child(2)>span{transition-delay:.07s}.ln:nth-child(3)>span{transition-delay:.14s}.ln:nth-child(4)>span{transition-delay:.21s}
+  [data-rv]{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+  [data-rv].in,.hero.on [data-rv]{opacity:1;transform:none}
+  .hero.on [data-rv]{transition-delay:.5s}
+  [data-clip]{clip-path:inset(100% 0 0 0);transition:clip-path 1.4s var(--ease)}
+  [data-clip].in{clip-path:inset(0 0 0 0)}
 
   /* bar */
-  .bar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-  .bar .wrap{display:flex;align-items:center;gap:28px;height:60px}
-  .mark{font-weight:600;font-size:15px;letter-spacing:.02em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
-  .bar nav{display:flex;gap:26px}
+  .bar{position:fixed;top:0;left:0;right:0;z-index:50;color:#fff;transition:background .5s var(--ease),color .5s var(--ease),border-color .5s;border-bottom:1px solid transparent}
+  .bar .wrap{display:flex;align-items:center;gap:28px;height:64px}
+  .bar.solid{background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);border-color:var(--rule)}
+  .mark{font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
+  .bar nav{display:flex;gap:28px}
   .bar nav a{font-size:14px;font-weight:500;position:relative;padding:4px 0}
-  .bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+  .bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
   .bar nav a:hover::after{transform:scaleX(1)}
-  .bar .place{display:flex;gap:14px;color:var(--soft);white-space:nowrap}
-  .bar .place b{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+  .bar .place{display:flex;gap:10px;align-items:center;white-space:nowrap;opacity:.85}
+  .bar .place i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block}
+  .bar .place b{font-weight:500;font-variant-numeric:tabular-nums}
+  .bar .call{display:none;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:8px 14px}
 
   /* hero */
-  .hero{padding:clamp(56px,9vw,128px) 0 clamp(40px,5vw,72px)}
-  .hero h1{font-size:clamp(2.6rem,8.2vw,6rem)}
-  .hero h1 span{display:block;overflow:hidden}
-  .hero h1 span i{display:block;font-style:normal;animation:rise 1s var(--ease) both}
-  .hero h1 span:nth-child(2) i{animation-delay:.08s}
-  .hero h1 span:nth-child(3) i{animation-delay:.16s}
-  @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
-  .hero .under{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:end;margin-top:clamp(36px,5vw,72px);padding-top:22px;border-top:1px solid var(--ink)}
-  .hero .under p{font-size:clamp(17px,1.5vw,21px);max-width:31em;line-height:1.45}
-  .hero .facts{display:flex;gap:36px;justify-content:flex-end;flex-wrap:wrap;color:var(--soft)}
-  .hero .facts b{display:block;color:var(--ink);font-weight:500;margin-top:4px;letter-spacing:.04em}
+  .hero{position:relative;height:var(--vh);min-height:560px;overflow:hidden;background:#1a1917;color:#fff}
+  .hero picture,.hero .shade{position:absolute;inset:0}
+  .hero img{height:100%;object-fit:cover;object-position:50% 50%;transform:scale(1.14);transition:transform 2.6s var(--ease);will-change:transform}
+  .hero.on img{transform:scale(1.02)}
+  .hero .shade{background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.08) 52%,rgba(0,0,0,.62) 100%)}
+  .hero .copy{position:absolute;left:0;right:0;bottom:0;padding-bottom:clamp(28px,5vw,56px)}
+  .hero h1{font-size:clamp(2.4rem,6.2vw,6rem)}
+  .hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(22px,3vw,40px);padding-top:18px;border-top:1px solid rgba(255,255,255,.45)}
+  .hero .row p{max-width:30em;font-size:clamp(15px,1.3vw,18px);opacity:.92}
+  .hero .cue{display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right;white-space:nowrap}
+  .hero .cue span:last-child{display:flex;gap:8px;align-items:center}
+  .hero .cue span:last-child::after{content:"";width:1px;height:22px;background:currentColor;animation:cue 2.2s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-  /* work */
-  .work{padding:0 0 clamp(72px,9vw,128px)}
-  .head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid var(--ink);margin-bottom:28px}
-  .head h2{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-  .head a{font-size:14px;font-weight:500;border-bottom:1px solid var(--ink)}
-  .head a:hover{color:var(--cedar);border-color:var(--cedar)}
-  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,28px) clamp(12px,1.6vw,24px)}
-  .tile .ph{overflow:hidden;background:var(--stone);aspect-ratio:3/4}
-  .tile img{height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
-  .tile:hover img{transform:scale(1.035)}
-  .tile figcaption{display:flex;justify-content:space-between;gap:12px;padding-top:10px;font-size:14.5px;font-weight:500}
-  .tile figcaption span{color:var(--soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding-top:2px}
-  .tile.wide{grid-column:span 2}
-  .tile.wide{display:flex;flex-direction:column}
-  .tile.wide .ph{aspect-ratio:auto;flex:1;min-height:0;position:relative}
-  .tile.wide .ph img{position:absolute;inset:0}
+  /* intro */
+  .intro{padding:clamp(88px,12vw,180px) 0 clamp(72px,9vw,140px)}
+  .intro .grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2fr);gap:clamp(24px,5vw,80px);align-items:start}
+  .intro p.big{font-size:clamp(1.5rem,3.1vw,2.75rem);letter-spacing:-.025em;line-height:1.14;max-width:22em}
+  .intro .facts{display:flex;gap:clamp(24px,4vw,56px);flex-wrap:wrap;margin-top:clamp(32px,4vw,56px);color:var(--soft)}
+  .intro .facts b{display:block;margin-top:6px;color:var(--ink);font-weight:500}
 
-  /* statement */
-  .state{background:var(--stone);padding:clamp(72px,10vw,150px) 0}
-  .state .cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.62fr);gap:clamp(32px,6vw,96px);align-items:end}
-  .state p{font-size:clamp(1.9rem,4.4vw,3.75rem);max-width:15em}
-  .state figure{overflow:hidden}
-  .state figcaption{padding-top:10px;color:var(--soft)}
+  /* work: pinned scroll-driven slideshow */
+  .work{position:relative;background:var(--paper)}
+  .work .track{position:relative}
+  .work .pin{position:sticky;top:0;height:var(--vh);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,80px);align-items:center;padding:84px var(--pad) 32px}
+  .work .side{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+  .work .kick{color:var(--soft)}
+  .plist{list-style:none;margin:auto 0}
+  .plist li{display:flex;align-items:baseline;gap:12px}
+  .plist button{text-align:left;font-size:clamp(1.9rem,4.2vw,4rem);letter-spacing:-.035em;line-height:1.08;color:rgba(13,15,14,.16);transition:color .6s var(--ease)}
+  .plist button:hover{color:rgba(13,15,14,.4)}
+  .plist li.on button{color:var(--ink)}
+  .plist .tag{color:var(--soft);opacity:0;transform:translateX(-6px);transition:opacity .5s,transform .6s var(--ease)}
+  .plist li.on .tag{opacity:1;transform:none}
+  .work .about-p{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-top:1px solid var(--ink);padding-top:16px}
+  .work .about-p p{max-width:30em;font-size:15.5px;color:#2a2d29;min-height:3em}
+  .work .count{font-variant-numeric:tabular-nums;color:var(--soft)}
+  .stage{position:relative;height:min(calc(var(--vh) - 116px),880px);aspect-ratio:3/4;background:var(--stone);overflow:hidden;cursor:zoom-in}
+  .stage .set{position:absolute;inset:0;clip-path:inset(100% 0 0 0);transition:clip-path 1.15s var(--ease);z-index:1}
+  .stage .set.on{clip-path:inset(0 0 0 0);z-index:2}
+  .stage .set.out{clip-path:inset(0 0 0 0);z-index:1}
+  .stage figure{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease}
+  .stage figure.on{opacity:1}
+  .stage img{height:100%;object-fit:cover;transform:scale(1.06);transition:transform 6s linear}
+  .stage figure.on img{transform:scale(1)}
+  .bars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px;z-index:5}
+  .bars i{flex:1;height:2px;background:rgba(255,255,255,.4);overflow:hidden;border-radius:2px}
+  .bars i b{display:block;height:100%;background:#fff;transform:scaleX(0);transform-origin:left}
+  .bars i.done b{transform:scaleX(1)}
+  .bars i.run b{animation:fill var(--dur,3.4s) linear forwards}
+  @keyframes fill{to{transform:scaleX(1)}}
+  .stage .zoom{position:absolute;right:14px;bottom:14px;z-index:5;color:#fff;background:rgba(13,15,14,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:999px;padding:8px 13px}
+
+  /* finish carpentry slider */
+  .finish{padding:clamp(88px,10vw,150px) 0 clamp(80px,9vw,130px);overflow:hidden}
+  .shead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(28px,3.4vw,48px)}
+  .shead h2{font-size:clamp(2rem,4.4vw,3.75rem)}
+  .shead .kick{color:var(--soft);margin-bottom:14px;display:block}
+  .arrows{display:flex;gap:10px}
+  .arrows button{width:48px;height:48px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:background .3s,color .3s}
+  .arrows button:hover{background:var(--ink);color:#fff}
+  .arrows svg{width:18px;height:18px}
+  .rail{display:flex;gap:clamp(12px,1.6vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 var(--pad);scroll-padding:0 var(--pad);-webkit-overflow-scrolling:touch}
+  .rail::-webkit-scrollbar{display:none}
+  .card{flex:0 0 clamp(250px,26vw,400px);scroll-snap-align:start;cursor:zoom-in}
+  .card .ph{aspect-ratio:3/4;overflow:hidden;background:var(--stone)}
+  .card img{height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+  .card:hover img{transform:scale(1.04)}
+  .card figcaption{display:flex;justify-content:space-between;gap:12px;padding-top:12px;font-size:15px;font-weight:500}
+  .card figcaption span{color:var(--soft);font-size:12px;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;padding-top:2px}
+  .rail .end{flex:0 0 1px}
+  .ticks{display:flex;gap:6px;margin-top:22px}
+  .ticks i{height:2px;flex:0 0 28px;background:var(--rule);transition:background .4s}
+  .ticks i.on{background:var(--ink)}
+
+  /* testimonials (placeholder slideshow) */
+  .words{background:var(--stone);padding:clamp(88px,11vw,170px) 0}
+  .words .grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:clamp(32px,6vw,100px);align-items:end}
+  .words h2{font-size:clamp(1.9rem,4.2vw,3.6rem);max-width:15em}
+  .tslides{position:relative;margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--ink);padding-top:22px;min-height:190px}
+  .tslide{position:absolute;inset:22px 0 auto 0;opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
+  .tslide.on{opacity:1;transform:none;position:relative;inset:auto}
+  .tslide q{display:block;quotes:"\201C" "\201D";font-size:clamp(20px,2.1vw,28px);letter-spacing:-.02em;line-height:1.25;max-width:26em}
+  .tslide .who{margin-top:16px;color:var(--soft)}
+  .tslide.pending q{quotes:none;color:var(--soft)}
+  .tslide.pending .who{display:flex;gap:10px;align-items:center}
+  .tslide.pending .who::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cedar);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .tnav{display:flex;gap:18px;align-items:center;margin-top:28px}
+  .tnav[hidden]{display:none}
+  .tnav .num{font-variant-numeric:tabular-nums;color:var(--soft)}
+  .fade{position:relative;aspect-ratio:4/5;overflow:hidden;background:#d8d6cf}
+  .fade figure{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+  .fade figure.on{opacity:1}
+  .fade img{height:100%;object-fit:cover}
+  .fade-cap{padding-top:10px;color:var(--soft);min-height:2em}
 
   /* about */
-  .about{padding:clamp(72px,9vw,128px) 0}
-  .about .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,6vw,96px);align-items:start}
-  .about h2{font-size:clamp(2rem,4.2vw,3.5rem);margin-bottom:28px}
-  .about p{font-size:17.5px;max-width:34em;margin-bottom:18px;color:#272a26}
-  .about blockquote{margin:34px 0 0;padding-top:22px;border-top:1px solid var(--ink);font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.02em;line-height:1.25;max-width:24em}
-  .about cite{display:block;margin-top:14px;font-style:normal;color:var(--soft)}
-  .about cite a{border-bottom:1px solid var(--rule)}
-  .about cite a:hover{color:var(--cedar);border-color:var(--cedar)}
-  .about .pics{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,24px)}
-  .about .pics figure{aspect-ratio:3/4;overflow:hidden;background:var(--stone)}
-  .about .pics img{height:100%;object-fit:cover}
-  .about .pics p{font-size:12px;margin:0;max-width:none}
-  .about .pics div:nth-child(2){margin-top:clamp(28px,5vw,72px)}
+  .about{padding:clamp(88px,11vw,170px) 0}
+  .about .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,100px);align-items:center}
+  .about h2{font-size:clamp(2.2rem,5vw,4.25rem);margin-bottom:clamp(24px,3vw,40px)}
+  .about p{font-size:17px;max-width:32em;margin-bottom:16px;color:#272a26}
+  .about .fade{aspect-ratio:3/4;max-width:520px;justify-self:end;width:100%}
 
-  /* services + process */
-  .lists{padding:0 0 clamp(72px,9vw,128px)}
-  .four,.three{display:grid;gap:clamp(20px,3vw,44px)}
-  .four{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .col h3{font-size:clamp(20px,1.9vw,26px);font-weight:500;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
-  .col ul{list-style:none}
-  .col li{padding:9px 0;border-top:1px solid var(--rule);font-size:15.5px;color:#272a26}
-  .col p{font-size:15.5px;color:#272a26;max-width:26em}
-  .lists + .lists{margin-top:0}
-  .step{color:var(--cedar);margin-bottom:14px;display:block}
+  /* press */
+  .press{background:var(--ink);color:var(--on-ink)}
+  .press .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(88vh,820px)}
+  .press .pic{position:relative;overflow:hidden}
+  .press .pic img{position:absolute;inset:0;height:100%;object-fit:cover}
+  .press .txt{padding:clamp(48px,7vw,110px) var(--pad);display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+  .press .kick{color:var(--on-ink-soft);display:flex;gap:14px;flex-wrap:wrap}
+  .press h2{font-size:clamp(2.2rem,4.6vw,4.25rem);margin:18px 0 0}
+  .press blockquote{font-size:clamp(20px,2vw,27px);letter-spacing:-.02em;line-height:1.25;max-width:22em;padding-top:22px;border-top:1px solid #3a3d39}
+  .press cite{display:block;margin-top:14px;font-style:normal;color:var(--on-ink-soft)}
+  .press .link{color:var(--on-ink);font-size:16px}
+  .press .link:hover{color:#e2a274}
+
+  /* services */
+  .services{padding:clamp(88px,10vw,150px) 0}
+  .services .four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,44px);border-top:1px solid var(--ink);padding-top:22px}
+  .services h3{font-size:clamp(19px,1.7vw,24px);font-weight:500;letter-spacing:-.02em;margin-bottom:12px}
+  .services ul{list-style:none}
+  .services li{padding:8px 0;border-top:1px solid var(--rule);font-size:15px;color:#2a2d29}
 
   /* contact */
-  .contact{background:var(--ink);color:var(--on-ink);padding:clamp(72px,10vw,150px) 0 40px}
-  .contact h2{font-size:clamp(2.6rem,8.2vw,6rem);margin-bottom:clamp(36px,5vw,72px)}
+  .contact{background:var(--ink);color:var(--on-ink);padding:clamp(88px,11vw,170px) 0 0;overflow:hidden}
+  .contact h2{font-size:clamp(2.6rem,7.6vw,6.5rem);margin-bottom:clamp(36px,5vw,72px)}
   .contact .rows{border-top:1px solid #3a3d39}
   .contact .row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:22px 0;border-bottom:1px solid #3a3d39}
   .contact .row .meta{color:var(--on-ink-soft)}
-  .contact .row a,.contact .row span.val{font-size:clamp(20px,3vw,40px);font-weight:500;letter-spacing:-.03em;text-align:right}
-  .contact .row a{transition:color .3s ease}
+  .contact .row .val{font-size:clamp(22px,3.2vw,44px);font-weight:400;letter-spacing:-.03em;text-align:right;display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+  .contact .row a{transition:color .3s}
   .contact .row a:hover{color:#e2a274}
-  .contact .todo{color:#8d8f86;font-size:clamp(16px,1.7vw,22px);letter-spacing:-.01em}
+  .contact .row .val small{font-size:15px;letter-spacing:0;align-self:center;border:1px solid #4a4d48;border-radius:999px;padding:7px 14px}
   .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;color:var(--on-ink-soft)}
+  .wordmark{font-weight:500;letter-spacing:-.055em;line-height:.8;font-size:var(--wm,15.2vw);white-space:nowrap;margin:clamp(40px,6vw,90px) 0 0 -0.04em;padding-bottom:.06em;color:var(--on-ink);transform:translateY(40%);transition:transform 1.6s var(--ease)}
+  .wordmark.in{transform:none}
 
-  @media (max-width:980px){
-    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .tile.wide{grid-column:span 2}
-    .tile.wide .ph{aspect-ratio:4/3;flex:none}
-    .four{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .hero .under,.about .cols,.state .cols{grid-template-columns:minmax(0,1fr)}
-    .state figure{max-width:320px}
-    .hero .facts{justify-content:flex-start}
-    .bar .place span.city{display:none}
+  /* floating call (phones) */
+  .fcall{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));white-space:nowrap;transform:translate(-50%,140%);z-index:45;display:none;gap:8px;align-items:center;background:var(--ink);color:#fff;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:600;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .6s var(--ease)}
+  .fcall.show{transform:translate(-50%,0)}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:100;background:#0b0c0b;color:#fff;display:none;flex-direction:column}
+  .lb.open{display:flex}
+  .lb .top{display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad)}
+  .lb .x{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center}
+  .lb .view{position:relative;flex:1;min-height:0}
+  .lb .view img{position:absolute;inset:0;margin:auto;width:auto;height:auto;max-width:calc(100% - 2*var(--pad));max-height:100%;object-fit:contain;opacity:0;transition:opacity .5s ease}
+  .lb .view img.on{opacity:1}
+  .lb .nav{display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad) max(18px,env(safe-area-inset-bottom))}
+  .lb .nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center}
+  .lb svg{width:18px;height:18px}
+
+  @media (max-width:1000px){
+    .intro .grid,.words .grid,.about .grid,.press .grid{grid-template-columns:minmax(0,1fr)}
+    .about .fade{justify-self:start;max-width:none}
+    .press .pic{aspect-ratio:4/3}
+    .services .four{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
+    .words .fade{max-width:420px}
+    .bar .place .city{display:none}
   }
-  @media (max-width:640px){
-    .bar nav a:not(.keep){display:none}
-    .three,.four{grid-template-columns:minmax(0,1fr)}
-    .contact .row{flex-direction:column;gap:6px}
-    .contact .row a,.contact .row span.val{text-align:left}
+  @media (max-width:800px){
+    .bar nav,.bar .place{display:none}
+    .bar .call{display:inline-block}
+    .bar .wrap{height:58px}
+    .hero .row{flex-direction:column;align-items:flex-start}
+    .hero .cue{display:none}
+    .work .pin{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:14px;padding:70px var(--pad) 18px;align-items:stretch}
+    .work .side{display:contents}
+    .work .kick{order:0}
+    .stage{order:1;height:auto;width:100%;max-height:100%;aspect-ratio:auto;min-height:0}
+    .plist{order:2;margin:0;display:flex;flex-wrap:wrap;column-gap:14px}
+    .plist button{font-size:clamp(1.35rem,6vw,1.8rem)}
+    .plist .tag{display:none}
+    .work .about-p{order:3;grid-template-columns:minmax(0,1fr) auto;padding-top:10px}
+    .work .about-p p{font-size:14px;min-height:0}
+    .arrows{display:none}
+    .card{flex-basis:76vw}
+    .contact .row{flex-direction:column;gap:8px}
+    .contact .row .val{text-align:left;justify-content:flex-start}
+    .fcall{display:flex}
+  }
+  @media (max-width:520px){
+    .services .four{grid-template-columns:minmax(0,1fr)}
   }
   @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .hero h1 span i{animation:none}
-    .tile img,.bar nav a::after{transition:none}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+    .ln>span,[data-rv],.wordmark{transform:none!important;opacity:1!important}
+    [data-clip]{clip-path:none!important}
+    .hero img{transform:none!important}
   }
 </style>
 </head>
 <body>
 
-<header class="bar"><div class="wrap">
+<header class="bar" id="bar"><div class="wrap">
   <a class="mark" href="#top">Travis Ford Woodworks</a>
   <nav aria-label="Main">
     <a href="#work">Work</a>
     <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a class="keep" href="#contact">Contact</a>
+    <a href="#press">Press</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <div class="place meta"><span class="city">San Diego, CA</span><b id="clock" aria-hidden="true"></b></div>
+  <div class="place meta"><i aria-hidden="true"></i><span class="city">San Diego, CA</span><b id="clock" aria-hidden="true"></b></div>
+  <a class="call" href="tel:+18587057922">Call</a>
 </div></header>
 
 <main id="top">
-<section class="hero"><div class="wrap">
-  <h1 class="display">
-    <span><i>Third-generation carpenter.</i></span>
-    <span><i>Raised on Maui.</i></span>
-    <span><i>Building in San Diego.</i></span>
-  </h1>
-  <div class="under">
-    <p>Travis Ford Woodworks is a licensed general contractor specializing in finish carpentry: doors, built-ins, cabinetry, gates and full remodels, built by hand.</p>
-    <div class="facts meta">
+
+<section class="hero" id="hero">
+  <picture>
+    <source media="(max-width:800px)" srcset="img/w/laundry_1-s.jpg">
+    <img src="img/w/hero-wide.jpg" width="2400" height="1350" alt="A remodeled laundry room lined with floor-to-ceiling dark wood cabinetry over a checkerboard floor" fetchpriority="high">
+  </picture>
+  <div class="shade"></div>
+  <div class="copy wrap">
+    <h1 class="display">
+      <span class="ln"><span>Third-generation carpenter.</span></span>
+      <span class="ln"><span>Raised on Maui.</span></span>
+      <span class="ln"><span>Building in San Diego.</span></span>
+    </h1>
+    <div class="row" data-rv>
+      <p>Remodels, cabinetry and finish carpentry by a licensed general contractor who still builds with his own hands.</p>
+      <div class="cue meta"><span>Est. 2018</span><span>Scroll</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="intro"><div class="wrap grid">
+  <span class="meta" data-rv style="color:var(--soft)">Travis Ford Woodworks</span>
+  <div>
+    <p class="big" data-rv>Whole rooms and the details in them. Laundry rooms, baths and kitchens, and the cabinetry, doors, fireplaces and gates that finish a home, built by hand in San Diego.</p>
+    <div class="facts meta" data-rv>
       <div>Established<b>2018</b></div>
       <div>California license<b>CSLB #1084436</b></div>
       <div>Classification<b>B · General Building</b></div>
@@ -183,82 +320,318 @@ FORM: single long page, editorial; brief-pinned direction, shaped directly (no c
   </div>
 </div></section>
 
-<section class="work" id="work"><div class="wrap">
-  <div class="head"><h2>Selected work</h2><a href="https://www.instagram.com/travisfordwoodworks/" target="_blank" rel="noopener">More on Instagram</a></div>
-  <div class="grid">
-    <figure class="tile"><div class="ph"><img src="img/arched-door.jpg" width="480" height="640" alt="A dark-stained arched plank door with a small arched window, set in a stucco wall"></div><figcaption>Arched entry door <span>Doors</span></figcaption></figure>
-    <figure class="tile"><div class="ph"><img src="img/driveway-gate.jpg" width="480" height="640" alt="A double cedar driveway gate with a row of square openings, hung between white pillars"></div><figcaption>Cedar driveway gate <span>Exterior</span></figcaption></figure>
-    <figure class="tile"><div class="ph"><img src="img/built-ins.jpg" width="480" height="640" alt="A galley room lined floor to ceiling with dark wood cabinetry over a checkerboard tile floor"></div><figcaption>Floor-to-ceiling cabinetry <span>Built-ins</span></figcaption></figure>
-    <figure class="tile"><div class="ph"><img src="img/stone-fireplace.jpg" width="480" height="640" alt="A limestone fireplace wall with a black stone hearth and a built-in window seat"></div><figcaption>Stone fireplace and window seat <span>Living</span></figcaption></figure>
-    <figure class="tile wide"><div class="ph"><img src="img/fireplace-surround.jpg" width="640" height="480" loading="lazy" alt="A white plaster fireplace surround with a floating stone hearth over oak flooring"></div><figcaption>Fireplace surround and floating hearth <span>Living</span></figcaption></figure>
-    <figure class="tile"><div class="ph"><img src="img/vanity.jpg" width="480" height="640" loading="lazy" alt="A bathroom vanity with a wood-framed mirror, stone counter and tall wood cabinet"></div><figcaption>Vanity and framed mirror <span>Bath</span></figcaption></figure>
-    <figure class="tile"><div class="ph"><img src="img/bath.jpg" width="480" height="640" loading="lazy" alt="A remodeled bathroom with an arched tile niche, an arched window and a sliding glass tub door"></div><figcaption>Bathroom remodel <span>Bath</span></figcaption></figure>
+<section class="work" id="work" aria-label="Selected work">
+  <div class="track" id="track">
+    <div class="pin">
+      <div class="side">
+        <span class="meta kick">Selected work</span>
+        <ol class="plist" id="plist"></ol>
+        <div class="about-p"><p id="pdesc"></p><span class="meta count" id="pcount"></span></div>
+      </div>
+      <div class="stage" id="stage" role="button" tabindex="0" aria-label="Open these photos full screen">
+        <div class="bars" id="bars"></div>
+        <span class="zoom meta">View photos</span>
+      </div>
+    </div>
   </div>
-</div></section>
+</section>
 
-<section class="state"><div class="wrap cols">
-  <p class="display">Most of the work comes from people I've already built for, and the people they send.</p>
-  <figure><img src="img/cedar-enclosure.jpg" width="512" height="640" loading="lazy" alt="A cedar panel fence and gate around a courtyard tree"><figcaption class="meta">Cedar fence and gate</figcaption></figure>
-</div></section>
+<section class="finish" aria-label="Finish carpentry">
+  <div class="wrap shead">
+    <div><span class="meta kick" data-rv>Finish carpentry</span><h2 class="display" data-rv>Doors, fireplaces<br>and the pieces in between.</h2></div>
+    <div class="arrows"><button id="fPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button><button id="fNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button></div>
+  </div>
+  <div class="rail" id="rail"></div>
+  <div class="wrap"><div class="ticks" id="ticks"></div></div>
+</section>
 
-<section class="about" id="about"><div class="wrap cols">
+<section class="words" aria-label="What clients say"><div class="wrap grid">
   <div>
-    <h2 class="display">Raised around the work.</h2>
-    <p>I grew up on Maui and started on job sites in grade school, working next to my father. I'm the third generation of carpenters in my family.</p>
-    <p>I studied architecture at the University of Hawaiʻi at Mānoa, spent years as a carpenter for other contractors, and settled in San Diego in 2007. In 2018 I started Travis Ford Woodworks.</p>
-    <p>I still build with my own two hands, and I care as much about how a project is run as how it is finished. Every job is priced on its scope of work, and my aim on every one is to deliver more than was expected.</p>
-    <blockquote>"I approach my business as relationship building and each job is about the person."
-      <cite class="meta">Travis Ford, in <a href="https://sdvoyager.com/interview/hidden-gems-meet-travis-ford-of-travis-ford-woodworks-inc/" target="_blank" rel="noopener">SDVoyager's Hidden Gems</a>, 2022</cite>
-    </blockquote>
+    <h2 class="display" data-rv>Most of the work comes from people I've already built for, and the people they send.</h2>
+    <div class="tslides" id="tslides" aria-live="polite"></div>
+    <div class="tnav" id="tnav" hidden>
+      <button id="tPrev" class="meta">Prev</button><span class="meta num" id="tnum"></span><button id="tNext" class="meta">Next</button>
+    </div>
   </div>
-  <div class="pics">
-    <div><figure><img src="img/shop.jpg" width="480" height="640" loading="lazy" alt="The workshop: a sliding table saw on a clean concrete floor, with Hawaiian and American flags on the wall"></figure><p class="meta" style="padding-top:10px;color:var(--soft)">The shop</p></div>
-    <div><figure><img src="img/van.jpg" width="480" height="640" loading="lazy" alt="The open back of a work van fitted with labeled drawers and tool storage"></figure><p class="meta" style="padding-top:10px;color:var(--soft)">The shop that travels</p></div>
+  <div data-rv>
+    <div class="fade" id="wfade"></div>
+    <div class="fade-cap meta" id="wfadecap"></div>
   </div>
 </div></section>
 
-<section class="lists" id="services"><div class="wrap">
-  <div class="head"><h2>What I build</h2></div>
-  <div class="four">
-    <div class="col"><h3>Finish carpentry</h3><ul><li>Doors and entries</li><li>Trim and millwork</li><li>Built-ins and cabinetry</li><li>Fireplace surrounds and mantels</li></ul></div>
-    <div class="col"><h3>Exterior woodwork</h3><ul><li>Driveway and garden gates</li><li>Fences and enclosures</li><li>Porch rails and details</li></ul></div>
-    <div class="col"><h3>Remodels</h3><ul><li>Kitchens</li><li>Bathrooms</li><li>Room-by-room renovations</li></ul></div>
-    <div class="col"><h3>General contracting</h3><ul><li>Licensed B general building contractor</li><li>Project management, start to finish</li><li>All types of construction</li></ul></div>
+<section class="about" id="about"><div class="wrap grid">
+  <div>
+    <span class="meta" data-rv style="color:var(--soft);display:block;margin-bottom:18px">About</span>
+    <h2 class="display"><span class="ln" data-ln><span>Raised around</span></span><span class="ln" data-ln><span>the work.</span></span></h2>
+    <p data-rv>I grew up on Maui and started on job sites in grade school, working next to my father. I'm the third generation of carpenters in my family.</p>
+    <p data-rv>I studied architecture at the University of Hawaiʻi at Mānoa, carpentered for other contractors for years, and settled in San Diego in 2007. In 2018 I started Travis Ford Woodworks.</p>
+    <p data-rv>Every job is priced on its scope of work, and I care as much about how a project is run as how it's finished.</p>
   </div>
+  <div class="fade" id="afade" data-clip></div>
 </div></section>
 
-<section class="lists"><div class="wrap">
-  <div class="head"><h2>How a job runs</h2></div>
-  <div class="three">
-    <div class="col"><span class="step meta">First</span><h3>We walk the job</h3><p>We meet at your home, look at the space together, and talk through what you want built.</p></div>
-    <div class="col"><span class="step meta">Then</span><h3>A clear scope and price</h3><p>You get the work written down and priced by its scope before anything starts.</p></div>
-    <div class="col"><span class="step meta">Then</span><h3>Built by hand</h3><p>Made in the shop where it should be, fitted on site, and finished down to the last detail.</p></div>
+<section class="press" id="press" aria-label="Press">
+  <div class="grid">
+    <div class="pic"><img src="img/w/gates_1.jpg" width="1200" height="1600" loading="lazy" alt="Custom cedar entry gates between white pillars" data-clip></div>
+    <div class="txt">
+      <div>
+        <div class="kick meta" data-rv><span>Featured</span><span>SDVoyager · Hidden Gems</span><span>September 19, 2022</span></div>
+        <h2 class="display"><span class="ln" data-ln><span>Hidden Gems:</span></span><span class="ln" data-ln><span>Meet Travis Ford of</span></span><span class="ln" data-ln><span>Travis Ford Woodworks</span></span></h2>
+      </div>
+      <div data-rv>
+        <blockquote>"I approach my business as relationship building and each job is about the person."
+          <cite class="meta">Travis Ford, to SDVoyager</cite>
+        </blockquote>
+        <p style="margin-top:32px"><a class="link" href="https://sdvoyager.com/interview/hidden-gems-meet-travis-ford-of-travis-ford-woodworks-inc/" target="_blank" rel="noopener">Read the interview <span aria-hidden="true">+</span></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services"><div class="wrap">
+  <div class="shead"><div><span class="meta kick" data-rv>Services</span><h2 class="display" data-rv>What I build</h2></div></div>
+  <div class="four" data-rv>
+    <div><h3>Remodels</h3><ul><li>Kitchens</li><li>Bathrooms</li><li>Laundry rooms</li><li>Room-by-room renovations</li></ul></div>
+    <div><h3>Cabinetry and built-ins</h3><ul><li>Floor-to-ceiling cabinetry</li><li>Vanities</li><li>Built-ins and window seats</li></ul></div>
+    <div><h3>Finish carpentry</h3><ul><li>Doors and entries</li><li>Fireplace surrounds</li><li>Trim and millwork</li></ul></div>
+    <div><h3>Exterior</h3><ul><li>Entry and driveway gates</li><li>Fences and enclosures</li><li>Porch rails</li></ul></div>
   </div>
 </div></section>
 </main>
 
 <footer class="contact" id="contact"><div class="wrap">
-  <h2 class="display">Have a project in mind?</h2>
-  <div class="rows">
-    <div class="row"><span class="meta">Call or text</span><span class="val todo" data-todo="phone">Phone number to be added</span></div>
-    <div class="row"><span class="meta">Email</span><span class="val todo" data-todo="email">Email to be added</span></div>
-    <div class="row"><span class="meta">Instagram</span><a href="https://www.instagram.com/travisfordwoodworks/" target="_blank" rel="noopener">@travisfordwoodworks</a></div>
+  <h2 class="display"><span class="ln" data-ln><span>Have a project</span></span><span class="ln" data-ln><span>in mind?</span></span></h2>
+  <div class="rows" data-rv>
+    <div class="row"><span class="meta">Call or text</span><span class="val"><a href="tel:+18587057922">858-705-7922</a><a href="sms:+18587057922"><small>Text</small></a></span></div>
+    <div class="row"><span class="meta">Instagram</span><span class="val"><a href="https://www.instagram.com/travisfordwoodworks/" target="_blank" rel="noopener">@travisfordwoodworks</a></span></div>
     <div class="row"><span class="meta">Serving</span><span class="val">San Diego County</span></div>
   </div>
   <div class="foot meta">
     <span>© <span id="yr">2026</span> Travis Ford Woodworks, Inc. · CSLB #1084436</span>
     <span>Site by <a href="https://boazcore.com/">Boaz</a></span>
   </div>
+  <div class="wordmark" id="wordmark" aria-hidden="true">Travis Ford</div>
 </div></footer>
 
+<a class="fcall" id="fcall" href="tel:+18587057922">Call or text 858-705-7922</a>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photos">
+  <div class="top"><span class="meta" id="lbTitle"></span><button class="x" id="lbX" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="view" id="lbView"></div>
+  <div class="nav"><button id="lbPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button><span class="meta" id="lbNum"></span><button id="lbNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button></div>
+</div>
+
 <script>
-  (function(){
-    var el=document.getElementById('clock');
-    function tick(){
-      try{el.textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())}catch(e){el.textContent=''}
-    }
-    tick();setInterval(tick,1000);
-    document.getElementById('yr').textContent=new Date().getFullYear();
-  })();
+/* ---------- CONTENT (edit here) ---------- */
+// Big projects first. Each photo: [file in img/w without .jpg, alt text]
+var PROJECTS = [
+  { name:'Laundry room', tag:'Complete remodel',
+    desc:'A full laundry room remodel: floor-to-ceiling cabinetry, stone counters, a farmhouse utility sink and the washer and dryer built into the cabinetry.',
+    photos:[
+      ['laundry_1','Looking down the remodeled laundry room: floor-to-ceiling cabinetry on one side, counters on the other'],
+      ['laundry_6','A full wall of floor-to-ceiling dark wood cabinets with brass pulls, leading to a glass back door'],
+      ['laundry_3','A white farmhouse utility sink with a brass faucet set into stone counters'],
+      ['laundry_4','A front-load washer and dryer set into cabinetry above deep drawers'],
+      ['laundry_5','A pull-out folding shelf below the built-in washer and dryer'],
+      ['laundry_2','Stone counters over dark wood drawer banks on a checkerboard floor']
+    ]},
+  // KITCHEN REMODEL: add here once the photos are in, e.g.
+  // { name:'Kitchen', tag:'Remodel', desc:'...', photos:[['kitchen_1','...']] },
+  { name:'Bathroom', tag:'Remodel',
+    desc:'A bathroom remodel with an arched tile niche and window, a double vanity and an arched doorway.',
+    photos:[
+      ['bath_3','A double vanity in dark wood with a marble top, brass faucets and arched mirrors'],
+      ['bath_1','A tiled tub and shower with an arched niche and an arched window'],
+      ['bath_2','The shower wall in white tile with a marble arched niche'],
+      ['bath_4','An arched doorway opening into the bathroom']
+    ]},
+  { name:'Entry gates', tag:'Exterior',
+    desc:'Custom cedar entry gates for a home in Rancho Santa Fe.',
+    photos:[
+      ['gates_2','A pair of cedar driveway gates with a row of windows, hung between white pillars'],
+      ['gates_1','The cedar entry gates seen from the driveway']
+    ]}
+];
+// Smaller pieces for the finish-carpentry slideshow (older 480px files in img/)
+var FINISH = [
+  ['img/stone-fireplace.jpg','Stone fireplace and window seat','Living','A limestone fireplace wall with a black stone hearth and a built-in window seat'],
+  ['img/arched-door.jpg','Custom Dutch door','Doors','A dark-stained arched Dutch door with a small window, set in a stucco wall'],
+  ['img/fireplace-surround.jpg','Fireplace surround and hearth','Living','A white plaster fireplace surround with a floating stone hearth over oak flooring'],
+  ['img/vanity.jpg','White oak vanity','Bath','A vanity with a wood-framed mirror, stone counter and tall wood cabinet'],
+  ['img/cedar-enclosure.jpg','Cedar pool equipment enclosure','Exterior','A cedar panel enclosure built around a courtyard tree to hide pool equipment']
+];
+// Real client words only. When the first one is added, the "being gathered" slide disappears.
+var TESTIMONIALS = [
+  // { quote:'...', name:'First name, neighborhood', project:'Laundry room remodel' },
+];
+
+/* ---------- ENGINE ---------- */
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(id){ return document.getElementById(id); };
+  var mobile = function(){ return innerWidth <= 800; };
+
+  // clock + year
+  var clock=$('clock');
+  function tick(){ try{ clock.textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date()); }catch(e){} }
+  tick(); setInterval(tick,1000); $('yr').textContent=new Date().getFullYear();
+
+  // hero entrance
+  var hero=$('hero');
+  requestAnimationFrame(function(){ hero.classList.add('on'); hero.querySelector('h1').classList.add('in'); });
+
+  // reveal on view
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -12% 0px'});
+  document.querySelectorAll('[data-rv],[data-clip],[data-ln],.wordmark').forEach(function(el){ io.observe(el); });
+
+  /* ---- selected work: pinned scroll slideshow ---- */
+  var track=$('track'), stage=$('stage'), plist=$('plist'), bars=$('bars');
+  var sets=[], cur=-1, photoIdx=0, timer=null, DUR=3400;
+  track.style.height = (PROJECTS.length*100 + 40) + 'vh';
+  PROJECTS.forEach(function(p,i){
+    var li=document.createElement('li');
+    li.innerHTML='<button type="button">'+p.name+'</button><span class="tag meta">'+p.tag+'</span>';
+    li.querySelector('button').addEventListener('click',function(){ jumpTo(i); });
+    plist.appendChild(li);
+    var set=document.createElement('div'); set.className='set';
+    p.photos.forEach(function(ph,k){
+      var f=document.createElement('figure');
+      f.innerHTML='<img src="img/w/'+ph[0]+'-s.jpg" srcset="img/w/'+ph[0]+'-s.jpg 675w, img/w/'+ph[0]+'.jpg 1200w" sizes="(max-width:800px) 92vw, 62vh" width="1200" height="1600" alt="'+ph[1]+'"'+(i===0&&k===0?'':' loading="lazy"')+'>';
+      set.appendChild(f);
+    });
+    stage.insertBefore(set,bars); sets.push(set);
+  });
+
+  function buildBars(n){ bars.innerHTML=''; for(var k=0;k<n;k++){ var i=document.createElement('i'); i.innerHTML='<b></b>'; bars.appendChild(i);} }
+  function showPhoto(k){
+    var figs=sets[cur].children; photoIdx=k;
+    for(var j=0;j<figs.length;j++) figs[j].classList.toggle('on',j===k);
+    var bs=bars.children;
+    for(var j=0;j<bs.length;j++){ bs[j].classList.remove('run'); bs[j].classList.toggle('done',j<k); }
+    void bars.offsetWidth;
+    if(bs[k]){ bs[k].style.setProperty('--dur',DUR+'ms'); if(!reduce) bs[k].classList.add('run'); }
+    clearTimeout(timer);
+    if(!reduce && figs.length>1) timer=setTimeout(function(){ if(document.hidden||lbOpen) return showPhoto(photoIdx); showPhoto((photoIdx+1)%figs.length); },DUR);
+  }
+  function setProject(i){
+    if(i===cur) return;
+    var prev=cur; cur=i;
+    sets.forEach(function(s,j){ s.classList.remove('out'); if(j===prev) s.classList.add('out'); s.classList.toggle('on',j===i); });
+    if(prev>=0) setTimeout(function(){ if(sets[prev]!==sets[cur]) sets[prev].classList.remove('out'); },1200);
+    [].forEach.call(plist.children,function(li,j){ li.classList.toggle('on',j===i); });
+    $('pdesc').textContent=PROJECTS[i].desc;
+    $('pcount').textContent=PROJECTS[i].photos.length+' photos';
+    buildBars(PROJECTS[i].photos.length); showPhoto(0);
+  }
+  function progressIndex(){
+    var r=track.getBoundingClientRect(), span=track.offsetHeight-innerHeight;
+    var p=Math.min(Math.max(-r.top/span,0),.9999);
+    return Math.floor(p*PROJECTS.length);
+  }
+  function jumpTo(i){
+    var span=track.offsetHeight-innerHeight, top=track.getBoundingClientRect().top+scrollY;
+    scrollTo({top: top + span*(i+.5)/PROJECTS.length, behavior: reduce?'auto':'smooth'});
+  }
+  setProject(0);
+  stage.addEventListener('click',function(){ openLB(PROJECTS[cur].name, PROJECTS[cur].photos.map(function(p){return ['img/w/'+p[0]+'.jpg',p[1]];}), photoIdx); });
+  stage.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); stage.click(); } });
+
+  /* ---- finish carpentry slideshow ---- */
+  var rail=$('rail'), ticks=$('ticks');
+  FINISH.forEach(function(f,i){
+    var c=document.createElement('figure'); c.className='card';
+    c.innerHTML='<div class="ph"><img src="'+f[0]+'" width="480" height="640" loading="lazy" alt="'+f[3]+'"></div><figcaption>'+f[1]+' <span>'+f[2]+'</span></figcaption>';
+    c.addEventListener('click',function(){ openLB('Finish carpentry', FINISH.map(function(x){return [x[0],x[3]];}), i); });
+    rail.appendChild(c); var t=document.createElement('i'); ticks.appendChild(t);
+  });
+  var endPad=document.createElement('div'); endPad.className='end'; rail.appendChild(endPad);
+  var cards=rail.querySelectorAll('.card');
+  function railIndex(){ var x=rail.scrollLeft, best=0, d=1e9; cards.forEach(function(c,i){ var dd=Math.abs(c.offsetLeft-rail.offsetLeft-parseFloat(getComputedStyle(rail).paddingLeft)-x); if(dd<d){d=dd;best=i;} }); return best; }
+  function railTo(i){ var c=cards[(i+cards.length)%cards.length]; rail.scrollTo({left:c.offsetLeft-rail.firstElementChild.offsetLeft, behavior:reduce?'auto':'smooth'}); }
+  function railTicks(){ var k=railIndex(); [].forEach.call(ticks.children,function(t,i){ t.classList.toggle('on',i===k); }); }
+  rail.addEventListener('scroll',function(){ requestAnimationFrame(railTicks); },{passive:true});
+  railTicks();
+  $('fPrev').onclick=function(){ railTo(railIndex()-1); hold(); };
+  $('fNext').onclick=function(){ var k=railIndex(); railTo(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4?0:k+1); hold(); };
+  var held=0; function hold(){ held=Date.now(); }
+  ['pointerdown','touchstart','wheel'].forEach(function(ev){ rail.addEventListener(ev,hold,{passive:true}); });
+  var railVisible=false;
+  new IntersectionObserver(function(es){ railVisible=es[0].isIntersecting; },{threshold:.4}).observe(rail);
+  if(!reduce) setInterval(function(){
+    if(!railVisible||document.hidden||lbOpen||Date.now()-held<7000||rail.matches(':hover')) return;
+    var atEnd=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4;
+    railTo(atEnd?0:railIndex()+1);
+  },3800);
+
+  /* ---- testimonials ---- */
+  var ts=$('tslides'), tlist=TESTIMONIALS.length?TESTIMONIALS:[{pending:true}], ti=0;
+  tlist.forEach(function(t){
+    var d=document.createElement('div'); d.className='tslide'+(t.pending?' pending':'');
+    d.innerHTML = t.pending
+      ? '<q>Words from the people I\u2019ve built for are being gathered now. They\u2019ll live here soon.</q><div class="who meta">Client stories · coming soon</div>'
+      : '<q>'+t.quote+'</q><div class="who meta">'+t.name+(t.project?' · '+t.project:'')+'</div>';
+    ts.appendChild(d);
+  });
+  function showT(k){ ti=(k+tlist.length)%tlist.length; [].forEach.call(ts.children,function(s,i){ s.classList.toggle('on',i===ti); }); $('tnum').textContent=String(ti+1).padStart(2,'0')+' / '+String(tlist.length).padStart(2,'0'); }
+  showT(0);
+  if(tlist.length>1){ $('tnav').hidden=false; $('tPrev').onclick=function(){showT(ti-1)}; $('tNext').onclick=function(){showT(ti+1)}; if(!reduce) setInterval(function(){ if(!document.hidden) showT(ti+1); },7000); }
+
+  /* ---- crossfade frames ---- */
+  function fader(el, cap, items, every){
+    items.forEach(function(it,i){ var f=document.createElement('figure'); f.innerHTML='<img src="'+it[0]+'" loading="lazy" alt="'+it[2]+'">'; if(i===0) f.className='on'; el.appendChild(f); });
+    var k=0; if(cap) cap.textContent=items[0][1];
+    if(!reduce && items.length>1) setInterval(function(){ if(document.hidden) return; var fs=el.children; fs[k].classList.remove('on'); k=(k+1)%fs.length; fs[k].classList.add('on'); if(cap) cap.textContent=items[k][1]; },every);
+  }
+  fader($('wfade'),$('wfadecap'),[
+    ['img/cedar-enclosure.jpg','Cedar pool equipment enclosure','A cedar enclosure around a courtyard tree'],
+    ['img/w/laundry_4-s.jpg','Laundry room remodel','A washer and dryer built into dark wood cabinetry'],
+    ['img/w/bath_1-s.jpg','Bathroom remodel','A tiled tub with an arched niche and arched window']
+  ],4200);
+  fader($('afade'),null,[
+    ['img/shop.jpg','The shop','The workshop with a sliding table saw and Hawaiian and American flags'],
+    ['img/van.jpg','The shop that travels','The back of a work van fitted with labeled drawers and tool storage']
+  ],4000);
+
+  /* ---- lightbox ---- */
+  var lb=$('lb'), view=$('lbView'), lbItems=[], lbI=0, lbOpen=false, lastFocus=null;
+  function openLB(title,items,start){
+    lbItems=items; $('lbTitle').textContent=title; view.innerHTML='';
+    items.forEach(function(it){ var im=document.createElement('img'); im.alt=it[1]; im.dataset.src=it[0]; view.appendChild(im); });
+    lastFocus=document.activeElement; lb.classList.add('open'); lbOpen=true; document.documentElement.style.overflow='hidden';
+    showLB(start||0); $('lbX').focus();
+  }
+  function showLB(k){
+    lbI=(k+lbItems.length)%lbItems.length;
+    [].forEach.call(view.children,function(im,i){ if(Math.abs(i-lbI)<=1 && !im.src) im.src=im.dataset.src; im.classList.toggle('on',i===lbI); });
+    $('lbNum').textContent=(lbI+1)+' / '+lbItems.length;
+  }
+  function closeLB(){ lb.classList.remove('open'); lbOpen=false; document.documentElement.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  $('lbX').onclick=closeLB; $('lbPrev').onclick=function(){showLB(lbI-1)}; $('lbNext').onclick=function(){showLB(lbI+1)};
+  addEventListener('keydown',function(e){ if(!lbOpen) return; if(e.key==='Escape') closeLB(); if(e.key==='ArrowRight') showLB(lbI+1); if(e.key==='ArrowLeft') showLB(lbI-1); });
+  var sx=null; view.addEventListener('touchstart',function(e){ sx=e.touches[0].clientX; },{passive:true});
+  view.addEventListener('touchend',function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) showLB(lbI+(dx<0?1:-1)); sx=null; });
+  view.addEventListener('click',function(e){ if(e.target===view) closeLB(); });
+
+  /* ---- scroll: bar state, hero drift, work index, call pill ---- */
+  var bar=$('bar'), fcall=$('fcall'), contact=$('contact'), heroImg=hero.querySelector('img'), ticking=false, drift=false;
+  function onScroll(){
+    ticking=false;
+    var y=scrollY, h=hero.offsetHeight;
+    bar.classList.toggle('solid', y > h-70);
+    if(drift && !reduce && y<h){ heroImg.style.transform='translateY('+(y*.28)+'px) scale(1.02)'; }
+    setProject(progressIndex());
+    var cTop=contact.getBoundingClientRect().top;
+    var tr=track.getBoundingClientRect(), inWork=tr.top<innerHeight*.5 && tr.bottom>innerHeight*.5;
+    fcall.classList.toggle('show', y>h*.9 && cTop>innerHeight*.9 && !inWork);
+  }
+  addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(onScroll);} },{passive:true});
+  addEventListener('resize',onScroll);
+  // let the CSS entrance finish before scroll takes over the hero transform
+  // footer wordmark fills the full width
+  var wm=$('wordmark'); function fitWM(){ wm.style.setProperty('--wm','100px'); var w=wm.scrollWidth, room=wm.parentElement.clientWidth-parseFloat(getComputedStyle(wm.parentElement).paddingLeft)*2; wm.style.setProperty('--wm',(100*room/w*.995)+'px'); }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitWM); fitWM(); addEventListener('resize',fitWM);
+  setTimeout(function(){ heroImg.style.transition='transform .2s linear'; drift=true; onScroll(); },2600);
+  onScroll();
+})();
 </script>
 </body></html>
