@@ -216,8 +216,9 @@ Never publish: street addresses, family photos, the client's house numbers.
   .contact .row a:hover{color:#e2a274}
   .contact .row .val small{font-size:15px;letter-spacing:0;align-self:center;border:1px solid #4a4d48;border-radius:999px;padding:7px 14px}
   .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;color:var(--on-ink-soft)}
-  .wordmark{font-weight:500;letter-spacing:-.055em;line-height:.8;font-size:var(--wm,15.2vw);white-space:nowrap;margin:clamp(40px,6vw,90px) 0 0 -0.04em;padding-bottom:.06em;color:var(--on-ink);transform:translateY(40%);transition:transform 1.6s var(--ease)}
-  .wordmark.in{transform:none}
+  .wordmark{overflow:hidden;margin-top:clamp(40px,6vw,90px);padding-bottom:max(clamp(18px,2.4vw,36px),env(safe-area-inset-bottom))}
+  .wordmark span{display:inline-block;font-size:var(--wm,15vw);font-weight:500;letter-spacing:-.055em;line-height:.92;white-space:nowrap;margin-left:-.04em;color:var(--on-ink);transform:translateY(105%);transition:transform 1.5s var(--ease)}
+  .wordmark.in span{transform:none}
 
   /* floating call (phones) */
   .fcall{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));white-space:nowrap;transform:translate(-50%,140%);z-index:45;display:none;gap:8px;align-items:center;background:var(--ink);color:#fff;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:600;letter-spacing:.02em;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .6s var(--ease)}
@@ -269,7 +270,7 @@ Never publish: street addresses, family photos, the client's house numbers.
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
-    .ln>span,[data-rv],.wordmark{transform:none!important;opacity:1!important}
+    .ln>span,[data-rv],.wordmark span{transform:none!important;opacity:1!important}
     [data-clip]{clip-path:none!important}
     .hero img{transform:none!important}
   }
@@ -412,7 +413,7 @@ Never publish: street addresses, family photos, the client's house numbers.
     <span>© <span id="yr">2026</span> Travis Ford Woodworks, Inc. · CSLB #1084436</span>
     <span>Site by <a href="https://boazcore.com/">Boaz</a></span>
   </div>
-  <div class="wordmark" id="wordmark" aria-hidden="true">Travis Ford</div>
+  <div class="wordmark" id="wordmark" aria-hidden="true"><span>Travis Ford</span></div>
 </div></footer>
 
 <a class="fcall" id="fcall" href="tel:+18587057922">Call or text 858-705-7922</a>
@@ -484,7 +485,7 @@ var TESTIMONIALS = [
 
   // reveal on view
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -12% 0px'});
-  document.querySelectorAll('[data-rv],[data-clip],[data-ln],.wordmark').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('[data-rv],[data-clip],[data-ln]').forEach(function(el){ io.observe(el); });
 
   /* ---- selected work: pinned scroll slideshow ---- */
   var track=$('track'), stage=$('stage'), plist=$('plist'), bars=$('bars');
@@ -630,7 +631,10 @@ var TESTIMONIALS = [
   addEventListener('resize',onScroll);
   // let the CSS entrance finish before scroll takes over the hero transform
   // footer wordmark fills the full width
-  var wm=$('wordmark'); function fitWM(){ wm.style.setProperty('--wm','100px'); var w=wm.scrollWidth, room=wm.parentElement.clientWidth-parseFloat(getComputedStyle(wm.parentElement).paddingLeft)*2; wm.style.setProperty('--wm',(100*room/w*.995)+'px'); }
+  var wm=$('wordmark'), wmText=wm.firstElementChild;
+  function fitWM(){ wm.style.setProperty('--wm','100px'); var w=wmText.getBoundingClientRect().width, room=wm.clientWidth; if(w>0) wm.style.setProperty('--wm',(100*room/w*.99)+'px'); }
+  // the wrapper is never transformed, so it reports its real position (the old version never fired at the page bottom)
+  new IntersectionObserver(function(es){ if(es[0].isIntersecting) wm.classList.add('in'); },{threshold:.15}).observe(wm);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitWM); fitWM(); addEventListener('resize',fitWM);
   setTimeout(function(){ heroImg.style.transition='transform .2s linear'; drift=true; onScroll(); },2600);
   onScroll();
