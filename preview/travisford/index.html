@@ -22,11 +22,11 @@ Never publish: street addresses, family photos, the client's house numbers.
 <meta property="og:type" content="website">
 <meta property="og:title" content="Travis Ford Woodworks — Remodels and Finish Carpentry, San Diego">
 <meta property="og:description" content="Third-generation carpenter. Raised on Maui. Building in San Diego.">
-<meta property="og:image" content="img/w/hero-wide.jpg">
+<meta property="og:image" content="img/w/hero-1920.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/w/hero-wide.jpg" media="(min-width:801px)">
-<link rel="preload" as="image" href="img/w/laundry_1-s.jpg" media="(max-width:800px)">
+<link rel="preload" as="image" imagesrcset="img/w/hero-1920.jpg 1920w, img/w/hero-2880.jpg 2880w" imagesizes="100vw" media="(min-width:801px)">
+<link rel="preload" as="image" href="img/w/hero-tall.jpg" media="(max-width:800px)">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"GeneralContractor","name":"Travis Ford Woodworks, Inc.","telephone":"+1-858-705-7922","areaServed":"San Diego County, CA","foundingDate":"2018","sameAs":["https://www.instagram.com/travisfordwoodworks/"]}
 </script>
@@ -181,7 +181,9 @@ Never publish: street addresses, family photos, the client's house numbers.
   .about .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,100px);align-items:center}
   .about h2{font-size:clamp(2.2rem,5vw,4.25rem);margin-bottom:clamp(24px,3vw,40px)}
   .about p{font-size:17px;max-width:32em;margin-bottom:16px;color:#272a26}
-  .about .fade{aspect-ratio:3/4;max-width:520px;justify-self:end;width:100%}
+  .about .afig{max-width:520px;justify-self:end;width:100%}
+  .about .fade{aspect-ratio:3/4}
+  .fade-cap{transition:opacity .6s ease}
 
   /* press */
   .press{background:var(--ink);color:var(--on-ink)}
@@ -235,7 +237,7 @@ Never publish: street addresses, family photos, the client's house numbers.
 
   @media (max-width:1000px){
     .intro .grid,.words .grid,.about .grid,.press .grid{grid-template-columns:minmax(0,1fr)}
-    .about .fade{justify-self:start;max-width:none}
+    .about .afig{justify-self:start;max-width:none}
     .press .pic{aspect-ratio:4/3}
     .services .four{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
     .words .fade{max-width:420px}
@@ -291,8 +293,8 @@ Never publish: street addresses, family photos, the client's house numbers.
 
 <section class="hero" id="hero">
   <picture>
-    <source media="(max-width:800px)" srcset="img/w/laundry_1-s.jpg">
-    <img src="img/w/hero-wide.jpg" width="2400" height="1350" alt="A remodeled laundry room lined with floor-to-ceiling dark wood cabinetry over a checkerboard floor" fetchpriority="high">
+    <source media="(max-width:800px)" srcset="img/w/hero-tall.jpg">
+    <img src="img/w/hero-1920.jpg" srcset="img/w/hero-1920.jpg 1920w, img/w/hero-2880.jpg 2880w" sizes="100vw" width="2880" height="1620" alt="A remodeled laundry room lined with floor-to-ceiling dark wood cabinetry over a checkerboard floor" fetchpriority="high">
   </picture>
   <div class="shade"></div>
   <div class="copy wrap">
@@ -367,7 +369,7 @@ Never publish: street addresses, family photos, the client's house numbers.
     <p data-rv>I studied architecture at the University of Hawaiʻi at Mānoa, carpentered for other contractors for years, and settled in San Diego in 2007. In 2018 I started Travis Ford Woodworks.</p>
     <p data-rv>Every job is priced on its scope of work, and I care as much about how a project is run as how it's finished.</p>
   </div>
-  <div class="fade" id="afade" data-clip></div>
+  <div class="afig"><div class="fade" id="afade" data-clip></div><div class="fade-cap meta" id="afadecap"></div></div>
 </div></section>
 
 <section class="press" id="press" aria-label="Press">
@@ -452,13 +454,13 @@ var PROJECTS = [
       ['gates_1','The cedar entry gates seen from the driveway']
     ]}
 ];
-// Smaller pieces for the finish-carpentry slideshow (older 480px files in img/)
+// Smaller pieces for the finish-carpentry slideshow: [file in img/w without .jpg, title, tag, alt]
 var FINISH = [
-  ['img/stone-fireplace.jpg','Stone fireplace and window seat','Living','A limestone fireplace wall with a black stone hearth and a built-in window seat'],
-  ['img/arched-door.jpg','Custom Dutch door','Doors','A dark-stained arched Dutch door with a small window, set in a stucco wall'],
-  ['img/fireplace-surround.jpg','Fireplace surround and hearth','Living','A white plaster fireplace surround with a floating stone hearth over oak flooring'],
-  ['img/vanity.jpg','White oak vanity','Bath','A vanity with a wood-framed mirror, stone counter and tall wood cabinet'],
-  ['img/cedar-enclosure.jpg','Cedar pool equipment enclosure','Exterior','A cedar panel enclosure built around a courtyard tree to hide pool equipment']
+  ['stone-fireplace','Stone fireplace and window seat','Living','A limestone fireplace wall with a black stone hearth and a built-in window seat'],
+  ['dutch-door','Custom Dutch door','Doors','A dark-stained arched Dutch door with a small window, set in a stucco wall'],
+  ['fireplace-surround','Fireplace surround and hearth','Living','A white plaster fireplace surround with a floating stone hearth over oak flooring'],
+  ['vanity','White oak vanity','Bath','A vanity with a wood-framed mirror, stone counter and tall wood cabinet'],
+  ['enclosure','Cedar pool equipment enclosure','Exterior','A cedar panel enclosure built around a courtyard tree to hide pool equipment']
 ];
 // Real client words only. When the first one is added, the "being gathered" slide disappears.
 var TESTIMONIALS = [
@@ -540,8 +542,8 @@ var TESTIMONIALS = [
   var rail=$('rail'), ticks=$('ticks');
   FINISH.forEach(function(f,i){
     var c=document.createElement('figure'); c.className='card';
-    c.innerHTML='<div class="ph"><img src="'+f[0]+'" width="480" height="640" loading="lazy" alt="'+f[3]+'"></div><figcaption>'+f[1]+' <span>'+f[2]+'</span></figcaption>';
-    c.addEventListener('click',function(){ openLB('Finish carpentry', FINISH.map(function(x){return [x[0],x[3]];}), i); });
+    c.innerHTML='<div class="ph"><img src="img/w/'+f[0]+'-s.jpg" srcset="img/w/'+f[0]+'-s.jpg 675w, img/w/'+f[0]+'.jpg 1200w" sizes="(max-width:800px) 76vw, 26vw" width="1200" height="1600" loading="lazy" alt="'+f[3]+'"></div><figcaption>'+f[1]+' <span>'+f[2]+'</span></figcaption>';
+    c.addEventListener('click',function(){ openLB('Finish carpentry', FINISH.map(function(x){return ['img/w/'+x[0]+'.jpg',x[3]];}), i); });
     rail.appendChild(c); var t=document.createElement('i'); ticks.appendChild(t);
   });
   var endPad=document.createElement('div'); endPad.className='end'; rail.appendChild(endPad);
@@ -580,16 +582,16 @@ var TESTIMONIALS = [
   function fader(el, cap, items, every){
     items.forEach(function(it,i){ var f=document.createElement('figure'); f.innerHTML='<img src="'+it[0]+'" loading="lazy" alt="'+it[2]+'">'; if(i===0) f.className='on'; el.appendChild(f); });
     var k=0; if(cap) cap.textContent=items[0][1];
-    if(!reduce && items.length>1) setInterval(function(){ if(document.hidden) return; var fs=el.children; fs[k].classList.remove('on'); k=(k+1)%fs.length; fs[k].classList.add('on'); if(cap) cap.textContent=items[k][1]; },every);
+    if(!reduce && items.length>1) setInterval(function(){ if(document.hidden) return; var fs=el.children; fs[k].classList.remove('on'); k=(k+1)%fs.length; fs[k].classList.add('on'); if(cap){ var t=items[k][1]; cap.style.opacity=0; setTimeout(function(){ cap.textContent=t; cap.style.opacity=1; },450); } },every);
   }
   fader($('wfade'),$('wfadecap'),[
-    ['img/cedar-enclosure.jpg','Cedar pool equipment enclosure','A cedar enclosure around a courtyard tree'],
-    ['img/w/laundry_4-s.jpg','Laundry room remodel','A washer and dryer built into dark wood cabinetry'],
-    ['img/w/bath_1-s.jpg','Bathroom remodel','A tiled tub with an arched niche and arched window']
+    ['img/w/enclosure.jpg','Cedar pool equipment enclosure','A cedar enclosure around a courtyard tree'],
+    ['img/w/laundry_4.jpg','Laundry room remodel','A washer and dryer built into dark wood cabinetry'],
+    ['img/w/bath_1.jpg','Bathroom remodel','A tiled tub with an arched niche and arched window']
   ],4200);
-  fader($('afade'),null,[
-    ['img/shop.jpg','The shop','The workshop with a sliding table saw and Hawaiian and American flags'],
-    ['img/van.jpg','The shop that travels','The back of a work van fitted with labeled drawers and tool storage']
+  fader($('afade'),$('afadecap'),[
+    ['img/w/shop.jpg','The shop','The workshop with a sliding table saw and Hawaiian and American flags'],
+    ['img/w/van.jpg','The shop on wheels','The back of a work van fitted with labeled drawers and tool storage']
   ],4000);
 
   /* ---- lightbox ---- */
